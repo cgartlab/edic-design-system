@@ -96,10 +96,10 @@ stamp-version:  ## 将 VERSION 同步到所有 HTML / MD 资源
 # ─── 本地预览 ──────────────────────────────────────────────
 serve: serve-py  ## 本地启动 HTTP 服务器（默认 8000）
 
-serve-py:  ## Python http.server
-	@echo "启动 Python HTTP 服务器 (http://localhost:$(PORT))"
-	@echo "按 Ctrl+C 停止"
-	$(PYTHON) -m http.server $(PORT)
+serve-py:  ## Python http.server (LAN accessible via 0.0.0.0)
+	@echo "启动 Python HTTP 服务器 (http://0.0.0.0:$(PORT))"
+	@echo "局域网地址请查看本机 IP"
+	$(PYTHON) -m http.server $(PORT) --bind 0.0.0.0
 
 serve-node:  ## npx serve（备选）
 	@echo "启动 Node serve (http://localhost:$(PORT))"

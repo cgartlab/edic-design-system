@@ -1155,7 +1155,6 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 
 /* ===== Landing hero ===== */
 .ds-hero-section{position:relative;padding:var(--ds-space-32) 0 var(--ds-space-28);text-align:center;overflow:hidden;isolation:isolate}
-.ds-hero-section::before{content:"";position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:min(90%,800px);height:60%;background:radial-gradient(ellipse at center,var(--ds-color-olive-400) 8%,var(--ds-color-olive-400) 3%,transparent 70%);z-index:0;pointer-events:none}
 .ds-hero-inner{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:0 var(--ds-space-6)}
 .ds-hero-mark-wrap{margin-bottom:var(--ds-space-10);display:flex;justify-content:center}
 .ds-hero-badge{display:inline-flex;align-items:center;gap:var(--ds-space-2);padding:var(--ds-space-2) var(--ds-space-5);border-radius:var(--ds-radius-full);background:var(--ds-color-surface-raised);border:1px solid var(--ds-color-border);font-size:var(--ds-text-body-sm);font-weight:500;color:var(--ds-color-fg-subtle);box-shadow:var(--ds-shadow-xs);margin-bottom:var(--ds-space-8);transition:all var(--ds-duration-200) var(--ds-ease-out)}
