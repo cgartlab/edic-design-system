@@ -90,7 +90,7 @@ Exit codes: 0 = pass, 1 = blocking error, 2 = warnings only.
 ## Local Development
 
 ```bash
-make serve                 # Python http.server at http://localhost:8000
+make serve                 # Python http.server at http://0.0.0.0:8000 (LAN accessible)
 make clean                 # remove __pycache__ and *.pyc
 ```
 
@@ -100,6 +100,39 @@ Or Node (requires `npm install`):
 npx serve -l 8000 .
 npm run validate           # Node wrapper for validators
 ```
+
+---
+
+## Preview Workflow (Post-Edit Testing)
+
+After every CSS/HTML change, you MUST do the following before marking the task complete:
+
+1. **Restart the preview server** (kill the old one first, then start fresh):
+
+   ```bash
+   pkill -f "http.server.*8000" 2>/dev/null; make serve &
+   ```
+
+2. **Verify the server is running**:
+
+   ```bash
+   curl -s -o /dev/null -w "%{http_code}" http://0.0.0.0:8000/ | grep -q 200 && echo "OK"
+   ```
+
+3. **Take a full-page screenshot** of the affected page via headless browser and show it to the user:
+
+   ```bash
+   # Use playwright or puppeteer to capture the page
+   # Save screenshot as `preview.png` in /tmp/opencode/
+   ```
+
+4. **Provide the LAN URL** to the user so they can open it on their own device:
+
+   ```
+   http://<LAN-IP>:8000/
+   ```
+
+   Get the LAN IP with: `ip -4 addr show | grep -E 'inet ' | grep -v '127.0.0.1'`
 
 ---
 
