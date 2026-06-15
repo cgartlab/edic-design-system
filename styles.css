@@ -1172,7 +1172,7 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .ds-hero-title{font-family:var(--ds-font-display);font-size:var(--ds-text-hero);font-weight:var(--ds-weight-bold);line-height:1.08;letter-spacing:var(--ds-tracking-tight);color:var(--ds-color-fg-strong);margin:0 auto var(--ds-space-6);max-width:18ch}
 .ds-hero-title br+.ds-gradient-text,.ds-hero-title .ds-gradient-text{display:inline-block;padding:0 .05em}
 .ds-gradient-text{background:linear-gradient(110deg,var(--ds-color-olive-600),var(--ds-accent) 45%,var(--ds-color-olive-300));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:ds-gradient-pan 8s var(--ds-ease-in-out) infinite;font-style:italic;font-weight:inherit}
-.ds-hero-cycle{display:inline-block;position:relative;height:1.15em;overflow:hidden;vertical-align:bottom}
+.ds-hero-cycle{display:inline-block;position:relative;height:1.15em;overflow:hidden;vertical-align:bottom;max-width:200px}
 .ds-hero-cycle-track{display:flex;flex-direction:column;animation:ds-word-cycle 16s ease-in-out infinite}
 .ds-hero-cycle-word{height:1.15em;flex-shrink:0;display:flex;align-items:center;background:linear-gradient(110deg,var(--ds-color-olive-600),var(--ds-accent) 45%,var(--ds-color-olive-300));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-family:var(--ds-font-mono);font-style:italic;font-weight:inherit;white-space:nowrap}
 @keyframes ds-word-cycle{0%,18%{transform:translateY(0)}20%,38%{transform:translateY(-20%)}40%,58%{transform:translateY(-40%)}60%,78%{transform:translateY(-60%)}80%,100%{transform:translateY(-80%)}}
@@ -1389,7 +1389,8 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
   .ds-hero-badge{padding:var(--ds-space-2) var(--ds-space-4);font-size:var(--ds-text-caption)}
   .ds-hero-actions{margin-bottom:var(--ds-space-10)}
   .ds-hero-actions .ds-btn{width:100%;max-width:280px}
-  .ds-hero-cycle-word{font-size:.85em}
+  .ds-hero-cycle-word{font-size:.72em}
+  .ds-hero-cycle{max-width:140px}
   .ds-stat-num{font-size:var(--ds-text-h1)}
   .ds-footer-cols{grid-template-columns:1fr;gap:var(--ds-space-8)}
   .ds-cta-actions .ds-btn{width:100%;max-width:280px}
