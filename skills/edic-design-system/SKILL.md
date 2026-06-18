@@ -1,5 +1,8 @@
 ---
 name: edic-design-system
+slug: edic-design-system
+displayName: EDIC 设计系统
+version: 1.5.5
 description: >-
   Generate UI components, full pages, documents, emails, and assets that
   strictly follow the EDIC design system (Editorial × Olive Green, OKLch
@@ -7,7 +10,7 @@ description: >-
   to build, style, or refactor anything for EDIC, or explicitly requests the
   EDIC / "editorial olive" design system. Output token-driven, accessible,
   framework-agnostic HTML/CSS.
-license: For use with the EDIC design system.
+license: MIT-0
 ---
 
 # EDIC Design System Skill
@@ -203,6 +206,6 @@ h4 1.5 · h3 1.875 · h2 2.25 · h1 3 · display 3.75 · hero 4.5.
 ```
 
 ## Reference
-- Full handbook & live tokens: https://edic.cgartlab.com/docs.html
+- Website: https://edic.cgartlab.com/
 - Usage docs: https://edic.cgartlab.com/docs.html
-- Structured tokens: `tokens.json`
+- Structured tokens: https://edic.cgartlab.com/tokens.json

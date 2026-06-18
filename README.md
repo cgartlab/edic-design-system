@@ -3,7 +3,7 @@
 Editorial Design Interface for Content. A framework-agnostic design system for building warm, restrained, ordered interfaces — with OKLch color science and design tokens. For humans and AI alike: even if you don't know design, EDIC helps any AI assistant produce professional-grade interfaces and documents.
 
 **Site:** https://edic.cgartlab.com
-**Version:** v1.5.4
+**Version:** v1.5.5
 **License:** CC BY 4.0
 
 ---

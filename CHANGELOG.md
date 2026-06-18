@@ -24,6 +24,69 @@
 
 ---
 
+## [1.5.5] — 2026-06-05
+
+### 新增
+
+- **页面目录组件**：统一页面目录组件 `.ds-pagenav`，支持桌面浮动与移动端折叠
+- **代码样式规范**：Prism.js 语法高亮主题，橄榄绿编辑风格，16 种 token 类型
+- **Layer 2 验证器**：新增 cssref、darkmode、verext、hardcode 四个跨文件验证器
+- **图标 sprite 生成**：`tools/generate_icons.py` 可生成独立 SVG sprite
+
+### 修复
+
+- **TOC 命名空间冲突回归**
+- **Prism 代码块暗色模式可见性**
+- **反模式清理**（hex/rgba 迁移到 OKLch，死代码删除）
+
+### 变更
+
+- **命名验证器白名单扩展**（新增 7 个合法类别）
+- **CI 治理完善**，`make validate` 退出码聚合
+- **暗色模式 Gravitas & Glow 增强**
+
+---
+
+## [1.5.5] — 2026-06-19
+
+### 修复（Skill 发布补丁）
+
+- **移除失效链接**：删除 `handbook.html`（404），更新 `edic.cgartlab.com` Reference 链接
+- **修正重复链接**：`docs.html` 重复链接合并，新增 Website 和 `tokens.json` 完整 URL
+- **版本源统一**：VERSION、package.json、tokens.json、SKILL.md 全部更新至 1.5.5
+- **缓存失效修复**：执行 `make stamp-version`，所有 HTML/CSS/JS/MD 文件 `?v=` 更新至 1.5.5
+
+### 变更（Skill 发布补丁）
+
+- **ClawHub/SkillHub 元数据**：SKILL.md 新增 `slug`、`displayName`、`version` 字段
+- **Skill 包 License 统一**：包内 README.md License badge 更新为 MIT-0，与 SKILL.md 一致
+- **Skill ZIP 重建**：`scripts/package_skill.py` 重建并通过 `--check` 校验
+
+---
+
+
+
+### 新增
+
+- **页面目录组件**：统一页面目录组件 `.ds-pagenav`，支持桌面浮动与移动端折叠
+- **代码样式规范**：Prism.js 语法高亮主题，橄榄绿编辑风格，16 种 token 类型
+- **Layer 2 验证器**：新增 cssref、darkmode、verext、hardcode 四个跨文件验证器
+- **图标 sprite 生成**：`tools/generate_icons.py` 可生成独立 SVG sprite
+
+### 修复
+
+- **TOC 命名空间冲突回归**
+- **Prism 代码块暗色模式可见性**
+- **反模式清理**（hex/rgba 迁移到 OKLch，死代码删除）
+
+### 变更
+
+- **命名验证器白名单扩展**（新增 7 个合法类别）
+- **CI 治理完善**，`make validate` 退出码聚合
+- **暗色模式 Gravitas & Glow 增强**
+
+---
+
 ## [1.5.4] — 2026-06-14
 
 ### 修复
