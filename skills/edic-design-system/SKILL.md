@@ -2,7 +2,7 @@
 name: edic-design-system
 slug: edic-design-system
 displayName: EDIC 设计系统
-version: 1.5.5
+version: 1.5.4
 description: >-
   Generate UI components, full pages, documents, emails, and assets that
   strictly follow the EDIC design system (Editorial × Olive Green, OKLch
@@ -10,7 +10,7 @@ description: >-
   to build, style, or refactor anything for EDIC, or explicitly requests the
   EDIC / "editorial olive" design system. Output token-driven, accessible,
   framework-agnostic HTML/CSS.
-license: MIT-0
+license: CC BY 4.0
 ---
 
 # EDIC Design System Skill
