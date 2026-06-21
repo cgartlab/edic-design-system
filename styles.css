@@ -1385,7 +1385,7 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
   .ds-hero-section{padding:var(--ds-space-20) 0 var(--ds-space-16)}
   .ds-hero-title{font-size:var(--ds-text-h3);line-height:1.15}
   .ds-hero-mark-wrap{margin-bottom:var(--ds-space-8)}
-  .ds-logo-hero{width:80px;height:80px}
+  .ds-logo-hero{width:var(--ds-space-20);height:var(--ds-space-20)}
   .ds-logo-hero svg{width:50px;height:50px}
   .ds-hero-badge{padding:var(--ds-space-2) var(--ds-space-4);font-size:var(--ds-text-caption)}
   .ds-hero-actions{margin-bottom:var(--ds-space-10)}
