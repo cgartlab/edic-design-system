@@ -1,8 +1,8 @@
 # EDIC Design System Skill Package v1.5.5
 # EDIC 设计系统 Skill 技能包 v1.5.5
 
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/)
-[![Version](https://img.shields.io/badge/Version-1.5.5-green.svg)](https://edic.cgartlab.com/)
+[![License: MIT-0](https://img.shields.io/badge/License-MIT%200-blue.svg)](https://spdx.org/licenses/MIT-0.html)
+[![Version](https://img.shields.io/badge/Version-1.5.4-green.svg)](https://edic.cgartlab.com/)
 
 ---
 

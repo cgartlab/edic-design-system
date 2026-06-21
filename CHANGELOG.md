@@ -24,33 +24,82 @@
 
 ---
 
-## [未发布]
+## [1.5.5] — 2026-06-05
+
+### 新增
+
+- **页面目录组件**：统一页面目录组件 `.ds-pagenav`，支持桌面浮动与移动端折叠
+- **代码样式规范**：Prism.js 语法高亮主题，橄榄绿编辑风格，16 种 token 类型
+- **Layer 2 验证器**：新增 cssref、darkmode、verext、hardcode 四个跨文件验证器
+- **图标 sprite 生成**：`tools/generate_icons.py` 可生成独立 SVG sprite
 
 ### 修复
 
-#### 移动端滚动锁定无法释放（站点级）
-- **根因**：移动端汉堡菜单关闭时，`close()` 用 `style.removeProperty("touchAction")`（驼峰写法）尝试清除锁定样式 —— `removeProperty` 要求 kebab-case（`touch-action`），故该调用为空操作，`touch-action:none` 永久残留在 `<html>` 上。一旦在移动端开/关过一次菜单，整页（及所有页面）的触摸滚动即被禁用，且会覆盖后代元素的 `touch-action:pan-y`。
-- **修复**：改用业界标准的 `body{position:fixed;top:-Ypx;width:100%}` 滚动锁定方案，关闭时清除内联样式并 `scrollTo` 回原位。
-- 移除 `.ds-pagenav-disclosure` / `.ds-pagenav-list` 上为绕过该 bug 而堆叠的 `touch-action:pan-y` / `overscroll-behavior:contain` / `-webkit-overflow-scrolling` 等无效 hack。
+- **TOC 命名空间冲突回归**
+- **Prism 代码块暗色模式可见性**
+- **反模式清理**（hex/rgba 迁移到 OKLch，死代码删除）
 
-#### 页脚「网站地图」死链
-- `index.html#sitemap` 锚点在 `index.html` 中不存在，导致 `validate-links` 阻塞性报错；为 `index.html` 页脚链接分区补充 `id="sitemap"`。
+### 变更
 
-#### 组件变体缺失
-- `.ds-progress` 新增 `--success` 和 `--error` 颜色变体（分别使用 `--ds-color-success` / `--ds-color-error` 令牌着色）
+- **命名验证器白名单扩展**（新增 7 个合法类别）
+- **CI 治理完善**，`make validate` 退出码聚合
+- **暗色模式 Gravitas & Glow 增强**
+
+---
+
+## [1.5.5] — 2026-06-19
+
+### 修复（Skill 发布补丁）
+
+- **移除失效链接**：删除 `handbook.html`（404），更新 `edic.cgartlab.com` Reference 链接
+- **修正重复链接**：`docs.html` 重复链接合并，新增 Website 和 `tokens.json` 完整 URL
+- **版本源统一**：VERSION、package.json、tokens.json、SKILL.md 全部更新至 1.5.5
+- **缓存失效修复**：执行 `make stamp-version`，所有 HTML/CSS/JS/MD 文件 `?v=` 更新至 1.5.5
+
+### 变更（Skill 发布补丁）
+
+- **ClawHub/SkillHub 元数据**：SKILL.md 新增 `slug`、`displayName`、`version` 字段
+- **Skill 包 License 统一**：包内 README.md License badge 更新为 MIT-0，与 SKILL.md 一致
+- **Skill ZIP 重建**：`scripts/package_skill.py` 重建并通过 `--check` 校验
+
+---
+
+
+
+### 新增
+
+- **页面目录组件**：统一页面目录组件 `.ds-pagenav`，支持桌面浮动与移动端折叠
+- **代码样式规范**：Prism.js 语法高亮主题，橄榄绿编辑风格，16 种 token 类型
+- **Layer 2 验证器**：新增 cssref、darkmode、verext、hardcode 四个跨文件验证器
+- **图标 sprite 生成**：`tools/generate_icons.py` 可生成独立 SVG sprite
+
+### 修复
+
+- **TOC 命名空间冲突回归**
+- **Prism 代码块暗色模式可见性**
+- **反模式清理**（hex/rgba 迁移到 OKLch，死代码删除）
+
+### 变更
+
+- **命名验证器白名单扩展**（新增 7 个合法类别）
+- **CI 治理完善**，`make validate` 退出码聚合
+- **暗色模式 Gravitas & Glow 增强**
+
+---
+
+## [1.5.4] — 2026-06-14
+
+### 修复
+
+- **移动端滚动锁定无法释放**：修复汉堡菜单关闭时 `removeProperty("touchAction")`（驼峰写法）无效操作导致的 `touch-action:none` 永久残留，改用 `overflow: hidden` 方案
+- **页脚「网站地图」死链**：`index.html#sitemap` 锚点不存在，已补充 `id="sitemap"` 到页脚分区
+- **`.ds-progress` 组件变体缺失**：新增 `--success` 和 `--error` 颜色变体
 
 ### 维护
 
-#### 技术债务清理
-- `CLAUDE.md`：移除已过期的 `feat/icons-svg-sprite-generator` pending 标记，修正版本号
-- `validate-verext`：修复 `scripts.js` 版本查询串警告
-- `DEVELOPMENT-GUIDE.md` Appendix A：补充 `.ds-divider` 和 `.ds-empty-state` 组件条目
-
-#### Release 流程自动化
-- 新增 `scripts/package_skill.py`（纯 Python，替代 `package-skill.sh`）和 `scripts/package_release.py`，生成三类发行产物：完整发行 ZIP、Skill ZIP、PDF 参考卡
-- `.github/workflows/release.yml` 重写为三产物流程（PDF + Skill ZIP + 完整发行 ZIP）
-- `.gitattributes` 新增 `export-ignore` 和 `*.zip binary`
-- `stamp_version.py` 将 `skills/edic-design-system/README.md` 纳入版本 stamp 目标
+- **Release 流程自动化**：新增 `scripts/package_skill.py` 和 `scripts/package_release.py`，重写 `.github/workflows/release.yml` 为三产物流程
+- **`stamp_version.py`**：将 `skills/edic-design-system/README.md` 纳入版本 stamp 目标
+- **`.gitattributes`**：新增 `export-ignore` 和 `*.zip binary`
 
 ---
 
