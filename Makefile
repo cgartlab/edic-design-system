@@ -4,7 +4,7 @@
 
 SHELL := /bin/sh
 .DEFAULT_GOAL := help
-.PHONY: help validate validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode stamp-version serve clean serve-py serve-node generate-pdfs icons icons-check test
+.PHONY: help bump-patch bump-minor bump-major validate validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode validate-versioning stamp-version serve clean serve-py serve-node generate-pdfs icons icons-check test release
 
 PYTHON ?= python3
 NODE ?= node
@@ -19,13 +19,21 @@ help:  ## 显示帮助
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 	  awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
-# ─── 验证 ──────────────────────────────────────────────────
+# ─── 版本管理 ─────────────────────────────────────────────
 # AGENTS.md 退出码契约：0 = pass / 1 = 阻塞错误 / 2 = 仅警告（非阻塞）
 # ci.yml 已将 exit 2 映射为 0；本地 `make validate` 也应如此——逐个运行所有验证器，
 # 仅在出现 exit 1 时失败，exit 0/2 视为通过。
-validate:  ## 全部验证（聚合 10 个验证器；exit 1 阻塞，exit 0/2 通过）
+
+.PHONY: bump-patch bump-minor bump-major
+bump-patch bump-minor bump-major:  ## 递增版本（patch/minor/major）并生成 CHANGELOG 条目
+	@python3 tools/bump_version.py $(notdir $(firstword $(MAKECMDGOALS)))
+	@echo ""
+	@echo "Files staged. Review, then: make validate && make release"
+
+.PHONY: validate
+validate:  ## 全部验证（聚合 11 个验证器；exit 1 阻塞，exit 0/2 通过）
 	@fail=0; \
-	for t in validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode; do \
+	for t in validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode validate-versioning; do \
 	  script="tools/validate_$$(echo $$t | sed 's/^validate-//').py"; \
 	  $(PYTHON) $$script > /tmp/ds-validate-$$t.raw 2>&1; \
 	  ec=$$?; \
@@ -83,6 +91,9 @@ validate-verext:  ## 校验 tokens.json / package.json 版本一致性
 validate-hardcode:  ## 校验硬编码颜色值（应使用 --ds-* token）
 	$(PYTHON) tools/validate_hardcode.py
 
+validate-versioning:  ## 校验 VERSION ↔ CHANGELOG.md 一致性
+	$(PYTHON) tools/validate_versioning.py
+
 stamp-version:  ## 将 VERSION 同步到所有 HTML / MD 资源
 	$(PYTHON) tools/stamp_version.py
 
@@ -112,8 +123,21 @@ icons-check:  ## 校验 icons.svg 是否与 scripts.js 的 ICONS 数组同步（
 test: validate  ## 运行所有测试（当前等价于 validate）
 	@echo "✓ 测试完成"
 
+# ─── 发布 ──────────────────────────────────────────────────
+.PHONY: release
+release:  ## 运行验证 → 提交 staged 文件 → 打标签 → 推送标签
+	@version=$$(cat VERSION) && \
+	git add VERSION CHANGELOG.md && \
+	git commit -m "Release v$$version" && \
+	git tag -a "v$$version" -m "Release v$$version" && \
+	git push && \
+	git push origin "v$$version" && \
+	@echo "" && \
+	echo "✓ Released v$$version — GitHub Actions will create the GitHub Release"
+
 # ─── 清理 ──────────────────────────────────────────────────
 clean:  ## 清理临时文件
 	find . -name '*.pyc' -delete
 	find . -name '__pycache__' -type d -exec rm -rf {} +
 	@echo "✓ 已清理"
+
