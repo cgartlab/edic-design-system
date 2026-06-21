@@ -1166,7 +1166,7 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .ds-hero-mark-wrap{margin-bottom:var(--ds-space-10);display:flex;justify-content:center}
 .ds-hero-badge{display:inline-flex;align-items:center;gap:var(--ds-space-2);padding:var(--ds-space-2) var(--ds-space-5);border-radius:var(--ds-radius-full);background:var(--ds-color-surface-raised);border:1px solid var(--ds-color-border);font-size:var(--ds-text-body-sm);font-weight:500;color:var(--ds-color-fg-subtle);box-shadow:var(--ds-shadow-xs);margin-bottom:var(--ds-space-8);transition:all var(--ds-duration-200) var(--ds-ease-out)}
 .ds-hero-badge:hover{box-shadow:var(--ds-shadow-sm);border-color:var(--ds-color-border-strong);transform:translateY(-1px)}
-.ds-hero-badge .ds-dot{width:8px;height:8px;border-radius:50%;background:var(--ds-color-success);box-shadow:0 0 0 var(--ds-space-0-75) var(--ds-color-success-bg);position:relative;flex-shrink:0}
+.ds-hero-badge .ds-dot{width:var(--ds-space-2);height:var(--ds-space-2);border-radius:50%;background:var(--ds-color-success);box-shadow:0 0 0 var(--ds-space-0-75) var(--ds-color-success-bg);position:relative;flex-shrink:0}
 .ds-hero-badge .ds-dot::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--ds-color-success);animation:ds-pulse-dot 2s var(--ds-ease-in-out) infinite}
 
 .ds-hero-title{font-family:var(--ds-font-display);font-size:var(--ds-text-hero);font-weight:var(--ds-weight-bold);line-height:1.08;letter-spacing:var(--ds-tracking-tight);color:var(--ds-color-fg-strong);margin:0 auto var(--ds-space-6);max-width:18ch}
@@ -1458,9 +1458,9 @@ a.ds-feature-card:focus-visible{outline:2px solid var(--ds-accent);outline-offse
 
 /* --- ds-glow-border: subtle luminous accent edge (dark-mode-only) --- */
 .ds-glow-border{position:relative;border-color:var(--ds-color-border);transition:border-color var(--ds-duration-300) var(--ds-ease-out),box-shadow var(--ds-duration-300) var(--ds-ease-out)}
-[data-theme="dark"] .ds-glow-border{border-color:var(--ds-glow-border);box-shadow:0 0 0 1px var(--ds-glow-border),var(--ds-glow-xs)}
+[data-theme="dark"] .ds-glow-border{border-color:var(--ds-glow-border);box-shadow:0 0 0 var(--ds-space-0-25) var(--ds-glow-border),var(--ds-glow-xs)}
 @media(prefers-color-scheme:dark){
-  :root:not([data-theme]) .ds-glow-border{border-color:var(--ds-glow-border);box-shadow:0 0 0 1px var(--ds-glow-border),var(--ds-glow-xs)}
+  :root:not([data-theme]) .ds-glow-border{border-color:var(--ds-glow-border);box-shadow:0 0 0 var(--ds-space-0-25) var(--ds-glow-border),var(--ds-glow-xs)}
 }
 
 /* --- ds-aura: soft radial light behind element (dark-mode-only) ---
