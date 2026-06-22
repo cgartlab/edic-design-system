@@ -27,6 +27,8 @@ CHANGED_HTML=$(echo "$CHANGED_FILES" | grep -E '\.html$' || true)
 CHANGED_CSS=$(echo "$CHANGED_FILES" | grep -E '\.css$' || true)
 CHANGED_JS=$(echo "$CHANGED_FILES" | grep -E '\.js$' || true)
 CHANGED_TOKENS=$(echo "$CHANGED_FILES" | grep -E 'tokens\.json$' || true)
+CHANGED_VERSION=$(echo "$CHANGED_FILES" | grep -E 'VERSION$' || true)
+CHANGED_PACKAGE=$(echo "$CHANGED_FILES" | grep -E 'package\.json$' || true)
 
 # 使用 Node.js 包装器运行验证器（自动检测 Python 路径）
 run_validators() {
@@ -43,6 +45,27 @@ run_validators() {
   fi
   return 0
 }
+
+# ── 版本文件自动同步 ──────────────────────────────────────
+# 当 VERSION 或 package.json 变更时，自动同步三个版本源
+if [ -n "$CHANGED_VERSION" ] || [ -n "$CHANGED_PACKAGE" ]; then
+  echo "  → 检测到 VERSION 或 package.json 变更，运行版本同步..."
+  if ! command -v python3 &> /dev/null; then
+    echo "  ⚠ Python 未安装，跳过版本同步"
+    echo "  ⚠ 请手动运行：python3 tools/sync_versions.py"
+  else
+    if ! python3 "$REPO_ROOT/tools/sync_versions.py" --check > /tmp/sync-check.log 2>&1; then
+      echo "  → 版本不一致，自动同步..."
+      python3 "$REPO_ROOT/tools/sync_versions.py"
+      echo "  → 已同步版本文件，重新暂存变更..."
+      git add VERSION tokens.json package.json 2>/dev/null || true
+      CHANGED_FILES=$(git diff --cached --name-only 2>/dev/null || true)
+      echo "  → 重新暂存的文件：$CHANGED_FILES"
+    else
+      echo "  → 版本已一致，无需同步"
+    fi
+  fi
+fi
 
 # 若有任何相关改动，运行全量验证
 if [ -n "$CHANGED_HTML" ] || [ -n "$CHANGED_CSS" ] || [ -n "$CHANGED_JS" ] || [ -n "$CHANGED_TOKENS" ]; then

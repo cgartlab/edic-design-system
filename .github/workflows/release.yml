@@ -8,6 +8,10 @@ on:
       - "v*"
   workflow_dispatch:
     inputs:
+      version:
+        description: "版本号（如 1.6.0），与 VERSION 文件同步（紧急手动发布用）"
+        required: false
+        type: string
       skip_validation:
         description: "跳过验证步骤（仅用于紧急热修复）"
         required: false
@@ -28,6 +32,30 @@ jobs:
     timeout-minutes: 15
 
     steps:
+      # ── workflow_dispatch 手动指定版本：同步 VERSION 文件 ──
+      - name: Sync VERSION file (manual dispatch)
+        if: inputs.version != ''
+        run: |
+          VERSION="${{ inputs.version }}"
+          echo "$VERSION" > VERSION
+          echo "VERSION file synced to v$VERSION"
+
+          # 同步 tokens.json 和 package.json
+          python3 -c "
+          import json, sys
+          for fname in ['tokens.json', 'package.json']:
+              with open(fname, 'r+', encoding='utf-8') as f:
+                  d = json.load(f)
+                  d['version'] = VERSION
+                  f.seek(0)
+                  json.dump(d, f, indent=2, ensure_ascii=False)
+                  f.truncate()
+              print(f'  {fname}: synced to v{VERSION}')
+          "
+
+          # 调用 stamp_version.py
+          python3 tools/stamp_version.py
+
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
@@ -107,24 +135,45 @@ jobs:
 
       - name: Extract changelog for release notes
         id: changelog
+        env:
+          TAG_NAME: ${{ github.ref_name }}
         run: |
-          awk '/^## \[/{flag=!flag; if(flag && !/Unreleased|未发布/) {capture=1}} capture' CHANGELOG.md | \
-            awk 'BEGIN{count=0} /^## \[/{count++; if(count>1) exit} {print}' > /tmp/release-notes.md
-          echo "RELEASE_NOTES<<EOF" >> $GITHUB_OUTPUT
-          cat /tmp/release-notes.md >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          # 从 tag 名称提取版本号（去掉 'v' 前缀）
+          VERSION="${TAG_NAME#v}"
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          # 使用 stamp_version.py 提取 Keep a Changelog 格式的 section
+          NOTES=$(python3 tools/stamp_version.py --changelog-section "$VERSION" 2>/dev/null || echo "")
+          if [ -n "$NOTES" ]; then
+            printf 'RELEASE_NOTES<<EOF\n%s\nEOF\n' "$NOTES" >> $GITHUB_OUTPUT
+          else
+            # 回退：输出空，让 GitHub Release 使用自动生成备注
+            printf 'RELEASE_NOTES<<EOF\nEOF\n' >> $GITHUB_OUTPUT
+          fi
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          name: ${{ github.ref_name }}
-          body: ${{ steps.changelog.outputs.RELEASE_NOTES }}
-          files: |
-            assets/downloads/*.pdf
-            assets/downloads/*.zip
-          draft: false
-          prerelease: ${{ contains(github.ref_name, '-') }}
-          generate_release_notes: false
+        id: create-release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.ref_name }}
+          BODY: ${{ steps.changelog.outputs.RELEASE_NOTES }}
+          PRERELEASE: ${{ contains(github.ref_name, '-') }}
+        run: |
+          set -e
+          # ── 幂等创建：已存在则编辑，不存在则创建 ──────────────
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG exists — editing in place"
+            gh release edit "$TAG" --title "$TAG" --notes "$BODY" --prerelease="$PRERELEASE"
+            gh release upload "$TAG" assets/downloads/*.pdf assets/downloads/*.zip --clobber
+          else
+            echo "Release $TAG does not exist — creating"
+            gh release create "$TAG" \
+              --title "$TAG" \
+              --notes "$BODY" \
+              --prerelease="$PRERELEASE" \
+              --draft=false \
+              assets/downloads/*.pdf \
+              assets/downloads/*.zip
+          fi
 
       - name: Verify release assets
         run: |

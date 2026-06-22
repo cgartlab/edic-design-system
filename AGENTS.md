@@ -197,11 +197,30 @@ release/{version}      # release prep
 
 ## Release Process
 
-1. Update `VERSION` file: `echo "1.6.0" > VERSION`
-2. Also update `tokens.json` `"version"` and `package.json` `"version"` to match
-3. Run `make stamp-version` to sync `?v=` to all HTML/MD files
-4. Run `make validate`
-5. Commit: `git add -A && git commit -m "chore(release): bump to v1.5.5"`
-6. Tag: `git tag v1.5.5 && git push origin v1.5.5`
+### 正常发布（自动化）
 
-Tag push triggers `release.yml` — builds PDFs and creates GitHub Release automatically.
+1. 推送到 `main` 分支，`release-please` 自动分析 Conventional Commits
+2. 自动创建/更新 Release PR（包含版本号和 CHANGELOG 变更）
+3. CI 运行 `make validate`（10 个验证器）
+4. 合并 Release PR → 自动打 tag → `release.yml` 构建资产并创建 GitHub Release
+
+> **前置条件**：Phase 4 完成（`RELEASE_PLEASE_TOKEN` secret + Branch Protection 配置）
+
+### 手动发布（紧急修复）
+
+```bash
+# 1. 同步版本
+make sync-versions
+
+# 2. 验证
+make validate
+
+# 3. 提交 + 打 tag
+git add -A && git commit -m "chore(release): bump v1.6.0"
+git tag -a v1.6.0 -m "Release v1.6.0"
+git push && git push origin v1.6.0
+
+# 4. release.yml 自动构建资产并创建 GitHub Release
+```
+
+> 注意：手动发布后需同步 `.release-please-manifest.json` 中的版本号，避免 release-please 下次重复发布。

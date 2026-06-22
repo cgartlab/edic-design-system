@@ -155,9 +155,48 @@ release-please / semantic-release 风格的自动化可在未来引入（见 [�
 - **最新稳定版**：`v1.5.5`（2026-06-08）
 - **VERSION 文件**：项目根目录 `VERSION` 单行文件存放当前版本号
 
+## 自动化发布（Release Please）
+
+项目已集成 [release-please](https://github.com/googleapis/release-please) 自动化发布流程。
+
+### 触发方式
+
+| 方式 | 说明 |
+|------|------|
+| **自动** | push to `main` → release-please 自动创建/更新 Release PR |
+| **手动（强制版本）** | `workflow_dispatch` + `release-as` 输入 → 强制指定版本号 |
+| **手动（预发布）** | `workflow_dispatch` + `prerelease=true` → 标记为预发布 |
+| **紧急发布** | `git tag vX.Y.Z && git push origin vX.Y.Z` → 触发现有 release.yml |
+
+### 发布流程
+
+```
+提交（Conventional Commits）
+  → release-please 分析
+  → 创建/更新 Release PR（CHANGELOG + 版本 bump）
+  → 合并 PR
+  → 自动打 tag (vX.Y.Z)
+  → release.yml 触发
+  → 构建 PDF/ZIP 资产 + GitHub Release
+```
+
+### Release PR 内容
+
+Release PR 包含：
+- `CHANGELOG.md` 更新（基于 Conventional Commits 自动分类，中文章节）
+- `VERSION`、`tokens.json`、`package.json` 版本同步
+
+### 版本同步
+
+release-please 创建 tag 后，`stamp_version.py` 会自动同步 HTML/MD 文件中的 `?v=` 缓存 busting 参数。
+
+### 向后兼容性
+
+手动 `git tag vX.Y.Z && git push origin vX.Y.Z` 仍然有效，会触发现有的 `release.yml` 完成资产构建和 GitHub Release 创建。
+
 ## 未来工作
 
-- [ ] 引入 release-please 自动化
+- [x] ~~引入 release-please 自动化~~（已实施）
 - [ ] 引入 Changesets（多组件包场景）
 - [ ] npm 发布为可选（如果未来需要 programmatic API）
 - [ ] 语义化令牌演进（`@deprecated` 标记、迁移指南）

@@ -38,6 +38,7 @@ stamp_version.py — 将 VERSION 同步到所有项目资源
   python3 tools/stamp_version.py --diff      # 显示 diff 预览（不修改）
   python3 tools/stamp_version.py --restore   # 把当前 stamp 反向还原为占位符
 """
+
 from __future__ import annotations
 
 import argparse
@@ -53,11 +54,16 @@ PLACEHOLDER = "{{DS_VERSION}}"
 PLACEHOLDER_RE = re.compile(r"\{\{DS_VERSION\}\}")
 
 HTML_TARGETS = [
-    "index.html", "terms.html", "prompts.html",
-    "downloads.html", "docs.html",
+    "index.html",
+    "terms.html",
+    "prompts.html",
+    "downloads.html",
+    "docs.html",
     "changelog.html",
-    "blog.html", "company.html",
-    "resume.html", "report.html",
+    "blog.html",
+    "company.html",
+    "resume.html",
+    "report.html",
 ]
 
 CSS_TARGETS = ["styles.css"]
@@ -116,11 +122,15 @@ def restore_placeholders(text: str, version: str) -> tuple[str, int]:
         return new, n
 
     quote_class = r"""["']"""
-    text, n = _sub(rf"\?v={re.escape(version)}(?={quote_class})", f"?v={PLACEHOLDER}", text)
+    text, n = _sub(
+        rf"\?v={re.escape(version)}(?={quote_class})", f"?v={PLACEHOLDER}", text
+    )
     count += n
     text, n = _sub(rf"\bv{re.escape(version)}\b", f"v{PLACEHOLDER}", text)
     count += n
-    text, n = _sub(rf'"version":\s*"{re.escape(version)}"', f'"version": "{PLACEHOLDER}"', text)
+    text, n = _sub(
+        rf'"version":\s*"{re.escape(version)}"', f'"version": "{PLACEHOLDER}"', text
+    )
     count += n
     return text, count
 
@@ -175,7 +185,42 @@ def diff_text(old: str, new: str) -> list[str]:
     return out
 
 
-def replace_old_version(text: str, old_version: str, new_version: str) -> tuple[str, int]:
+def extract_changelog_section(version: str) -> str | None:
+    """从 CHANGELOG.md 提取指定版本的 changelog section 文本。
+
+    解析 Keep a Changelog 格式：
+      ## [1.6.0] — 2026-06-22
+      ### 新增
+      ...
+
+    返回该版本的所有内容（不含下一版本的标题），或 None（未找到）。
+    """
+    changelog_path = ROOT / "CHANGELOG.md"
+    if not changelog_path.exists():
+        return None
+
+    content = changelog_path.read_text(encoding="utf-8")
+
+    # 转义版本号用于正则（处理 semver prerelease 等特殊字符）
+    escaped_version = re.escape(version)
+
+    # 匹配 ## [version] 或 ## [version] — date 开头
+    # 使用普通字符串拼接避免 rf-string 中 \{ 转义与 f-string 格式化的冲突
+    pattern = re.compile(
+        "^##\\s+\\[" + escaped_version + "\\](?:[^\\n]*\\n)(.*?)(?=^##\\s+\\[|\\Z)",
+        re.MULTILINE | re.DOTALL,
+    )
+    m = pattern.search(content)
+    if not m:
+        return None
+
+    section = m.group(1).rstrip()
+    return section
+
+
+def replace_old_version(
+    text: str, old_version: str, new_version: str
+) -> tuple[str, int]:
     """在已提交（已 stamp）的文件中把旧版本号替换为新版本号。
 
     处理三种形式：
@@ -333,7 +378,9 @@ def apply_stamp(paths: Iterable[Path], version: str, mode: str) -> int:
         print(f"✓ 还原完成：{files_changed} 个文件，{total_changes} 处占位符恢复")
         return 0
 
-    print(f"✓ stamp 完成：{files_changed} 个文件，{total_changes} 处替换（VERSION = v{version}）")
+    print(
+        f"✓ stamp 完成：{files_changed} 个文件，{total_changes} 处替换（VERSION = v{version}）"
+    )
     return 0
 
 
@@ -345,8 +392,29 @@ def main() -> int:
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--check", action="store_true", help="仅检查，不修改（CI 用）")
     group.add_argument("--diff", action="store_true", help="显示 diff 预览")
-    group.add_argument("--restore", action="store_true", help="反向：把 stamp 值还原为 {{DS_VERSION}} 占位符")
+    group.add_argument(
+        "--restore",
+        action="store_true",
+        help="反向：把 stamp 值还原为 {{DS_VERSION}} 占位符",
+    )
+    parser.add_argument(
+        "--changelog-section",
+        metavar="VERSION",
+        help="提取 CHANGELOG.md 中指定版本的 section 内容（供 release.yml 生成 Release Notes 用）",
+    )
     args = parser.parse_args()
+
+    # --changelog-section 是独立模式，不与 group 互斥
+    if args.changelog_section:
+        section = extract_changelog_section(args.changelog_section)
+        if section is None:
+            print(
+                f"[ERROR] CHANGELOG.md 中未找到版本 {args.changelog_section}",
+                file=sys.stderr,
+            )
+            return 1
+        print(section)
+        return 0
 
     if args.restore and (args.check or args.diff):
         parser.error("--restore 与 --check / --diff 互斥")

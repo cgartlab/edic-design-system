@@ -136,7 +136,15 @@ make serve             # 本地预览
 - 新增组件需在 `docs.html` 的 `#visual-components` 区域添加预览
 - 重大变更需更新 `CHANGELOG.md` 并 bump 版本号
 
-详见 [`docs/RELEASE-CHECKLIST.md`](./docs/RELEASE-CHECKLIST.md)。
+### 发布流程
+
+发布已自动化。贡献者无需手动发布：
+
+- **提交符合 Conventional Commits** 的 PR（`feat:`、`fix:`、`docs:` 等）
+- 合并到 `main` 后，`release-please` 自动创建 Release PR
+- Release PR 合并后自动打 tag → GitHub Release 包含 PDF/ZIP 附件
+
+详见 [`docs/VERSIONING.md`](./docs/VERSIONING.md) 和 [`docs/RELEASE-CHECKLIST.md`](./docs/RELEASE-CHECKLIST.md)。
 
 ## 目录结构（参考）
 

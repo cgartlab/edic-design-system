@@ -4,7 +4,7 @@
 
 SHELL := /bin/sh
 .DEFAULT_GOAL := help
-.PHONY: help lint build validate validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode stamp-version serve clean serve-py serve-node generate-pdfs icons icons-check test skill-package release-package
+.PHONY: help lint build validate validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode stamp-version sync-versions sync-versions:check release-please serve clean serve-py serve-node generate-pdfs icons icons-check test skill-package release-package
 
 PYTHON ?= python3
 NODE ?= node
@@ -92,6 +92,21 @@ validate-hardcode:  ## 校验硬编码颜色值（应使用 --ds-* token）
 
 stamp-version:  ## 将 VERSION 同步到所有 HTML / MD 资源
 	$(PYTHON) tools/stamp_version.py
+
+sync-versions:  ## 将 VERSION 同步到 tokens.json、package.json 及 HTML/MD
+	$(PYTHON) tools/sync_versions.py
+
+sync-versions:check:  ## 检查版本一致性（不修改文件）
+	$(PYTHON) tools/sync_versions.py --check
+
+# ─── 发布自动化 ────────────────────────────────────────────
+release-please:  ## 触发 release-please workflow（需要 GitHub CLI）
+	@if command -v gh > /dev/null 2>&1; then \
+	  gh workflow run release-please.yml; \
+	else \
+	  echo "GitHub CLI (gh) 未安装。请通过以下方式触发："; \
+	  echo "  GitHub → Actions → Release Please → Run workflow"; \
+	fi
 
 # ─── 本地预览 ──────────────────────────────────────────────
 serve: serve-py  ## 本地启动 HTTP 服务器（默认 8000）

@@ -36,10 +36,8 @@
 ## 代码阶段（发布当天）
 
 - [ ] 写入新版本号到 `VERSION`（如 `1.4.0`）
-- [ ] 运行 `make stamp-version` 一次性同步所有 HTML / README / AGENTS
+- [ ] 运行 `make sync-versions` 一次性同步 VERSION / tokens.json / package.json 及 HTML/MD
 - [ ] 同步更新 `scripts.js` 的 `TOKENS` 数组（如有新增令牌）
-- [ ] 同步更新 `tokens.json`（如有新增令牌）
-- [ ] 运行 `make validate-versions` 确认 `?v=` 一致
 - [ ] 运行 `make validate` 全部通过
 - [ ] 重新生成示例 PDF（如有视觉变更）：`python3 tools/generate_pdfs.py`
 - [ ] 提交最终 commit：`chore(release): bump vX.Y.Z`
