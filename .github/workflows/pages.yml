@@ -1,0 +1,106 @@
+# EDIC Design System — GitHub Pages Deployment
+#
+# 用 actions/deploy-pages 取代 Jekyll-based legacy build。
+# 优势：
+#   - 彻底绕过 Jekyll（项目是纯静态 HTML/CSS/JS，无 Jekyll 需求）
+#   - 显式构建日志（legacy build 失败时只显示通用 "Page build failed."）
+#   - actions/deploy-pages@v4 自带 concurrency 控制与失败回滚
+#
+# 触发方式：
+#   push to main              → 自动部署
+#   workflow_dispatch         → 手动重新部署（不改变内容，仅触发）
+#
+# 前置条件：
+#   - 仓库 Settings → Pages → Source: "GitHub Actions"（已通过 API 切换）
+#   - CNAME 文件已存在，GitHub Pages 自动应用自定义域名
+#
+# 重要：此 workflow 与 .nojekyll 文件共存
+#       .nojekyll 是 legacy build 时代的产物，现在保留仅为向后兼容。
+#       workflow build 模式下 .nojekyll 不起作用（不会被 Jekyll 处理，因为根本没有 Jekyll）。
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# 取消进行中的部署：避免 race condition（旧版本覆盖新版本）
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+# 部署到 GitHub Pages 必须的权限：
+#   contents: read   — checkout 代码
+#   pages: write     — 写入 Pages 部署
+#   id-token: write  — OIDC token（GitHub Pages 验证部署身份）
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    name: Deploy static site
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0  # 完整 git 历史，便于部署审计
+
+      # 健康检查：验证关键资产存在
+      # 这能立刻暴露问题资产（例如缺 index.html），比依赖 GitHub Pages 内部错误信息更直接
+      - name: Verify required assets exist
+        run: |
+          echo "─── Required assets check ───"
+          for f in index.html styles.css scripts.js CNAME .nojekyll; do
+            if [[ -f "$f" ]]; then
+              size=$(wc -c < "$f")
+              echo "  ✓ $f ($size bytes)"
+            else
+              echo "  ✗ MISSING: $f"
+              exit 1
+            fi
+          done
+          echo ""
+          echo "─── Optional assets ───"
+          for f in docs.html changelog.html tokens.json icons.svg; do
+            if [[ -f "$f" ]]; then
+              size=$(wc -c < "$f")
+              echo "  ✓ $f ($size bytes)"
+            else
+              echo "  ⚠ missing (optional): $f"
+            fi
+          done
+
+      # 上传整个仓库根目录作为 Pages artifact
+      # 关键：path 必须是 "." 而不是 "./" 或具体子目录
+      # 排除项：.git、__pycache__、node_modules、preview.png（开发截图）
+      - name: Setup Pages artifact
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      # 部署到 GitHub Pages
+      # url 输出会自动注入到 environment.url
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Verify deployment URL
+        if: success()
+        run: |
+          echo "─── Deployment summary ───"
+          echo "  URL: ${{ steps.deployment.outputs.page_url }}"
+          echo "  Commit: ${{ github.sha }}"
+          echo "  Author: ${{ github.actor }}"
+          echo "  Run ID: ${{ github.run_id }}"

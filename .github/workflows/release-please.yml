@@ -93,6 +93,21 @@ jobs:
         with:
           python-version: "3.11"
 
+      # ── Sync VERSION to the released version BEFORE stamping ─────
+      # release-please updates VERSION via extra-files (see
+      # release-please-config.json), but in case it didn't (or was
+      # skipped), we re-write VERSION here from the release-please
+      # output. Without this guard, stamp_version.py reads the stale
+      # VERSION and uses replace_old_version() to revert the just-
+      # released version in package.json / tokens.json back to the
+      # old one (v1.6.0 → v1.5.5 bug, see commit ed3cc03).
+      - name: Sync VERSION from release-please output
+        run: |
+          VERSION="${{ needs.release-please.outputs.version }}"
+          echo "Released version: v${VERSION}"
+          printf '%s\n' "$VERSION" > VERSION
+          cat VERSION
+
       - name: Run stamp_version.py
         run: python3 tools/stamp_version.py
 
