@@ -1414,12 +1414,12 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
   .ds-logo-hero svg{width:var(--ds-space-12);height:var(--ds-space-12)}
   .ds-hero-badge{padding:var(--ds-space-2) var(--ds-space-4);font-size:var(--ds-text-caption)}
   .ds-hero-actions{margin-bottom:var(--ds-space-10)}
-  .ds-hero-actions .ds-btn{width:100%;max-width:280px}
+  .ds-hero-actions .ds-btn{width:100%;max-width:18rem}
   .ds-hero-cycle-word{font-size:1em}
-  .ds-hero-cycle{max-width:150px}
+  .ds-hero-cycle{max-width:var(--ds-space-40)}
   .ds-stat-num{font-size:var(--ds-text-h1)}
   .ds-footer-cols{grid-template-columns:1fr;gap:var(--ds-space-8)}
-  .ds-cta-actions .ds-btn{width:100%;max-width:280px}
+  .ds-cta-actions .ds-btn{width:100%;max-width:18rem}
   /* P0 #95: mobile scroll trap fix — remove fixed height, let content flow */
   .ds-prompt-body{max-height:none;overflow-y:visible}
   .ds-navbar-cta span{display:none}
@@ -1435,7 +1435,7 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
   .ds-reveal{opacity:1!important;transform:none!important}
   .ds-gradient-text{animation:none}
   .ds-hero-cycle-track{animation:none}
-  .ds-feature-track{animation-play-state:paused}
+
   /* Gravitas & Glow: kill the breathe keyframes explicitly so the
      shadow doesn't flicker between xs/md keyframe states at 0.001ms.
      Static glows (border, aura, surface) are fine — they're not animated. */
