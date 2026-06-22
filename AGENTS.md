@@ -216,9 +216,9 @@ make sync-versions
 make validate
 
 # 3. 提交 + 打 tag
-git add -A && git commit -m "chore(release): bump v1.6.0"
-git tag -a v1.6.0 -m "Release v1.6.0"
-git push && git push origin v1.6.0
+git add -A && git commit -m "chore(release): bump v1.5.5"
+git tag -a v1.5.5 -m "Release v1.5.5"
+git push && git push origin v1.5.5
 
 # 4. release.yml 自动构建资产并创建 GitHub Release
 ```
