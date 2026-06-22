@@ -111,7 +111,7 @@ stamp 工具会一次性替换为 VERSION 中的真实版本号（无构建步�
 
 ```bash
 # 1. 改 VERSION（单行文本）
-echo "1.5.4" > VERSION
+echo "1.5.5" > VERSION
 
 # 2. 自动同步所有文件
 make stamp-version

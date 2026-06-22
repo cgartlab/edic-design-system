@@ -61,7 +61,17 @@
           <svg class="ds-logo-draw" viewBox="0 0 32 32" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" transform="rotate(45 16 16)" d="M11 8C13.5 6.6 18.5 6.6 21 8C23.2 11 22 19 16.1 26.6L16.5 14C16.5 13.5 15.5 13.5 15.5 14L15.9 26.6C10 19 8.8 11 11 8ZM14.3 11.8a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0 -3.4 0Z"/></svg>
         </span>
       </div>
-      <h1 class="ds-hero-title ds-reveal ds-text-balance" style="--d:120ms">同时面向人类与 Agent 的<br><span class="ds-gradient-text">编辑主义</span>设计系统</h1>
+      <h1 class="ds-hero-title ds-reveal ds-text-balance" style="--d:120ms">同时面向人类与 Agent 的<br>
+        <span class="ds-hero-cycle" aria-label="编辑主义、克制温暖、可被复制、框架无关">
+          <span class="ds-hero-cycle-track">
+            <span class="ds-hero-cycle-word">编辑主义</span>
+            <span class="ds-hero-cycle-word">克制温暖</span>
+            <span class="ds-hero-cycle-word">可被复制</span>
+            <span class="ds-hero-cycle-word">框架无关</span>
+            <span class="ds-hero-cycle-word">编辑主义</span>
+          </span>
+        </span>设计系统</h1>
+      <div class="ds-hero-badge ds-reveal" style="--d:80ms"><span class="ds-dot"></span>v1.5.5 · 开源设计系统 · 200+ 设计令牌</div>
       <div class="ds-hero-actions ds-reveal" style="--d:280ms">
         <div class="ds-hero-actions__row">
           <a href="docs.html#visual-colors" class="ds-btn ds-btn--secondary ds-btn--lg">浏览视觉手册</a>
@@ -79,6 +89,7 @@
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
             SkillHub
           </a>
+          </div>
         </div>
       </div>
     </div>
@@ -100,19 +111,6 @@
   </div>
 </section>
 
-<!-- Stats -->
-<section class="ds-section">
-  <div class="ds-wrapper">
-    <div class="ds-stat-grid">
-      <div class="ds-stat ds-reveal"><span class="ds-stat-num">200+</span><span class="ds-stat-label">设计令牌</span></div>
-      <div class="ds-stat ds-reveal" style="--d:80ms"><span class="ds-stat-num">20</span><span class="ds-stat-label">核心组件</span></div>
-      <div class="ds-stat ds-reveal" style="--d:160ms"><span class="ds-stat-num">5</span><span class="ds-stat-label">附加组件</span></div>
-      <div class="ds-stat ds-reveal" style="--d:240ms"><span class="ds-stat-num">100</span><span class="ds-stat-label">UI 图标</span></div>
-      <div class="ds-stat ds-reveal" style="--d:320ms"><span class="ds-stat-num">0</span><span class="ds-stat-label">构建依赖</span></div>
-    </div>
-  </div>
-</section>
-
 <!-- Features -->
 <section class="ds-section ds-section--alt" id="features">
   <div class="ds-wrapper">
@@ -121,47 +119,127 @@
       <h2>克制、温暖、可被复制的系统</h2>
       <p>每一个视觉决策都被沉淀为令牌与语义化的 class，让设计意图在任何平台、任何协作者（包括 AI）之间无损传递。</p>
     </div>
-    <div class="ds-feature-grid">
-      <article class="ds-feature-card ds-reveal">
-        <span class="ds-feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"/><circle cx="15" cy="15" r="6"/></svg></span>
+
+    <div class="ds-features-grid ds-reveal">
+      <!-- Feature Card 1: OKLch 色彩科学 -->
+      <article class="ds-feature-card">
+        <span class="ds-feature-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="9" r="6"/><circle cx="15" cy="15" r="6"/>
+          </svg>
+        </span>
         <h3>OKLch 色彩科学</h3>
         <p>全部颜色以 OKLch 定义，确保跨设备的感知均匀与色准，亮度阶梯可预测，深浅模式无缝映射。</p>
       </article>
-      <article class="ds-feature-card ds-reveal" style="--d:60ms">
-        <span class="ds-feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></span>
+
+      <!-- Feature Card 2: 令牌驱动 -->
+      <article class="ds-feature-card">
+        <span class="ds-feature-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/>
+            <line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
+            <line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
+          </svg>
+        </span>
         <h3>令牌驱动</h3>
         <p>200+ CSS 自定义属性覆盖色彩、字体、间距、圆角、阴影、动效与层级。改一个变量，全局即时更新。</p>
       </article>
-      <article class="ds-feature-card ds-reveal" style="--d:120ms">
-        <span class="ds-feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg></span>
+
+      <!-- Feature Card 3: 编辑主义排版 -->
+      <article class="ds-feature-card">
+        <span class="ds-feature-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>
+          </svg>
+        </span>
         <h3>编辑主义排版</h3>
         <p>衬线 Display + 无衬线 Body 的经典搭配，针对中英文混排的字距、行高与标点做了专门优化。</p>
       </article>
-      <article class="ds-feature-card ds-reveal">
-        <span class="ds-feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
-        <h3>暗色模式</h3>
-        <p>完整的暗色令牌覆盖，暖灰基底而非纯黑，强调色自动亮化。支持系统偏好与本地持久化。</p>
-      </article>
-      <article class="ds-feature-card ds-reveal" style="--d:60ms">
-        <span class="ds-feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
+
+      <!-- Feature Card 4: 框架无关 -->
+      <article class="ds-feature-card">
+        <span class="ds-feature-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+          </svg>
+        </span>
         <h3>框架无关</h3>
         <p>没有构建工具、没有运行时依赖。一份 CSS 即可用于任意技术栈、邮件、PDF 与设计工具。</p>
       </article>
-      <article class="ds-feature-card ds-reveal" style="--d:120ms">
-        <span class="ds-feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+
+      <!-- Feature Card 5: 暗色模式 -->
+      <article class="ds-feature-card">
+        <span class="ds-feature-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </span>
+        <h3>暗色模式</h3>
+        <p>完整的暗色令牌覆盖，暖灰基底而非纯黑，强调色自动亮化。支持系统偏好与本地持久化。</p>
+      </article>
+
+      <!-- Feature Card 6: 动效系统 -->
+      <article class="ds-feature-card">
+        <span class="ds-feature-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </span>
         <h3>动效系统</h3>
         <p>统一的时长与缓动令牌、滚动揭示、SVG 描边与微交互，并完整尊重 <code class="ds-inline-code">prefers-reduced-motion</code>。</p>
       </article>
-      <article class="ds-feature-card ds-reveal">
-        <span class="ds-feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+
+      <!-- Feature Card 7: 可访问性 -->
+      <article class="ds-feature-card">
+        <span class="ds-feature-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </span>
         <h3>可访问性</h3>
         <p>对比度满足 WCAG AA，焦点可见、语义化标签、键盘可达——开箱即合规。</p>
       </article>
-      <article class="ds-feature-card ds-reveal" style="--d:60ms">
-        <span class="ds-feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></span>
+
+      <!-- Feature Card 8: AI 就绪 -->
+      <article class="ds-feature-card">
+        <span class="ds-feature-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+          </svg>
+        </span>
         <h3>AI 就绪</h3>
         <p>把整套规范浓缩为可复制的系统提示词与 Skill。任何 Agent 读取后即可产出符合规范的代码与文档。</p>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section: 4 统计数字 -->
+<section class="ds-section ds-section--stats" id="stats">
+  <div class="ds-wrapper">
+    <div class="ds-section-head ds-section-head--center ds-reveal">
+      <span class="ds-eyebrow">系统规模</span>
+      <h2>足够全面，又足够轻盈</h2>
+      <p>覆盖全链路视觉决策，零门槛即插即用——EDIC 在完整性与简洁性之间找到平衡。</p>
+    </div>
+    <div class="ds-stats-grid ds-reveal">
+      <div class="ds-stat-card">
+        <span class="ds-stat-num">200+</span>
+        <span class="ds-stat-label">设计令牌</span>
+      </div>
+      <div class="ds-stat-card">
+        <span class="ds-stat-num">25</span>
+        <span class="ds-stat-label">核心组件</span>
+      </div>
+      <div class="ds-stat-card">
+        <span class="ds-stat-num">100</span>
+        <span class="ds-stat-label">UI 图标</span>
+      </div>
+      <div class="ds-stat-card">
+        <span class="ds-stat-num">0</span>
+        <span class="ds-stat-label">构建依赖</span>
+      </div>
     </div>
   </div>
 </section>
@@ -271,10 +349,10 @@
       <span class="ds-eyebrow ds-block ds-mb-4">开始使用</span>
       <h2 class="ds-cta-h2 ds-mb-5 ds-text-balance">把一致与优雅，变成默认值</h2>
       <p class="ds-lead ds-mb-10 ds-text-pretty ds-mx-auto">浏览手册了解全貌，复制提示词武装你的 Agent，或直接下载令牌与素材开始构建。</p>
-      <div class="ds-hero-actions ds-mb-0">
+<div class="ds-cta-actions ds-mb-0">
         <a href="docs.html#visual-colors" class="ds-btn ds-btn--primary ds-btn--lg">视觉手册</a>
         <a href="prompts.html" class="ds-btn ds-btn--secondary ds-btn--lg">提示词与 Skill</a>
-        <a href="downloads.html" class="ds-btn ds-btn--ghost ds-btn--lg">下载资源</a>
+        <a href="downloads.html" class="ds-btn ds-btn--secondary ds-btn--lg">下载资源</a>
       </div>
     </div>
   </div>
