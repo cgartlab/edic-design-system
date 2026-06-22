@@ -103,4 +103,4 @@ Repository includes `CNAME` (`edic.cgartlab.com`) and `.nojekyll`.
 
 ## License
 
-CC BY 4.0 — free to use, modify, and distribute with attribution. See `terms.html` or https://creativecommons.org/licenses/by/4.0/.
+CC BY 4.0 — free to use, modify, and distribute with attribution. See `terms.html` or https://creativecommons.org/licenses/by/4.0/.test: 冒烟测试
