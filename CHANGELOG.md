@@ -3,6 +3,21 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [1.6.2] — 2026-06-22
+
+### 修复（首页设计系统规范合规性）
+
+- **[P0] `ds-stat-num`/`ds-stat-label` 双重 CSS 定义**：`styles.css` 中存在两套同名规则，第二套（旧 `.ds-stat-grid` 体系）覆盖第一套（`.ds-stats-grid` 体系），导致首页统计数字 `display:block` 丢失、字号异常、标签样式错误。移除第二套中的重复选择器，旧体系仅保留布局类。
+- **[P0] `ds-eyebrow` `letter-spacing` 被 `!important` 强制覆盖**：全局 CJK 基线层将 `.ds-eyebrow` 的字间距 `!important` 压至 `tracking-wider`（0.08em），而组件定义规定 `tracking-widest`（0.12em）。从 `!important` 规则中移除 `.ds-eyebrow`，令组件定义正常生效。
+- **[P1] Hero 区域语义标签**：`<header class="ds-hero-section">` 改为 `<section aria-label="Hero">`，避免页面出现两个 `banner` landmark 混淆屏幕阅读器。
+- **[P1] `ds-hero-section` 补充分隔线**：加入 `border-bottom: 1px solid var(--ds-color-border)`，融入全站 section 分隔线节奏。
+- **[P1] `.ds-step-body` 标题层级统一**：三步骤中第 1 步误用 `<h3>`，其余用 `<h4>`，且 CSS 只定义 `h4` 样式；统一改为 `<h4>`。
+- **[P1] Footer CC BY 4.0 链接移除 inline style**：`style="color:var(--ds-accent);text-decoration:none"` 改为 class `ds-text-accent ds-footer-cc`（新增 `.ds-footer-cc` 工具类）。
+- **[P2] Hero 主操作层级**：Hero 区块 4 个 CTA 按钮全用 `ds-btn--secondary`；首个按钮「浏览视觉手册」改为 `ds-btn--primary`，明确核心转化路径。
+- **[P2] 卡片内标题语义**：Features（8 张）、System TOC（8 张）、Examples（4 张）共 20 处非文档结构性卡片标题从 `<h3>` 改为 `<p class="ds-card-heading">`，新增 `.ds-card-heading` 工具类，视觉不变但不再污染文档大纲。CSS 中 `ds-feature-card` 和 `ds-toc-item` 的选择器同时兼容 `h3` 与 `.ds-card-heading`。
+
+---
+
 ## [1.6.1](https://github.com/cgartlab/edic-design-system/compare/edic-design-system-v1.6.0...edic-design-system-v1.6.1) (2026-06-22)
 
 

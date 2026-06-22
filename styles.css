@@ -1,4 +1,4 @@
-/* ===== EDIC Design System v1.6.1 — Tokens & Styles ===== */
+/* ===== EDIC Design System v1.6.2 — Tokens & Styles ===== */
 
 :root {
   --ds-color-bg: oklch(97% 0.012 80);
@@ -105,6 +105,7 @@
   --ds-space-24: 6rem;
   --ds-space-28: 7rem;
   --ds-space-32: 8rem;
+  --ds-space-40: 10rem;  /* 160px — used by .ds-hero-cycle mobile max-width */
   --ds-radius-none: 0;
   --ds-radius-sm: 2px;
   --ds-radius-md: 4px;
@@ -377,7 +378,9 @@ body{font-family:var(--ds-font-body);font-size:var(--ds-text-body);line-height:v
 /* CJK & mixed text optimizations */
 body, p, li, .ds-wrapper, .ds-section-header p, .ds-component-label, .ds-form-label, .ds-timeline-content p, .ds-toast-text, .ds-navbar a{letter-spacing:var(--ds-tracking-cjk-body)}
 h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds-hero{letter-spacing:var(--ds-tracking-cjk-heading)}
-.ds-caption, .ds-eyebrow, .ds-meta, .ds-toc-num{letter-spacing:var(--ds-tracking-wider)!important}
+.ds-caption, .ds-meta, .ds-toc-num{letter-spacing:var(--ds-tracking-wider)!important}
+/* .ds-eyebrow uses tracking-widest (0.12em) set in the component block below;
+   removing it from this !important rule lets the component definition win. */
 .ds-btn, .ds-input, .ds-form-input, .ds-form-textarea, .ds-label, .ds-badge, .ds-chip, .ds-toast-text{letter-spacing:var(--ds-tracking-normal)}
 
 /* ===== Chinese Typography Utilities (中文排版规范) ===== */
@@ -703,7 +706,7 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .ds-toc-item:hover{border-color:var(--ds-accent);background:var(--ds-accent-soft)}
 .ds-toc-item:focus-visible{outline:2px solid var(--ds-accent);outline-offset:3px;box-shadow:0 0 0 4px var(--ds-accent-soft)}
 .ds-toc-num{font-family:var(--ds-font-mono);font-size:var(--ds-text-caption);color:var(--ds-accent)}
-.ds-toc-item h3{font-size:var(--ds-text-body);font-weight:600}
+.ds-toc-item h3,.ds-toc-item .ds-card-heading{font-size:var(--ds-text-body);font-weight:600}
 .ds-toc-item p{font-size:var(--ds-text-body-sm);color:var(--ds-color-muted)}
 .ds-spacing-vis{display:flex;align-items:center;gap:var(--ds-space-3)}
 .ds-spacing-block{background:var(--ds-accent-soft);border-radius:var(--ds-radius-sm);flex-shrink:0}
@@ -1161,7 +1164,7 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .ds-lead{font-size:var(--ds-text-lead);line-height:var(--ds-leading-relaxed);color:var(--ds-color-fg-subtle)}
 
 /* ===== Landing hero ===== */
-.ds-hero-section{position:relative;padding:var(--ds-space-32) 0 var(--ds-space-28);text-align:center;overflow:hidden;isolation:isolate}
+.ds-hero-section{position:relative;padding:var(--ds-space-32) 0 var(--ds-space-28);text-align:center;overflow:hidden;isolation:isolate;border-bottom:1px solid var(--ds-color-border)}
 .ds-hero-inner{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:0 var(--ds-space-6)}
 .ds-hero-mark-wrap{margin-bottom:var(--ds-space-10);display:flex;justify-content:center}
 .ds-hero-badge{display:inline-flex;align-items:center;gap:var(--ds-space-2);padding:var(--ds-space-2) var(--ds-space-5);border-radius:var(--ds-radius-full);background:var(--ds-color-surface-raised);border:1px solid var(--ds-color-border);font-size:var(--ds-text-body-sm);font-weight:500;color:var(--ds-color-fg-subtle);box-shadow:var(--ds-shadow-xs);margin-bottom:var(--ds-space-8);transition:all var(--ds-duration-200) var(--ds-ease-out)}
@@ -1191,15 +1194,14 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 
 .ds-feature-ico{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:var(--ds-radius-lg);background:var(--ds-accent-soft);color:var(--ds-accent);margin-bottom:var(--ds-space-3);flex-shrink:0}
 .ds-feature-ico svg{width:20px;height:20px;stroke-width:1.75}
-.ds-feature-card h3{font-family:var(--ds-font-display);font-size:var(--ds-text-body);font-weight:var(--ds-weight-semibold);color:var(--ds-color-fg-strong);margin-bottom:var(--ds-space-2);line-height:var(--ds-leading-snug)}
+.ds-feature-card h3,.ds-feature-card .ds-card-heading{font-family:var(--ds-font-display);font-size:var(--ds-text-body);font-weight:var(--ds-weight-semibold);color:var(--ds-color-fg-strong);margin-bottom:var(--ds-space-2);line-height:var(--ds-leading-snug)}
 .ds-feature-card p{font-size:var(--ds-text-body-sm);line-height:var(--ds-leading-normal);color:var(--ds-color-muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 
 @media(max-width:1023px){
   .ds-features-grid{grid-template-columns:repeat(2,1fr);gap:var(--ds-space-4);row-gap:var(--ds-space-6)}
 }
-@media(max-width:767px){
-  .ds-features-grid{grid-template-columns:repeat(2,1fr);gap:var(--ds-space-4);row-gap:var(--ds-space-6)}
-}
+/* 767px breakpoint intentionally omitted: 1023px rule already covers tablet/large-mobile.
+   480px breakpoint below handles single-column layout on small phones. */
 @media(max-width:479px){
   .ds-features-grid{grid-template-columns:1fr;gap:var(--ds-space-3)}
   .ds-feature-card{padding:var(--ds-space-4)}
@@ -1227,11 +1229,11 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 /* ===== Legacy auto-fit feature grid (used elsewhere) ===== */
 .ds-feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--ds-space-6)}
 
-/* ===== Stats ===== */
+/* ===== Stats (legacy .ds-stat/.ds-stat-grid — kept for backward compat) ===== */
+/* NOTE: .ds-stat-num and .ds-stat-label are canonical in the Stats Section block above.
+   This block intentionally omits those selectors to avoid cascade conflicts. */
 .ds-stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--ds-space-6)}
 .ds-stat{text-align:center;padding:var(--ds-space-6) var(--ds-space-4);border-radius:var(--ds-radius-xl);background:var(--ds-color-surface);border:1px solid var(--ds-color-border-subtle)}
-.ds-stat-num{font-family:var(--ds-font-display);font-size:clamp(2.75rem,4.5vw + 0.5rem,3.25rem);font-weight:var(--ds-weight-bold);line-height:1;color:var(--ds-accent);letter-spacing:var(--ds-tracking-tight)}
-.ds-stat-label{display:block;margin-top:var(--ds-space-3);font-size:var(--ds-text-body-sm);color:var(--ds-color-muted)}
 
 /* ===== Compatibility chips ===== */
 .ds-compat-grid{display:flex;flex-wrap:wrap;gap:var(--ds-space-3);justify-content:center}
@@ -1372,6 +1374,10 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .ds-text-center{text-align:center}
 .ds-text-muted{color:var(--ds-color-muted)}
 .ds-text-accent{color:var(--ds-accent)}
+/* ds-footer-cc: used for the CC BY 4.0 license link in ds-footer-bottom.
+   Inherits ds-text-accent color; adds text-decoration:none to match the
+   surrounding footer bottom style without inline CSS. */
+.ds-footer-cc{text-decoration:none;transition:opacity var(--ds-duration-150)}.ds-footer-cc:hover{opacity:.75}
 .ds-text-balance{text-wrap:balance}
 .ds-text-pretty{text-wrap:pretty}
 .ds-mx-auto{margin-left:auto;margin-right:auto}
@@ -1414,12 +1420,12 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
   .ds-logo-hero svg{width:var(--ds-space-12);height:var(--ds-space-12)}
   .ds-hero-badge{padding:var(--ds-space-2) var(--ds-space-4);font-size:var(--ds-text-caption)}
   .ds-hero-actions{margin-bottom:var(--ds-space-10)}
-  .ds-hero-actions .ds-btn{width:100%;max-width:18rem}
+  .ds-hero-actions .ds-btn{width:100%;max-width:var(--ds-btn-max-w,18rem)}
   .ds-hero-cycle-word{font-size:1em}
   .ds-hero-cycle{max-width:var(--ds-space-40)}
   .ds-stat-num{font-size:var(--ds-text-h1)}
   .ds-footer-cols{grid-template-columns:1fr;gap:var(--ds-space-8)}
-  .ds-cta-actions .ds-btn{width:100%;max-width:18rem}
+  .ds-cta-actions .ds-btn{width:100%;max-width:var(--ds-btn-max-w,18rem)}
   /* P0 #95: mobile scroll trap fix — remove fixed height, let content flow */
   .ds-prompt-body{max-height:none;overflow-y:visible}
   .ds-navbar-cta span{display:none}
@@ -1468,13 +1474,18 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .ds-gap-16{gap:var(--ds-space-16)}
 a.ds-feature-card{text-decoration:none;color:inherit}
 a.ds-feature-card:focus-visible{outline:2px solid var(--ds-accent);outline-offset:3px}
+
+/* ds-card-heading: semantic-neutral heading for cards/toc-items/feature-cards.
+   Renders identically to h3 within those contexts but avoids polluting the
+   document outline with dozens of h3 elements that are not structural headings. */
+.ds-card-heading{font-family:var(--ds-font-display);font-size:var(--ds-text-body);font-weight:var(--ds-weight-semibold);color:var(--ds-color-fg-strong);margin-bottom:var(--ds-space-2);line-height:var(--ds-leading-snug)}
 .ds-cta-h2{font-family:var(--ds-font-display);font-size:var(--ds-text-h2);font-weight:var(--ds-weight-bold);color:var(--ds-color-fg-strong);letter-spacing:var(--ds-tracking-tight);line-height:var(--ds-leading-snug)}
 
 .ds-pt-0{padding:0}
 
 
 /* =========================================================================
-   CGArtLab Design System v1.6.1 — Gravitas & Glow
+   CGArtLab Design System v1.6.2 — Gravitas & Glow
    Dark-mode editorial presence: warm olive undertone on shadow depths,
    luminous borders, soft auras, and inner-surface glow. Light mode
    stays restrained (0% opacity tokens, classes visually inert).

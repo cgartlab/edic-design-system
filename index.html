@@ -12,7 +12,7 @@
 <meta property="og:image:alt" content="EDIC Design System — 为纷繁的数字内容建立温暖而克制的秩序">
 <meta name="twitter:card" content="summary">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="styles.css?v=1.6.1">
+<link rel="stylesheet" href="styles.css?v=1.6.2">
 </head>
 <body>
 <a href="#ds-main" class="ds-skip">跳至主要内容</a>
@@ -53,7 +53,7 @@
 
 <main id="ds-main" tabindex="-1">
 <!-- Hero -->
-<header class="ds-hero-section">
+<section class="ds-hero-section" aria-label="Hero">
   <div class="ds-wrapper">
     <div class="ds-hero-inner">
       <div class="ds-hero-mark-wrap ds-reveal ds-reveal--scale">
@@ -71,10 +71,10 @@
             <span class="ds-hero-cycle-word">编辑主义</span>
           </span>
         </span>设计系统</h1>
-      <div class="ds-hero-badge ds-reveal" style="--d:80ms"><span class="ds-dot"></span>v1.6.1 · 开源设计系统 · 200+ 设计令牌</div>
+      <div class="ds-hero-badge ds-reveal" style="--d:80ms"><span class="ds-dot"></span>v1.6.2 · 开源设计系统 · 200+ 设计令牌</div>
       <div class="ds-hero-actions ds-reveal" style="--d:280ms">
         <div class="ds-hero-actions__row">
-          <a href="docs.html#visual-colors" class="ds-btn ds-btn--secondary ds-btn--lg">浏览视觉手册</a>
+          <a href="docs.html#visual-colors" class="ds-btn ds-btn--primary ds-btn--lg">浏览视觉手册</a>
           <a href="prompts.html" class="ds-btn ds-btn--secondary ds-btn--lg">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
             获取 Agent 提示词
@@ -89,12 +89,11 @@
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
             SkillHub
           </a>
-          </div>
         </div>
       </div>
     </div>
   </div>
-</header>
+</section>
 
 <!-- Compatibility -->
 <section class="ds-section ds-section--tight ds-section--alt">
@@ -128,7 +127,7 @@
             <circle cx="9" cy="9" r="6"/><circle cx="15" cy="15" r="6"/>
           </svg>
         </span>
-        <h3>OKLch 色彩科学</h3>
+        <p class="ds-card-heading">OKLch 色彩科学</p>
         <p>全部颜色以 OKLch 定义，确保跨设备的感知均匀与色准，亮度阶梯可预测，深浅模式无缝映射。</p>
       </article>
 
@@ -142,7 +141,7 @@
             <line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
           </svg>
         </span>
-        <h3>令牌驱动</h3>
+        <p class="ds-card-heading">令牌驱动</p>
         <p>200+ CSS 自定义属性覆盖色彩、字体、间距、圆角、阴影、动效与层级。改一个变量，全局即时更新。</p>
       </article>
 
@@ -153,7 +152,7 @@
             <polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>
           </svg>
         </span>
-        <h3>编辑主义排版</h3>
+        <p class="ds-card-heading">编辑主义排版</p>
         <p>衬线 Display + 无衬线 Body 的经典搭配，针对中英文混排的字距、行高与标点做了专门优化。</p>
       </article>
 
@@ -164,7 +163,7 @@
             <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
           </svg>
         </span>
-        <h3>框架无关</h3>
+        <p class="ds-card-heading">框架无关</p>
         <p>没有构建工具、没有运行时依赖。一份 CSS 即可用于任意技术栈、邮件、PDF 与设计工具。</p>
       </article>
 
@@ -175,7 +174,7 @@
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
           </svg>
         </span>
-        <h3>暗色模式</h3>
+        <p class="ds-card-heading">暗色模式</p>
         <p>完整的暗色令牌覆盖，暖灰基底而非纯黑，强调色自动亮化。支持系统偏好与本地持久化。</p>
       </article>
 
@@ -186,7 +185,7 @@
             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
           </svg>
         </span>
-        <h3>动效系统</h3>
+        <p class="ds-card-heading">动效系统</p>
         <p>统一的时长与缓动令牌、滚动揭示、SVG 描边与微交互，并完整尊重 <code class="ds-inline-code">prefers-reduced-motion</code>。</p>
       </article>
 
@@ -197,7 +196,7 @@
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
         </span>
-        <h3>可访问性</h3>
+        <p class="ds-card-heading">可访问性</p>
         <p>对比度满足 WCAG AA，焦点可见、语义化标签、键盘可达——开箱即合规。</p>
       </article>
 
@@ -208,7 +207,7 @@
             <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
           </svg>
         </span>
-        <h3>AI 就绪</h3>
+        <p class="ds-card-heading">AI 就绪</p>
         <p>把整套规范浓缩为可复制的系统提示词与 Skill。任何 Agent 读取后即可产出符合规范的代码与文档。</p>
       </article>
     </div>
@@ -278,7 +277,7 @@
         <h2 class="ds-cta-h2 ds-mb-5">让任何 Agent<br>说同一种设计语言</h2>
         <p class="ds-lead ds-mb-8">无需安装、无需训练。把提示词粘贴给 ChatGPT、Claude、Cursor、Kiro 或任意编码助手——即使你不懂设计，它也能用 EDIC 的令牌、组件与排版规范，帮你产出排版专业、视觉和谐的作品。</p>
         <div class="ds-steps ds-mb-8">
-          <div class="ds-step"><span class="ds-step-num">1</span><div class="ds-step-body"><h3>复制提示词</h3><p>从「提示词」页一键复制系统提示词或精简版。</p></div></div>
+          <div class="ds-step"><span class="ds-step-num">1</span><div class="ds-step-body"><h4>复制提示词</h4><p>从「提示词」页一键复制系统提示词或精简版。</p></div></div>
           <div class="ds-step"><span class="ds-step-num">2</span><div class="ds-step-body"><h4>粘贴给 Agent</h4><p>作为系统/项目指令，或对话开场白发送。</p></div></div>
           <div class="ds-step"><span class="ds-step-num">3</span><div class="ds-step-body"><h4>获得合规产出</h4><p>组件、落地页、文档、邮件——皆遵循规范。</p></div></div>
         </div>
@@ -297,14 +296,14 @@
       <p>每个模块都在视觉手册中以 live 形式展示，并在使用文档中配有代码与规范说明。</p>
     </div>
     <div class="ds-toc-grid">
-      <a href="docs.html#visual-colors" class="ds-toc-item ds-reveal"><span class="ds-toc-num">01</span><h3>色彩系统</h3><p>中性 10 级 · 橄榄绿 10 级 · 语义 4 组</p></a>
-      <a href="docs.html#visual-typography" class="ds-toc-item ds-reveal" style="--d:50ms"><span class="ds-toc-num">02</span><h3>字体系统</h3><p>四字族 · 比例尺 · 行距字距</p></a>
-      <a href="docs.html#visual-spacing" class="ds-toc-item ds-reveal" style="--d:100ms"><span class="ds-toc-num">03</span><h3>间距 · 圆角 · 阴影</h3><p>4 px 系统 · 7 圆角 · 6 阴影</p></a>
-      <a href="docs.html#visual-components" class="ds-toc-item ds-reveal" style="--d:150ms"><span class="ds-toc-num">04</span><h3>组件库</h3><p>20 核心 + 5 附加组件与全部状态</p></a>
-      <a href="docs.html#visual-icons" class="ds-toc-item ds-reveal"><span class="ds-toc-num">05</span><h3>图标库</h3><p>100 枚 1.5 px 线性 SVG 图标</p></a>
-      <a href="docs.html#visual-effects" class="ds-toc-item ds-reveal" style="--d:50ms"><span class="ds-toc-num">06</span><h3>效果层</h3><p>玻璃 · 遮罩 · 模糊 · 透明度</p></a>
-      <a href="docs.html#token-index" class="ds-toc-item ds-reveal" style="--d:100ms"><span class="ds-toc-num">07</span><h3>令牌索引</h3><p>全部 CSS 自定义属性总表</p></a>
-      <a href="docs.html" class="ds-toc-item ds-reveal" style="--d:150ms"><span class="ds-toc-num">→</span><h3>使用文档</h3><p>安装 · 主题 · 规范 · FAQ</p></a>
+      <a href="docs.html#visual-colors" class="ds-toc-item ds-reveal"><span class="ds-toc-num">01</span><p class="ds-card-heading">色彩系统</p><p>中性 10 级 · 橄榄绿 10 级 · 语义 4 组</p></a>
+      <a href="docs.html#visual-typography" class="ds-toc-item ds-reveal" style="--d:50ms"><span class="ds-toc-num">02</span><p class="ds-card-heading">字体系统</p><p>四字族 · 比例尺 · 行距字距</p></a>
+      <a href="docs.html#visual-spacing" class="ds-toc-item ds-reveal" style="--d:100ms"><span class="ds-toc-num">03</span><p class="ds-card-heading">间距 · 圆角 · 阴影</p><p>4 px 系统 · 7 圆角 · 6 阴影</p></a>
+      <a href="docs.html#visual-components" class="ds-toc-item ds-reveal" style="--d:150ms"><span class="ds-toc-num">04</span><p class="ds-card-heading">组件库</p><p>20 核心 + 5 附加组件与全部状态</p></a>
+      <a href="docs.html#visual-icons" class="ds-toc-item ds-reveal"><span class="ds-toc-num">05</span><p class="ds-card-heading">图标库</p><p>100 枚 1.5 px 线性 SVG 图标</p></a>
+      <a href="docs.html#visual-effects" class="ds-toc-item ds-reveal" style="--d:50ms"><span class="ds-toc-num">06</span><p class="ds-card-heading">效果层</p><p>玻璃 · 遮罩 · 模糊 · 透明度</p></a>
+      <a href="docs.html#token-index" class="ds-toc-item ds-reveal" style="--d:100ms"><span class="ds-toc-num">07</span><p class="ds-card-heading">令牌索引</p><p>全部 CSS 自定义属性总表</p></a>
+      <a href="docs.html" class="ds-toc-item ds-reveal" style="--d:150ms"><span class="ds-toc-num">→</span><p class="ds-card-heading">使用文档</p><p>安装 · 主题 · 规范 · FAQ</p></a>
     </div>
   </div>
 </section>
@@ -320,22 +319,22 @@
     <div class="ds-feature-grid">
       <a href="blog.html" class="ds-feature-card ds-reveal">
         <span class="ds-feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
-        <h3>纸间 · 评论博客</h3>
+        <p class="ds-card-heading">纸间 · 评论博客</p>
         <p>长文排版、文章目录与阅读节奏的编辑主义示范。</p>
       </a>
       <a href="company.html" class="ds-feature-card ds-reveal" style="--d:60ms">
         <span class="ds-feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg></span>
-        <h3>EDIC · 公司官网</h3>
+        <p class="ds-card-heading">EDIC · 公司官网</p>
         <p>首个采用 <code class="ds-inline-code">--ds-*</code> 令牌的生产级落地页。</p>
       </a>
       <a href="resume.html" class="ds-feature-card ds-reveal" style="--d:120ms">
         <span class="ds-feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-        <h3>简历 · 作品集</h3>
+        <p class="ds-card-heading">简历 · 作品集</p>
         <p>A4 友好、可打印为 PDF 的个人简历模板。</p>
       </a>
       <a href="report.html" class="ds-feature-card ds-reveal" style="--d:180ms">
         <span class="ds-feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></span>
-        <h3>A4 报告规范</h3>
+        <p class="ds-card-heading">A4 报告规范</p>
         <p>多页报告/白皮书的版式模板与打印规范。</p>
       </a>
     </div>
@@ -404,15 +403,15 @@
     <div class="ds-footer-bottom">
       <span>© <span class="ds-year">2026</span> EDIC · CGArtLab</span>
       <div class="ds-cluster">
-        <span class="ds-mono" data-ds-version>v1.6.1</span>
-        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:var(--ds-accent);text-decoration:none" title="本设计系统采用 CC BY 4.0 许可证">CC BY 4.0</a>
+        <span class="ds-mono" data-ds-version>v1.6.2</span>
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" class="ds-text-accent ds-footer-cc" title="本设计系统采用 CC BY 4.0 许可证">CC BY 4.0</a>
       </div>
     </div>
   </div>
 <div id="footer-end" aria-hidden="true" tabindex="-1"></div>
 </footer>
 
-<script src="scripts.js?v=1.6.1"></script>
+<script src="scripts.js?v=1.6.2"></script>
 <button id="theme-toggle-btn-fixed" class="ds-theme-toggle-btn ds-theme-toggle-btn--fixed" type="button" aria-label="跟随系统 · 点击切换">
   <span class="theme-icon"></span>
 </button>

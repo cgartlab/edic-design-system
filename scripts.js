@@ -1,4 +1,4 @@
-/* ===== EDIC Design System v1.6.1 — Icon Grid & Token Table ===== */
+/* ===== EDIC Design System v1.6.2 — Icon Grid & Token Table ===== */
 
 const ICONS = [
   {id:"archive",svg:'<svg viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>'},
