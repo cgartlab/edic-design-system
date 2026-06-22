@@ -3,6 +3,13 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [1.6.1](https://github.com/cgartlab/edic-design-system/compare/edic-design-system-v1.6.0...edic-design-system-v1.6.1) (2026-06-22)
+
+
+### 修复
+
+* **pages:** migrate to workflow-based Pages + restore v1.6.0 stamp ([dbd26c2](https://github.com/cgartlab/edic-design-system/commit/dbd26c28a80fdcb2dbfbc574e5542a8f5b3df693))
+
 ## [1.6.0](https://github.com/cgartlab/edic-design-system/compare/edic-design-system-v1.5.5...edic-design-system-v1.6.0) (2026-06-22)
 
 
