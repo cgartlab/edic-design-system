@@ -4,7 +4,7 @@
 
 SHELL := /bin/sh
 .DEFAULT_GOAL := help
-.PHONY: help lint build validate validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode stamp-version sync-versions sync-versions:check release-please serve clean serve-py serve-node generate-pdfs icons icons-check test skill-package release-package
+.PHONY: help lint build validate validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode validate-size stamp-version sync-versions sync-versions:check release-please serve clean serve-py serve-node generate-pdfs icons icons-check test skill-package release-package
 
 PYTHON ?= python3
 NODE ?= node
@@ -89,6 +89,9 @@ validate-verext:  ## 校验 tokens.json / package.json 版本一致性
 
 validate-hardcode:  ## 校验硬编码颜色值（应使用 --ds-* token）
 	$(PYTHON) tools/validate_hardcode.py
+
+validate-size:  ## 校验 CSS/JS gzip 体积是否超过阈值
+	$(PYTHON) tools/validate_size.py
 
 stamp-version:  ## 将 VERSION 同步到所有 HTML / MD 资源
 	$(PYTHON) tools/stamp_version.py
