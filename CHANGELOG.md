@@ -3,6 +3,19 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [1.8.0](https://github.com/cgartlab/edic-design-system/compare/v1.7.0...v1.8.0) (2026-06-23)
+
+
+### 新增
+
+* **automation:** Phase 1+3 — stamp placeholders + changelog generation system ([43da364](https://github.com/cgartlab/edic-design-system/commit/43da364918e7600116348854f6a42eba382816be))
+
+
+### 修复
+
+* **ci:** skip version validators on Release PR + add post-merge-stamp failure alert ([12c7488](https://github.com/cgartlab/edic-design-system/commit/12c74886ef5d4bef28cae9b28c46cfa2b768c660))
+* **templates:** correct version impact table + add fatigue/screenshot warnings ([d2a993f](https://github.com/cgartlab/edic-design-system/commit/d2a993f583ad3fb75faa0a7af7c8f0cd309d5906))
+
 ## [1.7.0](https://github.com/cgartlab/edic-design-system/compare/v1.6.1...v1.7.0) (2026-06-23)
 
 
