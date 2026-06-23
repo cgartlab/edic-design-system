@@ -57,90 +57,111 @@
           <details class="ds-pagenav-disclosure" open>
             <summary class="ds-pagenav-summary"><span>版本</span><svg class="ds-pagenav-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 6 8 10 12 6"/></svg></summary>
             <ol class="ds-pagenav-list">
-              <li><a class="ds-pagenav-link" href="#v155patch"><span class="ds-pagenav-num">01</span><span class="ds-pagenav-text">v1.7.0-patch</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v150"><span class="ds-pagenav-num">02</span><span class="ds-pagenav-text">v1.7.0</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v143"><span class="ds-pagenav-num">03</span><span class="ds-pagenav-text">v1.4.3</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v140"><span class="ds-pagenav-num">03</span><span class="ds-pagenav-text">v1.4.0</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v140"><span class="ds-pagenav-num">01</span><span class="ds-pagenav-text">v1.4.0</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v143"><span class="ds-pagenav-num">02</span><span class="ds-pagenav-text">v1.4.3</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v170"><span class="ds-pagenav-num">03</span><span class="ds-pagenav-text">v1.7.0</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v170patch"><span class="ds-pagenav-num">04</span><span class="ds-pagenav-text">v1.7.0-patch</span></a></li>
             </ol>
           </details>
         </nav>
       </aside>
-      <div class="ds-prose">
-
-        <section class="ds-doc-block" id="v150">
-          <h2>v1.7.0 — 2026-06-05</h2>
-          <p>重大更新：新增页面目录组件、暗色模式增强、代码样式规范、Layer 2 验证器。</p>
-
+      <!-- CHANGELOG_CONTENT_START -->
+        <div class="ds-prose">
+        <section class="ds-doc-block" id="v140">
+          <h2>v1.4.0 — 2026-06-04</h2>
+          <h3>变更</h3>
+          <ul>
+            <li>品牌重命名：CGArtLab Design System → EDIC Design System（Editorial Design Interface for Content）</li>
+            <li>新定位：同时面向人类和 Agent 的编辑主义设计系统</li>
+            <li>新理念：为纷繁的数字内容建立温暖而克制的秩序</li>
+            <li>包名更新：cgartlab-design-system → edic-design-system</li>
+            <li>Skill 目录重命名：skills/cgartlab-design-system/ → skills/edic-design-system/</li>
+            <li>SVG logo、favicon aria-label、所有 HTML title 和 meta description 更新</li>
+            <li>prompt 文件引用 EDIC</li>
+            <li>README、AGENTS、CHANGELOG、CONTRIBUTING、docs 品牌文案全面更新</li>
+            <li>tools/generate_pdfs.py PDF 输出文件名更新</li>
+            <li>report.html localStorage key 更新</li>
+          </ul>
+          <h3>注意</h3>
+          <ul>
+            <li>GitHub org（cgartlab）、repo name（cgartlab-design-system）、CNAME（edic.cgartlab.com）保持不变</li>
+            <li>仓库 URL 引用（edic.cgartlab.com、github.com/cgartlab/cgartlab-design-system、cgartlab.github.io）保持不变</li>
+            <li>颜色令牌（--ds-color-olive-*）保持不变</li>
+            <li>个人联系方式保持不变（属于维护者而非品牌）</li>
+          </ul>
+        </section>
+        <section class="ds-doc-block" id="v143">
+          <h2>v1.4.3 — 2026-06-05</h2>
+          <h3>修复</h3>
+          <ul>
+            <li>文档内容一致性审计：修复 12 处跨文档矛盾</li>
+            <li>品牌名：CLAUDE.md 仍使用 CGArtLab，全系统已更名为 EDIC</li>
+            <li>版本号：VERSION、package.json、README badge 统一为 1.4.3</li>
+            <li>组件数量统计修正（25 → 23）</li>
+            <li>README badge alt 文本与版本号一致</li>
+            <li>CLAUDE.md 发布示例：bump to v1.4.0 → bump to v1.4.3</li>
+          </ul>
+          <h3>文档</h3>
+          <ul>
+            <li>CHANGELOG.md：[未发布] → [1.4.3]，更新版本链接</li>
+            <li>VERSION：1.4.2 → 1.4.3</li>
+            <li>package.json：1.4.0 → 1.4.3</li>
+            <li>README.md：badge 版本统一为 1.4.3，组件数量 25 → 23</li>
+          </ul>
+        </section>
+        <section class="ds-doc-block" id="v170">
+          <h2>v1.7.0 — 2026-06-23</h2>
           <h3>新增</h3>
           <ul>
-            <li><strong>页面目录组件</strong>：统一页面目录组件 `.ds-pagenav`，支持桌面浮动与移动端折叠</li>
-            <li><strong>代码样式规范</strong>：Prism.js 语法高亮主题，橄榄绿编辑风格，16 种 token 类型</li>
-            <li><strong>Layer 2 验证器</strong>：新增 cssref、darkmode、verext、hardcode 四个跨文件验证器</li>
-            <li><strong>图标 sprite 生成</strong>：`tools/generate_icons.py` 可生成独立 SVG sprite</li>
+            <li>页面目录组件（.ds-pagenav）：统一桌面浮动与移动端折叠导航</li>
+            <li>Prism.js 代码高亮主题，橄榄绿编辑风格，16 种 token 类型</li>
+            <li>Layer 2 验证器：cssref、darkmode、verext、hardcode 四项跨文件检查</li>
+            <li>图标 sprite 生成工具（generate_icons.py）</li>
+            <li>release-please 自动化发布流水线</li>
+            <li>Argus 自动 PR 审查工作流</li>
+            <li>tokens.json 覆盖率从 30% 扩展至 80%（暗色、断点、z-index、时长、缓动、阴影、字间距、行高、字重）</li>
           </ul>
-
           <h3>修复</h3>
           <ul>
             <li>TOC 命名空间冲突回归</li>
             <li>Prism 代码块暗色模式可见性</li>
-            <li>反模式清理（hex/rgba 迁移到 OKLch，死代码删除）</li>
+            <li>移动端抽屉导航交互优化（3-bar 汉堡、滑动 drawer、backdrop 遮罩）</li>
+            <li>3 项 P0 移动端问题</li>
+            <li>19 处heading层级跳跃（跨 7 个 HTML 文件）</li>
+            <li>下载页面核心资源两排三列布局</li>
+            <li>主题切换 system 模式跟随系统变化</li>
+            <li>body scroll 锁定可靠性修复</li>
+            <li>sitemap 死链修复</li>
           </ul>
-
           <h3>变更</h3>
           <ul>
-            <li>命名验证器白名单扩展（新增 7 个合法类别）</li>
-            <li>CI 治理完善，`make validate` 退出码聚合</li>
-            <li>暗色模式 Gravitas & Glow 增强</li>
+            <li>CI 治理完善，make validate 退出码聚合</li>
+            <li>暗色模式 Gravitas & Glow 增强（暖灰底层 + 橄榄绿暗底）</li>
+            <li>品牌重命名：CGArtLab Design System → EDIC Design System</li>
+            <li>CC BY 4.0 使用条款全面修订</li>
+            <li>统一版本戳记至所有 HTML/MD 资源</li>
+            <li>浮动目录与移动端 TOC 碰撞修复</li>
+            <li>动效系统：sliding word cycle、infinite scroll carousel</li>
           </ul>
         </section>
-
-        <section class="ds-doc-block" id="v155patch">
+        <section class="ds-doc-block" id="v170patch">
           <h2>v1.7.0-patch — 2026-06-19</h2>
-          <p>Skill 发布修复：链接修正、元数据一致性、缓存失效。</p>
-
           <h3>修复</h3>
           <ul>
-            <li>移除失效的 <code>handbook.html</code> 链接（404），更新为有效 URL</li>
-            <li>修正 <code>docs.html</code> 重复链接，添加 <code>Website</code> 和 <code>tokens.json</code> 完整 URL</li>
+            <li>移除失效的 handbook.html 链接（404），更新为有效 URL</li>
+            <li>修正 docs.html 重复链接，添加 Website 和 tokens.json 完整 URL</li>
             <li>统一所有版本源（VERSION、package.json、tokens.json、SKILL.md）至 1.5.5</li>
-            <li>执行 <code>make stamp-version</code>，所有 HTML/CSS/JS/MD 文件 <code>?v=</code> 更新至 1.5.5</li>
+            <li>执行 make stamp-version，所有 HTML/CSS/JS/MD 文件 ?v= 更新至 1.5.5</li>
           </ul>
-
           <h3>变更</h3>
           <ul>
-            <li>SKILL.md 新增 <code>slug</code>、<code>displayName</code>、<code>version</code> 字段（ClawHub/SkillHub 兼容性）</li>
+            <li>SKILL.md 新增 slug、displayName、version 字段（ClawHub/SkillHub 兼容性）</li>
             <li>Skill 包内 README.md License badge 统一为 MIT-0</li>
-            <li>Skill ZIP 包重建并通过 <code>--check</code> 校验</li>
+            <li>Skill ZIP 包重建并通过 --check 校验</li>
           </ul>
         </section>
-
-        <section class="ds-doc-block" id="v143">
-          <h2>v1.4.3 — 2026-06-05</h2>
-          <p>文档一致性修复：解决 16 处跨文档矛盾。</p>
-
-          <h3>修复</h3>
-          <ul>
-            <li>CLAUDE.md 品牌名 CGArtLab → EDIC</li>
-            <li>版本号统一（VERSION/package.json/README badge 一致）</li>
-            <li>组件数量统计修正（25 → 23）</li>
-            <li>README badge alt 文本与版本号一致</li>
-          </ul>
-        </section>
-
-        <section class="ds-doc-block" id="v140">
-          <h2>v1.4.0 — 2026-06-04</h2>
-          <p>品牌重塑：CGArtLab Design System 更名为 EDIC Design System。</p>
-
-          <h3>变更</h3>
-          <ul>
-            <li><strong>品牌重命名</strong>：CGArtLab Design System → EDIC Design System</li>
-            <li>新定位：面向人类和 Agent 的编辑主义设计系统</li>
-            <li>包名更新：`cgartlab-design-system` → `edic-design-system`</li>
-            <li>Skill 目录重命名：`skills/cgartlab-design-system/` → `skills/edic-design-system/`</li>
-          </ul>
-        </section>
-
-      </div>
+        </div>
+        <!-- CHANGELOG_CONTENT_END -->
     </div>
   </div>
 </main>
@@ -188,7 +209,7 @@
     <div class="ds-footer-bottom">
       <span>© <span class="ds-year">2026</span> EDIC · CGArtLab</span>
       <div class="ds-cluster">
-        <span class="ds-mono" data-ds-version>v1.7.0</span>
+        <span class="ds-mono" data-ds-version>v{{DS_VERSION}}</span>
         <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:var(--ds-accent);text-decoration:none" title="本设计系统采用 CC BY 4.0 许可证">CC BY 4.0</a>
       </div>
     </div>
