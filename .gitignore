@@ -55,3 +55,8 @@ out/
 .cache/
 # oh-my-openagent runtime cache/state — never commit
 .omo/
+
+# ─── Release artifacts — built by CI, hosted on GitHub Releases ─
+assets/downloads/*.pdf
+assets/downloads/*.zip
+!assets/downloads/.gitkeep
