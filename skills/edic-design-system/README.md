@@ -2,7 +2,7 @@
 # EDIC 设计系统 Skill 技能包 v1.7.0
 
 [![License: MIT-0](https://img.shields.io/badge/License-MIT%200-blue.svg)](https://spdx.org/licenses/MIT-0.html)
-[![Version](https://img.shields.io/badge/Version-1.5.4-green.svg)](https://edic.cgartlab.com/)
+[![Version](https://img.shields.io/badge/Version-1.7.0-green.svg)](https://edic.cgartlab.com/)
 
 ---
 
