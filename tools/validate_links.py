@@ -9,6 +9,7 @@
   5. 邮件链接（mailto:）格式合法（仅警告）
   6. 外链（http/https）格式合法（不实际请求）
 """
+
 from __future__ import annotations
 
 import re
@@ -108,7 +109,9 @@ def main() -> int:
                 continue
 
             if href.startswith(("http://", "https://", "//")):
-                parsed = urlparse(href if not href.startswith("//") else "https:" + href)
+                parsed = urlparse(
+                    href if not href.startswith("//") else "https:" + href
+                )
                 if not parsed.netloc:
                     print(f"  [WARN] {path.name}: 外链格式异常：{href[:80]}")
                     page_warnings += 1
@@ -122,6 +125,10 @@ def main() -> int:
 
             # 去除查询字符串（如 ?v=1.3.1），避免把版本化引用误判为不存在的文件
             file_part = file_part.split("?")[0]
+
+            # 跳过含 {{DS_VERSION}} 占位符的链接（stamp 后替换为实际版本号）
+            if "{{DS_VERSION}}" in href:
+                continue
 
             # 文件存在性
             target_path = (path.parent / file_part).resolve()

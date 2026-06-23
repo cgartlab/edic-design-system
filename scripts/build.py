@@ -10,6 +10,7 @@ Steps:
   4. python3 tools/generate_pdfs.py    — generate PDF assets
   5. bash scripts/package-skill.sh     — package SKILL ZIP (optional)
 """
+
 from __future__ import annotations
 
 import subprocess
@@ -22,10 +23,10 @@ TOOLS = ROOT / "tools"
 
 
 def run(cmd: list[str], label: str, cwd: Path | None = None) -> int:
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print(f"  {label}")
     print(f"  $ {' '.join(str(c) for c in cmd)}")
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
     result = subprocess.run(cmd, cwd=cwd or ROOT, capture_output=False)
     if result.returncode != 0:
         print(f"\n[ABORT] {label} failed with exit {result.returncode}")
@@ -46,22 +47,31 @@ def main() -> int:
     print(f"Root: {ROOT}")
 
     # Step 1: lint
-    rc = run([sys.executable, str(SCRIPTS / "lint.py")], "Step 1: Lint (abort on failure)")
+    rc = run(
+        [sys.executable, str(SCRIPTS / "lint.py")], "Step 1: Lint (abort on failure)"
+    )
     if rc != 0:
         return rc
 
     # Step 2: stamp version
-    rc = run([sys.executable, str(TOOLS / "stamp_version.py")], "Step 2: Stamp version placeholders")
+    rc = run(
+        [sys.executable, str(TOOLS / "stamp_version.py")],
+        "Step 2: Stamp version placeholders",
+    )
     if rc != 0:
         return rc
 
     # Step 3: generate icons
-    rc = run([sys.executable, str(TOOLS / "generate_icons.py")], "Step 3: Generate icons.svg")
+    rc = run(
+        [sys.executable, str(TOOLS / "generate_icons.py")], "Step 3: Generate icons.svg"
+    )
     if rc != 0:
         return rc
 
     # Step 4: generate PDFs
-    rc = run([sys.executable, str(TOOLS / "generate_pdfs.py")], "Step 4: Generate PDF assets")
+    rc = run(
+        [sys.executable, str(TOOLS / "generate_pdfs.py")], "Step 4: Generate PDF assets"
+    )
     if rc != 0:
         return rc
 
@@ -75,13 +85,13 @@ def main() -> int:
         print(f"\n[SKIP] {skill_script} not found — skipping SKILL packaging")
 
     print(f"""
-{'='*60}
+{"=" * 60}
   Build complete · v{version}
-{'='*60}
+{"=" * 60}
 Generated artifacts:
   - icons.svg            (from scripts.js ICONS array)
   - assets/downloads/*.pdf (PDF reference cards)
-  - assets/downloads/edic-design-system-skill.zip (if package_skill.py ran)
+  - assets/downloads/edic-design-system-skill-v{version}.zip (if package_skill.py ran)
 """)
     return 0
 

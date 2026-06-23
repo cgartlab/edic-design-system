@@ -12,6 +12,7 @@
   8. AGENTS.md 状态行版本号已被 stamp
   9. CSS/JSON/MD 中 {{DS_VERSION}} 占位符已被 stamp
 """
+
 from __future__ import annotations
 
 import re
@@ -30,14 +31,20 @@ SEMVER_RE = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.]+)?$")
 PLACEHOLDER_RE = re.compile(r"\{\{DS_VERSION\}\}")
 
 STAMP_TARGETS = [
-    "index.html", "terms.html", "prompts.html",
-    "downloads.html", "docs.html",
+    "index.html",
+    "terms.html",
+    "prompts.html",
+    "downloads.html",
+    "docs.html",
     "changelog.html",
-    "blog.html", "company.html",
-    "resume.html", "report.html",
+    "blog.html",
+    "company.html",
+    "resume.html",
+    "report.html",
     "styles.css",
     "scripts.js",
-    "package.json", "tokens.json",
+    "package.json",
+    "tokens.json",
     "README.md",
     "AGENTS.md",
     "CLAUDE.md",
@@ -46,6 +53,12 @@ STAMP_TARGETS = [
     "docs/VERSIONING.md",
     "DEVELOPMENT-GUIDE.md",
 ]
+
+# Files/patterns where {{DS_VERSION}} is intentional and should NOT be flagged
+# Example: downloads.html uses {{DS_VERSION}} in ZIP filename as a template placeholder
+PLACEHOLDER_EXCEPTIONS: dict[str, list[str]] = {
+    "downloads.html": [r"edic-design-system-skill-v\{\{DS_VERSION\}\}\.zip"],
+}
 
 
 def get_expected_version() -> str | None:
@@ -88,7 +101,9 @@ def main() -> int:
         print(f"[WARN] 未发现期望版本（VERSION 文件缺失）")
         return 1
 
-    by_resource: dict[str, dict[str, list[str]]] = defaultdict(lambda: defaultdict(list))
+    by_resource: dict[str, dict[str, list[str]]] = defaultdict(
+        lambda: defaultdict(list)
+    )
     for path in html_files:
         versions = check_html(path)
         for resource, version in versions.items():
@@ -119,7 +134,9 @@ def main() -> int:
     no_version = []
     for path in html_files:
         text = path.read_text(encoding="utf-8", errors="replace")
-        for match in re.finditer(r'<(?:link[^>]+href|script[^>]+src)="(styles\.css|scripts\.js)"', text):
+        for match in re.finditer(
+            r'<(?:link[^>]+href|script[^>]+src)="(styles\.css|scripts\.js)"', text
+        ):
             no_version.append((path.name, match.group(1)))
     if no_version:
         print(f"\n[WARN] 以下资源未使用 ?v= 版本号：")
@@ -130,9 +147,17 @@ def main() -> int:
     placeholder_files = []
     for name in STAMP_TARGETS:
         p = ROOT / name
-        n = count_placeholders(p)
-        if n > 0:
-            placeholder_files.append((name, n))
+        n_total = count_placeholders(p)
+
+        # Subtract exceptions for intentional placeholders (e.g., ZIP filename templates)
+        if name in PLACEHOLDER_EXCEPTIONS and p.exists():
+            text = p.read_text(encoding="utf-8", errors="replace")
+            for pattern in PLACEHOLDER_EXCEPTIONS[name]:
+                matches = re.findall(pattern, text)
+                n_total -= len(matches)
+
+        if n_total > 0:
+            placeholder_files.append((name, n_total))
     if placeholder_files:
         print(f"\n[ERROR] 以下文件残留 {{{{DS_VERSION}}}} 占位符，需 stamp：")
         for name, n in placeholder_files:
