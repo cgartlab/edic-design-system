@@ -68,6 +68,9 @@ jobs:
       - name: Make scripts executable
         run: chmod +x tools/validate_*.py scripts/*.py scripts/*.sh 2>/dev/null || true
 
+      - name: Clean assets directory
+        run: rm -rf assets/downloads/*
+
       # ── 版本一致性校验 ─────────────────────────────
       - name: Validate version consistency
         if: inputs.skip_validation != 'true'
@@ -103,6 +106,14 @@ jobs:
       - name: Package distribution ZIP
         run: python3 scripts/package_release.py
 
+      # ── 生成校验和 ────────────────────────────────
+      - name: Generate checksums
+        run: |
+          cd assets/downloads
+          sha256sum *.pdf *.zip > CHECKSUMS.txt
+          echo "=== Checksums ==="
+          cat CHECKSUMS.txt
+
       # ── 上传全部产物 ─────────────────────────────
       - name: Upload all artifacts
         uses: actions/upload-artifact@v4
@@ -111,6 +122,7 @@ jobs:
           path: |
             assets/downloads/*.pdf
             assets/downloads/*.zip
+            assets/downloads/CHECKSUMS.txt
           retention-days: 90
 
   release:
@@ -163,7 +175,7 @@ jobs:
           if gh release view "$TAG" >/dev/null 2>&1; then
             echo "Release $TAG exists — editing in place"
             gh release edit "$TAG" --title "$TAG" --notes "$BODY" --prerelease="$PRERELEASE"
-            gh release upload "$TAG" assets/downloads/*.pdf assets/downloads/*.zip --clobber
+            gh release upload "$TAG" assets/downloads/*.pdf assets/downloads/*.zip assets/downloads/CHECKSUMS.txt --clobber
           else
             echo "Release $TAG does not exist — creating"
             gh release create "$TAG" \
@@ -172,7 +184,8 @@ jobs:
               --prerelease="$PRERELEASE" \
               --draft=false \
               assets/downloads/*.pdf \
-              assets/downloads/*.zip
+              assets/downloads/*.zip \
+              assets/downloads/CHECKSUMS.txt
           fi
 
       - name: Verify release assets
@@ -180,5 +193,5 @@ jobs:
           echo "=== Release artifacts ==="
           ls -lh assets/downloads/
           echo ""
-          echo "=== Artifact sizes ==="
-          for f in assets/downloads/*; do echo "$(basename $f): $(du -sh $f | cut -f1)"; done
+          echo "=== Checksums ==="
+          sha256sum assets/downloads/*.pdf assets/downloads/*.zip
