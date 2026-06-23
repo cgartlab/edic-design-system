@@ -11,6 +11,7 @@ Usage:
   python3 scripts/package_skill.py --check  # verify ZIP matches sources
   python3 scripts/package_skill.py --diff  # show what would change
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -21,9 +22,10 @@ from pathlib import Path
 import argparse
 
 ROOT = Path(__file__).resolve().parent.parent
+VERSION_FILE = ROOT / "VERSION"
 SKILL_DIR = ROOT / "skills" / "edic-design-system"
 DIST_DIR = ROOT / "assets" / "downloads"
-PKG_NAME = "edic-design-system-skill"
+PKG_NAME = f"edic-design-system-skill-v{VERSION_FILE.read_text().strip().splitlines()[0].strip()}"
 ZIP_PATH = DIST_DIR / f"{PKG_NAME}.zip"
 SOURCES = [
     SKILL_DIR / "SKILL.md",
