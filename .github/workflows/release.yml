@@ -68,6 +68,18 @@ jobs:
       - name: Make scripts executable
         run: chmod +x tools/validate_*.py scripts/*.py scripts/*.sh 2>/dev/null || true
 
+      # ── Sync VERSION from tag name ─────────────────────────────────
+      # release-please's generic updater doesn't update the plain-text VERSION
+      # file (needs x-release-please-version annotation). The tag IS the source
+      # of truth here, so overwrite VERSION with the tag-derived version.
+      - name: Sync VERSION from tag name
+        run: |
+          TAG_NAME="${{ github.ref_name }}"
+          VERSION_NUM="${TAG_NAME#v}"
+          echo "Tag: $TAG_NAME → VERSION: $VERSION_NUM"
+          printf '%s\n' "$VERSION_NUM" > VERSION
+          cat VERSION
+
       - name: Clean assets directory
         run: rm -rf assets/downloads/*
 
