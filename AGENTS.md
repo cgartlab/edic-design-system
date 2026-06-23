@@ -1,6 +1,6 @@
 # EDIC Design System — Agent Instructions
 
-**Version:** v1.6.2 | **Site:** https://edic.cgartlab.com | **License:** CC BY 4.0
+**Version:** v1.7.0 | **Site:** https://edic.cgartlab.com | **License:** CC BY 4.0
 
 ---
 
@@ -216,9 +216,9 @@ make sync-versions
 make validate
 
 # 3. 提交 + 打 tag
-git add -A && git commit -m "chore(release): bump v1.6.2"
-git tag -a v1.6.2 -m "Release v1.6.2"
-git push && git push origin v1.6.2
+git add -A && git commit -m "chore(release): bump v1.7.0"
+git tag -a v1.7.0 -m "Release v1.7.0"
+git push && git push origin v1.7.0
 
 # 4. release.yml 自动构建资产并创建 GitHub Release
 ```
