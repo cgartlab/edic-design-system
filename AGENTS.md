@@ -1,6 +1,6 @@
 # EDIC Design System — Agent Instructions
 
-**Version:** v1.7.0 | **Site:** https://edic.cgartlab.com | **License:** CC BY 4.0
+**Version:** 1.7.0 | **Site:** https://edic.cgartlab.com | **License:** CC BY 4.0
 
 ---
 
@@ -224,3 +224,108 @@ git push && git push origin v1.7.0
 ```
 
 > 注意：手动发布后需同步 `.release-please-manifest.json` 中的版本号，避免 release-please 下次重复发布。
+
+---
+
+## 发布管线 (Release Pipeline)
+
+This document describes the automated release pipeline for the EDIC Design System.
+
+### 1. PR-Based Workflow
+
+All changes go through Pull Requests — no direct pushes to `main` for features or fixes.
+
+1. Create a branch from `main`: `dev-{feature}`, `fix-{bug}`, `write-{topic}`
+2. Make changes and open a PR against `main`
+3. CI runs all validators (`make validate`)
+4. PR is reviewed and squash-merged
+
+### 2. Merge Strategy
+
+- **Squash merge** with PR title = Conventional Commits format
+- PR title must be one of: `fix:`, `feat:`, `feat!:` (or other Conventional Commits types)
+- Example: `feat(card): add hoverable variant`
+
+### 3. Release Flow
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Feature/Bug PR                                               │
+│  1. Developer opens PR (dev-*, fix-*)                       │
+│  2. CI runs: make validate (10 validators)                   │
+│  3. Review → Squash merge to main                            │
+└─────────────────────────────────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│ release-please (automated)                                  │
+│  1. Detects feat:/fix: commits since last release           │
+│  2. Creates/updates Release PR (branch: release-please--)    │
+│  3. Release PR contains: version bump, CHANGELOG.md         │
+└─────────────────────────────────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Release PR (release-please--)                                │
+│  1. Developer creates: docs/changelog_human/vX.Y.Z.md        │
+│  2. CI runs: make validate + validate_release_notes.py       │
+│  3. CI checks: vX.Y.Z.md exists (blocks if missing)         │
+│  4. Review → Merge                                           │
+└─────────────────────────────────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│ GitHub Actions (release.yml)                                 │
+│  1. Creates git tag vX.Y.Z                                   │
+│  2. Builds: styles.css.gz, scripts.js.gz, docs.html.gz      │
+│  3. Creates GitHub Release with assets + checksums            │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 4. Version Sync
+
+All version references are stamped via `1.7.0` placeholders:
+
+| File | Tool |
+|------|------|
+| `docs.html`, `resume.html`, `report.html` | `stamp_version.py` |
+| `AGENTS.md` | `stamp_version.py` |
+| `tokens.json` `"version"` | Manual (must match VERSION) |
+| `package.json` `"version"` | Manual (must match VERSION) |
+| `VERSION` | Single source of truth |
+
+Run `make stamp-version` after bumping VERSION to sync all HTML/MD files.
+
+### 5. Size Monitoring
+
+`make validate-size` checks gzip limits:
+
+- `styles.css.gz` ≤ 8KB
+- `scripts.js.gz` ≤ 5KB
+
+If limits are exceeded, CI blocks the release.
+
+### 6. Historical Versions
+
+All releases are archived on GitHub Releases with:
+
+- Version tag (e.g., `v1.7.0`)
+- Release notes (from `CHANGELOG.md` + `docs/changelog_human/vX.Y.Z.md`)
+- Checksums (SHA-256)
+- Pre-built assets (`.gz` files)
+
+### 7. PR Title Format
+
+PR titles must follow [Conventional Commits](https://www.conventionalcommits.org/):
+
+| Type | Description |
+|------|-------------|
+| `feat:` | New feature |
+| `fix:` | Bug fix |
+| `docs:` | Documentation only |
+| `style:` | Formatting (no code change) |
+| `refactor:` | Code restructuring |
+| `test:` | Adding tests |
+| `chore:` | Maintenance tasks |
+
+Examples:
+- `feat(card): add hoverable variant`
+- `fix(btn): correct active state color`
+- `docs: update installation instructions`

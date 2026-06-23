@@ -57,6 +57,10 @@ jobs:
         continue-on-error: true
         if: always()
         run: python3 tools/validate_hardcode.py || rc=$?; if [ ${rc:-0} -eq 1 ]; then exit 1; elif [ ${rc:-0} -eq 2 ]; then exit 0; fi
+      - id: release-notes
+        name: Validate release notes exist
+        if: github.head_ref != '' && contains(github.head_ref, 'release-please')
+        run: python3 tools/validate_release_notes.py
       - name: Summarize
         if: always()
         run: |
@@ -73,6 +77,7 @@ jobs:
           echo "| darkmode | ${{ steps.darkmode.outcome }} |" >> $GITHUB_STEP_SUMMARY
           echo "| verext  | ${{ steps.verext.outcome }} |" >> $GITHUB_STEP_SUMMARY
           echo "| hardcode | ${{ steps.hardcode.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| release-notes | ${{ steps.release-notes.outcome }} |" >> $GITHUB_STEP_SUMMARY
       - name: Check for failures
         if: always()
         run: |
@@ -84,6 +89,7 @@ jobs:
           if [ "${{ steps.a11y.outcome }}" = "failure" ]; then FAILED="$FAILED a11y"; fi
           if [ "${{ steps.versions.outcome }}" = "failure" ]; then FAILED="$FAILED versions"; fi
           if [ "${{ steps.links.outcome }}" = "failure" ]; then FAILED="$FAILED links"; fi
+          if [ "${{ steps.release-notes.outcome }}" = "failure" ]; then FAILED="$FAILED release-notes"; fi
           # NOTE: cssref/darkmode/verext/hardcode use continue-on-error=true
           # (soft failures / warnings only) — excluded from blocking check
           if [ -n "$FAILED" ]; then
