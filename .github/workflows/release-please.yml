@@ -126,3 +126,20 @@ jobs:
           else
             echo "No stamp drift — all HTML/MD files already up to date."
           fi
+
+      - name: Alert on post-merge-stamp failure
+        if: failure()
+        run: |
+          echo "## ⚠️ POST-MERGE-STAMP FAILED" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**`post-merge-stamp` failed to sync VERSION and stamp HTML/MD files on main.**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "This means main branch still has the OLD version (`VERSION` file). All subsequent stamps and asset builds will use the wrong version." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Action required:** Manually run the `post-merge-stamp` job or fix the VERSION file on main." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "If this job fails repeatedly, check:" >> $GITHUB_STEP_SUMMARY
+          echo "1. `RELEASE_PLEASE_TOKEN` has not expired" >> $GITHUB_STEP_SUMMARY
+          echo "2. No git conflicts on main" >> $GITHUB_STEP_SUMMARY
+          echo "3. Network connectivity to GitHub" >> $GITHUB_STEP_SUMMARY
+          exit 1

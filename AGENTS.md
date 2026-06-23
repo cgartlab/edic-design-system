@@ -279,6 +279,18 @@ All changes go through Pull Requests — no direct pushes to `main` for features
 └─────────────────────────────────────────────────────────────┘
 ```
 
+### 3.1 Release PR CI 校验豁免规则
+
+Release PR（分支名以 `release-please--` 开头）存活期间，CI 校验策略如下：
+
+**豁免项（跳过）：**
+- `validate-versions` 和 `validate-verext`：由于 `release-please` 的 `generic` updater 无法处理无 `x-release-please-version` 标注的纯文本 `VERSION` 文件，Release PR 中 `tokens.json`/`package.json`（新版本）与 `VERSION`（旧版本）的不一致是**预期的过渡态**。最终一致性由合并后的 `post-merge-stamp` 保障。
+
+**强制项（不可跳过）：**
+- `validate_release_notes.py`：此脚本校验的是**人类撰写的更新摘要**（`docs/changelog_human/vX.Y.Z.md`），而非 `release-please` 自动生成的机器 `CHANGELOG.md`。即使在 Release PR 分支上，如果缺失人类摘要，CI 必须失败并**物理阻断该 Release PR 的合并**。
+
+> ⚠️ `post-merge-stamp` 若静默失败（网络抖动 / Token 过期 / Git 冲突），main 分支的 `VERSION` 将停滞在旧版本，导致后续所有 Stamp 注入和资产打包全部使用错误版本号。该 Job 已配置失败告警机制。
+
 ### 4. Version Sync
 
 All version references are stamped via `1.7.0` placeholders:
