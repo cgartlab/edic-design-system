@@ -9,6 +9,7 @@
   5. scripts.js 是否声明了 VERSION 常量/变量及其值是否一致
   6. 所有扫描到的 ?v= 值与 VERSION 不一致时报告 ERROR
 """
+
 from __future__ import annotations
 
 import argparse
@@ -25,7 +26,9 @@ SCRIPTS_FILE = ROOT / "scripts.js"
 
 SEMVER_RE = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.]+)?$")
 QV_RE = re.compile(r"\?v=([0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.]+)?)")
-#匹配 scripts.js 中对 CSS/JS 资源的 src引用（含 ?v=）
+# Files that are exempt from ?v= reference checks (JS files don't self-reference ?v=)
+SKIP_FROM_VVERSION_CHECK = {"scripts.js"}
+# 匹配 scripts.js 中对 CSS/JS 资源的 src引用（含 ?v=）
 SRC_REF_RE = re.compile(r'(?:href|src)="([^"?]+\.(?:css|js))\?v=([^"]+)"')
 # 匹配 VERSION 常量或变量声明
 VERSION_DECL_RE = re.compile(
@@ -61,16 +64,26 @@ def check_tokens_version(expected: str, verbose: bool) -> list[tuple[str, str, s
     if "version" in data:
         ver = data["version"]
         ver_path = "tokens.json.version"
-    elif "info" in data and isinstance(data["info"], dict) and "version" in data["info"]:
+    elif (
+        "info" in data and isinstance(data["info"], dict) and "version" in data["info"]
+    ):
         ver = data["info"]["version"]
         ver_path = "tokens.json.info.version"
 
     if ver is None:
-        issues.append(("ERROR", "tokens.json", "未发现 version 字段（尝试了 .version 和 .info.version）"))
+        issues.append(
+            (
+                "ERROR",
+                "tokens.json",
+                "未发现 version 字段（尝试了 .version 和 .info.version）",
+            )
+        )
         return issues
 
     if ver != expected:
-        issues.append(("ERROR", ver_path, f"version={ver!r}，与 VERSION {expected!r} 不一致"))
+        issues.append(
+            ("ERROR", ver_path, f"version={ver!r}，与 VERSION {expected!r} 不一致")
+        )
     elif verbose:
         issues.append(("OK", ver_path, f"version={ver!r}"))
 
@@ -97,15 +110,25 @@ def check_package_version(expected: str, verbose: bool) -> list[tuple[str, str, 
         return issues
 
     if ver != expected:
-        issues.append(("ERROR", "package.json.version", f"version={ver!r}，与 VERSION {expected!r} 不一致"))
+        issues.append(
+            (
+                "ERROR",
+                "package.json.version",
+                f"version={ver!r}，与 VERSION {expected!r} 不一致",
+            )
+        )
     elif verbose:
         issues.append(("OK", "package.json.version", f"version={ver!r}"))
 
     return issues
 
 
-def check_scripts_version_refs(expected: str, verbose: bool) -> tuple[list[tuple[str, str, str]], bool]:
+def check_scripts_version_refs(
+    expected: str, verbose: bool
+) -> tuple[list[tuple[str, str, str]], bool]:
     """检查 scripts.js 中对 styles.css 和 scripts.js 的 ?v= 引用。"""
+    if SCRIPTS_FILE.name in SKIP_FROM_VVERSION_CHECK:
+        return [], False
     issues: list[tuple[str, str, str]] = []
     has_own_qv = False
 
@@ -134,14 +157,26 @@ def check_scripts_version_refs(expected: str, verbose: bool) -> tuple[list[tuple
         if resource == "styles.css":
             css_qv_found = True
             if ver != expected:
-                issues.append(("ERROR", ref, f"styles.css?v={ver}，与 VERSION {expected!r} 不一致"))
+                issues.append(
+                    (
+                        "ERROR",
+                        ref,
+                        f"styles.css?v={ver}，与 VERSION {expected!r} 不一致",
+                    )
+                )
             elif verbose:
                 issues.append(("OK", ref, f"styles.css?v={ver}"))
 
         elif resource == "scripts.js":
             js_qv_found = True
             if ver != expected:
-                issues.append(("ERROR", ref, f"scripts.js?v={ver}，与 VERSION {expected!r} 不一致"))
+                issues.append(
+                    (
+                        "ERROR",
+                        ref,
+                        f"scripts.js?v={ver}，与 VERSION {expected!r} 不一致",
+                    )
+                )
             elif verbose:
                 issues.append(("OK", ref, f"scripts.js?v={ver}"))
 
@@ -151,8 +186,12 @@ def check_scripts_version_refs(expected: str, verbose: bool) -> tuple[list[tuple
     return issues, has_own_qv
 
 
-def check_scripts_version_decl(expected: str, verbose: bool) -> list[tuple[str, str, str]]:
+def check_scripts_version_decl(
+    expected: str, verbose: bool
+) -> list[tuple[str, str, str]]:
     """检查 scripts.js 中 VERSION 常量/变量声明。"""
+    if SCRIPTS_FILE.name in SKIP_FROM_VVERSION_CHECK:
+        return []
     issues: list[tuple[str, str, str]] = []
 
     if not SCRIPTS_FILE.exists():
@@ -166,7 +205,9 @@ def check_scripts_version_decl(expected: str, verbose: bool) -> list[tuple[str, 
         ref = f"scripts.js:{lineno}"
 
         if ver != expected:
-            issues.append(("WARN", ref, f"VERSION={ver!r}，与 VERSION 文件 {expected!r} 不一致"))
+            issues.append(
+                ("WARN", ref, f"VERSION={ver!r}，与 VERSION 文件 {expected!r} 不一致")
+            )
         elif verbose:
             issues.append(("OK", ref, f"VERSION={ver!r}"))
 
@@ -175,7 +216,9 @@ def check_scripts_version_decl(expected: str, verbose: bool) -> list[tuple[str, 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="扩展版本一致性校验")
-    parser.add_argument("--verbose", "-v", action="store_true", help="显示所有检查项（含 OK）")
+    parser.add_argument(
+        "--verbose", "-v", action="store_true", help="显示所有检查项（含 OK）"
+    )
     args = parser.parse_args()
 
     expected = get_expected_version()
