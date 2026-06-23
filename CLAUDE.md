@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-**EDIC Design System** (formerly CGArtLab) — Editorial × Olive Green, a zero-runtime-dependency static design system driven by OKLch color science and design tokens. Current version: **v1.7.0**.
+**EDIC Design System** (formerly CGArtLab) — Editorial × Olive Green, a zero-runtime-dependency static design system driven by OKLch color science and design tokens. Current version: **v1.8.0**.
 
 - **Website:** https://edic.cgartlab.com
 - **License:** CC BY 4.0
@@ -113,10 +113,10 @@ make stamp-version
 make validate
 
 # 4. Commit
-git add -A && git commit -m "chore(release): bump to v1.7.0"
+git add -A && git commit -m "chore(release): bump to v1.8.0"
 
 # 5. Tag & push
-git tag v1.7.0 && git push origin v1.7.0
+git tag v1.8.0 && git push origin v1.8.0
 ```
 
 ## Adding a New Component

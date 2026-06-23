@@ -216,9 +216,9 @@ make sync-versions
 make validate
 
 # 3. 提交 + 打 tag
-git add -A && git commit -m "chore(release): bump v1.7.0"
-git tag -a v1.7.0 -m "Release v1.7.0"
-git push && git push origin v1.7.0
+git add -A && git commit -m "chore(release): bump v1.8.0"
+git tag -a v1.8.0 -m "Release v1.8.0"
+git push && git push origin v1.8.0
 
 # 4. release.yml 自动构建资产并创建 GitHub Release
 ```
@@ -318,7 +318,7 @@ If limits are exceeded, CI blocks the release.
 
 All releases are archived on GitHub Releases with:
 
-- Version tag (e.g., `v1.7.0`)
+- Version tag (e.g., `v1.8.0`)
 - Release notes (from `CHANGELOG.md` + `docs/changelog_human/vX.Y.Z.md`)
 - Checksums (SHA-256)
 - Pre-built assets (`.gz` files)
