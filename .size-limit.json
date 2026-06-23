@@ -1,0 +1,12 @@
+{
+  "css": {
+    "max_kb": 60,
+    "file": "styles.css",
+    "note": "Gzip-compressed size, 20% buffer over current ~50KB baseline"
+  },
+  "js": {
+    "max_kb": 40,
+    "file": "scripts.js",
+    "note": "Gzip-compressed size, 30% buffer over current ~30KB baseline"
+  }
+}

@@ -17,11 +17,6 @@
     { "type": "chore",    "section": "其他",      "hidden": true  },
     { "type": "revert",   "section": "回滚",      "hidden": false }
   ],
-  "extra-files": [
-    "VERSION",
-    { "type": "json", "path": "tokens.json",  "jsonpath": "$.version" },
-    { "type": "json", "path": "package.json", "jsonpath": "$.version" }
-  ],
   "packages": {
     ".": {
       "release-type": "simple",
