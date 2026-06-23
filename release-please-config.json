@@ -3,6 +3,7 @@
   "release-type": "simple",
   "package-name": "edic-design-system",
   "include-v-in-tags": true,
+  "include-component-in-tag": false,
   "changelog-sections": [
     { "type": "feat",     "section": "新增",      "hidden": false },
     { "type": "fix",      "section": "修复",      "hidden": false },
