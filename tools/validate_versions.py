@@ -47,6 +47,12 @@ STAMP_TARGETS = [
     "DEVELOPMENT-GUIDE.md",
 ]
 
+# Files/patterns where {{DS_VERSION}} is intentional and should NOT be flagged as errors
+# Example: downloads.html uses {{DS_VERSION}} in ZIP filename as a template placeholder
+PLACEHOLDER_EXCEPTIONS = {
+    "downloads.html": [r"edic-design-system-skill-v\{\{DS_VERSION\}\}\.zip"],
+}
+
 
 def get_expected_version() -> str | None:
     """从 VERSION 文件读取最新稳定版本。"""
@@ -130,9 +136,17 @@ def main() -> int:
     placeholder_files = []
     for name in STAMP_TARGETS:
         p = ROOT / name
-        n = count_placeholders(p)
-        if n > 0:
-            placeholder_files.append((name, n))
+        n_total = count_placeholders(p)
+        
+        # Subtract exceptions for intentional placeholders (e.g., ZIP filename templates)
+        if name in PLACEHOLDER_EXCEPTIONS and p.exists():
+            text = p.read_text(encoding="utf-8", errors="replace")
+            for pattern in PLACEHOLDER_EXCEPTIONS[name]:
+                matches = re.findall(pattern, text)
+                n_total -= len(matches)
+        
+        if n_total > 0:
+            placeholder_files.append((name, n_total))
     if placeholder_files:
         print(f"\n[ERROR] 以下文件残留 {{{{DS_VERSION}}}} 占位符，需 stamp：")
         for name, n in placeholder_files:
