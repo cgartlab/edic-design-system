@@ -16,7 +16,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Courier >>
 endobj
 6 0 obj
-<< /Length 1668 >>
+<< /Length 1660 >>
 stream
 0.9781 0.9584 0.9267 rg
 0.00 0.00 595.28 841.89 re f
@@ -94,7 +94,7 @@ BT
 /F3 10.00 Tf
 0.3931 0.3600 0.3345 rg
 1 0 0 1 56.00 129.89 Tm
-(designsystem.cgartlab.com) Tj
+(edic.cgartlab.com) Tj
 ET
 0.8741 0.8549 0.8238 RG
 0.60 w
@@ -103,7 +103,7 @@ BT
 /F3 7.50 Tf
 0.3931 0.3600 0.3345 rg
 1 0 0 1 56.00 805.89 Tm
-(EDIC Design System  -  Editorial x Olive Green  -  v1.4.0) Tj
+(EDIC Design System  -  Editorial x Olive Green  -  v1.6.2) Tj
 ET
 BT
 /F3 7.50 Tf
@@ -424,7 +424,7 @@ BT
 /F3 7.50 Tf
 0.3931 0.3600 0.3345 rg
 1 0 0 1 56.00 805.89 Tm
-(EDIC Design System  -  Editorial x Olive Green  -  v1.4.0) Tj
+(EDIC Design System  -  Editorial x Olive Green  -  v1.6.2) Tj
 ET
 BT
 /F3 7.50 Tf
@@ -697,7 +697,7 @@ BT
 /F3 7.50 Tf
 0.3931 0.3600 0.3345 rg
 1 0 0 1 56.00 805.89 Tm
-(EDIC Design System  -  Editorial x Olive Green  -  v1.4.0) Tj
+(EDIC Design System  -  Editorial x Olive Green  -  v1.6.2) Tj
 ET
 BT
 /F3 7.50 Tf
@@ -986,7 +986,7 @@ BT
 /F3 7.50 Tf
 0.3931 0.3600 0.3345 rg
 1 0 0 1 56.00 805.89 Tm
-(EDIC Design System  -  Editorial x Olive Green  -  v1.4.0) Tj
+(EDIC Design System  -  Editorial x Olive Green  -  v1.6.2) Tj
 ET
 BT
 /F3 7.50 Tf
@@ -1008,15 +1008,15 @@ xref
 0000000211 00000 n 
 0000000286 00000 n 
 0000000354 00000 n 
-0000002074 00000 n 
-0000002226 00000 n 
-0000007829 00000 n 
-0000007981 00000 n 
-0000012015 00000 n 
-0000012169 00000 n 
-0000016791 00000 n 
+0000002066 00000 n 
+0000002218 00000 n 
+0000007821 00000 n 
+0000007973 00000 n 
+0000012007 00000 n 
+0000012161 00000 n 
+0000016783 00000 n 
 trailer
 << /Size 14 /Root 1 0 R >>
 startxref
-16945
+16937
 %%EOF
