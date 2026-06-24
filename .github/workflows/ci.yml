@@ -63,7 +63,7 @@ jobs:
         if: github.head_ref != '' && contains(github.head_ref, 'release-please')
         run: python3 tools/validate_release_notes.py
       - id: changelog-html
-        name: Verify changelog.html is up to date with docs/changelog_human/
+        name: Verify changelog.html is up to date with CHANGELOG.md
         continue-on-error: true
         if: always()
         run: python3 tools/generate_changelog_html.py --check || rc=$?; if [ ${rc:-0} -eq 2 ]; then echo "::warning::changelog.html is stale — run python3 tools/generate_changelog_html.py"; exit 0; fi
