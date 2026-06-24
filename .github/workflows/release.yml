@@ -208,3 +208,39 @@ jobs:
           echo ""
           echo "=== Checksums ==="
           sha256sum assets/downloads/*.pdf assets/downloads/*.zip
+
+      # ── Guard against orphaned 'untagged-' asset URLs ─────────────
+      # When a release object loses its tag binding (e.g. tag deleted
+      # and recreated), GitHub keeps the assets but serves them under
+      # releases/download/untagged-<sha>/... instead of /vX.Y.Z/...
+      # This step fails the pipeline if any asset URL is mis-bound so
+      # the broken release cannot ship silently. See v1.8.1 incident.
+      - name: Verify asset URLs are versioned (no 'untagged-' leak)
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          echo "=== Checking every asset URL contains tag '$TAG' ==="
+          set +e
+          BAD=0
+          COUNT=0
+          while IFS=$'\t' read -r name url; do
+            [ -z "$url" ] && continue
+            COUNT=$((COUNT + 1))
+            if echo "$url" | grep -q "untagged-"; then
+              echo "::error file=.github/workflows/release.yml::Asset '$name' has untagged URL: $url"
+              BAD=1
+            elif ! echo "$url" | grep -q "/$TAG/"; then
+              echo "::error file=.github/workflows/release.yml::Asset '$name' URL missing tag '$TAG': $url"
+              BAD=1
+            else
+              echo "OK  $name -> $url"
+            fi
+          done < <(gh release view "$TAG" --json assets --jq '.assets[] | "\(.name)\t\(.url)"')
+          echo ""
+          echo "Verified $COUNT assets."
+          if [ "$BAD" -ne 0 ]; then
+            echo "::error::Release was published with mis-bound asset URLs. Failing pipeline."
+            echo "Hint: delete the release, ensure the tag is intact, then re-run the workflow."
+            exit 1
+          fi
+          echo "All asset URLs are correctly bound to tag '$TAG'."
