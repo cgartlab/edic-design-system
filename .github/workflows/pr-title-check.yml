@@ -1,0 +1,56 @@
+# EDIC Design System — PR Title Conventional Commit Check
+#
+# squash-merge 使用 PR 标题作为最终 commit message，release-please 据此
+# 分析版本影响并生成 CHANGELOG。本工作流强制 PR 标题遵循 Conventional
+# Commits 规范，避免：
+#   - 错误的版本号 bump（例如本该 chore: 却写成 feat:）
+#   - CHANGELOG 分类错误或遗漏
+#
+# 允许的类型前缀见下方 TYPES。带 ! 或 BREAKING CHANGE 视为 MAJOR。
+name: PR Title Check
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  lint-pr-title:
+    name: Lint PR title (Conventional Commits)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          echo "PR title: $PR_TITLE"
+          # 允许的类型：feat fix docs style refactor perf test build ci chore revert
+          # 格式：type(scope)!: subject  —— scope 与 ! 可选
+          PATTERN='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-zA-Z0-9_.\-]+\))?!?: .+'
+          if echo "$PR_TITLE" | grep -qE "$PATTERN"; then
+            echo "::notice::PR title 符合 Conventional Commits 规范。"
+            # 版本影响提示
+            case "$PR_TITLE" in
+              *"!:"*|*"BREAKING"*) echo "::warning::检测到破坏性变更标记 → 将触发 MAJOR 版本升级。请确认这是预期行为。" ;;
+              feat*) echo "::notice::feat → MINOR 版本升级" ;;
+              fix*)  echo "::notice::fix → PATCH 版本升级" ;;
+              *)     echo "::notice::此类型不会触发版本升级（chore/docs/style/refactor/perf/test/build/ci）" ;;
+            esac
+            exit 0
+          fi
+          echo "::error::PR 标题不符合 Conventional Commits 规范。"
+          echo ""
+          echo "期望格式：<type>(<scope>)!: <subject>"
+          echo "  type 必须是：feat fix docs style refactor perf test build ci chore revert"
+          echo "  例：feat(release): 手工 tag 触发发布策略"
+          echo "      fix(nav): 修复移动端抽屉滚动"
+          echo "      chore(deps): 升级 vitest"
+          echo ""
+          echo "版本影响："
+          echo "  feat:        → MINOR"
+          echo "  fix:         → PATCH"
+          echo "  type!: / BREAKING CHANGE → MAJOR"
+          echo "  其他（chore/docs/...）   → 不触发版本升级"
+          exit 1

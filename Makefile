@@ -4,7 +4,7 @@
 
 SHELL := /bin/sh
 .DEFAULT_GOAL := help
-.PHONY: help lint build validate validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode validate-size stamp-version sync-versions sync-versions:check release-please serve clean serve-py serve-node generate-pdfs icons icons-check test skill-package release-package
+.PHONY: help lint build validate validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode validate-size stamp-version changelog changelog-check changelog-coverage sync-versions sync-versions-check release-please serve clean serve-py serve-node generate-pdfs icons icons-check test skill-package release-package
 
 PYTHON ?= python3
 NODE ?= node
@@ -96,10 +96,19 @@ validate-size:  ## 校验 CSS/JS gzip 体积是否超过阈值
 stamp-version:  ## 将 VERSION 同步到所有 HTML / MD 资源
 	$(PYTHON) tools/stamp_version.py
 
+changelog:  ## 从 docs/changelog_human/*.md 重建 changelog.html
+	$(PYTHON) tools/generate_changelog_html.py
+
+changelog-check:  ## 检查 changelog.html 是否与 docs/changelog_human/ 同步（CI 用）
+	$(PYTHON) tools/generate_changelog_html.py --check
+
+changelog-coverage:  ## 报告缺少人类友好条目的已发布版本（对照 CHANGELOG.md）
+	$(PYTHON) tools/generate_changelog_html.py --verify-coverage
+
 sync-versions:  ## 将 VERSION 同步到 tokens.json、package.json 及 HTML/MD
 	$(PYTHON) tools/sync_versions.py
 
-sync-versions:check:  ## 检查版本一致性（不修改文件）
+sync-versions-check:  ## 检查版本一致性（不修改文件）
 	$(PYTHON) tools/sync_versions.py --check
 
 # ─── 发布自动化 ────────────────────────────────────────────

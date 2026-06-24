@@ -1,370 +1,337 @@
 #!/usr/bin/env python3
-"""tools/generate_changelog_html.py — Auto-generate changelog.html from human-readable Markdown summaries.
-
-This script reads all docs/changelog_human/v*.md files, converts them to HTML,
-and replaces the content section of changelog.html.
-
-Usage:
-  python3 tools/generate_changelog_html.py          # generate
-  python3 tools/generate_changelog_html.py --check   # verify changelog.html is up-to-date
-  python3 tools/generate_changelog_html.py --diff   # show what would change
+# -*- coding: utf-8 -*-
 """
+tools/generate_changelog_html.py
+从 docs/changelog_human/*.md 自动生成 changelog.html 中的内容块。
 
+工作方式：
+  1. 扫描 docs/changelog_human/ 目录，按版本号排序（最新在前）
+  2. 将每个 Markdown 文件转换为 changelog.html 中的 <section> 块
+  3. 替换 changelog.html 里 <!-- CHANGELOG_CONTENT_START --> 至
+     <!-- CHANGELOG_CONTENT_END --> 之间的内容（含侧边导航）
+
+Markdown 文件命名规范：
+  vX.Y.Z.md         → 正式版本
+  vX.Y.Z-patch.md   → 补丁（用 "-patch" 后缀，不是 semver）
+
+文件第一行可包含日期注释（括号内），例如：
+  (2026-06-23)
+其余行是 "## 分类" + "- 条目" 形式的 Markdown。
+
+用法：
+  python3 tools/generate_changelog_html.py           # 原地更新 changelog.html
+  python3 tools/generate_changelog_html.py --check   # 仅检查是否需要更新（CI 用）
+  python3 tools/generate_changelog_html.py --dry-run # 打印将要写入的内容，不修改文件
+
+退出码：
+  0  成功（--check 模式下：内容已是最新）
+  1  错误
+  2  --check 模式下：内容需要更新
+"""
+from __future__ import annotations
+
+import argparse
 import re
 import sys
 from pathlib import Path
+from typing import NamedTuple
 
 ROOT = Path(__file__).resolve().parent.parent
-CHANGELOG_HUMAN_DIR = ROOT / "docs" / "changelog_human"
 CHANGELOG_HTML = ROOT / "changelog.html"
-VERSION_FILE = ROOT / "VERSION"
+HUMAN_DIR = ROOT / "docs" / "changelog_human"
 
-# Regex to extract version from filename like v1.7.0.md or v1.7.0-patch.md
-VERSION_PATTERN = re.compile(r"v(\d+\.\d+\.\d+(?:-\d+)?(?:-[a-zA-Z0-9.]+)?)\.md$")
-
-
-def extract_version(filename: str) -> str | None:
-    """Extract version string from markdown filename."""
-    match = VERSION_PATTERN.search(filename)
-    return match.group(1) if match else None
+CONTENT_START = "<!-- CHANGELOG_CONTENT_START -->"
+CONTENT_END = "<!-- CHANGELOG_CONTENT_END -->"
 
 
-def parse_version(version: str):
-    """Parse version string into comparable tuple. Handles semantic versioning."""
-    # Remove 'v' prefix if present
-    v = version.lstrip("v")
-    parts = []
-    for part in re.split(r"[.\-]", v):
-        # Try to extract numeric portion
-        num_match = re.match(r"(\d+)", part)
-        if num_match:
-            parts.append((0, int(num_match.group(1)), part))
-        else:
-            parts.append((1, part, part))
-    return tuple(parts)
+class VersionEntry(NamedTuple):
+    sort_key: tuple          # 用于排序（倒序：最新在前）
+    version_str: str         # 例 "1.8.1" 或 "1.8.1-patch"
+    display_version: str     # 例 "v1.8.1" 或 "v1.8.1-patch"
+    date: str                # 例 "2026-06-23"，可为空
+    anchor: str              # 例 "v181" 或 "v181patch"
+    sections: dict           # { "修复": ["…", "…"], "新增": ["…"] }
+    path: Path
 
 
-def version_key(version: str):
-    """Sort key for semantic versioning."""
-    return parse_version(version)
+# ── 版本排序键 ──────────────────────────────────────────────────────────────
 
 
-def markdown_to_html(text: str, version: str) -> str:
-    """Convert Markdown to HTML with simple transformations."""
-    lines = text.strip().split("\n")
-    html_parts = []
-    in_list = False
-    current_list_items = []
+def _parse_sort_key(version_str: str) -> tuple:
+    """
+    将版本字符串转为可排序的元组，确保：
+      1.9.0 > 1.8.1 > 1.8.1-patch > 1.8.0
+    patch 后缀视为比正版本低一级（用 -0.5 近似）。
+    """
+    base = version_str.replace("-patch", "")
+    parts = base.split(".")
+    try:
+        nums = tuple(int(p) for p in parts)
+    except ValueError:
+        nums = (0, 0, 0)
+    # patch 后缀让其排在正版本之前（显示时更新的 patch 在上方）
+    suffix = 0 if "-patch" not in version_str else -1
+    return nums + (suffix,)
 
-    def flush_list():
-        nonlocal in_list, current_list_items
-        if current_list_items:
-            html_parts.append("          <ul>")
-            for item in current_list_items:
-                html_parts.append(f"            <li>{item}</li>")
-            html_parts.append("          </ul>")
-            current_list_items = []
-        in_list = False
 
-    i = 0
-    while i < len(lines):
-        line = lines[i].strip()
+# ── Markdown 解析 ─────────────────────────────────────────────────────────────
 
-        # Empty line - paragraph break
-        if not line:
-            if in_list:
-                flush_list()
-            html_parts.append("")
-            i += 1
+
+def _anchor(version_str: str) -> str:
+    """把版本字符串转为合法 HTML id（去掉所有非字母数字字符）。"""
+    return "v" + re.sub(r"[^a-z0-9]", "", version_str.lower())
+
+
+def parse_md_file(path: Path) -> VersionEntry:
+    """解析单个 docs/changelog_human/*.md 文件，返回 VersionEntry。"""
+    stem = path.stem  # 例 "v1.8.1" 或 "v1.8.1-patch"
+    version_str = stem.lstrip("v")  # "1.8.1" 或 "1.8.1-patch"
+    display_version = "v" + version_str
+    anchor = _anchor(version_str)
+    sort_key = _parse_sort_key(version_str)
+
+    text = path.read_text(encoding="utf-8")
+    lines = text.splitlines()
+
+    date = ""
+    start_idx = 0
+    if lines and lines[0].strip().startswith("(") and lines[0].strip().endswith(")"):
+        date = lines[0].strip().strip("()")
+        start_idx = 1
+
+    sections: dict[str, list[str]] = {}
+    current_section: str | None = None
+
+    for line in lines[start_idx:]:
+        stripped = line.strip()
+        if not stripped:
             continue
+        if stripped.startswith("## "):
+            current_section = stripped[3:].strip()
+            sections.setdefault(current_section, [])
+        elif stripped.startswith("- ") and current_section is not None:
+            sections[current_section].append(stripped[2:])
+        elif stripped.startswith("### "):
+            # 支持三级标题作为子分类（忽略，并入上个分类）
+            pass
 
-        # H2 heading (## 新增 / ## 修复 / ## 变更)
-        if line.startswith("## "):
-            if in_list:
-                flush_list()
-            heading_text = line[3:].strip()
-            html_parts.append(f"          <h3>{heading_text}</h3>")
-            i += 1
-            continue
-
-        # List item (- item)
-        if line.startswith("- "):
-            if in_list and lines[i - 1].strip().startswith("- "):
-                current_list_items.append(process_inline(line[2:]))
-            else:
-                if in_list:
-                    flush_list()
-                in_list = True
-                current_list_items.append(process_inline(line[2:]))
-            i += 1
-            continue
-
-        # Fallback - treat as paragraph
-        if in_list:
-            flush_list()
-        if line:
-            html_parts.append(f"          <p>{process_inline(line)}</p>")
-
-        i += 1
-
-    # Flush any remaining list
-    if in_list:
-        flush_list()
-
-    return "\n".join(html_parts)
-
-
-def process_inline(text: str) -> str:
-    """Process inline elements: bold, code."""
-    # **bold** -> <strong>bold</strong>
-    text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
-    # `code` -> <code>code</code>
-    text = re.sub(r"`([^`]+)`", r"<code>\1</code>", text)
-    return text
-
-
-def generate_section_id(version: str) -> str:
-    """Generate section ID from version string (remove dots and dashes)."""
-    return "v" + version.replace(".", "").replace("-", "")
-
-
-def read_changelog_files():
-    """Read all markdown files from changelog_human directory."""
-    if not CHANGELOG_HUMAN_DIR.exists():
-        return []
-
-    files = sorted(
-        CHANGELOG_HUMAN_DIR.glob("v*.md"), key=lambda f: extract_version(f.name) or ""
+    return VersionEntry(
+        sort_key=sort_key,
+        version_str=version_str,
+        display_version=display_version,
+        date=date,
+        anchor=anchor,
+        sections=sections,
+        path=path,
     )
 
-    versions_data = []
-    for filepath in files:
-        version = extract_version(filepath.name)
-        if not version:
+
+# ── HTML 生成 ─────────────────────────────────────────────────────────────────
+
+_SECTION_ORDER = ["新增", "修复", "性能优化", "重构", "变更", "文档", "注意", "其他"]
+
+
+def _escape(text: str) -> str:
+    """最小化 HTML 转义。"""
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def _render_section(entry: VersionEntry) -> str:
+    """渲染单个版本的 <section> HTML 块。"""
+    heading_date = f" — {entry.date}" if entry.date else ""
+    lines = [
+        f'        <section class="ds-doc-block" id="{entry.anchor}">',
+        f"          <h2>{_escape(entry.display_version)}{_escape(heading_date)}</h2>",
+    ]
+
+    # 按预定顺序输出各分类
+    ordered_keys = [k for k in _SECTION_ORDER if k in entry.sections]
+    remaining_keys = [k for k in entry.sections if k not in _SECTION_ORDER]
+    all_keys = ordered_keys + remaining_keys
+
+    for key in all_keys:
+        items = entry.sections[key]
+        if not items:
             continue
-        content = filepath.read_text(encoding="utf-8")
-        versions_data.append(
-            {"version": version, "filepath": filepath, "content": content}
-        )
+        lines.append(f"          <h3>{_escape(key)}</h3>")
+        lines.append("          <ul>")
+        for item in items:
+            lines.append(f"            <li>{_escape(item)}</li>")
+        lines.append("          </ul>")
 
-    # Sort by semantic version
-    versions_data.sort(key=lambda x: version_key(x["version"]))
-    return versions_data
-
-
-def generate_nav(versions_data: list) -> str:
-    """Generate left navigation HTML."""
-    nav_items = []
-    for idx, vdata in enumerate(versions_data, 1):
-        version = vdata["version"]
-        section_id = generate_section_id(version)
-        num = f"{idx:02d}"
-        nav_items.append(
-            f'              <li><a class="ds-pagenav-link" href="#{section_id}">'
-            f'<span class="ds-pagenav-num">{num}</span>'
-            f'<span class="ds-pagenav-text">v{version}</span></a></li>'
-        )
-
-    return "\n".join(nav_items)
+    lines.append("        </section>")
+    return "\n".join(lines)
 
 
-def generate_sections(versions_data: list) -> str:
-    """Generate HTML sections for each version."""
-    sections = []
-    for vdata in versions_data:
-        version = vdata["version"]
-        content = vdata["content"]
-        section_id = generate_section_id(version)
-
-        # Extract date from file or use placeholder
-        date_match = re.search(r"\((\d{4}-\d{2}-\d{2})\)", content)
-        date_str = date_match.group(1) if date_match else "2026-06-23"
-
-        sections.append(f'        <section class="ds-doc-block" id="{section_id}">')
-        sections.append(f"          <h2>v{version} — {date_str}</h2>")
-
-        # Extract description from first paragraph, skipping date lines
-        lines = content.strip().split("\n")
-        first_para = None
-        remaining_lines = []
-        date_pattern = re.compile(r"^\(\d{4}-\d{2}-\d{2}\)$")
-
-        for line in lines:
-            stripped = line.strip()
-            if not stripped:
-                continue
-            # Skip standalone date lines
-            if date_pattern.match(stripped):
-                continue
-            if stripped.startswith("## "):
-                remaining_lines.append(line)
-            elif first_para is None and not stripped.startswith("-"):
-                first_para = stripped
-            else:
-                remaining_lines.append(line)
-
-        if first_para:
-            sections.append(f"          <p>{process_inline(first_para)}</p>")
-
-        # Convert remaining content to HTML
-        if remaining_lines:
-            html_content = markdown_to_html("\n".join(remaining_lines), version)
-            sections.append(html_content)
-
-        sections.append("        </section>")
-
-    return "\n".join(sections)
-
-
-def get_current_html_nav() -> str:
-    """Extract current navigation from changelog.html."""
-    if not CHANGELOG_HTML.exists():
-        return ""
-
-    content = CHANGELOG_HTML.read_text(encoding="utf-8")
-    # Find nav list
-    match = re.search(r'<ol class="ds-pagenav-list">(.*?)</ol>', content, re.DOTALL)
-    return match.group(1) if match else ""
-
-
-def update_changelog_html():
-    """Main function to update changelog.html."""
-    versions_data = read_changelog_files()
-
-    if not versions_data:
-        print("Error: No version files found in docs/changelog_human/", file=sys.stderr)
-        sys.exit(1)
-
-    # Generate new content
-    new_nav = generate_nav(versions_data)
-    new_sections = generate_sections(versions_data)
-
-    if not CHANGELOG_HTML.exists():
-        print(f"Error: {CHANGELOG_HTML} not found", file=sys.stderr)
-        sys.exit(1)
-
-    html_content = CHANGELOG_HTML.read_text(encoding="utf-8")
-
-    # Check if markers exist
-    if "<!-- CHANGELOG_CONTENT_START -->" not in html_content:
-        print("Error: Start marker not found in changelog.html", file=sys.stderr)
-        print(
-            'Please add <!-- CHANGELOG_CONTENT_START --> before <div class="ds-prose">',
-            file=sys.stderr,
-        )
-        sys.exit(1)
-
-    if "<!-- CHANGELOG_CONTENT_END -->" not in html_content:
-        print("Error: End marker not found in changelog.html", file=sys.stderr)
-        print(
-            "Please add <!-- CHANGELOG_CONTENT_END --> after the closing </div> of the prose section",
-            file=sys.stderr,
-        )
-        sys.exit(1)
-
-    # Replace navigation list content
-    html_content = re.sub(
-        r'<ol class="ds-pagenav-list">.*?</ol>',
-        f'<ol class="ds-pagenav-list">\n{new_nav}\n            </ol>',
-        html_content,
-        flags=re.DOTALL,
+def _render_nav_item(entry: VersionEntry, index: int) -> str:
+    """渲染侧边导航中的单个 <li> 项。"""
+    num = str(index).zfill(2)
+    return (
+        f'              <li><a class="ds-pagenav-link" href="#{entry.anchor}">'
+        f'<span class="ds-pagenav-num">{num}</span>'
+        f'<span class="ds-pagenav-text">{_escape(entry.display_version)}</span>'
+        f"</a></li>"
     )
 
-    # Replace prose content between markers
-    pattern = r"<!-- CHANGELOG_CONTENT_START -->.*?<!-- CHANGELOG_CONTENT_END -->"
-    replacement = f"""<!-- CHANGELOG_CONTENT_START -->
+
+def generate_content(entries: list[VersionEntry]) -> str:
+    """生成完整的 CHANGELOG_CONTENT 替换块（含侧边导航和内容区）。"""
+    # ── 侧边导航 ──
+    nav_items = "\n".join(_render_nav_item(e, i + 1) for i, e in enumerate(entries))
+
+    # ── 内容区 ──
+    sections_html = "\n".join(_render_section(e) for e in entries)
+
+    content = f"""      <aside class="ds-docs-aside">
+        <nav class="ds-pagenav" aria-label="文档目录">
+          <details class="ds-pagenav-disclosure" open>
+            <summary class="ds-pagenav-summary"><span>版本</span><svg class="ds-pagenav-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 6 8 10 12 6"/></svg></summary>
+            <ol class="ds-pagenav-list">
+{nav_items}
+            </ol>
+          </details>
+        </nav>
+      </aside>
+      <div class="ds-docs-main">
         <div class="ds-prose">
-{new_sections}
+{sections_html}
         </div>
-        <!-- CHANGELOG_CONTENT_END -->"""
+      </div>"""
 
-    new_html = re.sub(pattern, replacement, html_content, flags=re.DOTALL)
-
-    # Write updated content
-    CHANGELOG_HTML.write_text(new_html, encoding="utf-8")
-    print(f"Updated {CHANGELOG_HTML}")
+    return content
 
 
-def check_changelog_html() -> bool:
-    """Check if changelog.html is up-to-date. Returns True if up-to-date."""
-    versions_data = read_changelog_files()
+# ── 主逻辑 ────────────────────────────────────────────────────────────────────
 
-    if not versions_data:
-        print("Error: No version files found", file=sys.stderr)
-        sys.exit(1)
 
-    # Generate expected content
-    new_nav = generate_nav(versions_data)
-    new_sections = generate_sections(versions_data)
+def load_entries() -> list[VersionEntry]:
+    """从 docs/changelog_human/ 加载所有版本条目，按最新版本排在前面。"""
+    if not HUMAN_DIR.exists():
+        raise FileNotFoundError(f"目录不存在：{HUMAN_DIR}")
 
+    md_files = list(HUMAN_DIR.glob("*.md"))
+    if not md_files:
+        raise ValueError(f"docs/changelog_human/ 中没有 .md 文件")
+
+    entries = [parse_md_file(p) for p in md_files]
+    # 最新版本排最前面（倒序）
+    entries.sort(key=lambda e: e.sort_key, reverse=True)
+    return entries
+
+
+def update_changelog_html(new_content: str, dry_run: bool = False, check: bool = False) -> int:
+    """替换 changelog.html 中两个注释标记之间的内容。"""
     if not CHANGELOG_HTML.exists():
-        print("Error: changelog.html not found", file=sys.stderr)
-        sys.exit(1)
+        print(f"[ERROR] 未找到 {CHANGELOG_HTML}", file=sys.stderr)
+        return 1
 
-    html_content = CHANGELOG_HTML.read_text(encoding="utf-8")
+    original = CHANGELOG_HTML.read_text(encoding="utf-8")
 
-    # Extract current navigation
-    nav_match = re.search(
-        r'<ol class="ds-pagenav-list">(.*?)</ol>', html_content, re.DOTALL
-    )
-    current_nav = nav_match.group(1).strip() if nav_match else ""
+    if CONTENT_START not in original or CONTENT_END not in original:
+        print(
+            f"[ERROR] changelog.html 中未找到标记：\n"
+            f"  {CONTENT_START}\n  {CONTENT_END}",
+            file=sys.stderr,
+        )
+        return 1
 
-    # Extract current prose content
-    prose_match = re.search(
-        r'<div class="ds-prose">(.*?)</div>', html_content, re.DOTALL
-    )
-    current_prose = prose_match.group(1).strip() if prose_match else ""
+    # 构造替换后文本
+    before = original[: original.index(CONTENT_START) + len(CONTENT_START)]
+    after = original[original.index(CONTENT_END) :]
+    updated = before + "\n" + new_content + "\n      " + after
 
-    # Compare
-    expected_nav = new_nav.strip()
-    expected_prose = new_sections.strip()
-
-    if current_nav != expected_nav or current_prose != expected_prose:
-        return False
-    return True
-
-
-def show_diff():
-    """Show what would change if update was run."""
-    versions_data = read_changelog_files()
-
-    if not versions_data:
-        print("Error: No version files found", file=sys.stderr)
-        sys.exit(1)
-
-    new_nav = generate_nav(versions_data)
-    new_sections = generate_sections(versions_data)
-
-    print("=== Navigation would change to: ===")
-    print(new_nav)
-    print("\n=== Sections would change to: ===")
-    print(new_sections)
-
-
-def main():
-    if len(sys.argv) > 1:
-        arg = sys.argv[1]
-        if arg == "--check":
-            if check_changelog_html():
-                print("changelog.html is up-to-date")
-                sys.exit(0)
-            else:
-                print("changelog.html needs regeneration")
-                sys.exit(2)
-        elif arg == "--diff":
-            show_diff()
-            sys.exit(0)
+    if check:
+        if updated == original:
+            print("✓ changelog.html 已是最新，无需更新。")
+            return 0
         else:
-            print(f"Unknown argument: {arg}", file=sys.stderr)
-            print(
-                "Usage: python3 tools/generate_changelog_html.py [--check|--diff]",
-                file=sys.stderr,
-            )
-            sys.exit(1)
+            print("✗ changelog.html 内容需要更新，请运行：")
+            print("  python3 tools/generate_changelog_html.py")
+            return 2
 
-    update_changelog_html()
-    sys.exit(0)
+    if dry_run:
+        print("=== 将要写入 changelog.html（CHANGELOG_CONTENT_START 至 END）===")
+        print(new_content[:3000])
+        if len(new_content) > 3000:
+            print(f"... [已截断，共 {len(new_content)} 字符]")
+        return 0
+
+    if updated == original:
+        print("✓ changelog.html 已是最新，无需更新。")
+        return 0
+
+    CHANGELOG_HTML.write_text(updated, encoding="utf-8")
+    print(f"✓ changelog.html 已更新（{len(entries_cache)} 个版本条目）。")
+    return 0
+
+
+entries_cache: list[VersionEntry] = []
+
+
+def main() -> int:
+    global entries_cache
+
+    parser = argparse.ArgumentParser(
+        description="从 docs/changelog_human/ 生成 changelog.html 内容",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=__doc__,
+    )
+    parser.add_argument("--check", action="store_true", help="仅检查，不修改（CI 用，不一致返回 exit 2）")
+    parser.add_argument("--dry-run", action="store_true", help="打印将要写入的内容，不修改文件")
+    parser.add_argument("--verify-coverage", action="store_true",
+                        help="对照 CHANGELOG.md 报告缺少人类友好条目的已发布版本（非阻塞）")
+    args = parser.parse_args()
+
+    try:
+        entries_cache = load_entries()
+    except (FileNotFoundError, ValueError) as e:
+        print(f"[ERROR] {e}", file=sys.stderr)
+        return 1
+
+    print(f"发现 {len(entries_cache)} 个版本条目：", ", ".join(e.display_version for e in entries_cache))
+
+    if args.verify_coverage:
+        return verify_coverage()
+
+    new_content = generate_content(entries_cache)
+    return update_changelog_html(new_content, dry_run=args.dry_run, check=args.check)
+
+
+def verify_coverage() -> int:
+    """
+    对照 CHANGELOG.md 中的版本标题，报告 docs/changelog_human/ 缺失的版本条目。
+    用于确保网站变更页"包含从上个版本到此次版本的所有改进信息"。
+
+    返回：
+      0  覆盖完整
+      0  有缺失（仅警告，不阻塞 CI —— 历史版本需人工补全）
+    """
+    changelog_md = ROOT / "CHANGELOG.md"
+    if not changelog_md.exists():
+        print("[WARN] 未找到 CHANGELOG.md，跳过覆盖检查。")
+        return 0
+
+    # 提取 CHANGELOG.md 中所有版本号
+    released = set()
+    for m in re.finditer(r"^##\s*\[?(\d+\.\d+\.\d+)", changelog_md.read_text(encoding="utf-8"), re.M):
+        released.add(m.group(1))
+
+    # 已有的人类条目版本号（去掉 -patch 后缀做基准比较）
+    human = {e.version_str.replace("-patch", "") for e in entries_cache}
+
+    missing = sorted(released - human, key=lambda v: tuple(int(x) for x in v.split(".")))
+
+    if not missing:
+        print(f"✓ 覆盖完整：CHANGELOG.md 中全部 {len(released)} 个已发布版本都有人类友好条目。")
+        return 0
+
+    print(f"⚠ 以下 {len(missing)} 个已发布版本缺少 docs/changelog_human/ 人类友好条目：")
+    for v in missing:
+        print(f"    - v{v}（建议新增 docs/changelog_human/v{v}.md）")
+    print("  注：这些是历史版本，需维护者人工补全友好摘要（避免从 commit 直接机器翻译造成失真）。")
+    print("  机器可读的完整变更始终见 CHANGELOG.md。")
+    return 0  # 非阻塞
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

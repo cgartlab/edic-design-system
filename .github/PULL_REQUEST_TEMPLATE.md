@@ -23,6 +23,22 @@
 - [ ] ✅ 测试（`test:`）
 - [ ] 🔧 构建 / 工具（`chore:`）
 
+## 版本影响
+
+> PR 标题前缀决定下次 release-please 自动计算的版本号。
+
+| 前缀 | 版本影响 | 用途 |
+|------|---------|------|
+| `feat:` | MINOR 升级 | 新组件 / 新令牌 / 新功能 |
+| `fix:` | PATCH 升级 | Bug 修复 / 暗色微调 / 文档修正 |
+| `feat!:` / `fix!:` | MAJOR 升级 | 破坏性变更（慎用） |
+| `chore:` / `docs:` / `style:` | **不触发版本升级** | 工具维护 / 纯文档 / 格式 |
+| `refactor:` / `perf:` | 不触发版本升级（除非加 `!`） | 重构 / 性能 |
+
+> ⚠️ **使用 `chore:`** 标注不希望触发版本号变更的 PR（CI 维护、依赖更新、文档修正等）。
+
+当前 PR 适用前缀：______
+
 ## 破坏性变更
 
 - [ ] 无
@@ -32,8 +48,6 @@
 
 ## 改动清单
 
-**⚠ 注意：请务必取消勾选未修改的文件，误勾会严重误导 Reviewer。**
-
 请勾选涉及的文件：
 
 - [ ] `styles.css`
@@ -41,49 +55,23 @@
 - [ ] `tokens.json`
 - [ ] `index.html` / `docs.html` / `prompts.html` / `downloads.html` / `terms.html`
 - [ ] `blog.html` / `company.html` / `resume.html` / `report.html`
+- [ ] `changelog.html`（⚠️ 不要手动编辑：由 `make changelog` 自动生成）
+- [ ] `docs/changelog_human/vX.Y.Z.md`（新增版本说明，Release PR 必填）
 - [ ] `README.md` / `AGENTS.md` / `DEVELOPMENT-GUIDE.md`
-- [ ] `CHANGELOG.md`
-- [ ] `docs/changelog_human/`（新增版本的更新摘要 Markdown）
+- [ ] `CHANGELOG.md`（由 release-please 自动管理，勿手动编辑）
 - [ ] `docs/*`（流程文档）
 - [ ] `prompts/*` / `skills/*`
 - [ ] `tools/*` / `tests/*`
 - [ ] `.github/*`
 - [ ] `assets/*`
-- [ ] 全部 HTML 中的 `?v=` 版本号已 bump
-
-## 版本影响 (Version Impact)
-
-**重要：Commit 前缀决定版本号增幅。只有 feat/fix 及其破坏性变体才会触发正式发布。**
-
-| 前缀 | 版本触发 | 适用场景 |
-|------|----------|----------|
-| `fix:` | ✅ PATCH (1.7.0→1.7.1) | Bug 修复、样式微调 |
-| `feat:` | ✅ MINOR (1.7.0→1.8.0) | 新功能、新组件、新令牌 |
-| `feat!:` / `fix!:` | ✅ MAJOR (→2.0.0) | 破坏性变更（需在正文声明 BREAKING CHANGE） |
-| `docs:` / `chore:` / `refactor:` / `style:` / `perf:` / `test:` | ❌ **不触发发布** | 仅记录在 CHANGELOG.md 中 |
-
-**如果需要通过文档修改触发版本发布，请使用 `fix(docs):` 或 `feat(docs):` 前缀。**
-
----
-
-## 版本更新摘要（仅发布 PR 填写）
-
-**此次发布是否需要更新网站更新日志？**
-
-- [ ] 需要（请继续填写）
-- [ ] 不需要（bug 修复、文档修正等不影响用户的功能性变更）
-
-**如果是需要更新，请创建/更新 `docs/changelog_human/vX.Y.Z.md`**：
-
-此文件将自动生成网站更新日志中的对应版本摘要。
-
----
+- [ ] 全部 HTML 中的 `?v=` 版本号已 bump（`make stamp-version`）
 
 ## 验证
 
 请确认已运行以下检查：
 
 - [ ] `make validate`（全部校验通过）
+- [ ] `make changelog-check`（如添加了 `docs/changelog_human/` 内容）
 - [ ] 浏览器实测（Chrome / Firefox / Safari）
 - [ ] 浅色 + 暗色模式验证
 - [ ] 移动端验证（375px / 768px）
@@ -91,8 +79,6 @@
 - [ ] 屏幕阅读器（如有可访问性影响）
 
 ## 截图 / 录屏
-
-**⚠ UI/文案类变更必须提供 Before/After 截图或高亮 Diff，否则 Reviewer 有权要求补充。**
 
 **改动前**（如适用）：
 
