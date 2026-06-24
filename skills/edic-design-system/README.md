@@ -1,5 +1,5 @@
-# EDIC Design System Skill Package v1.8.0
-# EDIC 设计系统 Skill 技能包 v1.8.0
+# EDIC Design System Skill Package v1.8.1
+# EDIC 设计系统 Skill 技能包 v1.8.1
 
 [![License: MIT-0](https://img.shields.io/badge/License-MIT%200-blue.svg)](https://spdx.org/licenses/MIT-0.html)
 [![Version](https://img.shields.io/badge/Version-1.7.0-green.svg)](https://edic.cgartlab.com/)
@@ -134,7 +134,7 @@ mkdir -p .kiro/steering
 
 ## 更新日志 Changelog
 
-### v1.8.0 (2026-06)
+### v1.8.1 (2026-06)
 - 重构 tokens.json 为 flat 结构，与 CSS `--ds-*` 变量名一一对应
 - 添加统一构建工具链 `scripts/lint.py` 和 `scripts/build.py`
 - 完善打印/PDF 输出样式，添加 `@page` 规则
