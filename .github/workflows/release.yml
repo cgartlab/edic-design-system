@@ -83,11 +83,6 @@ jobs:
       - name: Clean assets directory
         run: rm -rf assets/downloads/*
 
-      # ── Stamp first, then validate ─────────────────────────
-      # Tag push is the source of truth — stamp updates ?v= before validation
-      - name: Stamp version placeholders
-        run: python3 tools/stamp_version.py
-
       # ── 版本一致性校验 ─────────────────────────────
       - name: Validate version consistency
         if: inputs.skip_validation != 'true'
@@ -100,6 +95,10 @@ jobs:
         run: |
           python3 tools/validate_tokens.py || rc=$?; \
           if [ ${rc:-0} -eq 1 ]; then exit 1; elif [ ${rc:-0} -eq 2 ]; then exit 0; fi
+
+      # ── Stamp ────────────────────────────────────
+      - name: Stamp version placeholders
+        run: python3 tools/stamp_version.py
 
       # ── 生成图标精灵 ─────────────────────────────
       - name: Verify icons sprite
