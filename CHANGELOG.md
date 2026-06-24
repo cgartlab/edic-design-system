@@ -3,6 +3,13 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [1.8.2](https://github.com/cgartlab/edic-design-system/compare/v1.8.1...v1.8.2) (2026-06-24)
+
+
+### 修复
+
+* **release:** stamp before version validation in release pipeline ([104d7ce](https://github.com/cgartlab/edic-design-system/commit/104d7cef5abb229dd5d70bc1b41c7597cff195c5))
+
 ## [1.8.1](https://github.com/cgartlab/edic-design-system/compare/v1.8.0...v1.8.1) (2026-06-24)
 
 
