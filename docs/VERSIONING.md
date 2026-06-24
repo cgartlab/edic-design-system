@@ -159,40 +159,59 @@ release-please / semantic-release 风格的自动化可在未来引入（见 [�
 
 项目已集成 [release-please](https://github.com/googleapis/release-please) 自动化发布流程。
 
+### 发布策略：手工 tag 触发正式发布
+
+`release-please` **只负责** Release PR 和 CHANGELOG，**不会**自动打 tag，**不会**自动触发 release 流水线。
+只有人类明确执行 `git tag vX.Y.Z && git push origin vX.Y.Z` 之后，`release.yml` 才会触发。
+
+这样设计的原因：
+- 避免"一合并就发布"的自动链路绕过人类审查
+- 人类可以在 Release PR 合并后、发布前做最终验收
+- 版本发布时机完全由人类决定（比如避开周五下午）
+
 ### 触发方式
 
 | 方式 | 说明 |
 |------|------|
-| **自动** | push to `main` → release-please 自动创建/更新 Release PR |
-| **手动（强制版本）** | `workflow_dispatch` + `release-as` 输入 → 强制指定版本号 |
-| **手动（预发布）** | `workflow_dispatch` + `prerelease=true` → 标记为预发布 |
-| **紧急发布** | `git tag vX.Y.Z && git push origin vX.Y.Z` → 触发现有 release.yml |
+| **自动（创建 Release PR）** | push to `main` → release-please 分析 commits → 创建/更新 Release PR |
+| **合并 Release PR** | 合并后 post-merge-stamp 自动同步 ?v= 和 changelog.html |
+| **手动发布（打 tag）** | `git tag vX.Y.Z && git push origin vX.Y.Z` → 触发 release.yml |
+| **强制版本** | `workflow_dispatch` + `release-as` 输入 → 强制指定版本号 |
+| **预发布** | `workflow_dispatch` + `prerelease=true` → 标记为预发布 |
 
-### 发布流程
+### 完整发布流程
 
 ```
 提交（Conventional Commits）
   → release-please 分析
   → 创建/更新 Release PR（CHANGELOG + 版本 bump）
-  → 合并 PR
-  → 自动打 tag (vX.Y.Z)
+  → 人类在 Release PR 中添加 docs/changelog_human/vX.Y.Z.md
+  → 合并 Release PR
+  → post-merge-stamp 自动：
+      ① stamp_version.py（同步 ?v= 缓存戳）
+      ② generate_changelog_html.py（重建网站变更页）
+  ↓
+  人类决定发布时机：
+  git tag vX.Y.Z && git push origin vX.Y.Z
   → release.yml 触发
   → 构建 PDF/ZIP 资产 + GitHub Release
 ```
 
-### Release PR 内容
+### Release PR 包含的内容
 
 Release PR 包含：
 - `CHANGELOG.md` 更新（基于 Conventional Commits 自动分类，中文章节）
 - `VERSION`、`tokens.json`、`package.json` 版本同步
 
+> 人类需要在合并前额外添加：`docs/changelog_human/vX.Y.Z.md`（人类友好的版本说明，CI 会检查）
+
 ### 版本同步
 
-release-please 创建 tag 后，`stamp_version.py` 会自动同步 HTML/MD 文件中的 `?v=` 缓存 busting 参数。
+Release PR 合并后，`post-merge-stamp` 会自动：
+1. 运行 `stamp_version.py` 同步所有 HTML/MD 中的 `?v=` 缓存 busting 参数
+2. 运行 `generate_changelog_html.py` 从 `docs/changelog_human/` 重建网站变更页
 
-### 向后兼容性
-
-手动 `git tag vX.Y.Z && git push origin vX.Y.Z` 仍然有效，会触发现有的 `release.yml` 完成资产构建和 GitHub Release 创建。
+完整流程见 [docs/RELEASE-CHECKLIST.md](./RELEASE-CHECKLIST.md)。
 
 ## 未来工作
 

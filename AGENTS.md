@@ -197,33 +197,67 @@ release/{version}      # release prep
 
 ## Release Process
 
-### 正常发布（自动化）
+### 发布策略：手工 tag 触发正式发布
 
-1. 推送到 `main` 分支，`release-please` 自动分析 Conventional Commits
-2. 自动创建/更新 Release PR（包含版本号和 CHANGELOG 变更）
-3. CI 运行 `make validate`（10 个验证器）
-4. 合并 Release PR → 自动打 tag → `release.yml` 构建资产并创建 GitHub Release
+`release-please` **只负责** Release PR 和 CHANGELOG 更新，**不会**自动打 tag、**不会**自动触发 release 流水线。
+只有人类明确执行 `git tag vX.Y.Z && git push origin vX.Y.Z` 之后，release.yml 才会触发，构建资产并创建 GitHub Release。
 
-> **前置条件**：Phase 4 完成（`RELEASE_PLEASE_TOKEN` secret + Branch Protection 配置）
+### 正常发布流程
 
-### 手动发布（紧急修复）
+```
+普通 PR merge → main
+    ↓
+release-please 分析 Conventional Commits → 创建/更新 Release PR
+    ↓
+人类在 Release PR 中添加 docs/changelog_human/vX.Y.Z.md
+    ↓
+合并 Release PR → post-merge-stamp 自动：
+  ① stamp_version.py（同步 ?v= 缓存戳）
+  ② generate_changelog_html.py（重建网站变更页）
+    ↓
+人类决定发布时机：
+  git tag vX.Y.Z && git push origin vX.Y.Z
+    ↓
+release.yml 触发 → 构建 PDF/ZIP + 创建 GitHub Release
+```
+
+### 网站变更页（changelog.html）
+
+从 `docs/changelog_human/` 目录自动生成，格式规范：
+
+```markdown
+# docs/changelog_human/vX.Y.Z.md
+
+(2026-06-24)
+
+## 新增
+
+- 条目描述（人类友好，无 git 哈希）
+
+## 修复
+
+- 条目描述
+```
+
+本地重建：`make changelog`，CI 检查：`make changelog-check`
+
+### 手动打 tag（发布命令）
 
 ```bash
-# 1. 同步版本
-make sync-versions
+# 1. 确保本地 main 是最新
+git checkout main && git pull
 
 # 2. 验证
 make validate
 
-# 3. 提交 + 打 tag
-git add -A && git commit -m "chore(release): bump v1.8.1"
-git tag -a v1.8.1 -m "Release v1.8.1"
-git push && git push origin v1.8.1
+# 3. 打 tag（格式必须是 vX.Y.Z）
+git tag vX.Y.Z
+git push origin vX.Y.Z
 
-# 4. release.yml 自动构建资产并创建 GitHub Release
+# → release.yml 自动构建资产并创建 GitHub Release
 ```
 
-> 注意：手动发布后需同步 `.release-please-manifest.json` 中的版本号，避免 release-please 下次重复发布。
+完整发布清单见 [docs/RELEASE-CHECKLIST.md](./docs/RELEASE-CHECKLIST.md)。
 
 ---
 

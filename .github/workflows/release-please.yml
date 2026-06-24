@@ -1,13 +1,24 @@
 # EDIC Design System — Release Please Workflow
 #
-# 基于 Conventional Commits 自动创建 Release PR。
-# 合并后自动打 tag → 触发 release.yml 构建资产并创建 GitHub Release。
+# ── 策略：手工 tag 触发正式发布 ──────────────────────────────────────────────
+#
+# release-please 只负责两件事：
+#   1. 分析 Conventional Commits，自动创建/更新 Release PR
+#      （含版本号 bump、CHANGELOG.md 更新）
+#   2. Release PR 合并后 post-merge-stamp 同步所有 HTML/MD 的 ?v= 缓存戳
+#      并自动更新网站 changelog.html 的可见内容
+#
+# release-please 【不会】自动打 tag，【不会】自动触发 release 流水线。
+# 只有人类明确执行 `git tag vX.Y.Z && git push origin vX.Y.Z` 之后，
+# release.yml 才会触发，构建资产并创建 GitHub Release。
+#
+# 完整发布流程见 docs/RELEASE-CHECKLIST.md。
 #
 # 触发方式：
 #   push to main       → 自动分析 commits，创建/更新 Release PR
 #   workflow_dispatch   → 手动触发，可强制版本号或标记预发布
 #
-# 前置条件（Phase 4 完成）：
+# 前置条件：
 #   - secrets.RELEASE_PLEASE_TOKEN 已配置（Fine-grained PAT）
 #   - main 分支已配置 Branch Protection（Validate 检查 + github-actions[bot] 绕过审批）
 name: Release Please
@@ -57,6 +68,12 @@ jobs:
           manifest-file: .release-please-manifest.json
           release-as: ${{ inputs.release-as }}
           prerelease: ${{ inputs.prerelease }}
+          # ── 核心策略：不创建 GitHub Release，不打 tag ──────────────────
+          # release-please 只负责 Release PR + CHANGELOG 更新。
+          # 实际 tag 和 Release 由人类在验收 Release PR 后手动执行：
+          #   git tag vX.Y.Z && git push origin vX.Y.Z
+          # 这样避免了未经人类审查就触发资产构建和发布的风险。
+          skip-github-release: "true"
 
       - name: Show release result
         if: steps.rp.outputs.release_created == 'true'
@@ -71,9 +88,14 @@ jobs:
           echo "Release PR may have been updated even without a new release."
 
   # ── post-merge-stamp ─────────────────────────────────────────
-  # 在 Release PR 合并后、tag push 之前，确保 main 分支上的 HTML/MD
-  # 文件已被 stamp（VERSION 已由 release-please 在 PR 中更新）。
-  # 这样 release.yml 的 tag push 触发时，main 上的 ?v= 已经是最新的。
+  # Release PR 合并后自动完成两件事：
+  #   1. 同步 VERSION → 所有 HTML/MD 的 ?v= 缓存戳（stamp_version.py）
+  #   2. 从 docs/changelog_human/*.md 重建网站变更页（generate_changelog_html.py）
+  #
+  # 此 job 完成后，main 分支上的网站已完全同步到新版本，
+  # 人类可以在任意时间执行：
+  #   git tag vX.Y.Z && git push origin vX.Y.Z
+  # 来触发 release.yml 构建资产并创建 GitHub Release。
   post-merge-stamp:
     name: Stamp HTML/MD after Release PR merge
     needs: release-please
@@ -110,6 +132,11 @@ jobs:
 
       - name: Run stamp_version.py
         run: python3 tools/stamp_version.py
+
+      - name: Rebuild changelog.html from docs/changelog_human/
+        run: |
+          python3 tools/generate_changelog_html.py
+          echo "changelog.html rebuilt from docs/changelog_human/*.md"
 
       - name: Commit stamp drift (if any)
         run: |

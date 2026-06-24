@@ -96,6 +96,12 @@ validate-size:  ## 校验 CSS/JS gzip 体积是否超过阈值
 stamp-version:  ## 将 VERSION 同步到所有 HTML / MD 资源
 	$(PYTHON) tools/stamp_version.py
 
+changelog:  ## 从 docs/changelog_human/*.md 重建 changelog.html
+	$(PYTHON) tools/generate_changelog_html.py
+
+changelog-check:  ## 检查 changelog.html 是否与 docs/changelog_human/ 同步（CI 用）
+	$(PYTHON) tools/generate_changelog_html.py --check
+
 sync-versions:  ## 将 VERSION 同步到 tokens.json、package.json 及 HTML/MD
 	$(PYTHON) tools/sync_versions.py
 
