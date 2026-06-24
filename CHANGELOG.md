@@ -3,6 +3,23 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [1.9.0](https://github.com/cgartlab/edic-design-system/compare/v1.8.1...v1.9.0) (2026-06-24)
+
+
+### 新增
+
+* **release:** 手工 tag 触发发布策略 + 自动 changelog 页生成 ([#202](https://github.com/cgartlab/edic-design-system/issues/202)) ([864717c](https://github.com/cgartlab/edic-design-system/commit/864717ca76c505e114b32e9e2f6b08e89c2cf21d))
+
+
+### 修复
+
+* **release:** add post-upload URL guard to prevent orphaned 'untagged-' asset URLs ([#200](https://github.com/cgartlab/edic-design-system/issues/200)) ([f59c8f5](https://github.com/cgartlab/edic-design-system/commit/f59c8f5a09e077b8f8d38497a0ff02c1e9d249eb))
+
+
+### 重构
+
+* **changelog:** single-source from CHANGELOG.md + fix Argus review issues ([#204](https://github.com/cgartlab/edic-design-system/issues/204)) ([0db61d6](https://github.com/cgartlab/edic-design-system/commit/0db61d623ed92467d1333a1e8f0a92d822cf4623))
+
 ## [1.8.1](https://github.com/cgartlab/edic-design-system/compare/v1.8.0...v1.8.1) (2026-06-24)
 
 
