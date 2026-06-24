@@ -278,6 +278,8 @@ def main() -> int:
     )
     parser.add_argument("--check", action="store_true", help="仅检查，不修改（CI 用，不一致返回 exit 2）")
     parser.add_argument("--dry-run", action="store_true", help="打印将要写入的内容，不修改文件")
+    parser.add_argument("--verify-coverage", action="store_true",
+                        help="对照 CHANGELOG.md 报告缺少人类友好条目的已发布版本（非阻塞）")
     args = parser.parse_args()
 
     try:
@@ -288,8 +290,47 @@ def main() -> int:
 
     print(f"发现 {len(entries_cache)} 个版本条目：", ", ".join(e.display_version for e in entries_cache))
 
+    if args.verify_coverage:
+        return verify_coverage()
+
     new_content = generate_content(entries_cache)
     return update_changelog_html(new_content, dry_run=args.dry_run, check=args.check)
+
+
+def verify_coverage() -> int:
+    """
+    对照 CHANGELOG.md 中的版本标题，报告 docs/changelog_human/ 缺失的版本条目。
+    用于确保网站变更页"包含从上个版本到此次版本的所有改进信息"。
+
+    返回：
+      0  覆盖完整
+      0  有缺失（仅警告，不阻塞 CI —— 历史版本需人工补全）
+    """
+    changelog_md = ROOT / "CHANGELOG.md"
+    if not changelog_md.exists():
+        print("[WARN] 未找到 CHANGELOG.md，跳过覆盖检查。")
+        return 0
+
+    # 提取 CHANGELOG.md 中所有版本号
+    released = set()
+    for m in re.finditer(r"^##\s*\[?(\d+\.\d+\.\d+)", changelog_md.read_text(encoding="utf-8"), re.M):
+        released.add(m.group(1))
+
+    # 已有的人类条目版本号（去掉 -patch 后缀做基准比较）
+    human = {e.version_str.replace("-patch", "") for e in entries_cache}
+
+    missing = sorted(released - human, key=lambda v: tuple(int(x) for x in v.split(".")))
+
+    if not missing:
+        print(f"✓ 覆盖完整：CHANGELOG.md 中全部 {len(released)} 个已发布版本都有人类友好条目。")
+        return 0
+
+    print(f"⚠ 以下 {len(missing)} 个已发布版本缺少 docs/changelog_human/ 人类友好条目：")
+    for v in missing:
+        print(f"    - v{v}（建议新增 docs/changelog_human/v{v}.md）")
+    print("  注：这些是历史版本，需维护者人工补全友好摘要（避免从 commit 直接机器翻译造成失真）。")
+    print("  机器可读的完整变更始终见 CHANGELOG.md。")
+    return 0  # 非阻塞
 
 
 if __name__ == "__main__":

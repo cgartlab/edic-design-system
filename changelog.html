@@ -90,6 +90,12 @@
             <li>**发布策略重构**：release-please 改为仅创建 Release PR 和 CHANGELOG，不再自动打 tag、不再自动触发发布流水线。只有人类明确执行 `git tag vX.Y.Z &amp;&amp; git push origin vX.Y.Z` 才触发正式发布构建，避免"一合并就发布"绕过人类审查的风险。</li>
             <li>**changelog.html 自动生成**：新增 `tools/generate_changelog_html.py`，从 `docs/changelog_human/*.md` 自动生成人类友好的网站变更页内容。Release PR 合并后由 `post-merge-stamp` 自动调用，无需手动维护 HTML。支持 `make changelog`（重建）和 `make changelog-check`（CI 检查）两个 Makefile 目标。</li>
             <li>**PR 模板版本影响说明**：`.github/PULL_REQUEST_TEMPLATE.md` 新增版本影响表，明确 `feat:`/`fix:`/`chore:` 各前缀对版本号的影响，避免因前缀选择不当触发意外版本升级。</li>
+            <li>**PR 标题规范校验**：新增 `.github/workflows/pr-title-check.yml`，强制 PR 标题遵循 Conventional Commits 规范（squash-merge 用 PR 标题作为 commit message，release-please 据此分类生成 CHANGELOG）。</li>
+            <li>**变更日志覆盖检查**：`generate_changelog_html.py --verify-coverage` 对照 CHANGELOG.md 报告缺少人类友好条目的已发布版本，确保网站变更页不会静默遗漏版本。</li>
+          </ul>
+          <h3>修复</h3>
+          <ul>
+            <li>`Makefile`：修复 `sync-versions:check` 目标名含冒号导致 `make` 全局解析失败（"multiple target patterns"）的问题，重命名为 `sync-versions-check`。</li>
           </ul>
           <h3>变更</h3>
           <ul>
