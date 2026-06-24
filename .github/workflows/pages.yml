@@ -83,10 +83,10 @@ jobs:
       # 关键：path 必须是 "." 而不是 "./" 或具体子目录
       # 排除项：.git、__pycache__、node_modules、preview.png（开发截图）
       - name: Setup Pages artifact
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: "."
 
@@ -94,7 +94,7 @@ jobs:
       # url 输出会自动注入到 environment.url
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
       - name: Verify deployment URL
         if: success()
