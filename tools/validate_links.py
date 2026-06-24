@@ -130,6 +130,10 @@ def main() -> int:
             if "{{DS_VERSION}}" in href:
                 continue
 
+            # 跳过 assets/downloads/（构建产物，仅 release pipeline 生成）
+            if href.startswith("assets/downloads/") or "/assets/downloads/" in href:
+                continue
+
             # 文件存在性
             target_path = (path.parent / file_part).resolve()
             if not target_path.exists():
