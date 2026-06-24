@@ -350,7 +350,7 @@ If limits are exceeded, CI blocks the release.
 
 All releases are archived on GitHub Releases with:
 
-- Version tag (e.g., `v1.8.1`)
+- Version tag (e.g., `v1.9.0`)
 - Release notes (from `CHANGELOG.md`)
 - Checksums (SHA-256)
 - Pre-built assets (`.gz` files)

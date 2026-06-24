@@ -72,8 +72,8 @@ MAJOR.MINOR.PATCH[-PRERELEASE][+BUILD]
 由于本项目无构建工具，浏览器/CDN 通过 `?v=` 查询字符串刷新资源缓存：
 
 ```html
-<link rel="stylesheet" href="styles.css?v=1.8.1">
-<script src="scripts.js?v=1.8.1"></script>
+<link rel="stylesheet" href="styles.css?v=1.9.0">
+<script src="scripts.js?v=1.9.0"></script>
 ```
 
 **规则**：
@@ -120,10 +120,10 @@ make stamp-version
 make validate-versions
 
 # 4. 提交
-git add -A && git commit -m "chore(release): bump to v1.8.1"
+git add -A && git commit -m "chore(release): bump to v1.9.0"
 
 # 5. 打 tag
-git tag v1.8.1 && git push origin v1.8.1
+git tag v1.9.0 && git push origin v1.9.0
 ```
 
 ## 分支与版本对应
@@ -152,7 +152,7 @@ release-please / semantic-release 风格的自动化可在未来引入（见 [�
 
 ## 当前版本
 
-- **最新稳定版**：`v1.8.1`（2026-06-08）
+- **最新稳定版**：`v1.9.0`（2026-06-08）
 - **VERSION 文件**：项目根目录 `VERSION` 单行文件存放当前版本号
 
 ## 自动化发布（Release Please）
