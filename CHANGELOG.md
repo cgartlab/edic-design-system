@@ -3,6 +3,20 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [1.8.1](https://github.com/cgartlab/edic-design-system/compare/v1.8.0...v1.8.1) (2026-06-24)
+
+
+### 修复
+
+* **ci:** read release version from manifest in validate_release_notes.py ([6deb3ad](https://github.com/cgartlab/edic-design-system/commit/6deb3ad701e8abcbb1f435f67ee4d7034e11cf0e))
+* **release:** sync VERSION from tag name before packaging ([38f817b](https://github.com/cgartlab/edic-design-system/commit/38f817be58023208440a28d09103de8dfaaf9806))
+* **skill:** version skill ZIP filename for consistent release naming ([2aac8ba](https://github.com/cgartlab/edic-design-system/commit/2aac8ba735341fbfcc8865212d1e318f1a610ca5))
+
+
+### 文档
+
+* **prompts:** clarify Step 2 wording in AI collaboration guide ([#195](https://github.com/cgartlab/edic-design-system/issues/195)) ([4bd787b](https://github.com/cgartlab/edic-design-system/commit/4bd787b0ee7a59789ae0914a1ead2f5b2e4a77a1))
+
 ## [1.8.0](https://github.com/cgartlab/edic-design-system/compare/v1.7.0...v1.8.0) (2026-06-23)
 
 
