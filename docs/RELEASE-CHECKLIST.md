@@ -58,10 +58,9 @@ release.yml 自动触发 → 构建资产 → 创建 GitHub Release
 
 ## 文档阶段（T-1 天）
 
-- [ ] 在 `docs/changelog_human/` 目录下创建 `vX.Y.Z.md`（人类友好的版本说明）
-  - 格式参考现有文件，第一行为日期 `(2026-XX-XX)`，其余为 `## 分类` + `- 条目`
+- [ ] 检查 `CHANGELOG.md` 是否包含完整的版本条目（由 release-please 自动填入，是变更日志唯一来源）
+  - 如需润色措辞，直接编辑 `CHANGELOG.md` 对应版本节即可（changelog.html 会从中重建）
 - [ ] 运行 `make changelog` 预览 changelog.html 将如何更新
-- [ ] 检查 `CHANGELOG.md` 是否包含完整的机器生成条目（由 release-please 自动填入）
 - [ ] 检查 `README.md` 截图与示例是否需要更新
 - [ ] 检查 `AGENTS.md` 组件清单是否需要更新
 - [ ] 检查 `docs.html` 预览是否完整
@@ -78,7 +77,7 @@ release.yml 自动触发 → 构建资产 → 创建 GitHub Release
 - [ ] 验证 main 上的 VERSION 已更新为新版本号
 - [ ] 验证 changelog.html 已包含新版本的内容（本地 `make changelog-check`）
 - [ ] 运行 `make validate` 全部通过
-- [ ] 确认 `docs/changelog_human/vX.Y.Z.md` 已存在
+- [ ] 确认 `CHANGELOG.md` 含该版本节（`validate_release_notes.py` 会校验）
 
 ---
 

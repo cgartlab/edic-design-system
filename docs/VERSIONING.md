@@ -184,12 +184,12 @@ release-please / semantic-release 风格的自动化可在未来引入（见 [�
 ```
 提交（Conventional Commits）
   → release-please 分析
-  → 创建/更新 Release PR（CHANGELOG + 版本 bump）
-  → 人类在 Release PR 中添加 docs/changelog_human/vX.Y.Z.md
+  → 创建/更新 Release PR（CHANGELOG.md + 版本 bump）
+  → 人类审查 Release PR（如需润色措辞，直接编辑 CHANGELOG.md 对应节）
   → 合并 Release PR
   → post-merge-stamp 自动：
       ① stamp_version.py（同步 ?v= 缓存戳）
-      ② generate_changelog_html.py（重建网站变更页）
+      ② generate_changelog_html.py（从 CHANGELOG.md 重建网站变更页）
   ↓
   人类决定发布时机：
   git tag vX.Y.Z && git push origin vX.Y.Z
@@ -200,16 +200,16 @@ release-please / semantic-release 风格的自动化可在未来引入（见 [�
 ### Release PR 包含的内容
 
 Release PR 包含：
-- `CHANGELOG.md` 更新（基于 Conventional Commits 自动分类，中文章节）
+- `CHANGELOG.md` 更新（基于 Conventional Commits 自动分类，中文章节）—— **变更日志唯一来源**
 - `VERSION`、`tokens.json`、`package.json` 版本同步
 
-> 人类需要在合并前额外添加：`docs/changelog_human/vX.Y.Z.md`（人类友好的版本说明，CI 会检查）
+> 网站变更页（changelog.html）与 GitHub Release notes **都从 `CHANGELOG.md` 生成**，无需单独维护人类摘要文件。`validate_release_notes.py` 会校验 `CHANGELOG.md` 含该版本节。
 
 ### 版本同步
 
 Release PR 合并后，`post-merge-stamp` 会自动：
 1. 运行 `stamp_version.py` 同步所有 HTML/MD 中的 `?v=` 缓存 busting 参数
-2. 运行 `generate_changelog_html.py` 从 `docs/changelog_human/` 重建网站变更页
+2. 运行 `generate_changelog_html.py` 从 `CHANGELOG.md` 单源重建网站变更页
 
 完整流程见 [docs/RELEASE-CHECKLIST.md](./RELEASE-CHECKLIST.md)。
 

@@ -55,10 +55,9 @@
 - [ ] `tokens.json`
 - [ ] `index.html` / `docs.html` / `prompts.html` / `downloads.html` / `terms.html`
 - [ ] `blog.html` / `company.html` / `resume.html` / `report.html`
-- [ ] `changelog.html`（⚠️ 不要手动编辑：由 `make changelog` 自动生成）
-- [ ] `docs/changelog_human/vX.Y.Z.md`（新增版本说明，Release PR 必填）
+- [ ] `changelog.html`（⚠️ 不要手动编辑：由 `make changelog` 从 `CHANGELOG.md` 自动生成）
 - [ ] `README.md` / `AGENTS.md` / `DEVELOPMENT-GUIDE.md`
-- [ ] `CHANGELOG.md`（由 release-please 自动管理，勿手动编辑）
+- [ ] `CHANGELOG.md`（由 release-please 自动管理，勿手动编辑 —— 它是变更日志唯一来源）
 - [ ] `docs/*`（流程文档）
 - [ ] `prompts/*` / `skills/*`
 - [ ] `tools/*` / `tests/*`
@@ -71,7 +70,7 @@
 请确认已运行以下检查：
 
 - [ ] `make validate`（全部校验通过）
-- [ ] `make changelog-check`（如添加了 `docs/changelog_human/` 内容）
+- [ ] `make changelog-check`（变更页与 `CHANGELOG.md` 同步）
 - [ ] 浏览器实测（Chrome / Firefox / Safari）
 - [ ] 浅色 + 暗色模式验证
 - [ ] 移动端验证（375px / 768px）

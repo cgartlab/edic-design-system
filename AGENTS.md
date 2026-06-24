@@ -207,13 +207,13 @@ release/{version}      # release prep
 ```
 普通 PR merge → main
     ↓
-release-please 分析 Conventional Commits → 创建/更新 Release PR
+release-please 分析 Conventional Commits → 创建/更新 Release PR（含 CHANGELOG.md）
     ↓
-人类在 Release PR 中添加 docs/changelog_human/vX.Y.Z.md
+人类审查 Release PR（如需润色，直接编辑 CHANGELOG.md 对应版本节）
     ↓
 合并 Release PR → post-merge-stamp 自动：
   ① stamp_version.py（同步 ?v= 缓存戳）
-  ② generate_changelog_html.py（重建网站变更页）
+  ② generate_changelog_html.py（从 CHANGELOG.md 重建网站变更页）
     ↓
 人类决定发布时机：
   git tag vX.Y.Z && git push origin vX.Y.Z
@@ -223,20 +223,18 @@ release.yml 触发 → 构建 PDF/ZIP + 创建 GitHub Release
 
 ### 网站变更页（changelog.html）
 
-从 `docs/changelog_human/` 目录自动生成，格式规范：
+**单一来源**：从 `CHANGELOG.md`（release-please 维护）自动生成，无需单独维护人类摘要文件。
+`tools/generate_changelog_html.py` 解析 CHANGELOG.md 每个版本节，转换为人类友好 HTML
+（去除 commit/PR 哈希引用、转换 `**粗体**` 与 `` `代码` ``），写入 changelog.html 的
+`<!-- CHANGELOG_CONTENT_START/END -->` 标记之间。覆盖所有历史版本，永不漂移。
 
-```markdown
-# docs/changelog_human/vX.Y.Z.md
-
-(2026-06-24)
-
-## 新增
-
-- 条目描述（人类友好，无 git 哈希）
-
-## 修复
-
-- 条目描述
+```text
+CHANGELOG.md（唯一来源）
+  ## [1.8.1](url) (2026-06-24)
+  ### 修复
+  * **scope:** subject ([hash](url))
+        ↓  make changelog
+changelog.html（自动生成，勿手动编辑）
 ```
 
 本地重建：`make changelog`，CI 检查：`make changelog-check`
@@ -299,10 +297,10 @@ All changes go through Pull Requests — no direct pushes to `main` for features
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ Release PR (release-please--)                                │
-│  1. Developer creates: docs/changelog_human/vX.Y.Z.md        │
+│  1. release-please writes CHANGELOG.md (single source)       │
 │  2. CI runs: make validate + validate_release_notes.py       │
-│  3. CI checks: vX.Y.Z.md exists (blocks if missing)         │
-│  4. Review → Merge                                           │
+│  3. CI checks: CHANGELOG.md has vX.Y.Z section (blocks if not)│
+│  4. Review (polish CHANGELOG.md wording if needed) → Merge   │
 └─────────────────────────────────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -321,7 +319,7 @@ Release PR（分支名以 `release-please--` 开头）存活期间，CI 校验�
 - `validate-versions` 和 `validate-verext`：由于 `release-please` 的 `generic` updater 无法处理无 `x-release-please-version` 标注的纯文本 `VERSION` 文件，Release PR 中 `tokens.json`/`package.json`（新版本）与 `VERSION`（旧版本）的不一致是**预期的过渡态**。最终一致性由合并后的 `post-merge-stamp` 保障。
 
 **强制项（不可跳过）：**
-- `validate_release_notes.py`：此脚本校验的是**人类撰写的更新摘要**（`docs/changelog_human/vX.Y.Z.md`），而非 `release-please` 自动生成的机器 `CHANGELOG.md`。即使在 Release PR 分支上，如果缺失人类摘要，CI 必须失败并**物理阻断该 Release PR 的合并**。
+- `validate_release_notes.py`：此脚本校验 **`CHANGELOG.md` 中是否存在当前版本节**（变更日志唯一来源，由 `release-please` 维护）。即使在 Release PR 分支上，如果缺失该版本节，CI 必须失败并**物理阻断该 Release PR 的合并**（否则网站变更页与 GitHub Release notes 都会是空的）。
 
 > ⚠️ `post-merge-stamp` 若静默失败（网络抖动 / Token 过期 / Git 冲突），main 分支的 `VERSION` 将停滞在旧版本，导致后续所有 Stamp 注入和资产打包全部使用错误版本号。该 Job 已配置失败告警机制。
 
@@ -353,7 +351,7 @@ If limits are exceeded, CI blocks the release.
 All releases are archived on GitHub Releases with:
 
 - Version tag (e.g., `v1.8.1`)
-- Release notes (from `CHANGELOG.md` + `docs/changelog_human/vX.Y.Z.md`)
+- Release notes (from `CHANGELOG.md`)
 - Checksums (SHA-256)
 - Pre-built assets (`.gz` files)
 

@@ -90,7 +90,7 @@ jobs:
   # ── post-merge-stamp ─────────────────────────────────────────
   # Release PR 合并后自动完成两件事：
   #   1. 同步 VERSION → 所有 HTML/MD 的 ?v= 缓存戳（stamp_version.py）
-  #   2. 从 docs/changelog_human/*.md 重建网站变更页（generate_changelog_html.py）
+  #   2. 从 CHANGELOG.md 单源重建网站变更页（generate_changelog_html.py）
   #
   # 此 job 完成后，main 分支上的网站已完全同步到新版本，
   # 人类可以在任意时间执行：
@@ -133,10 +133,10 @@ jobs:
       - name: Run stamp_version.py
         run: python3 tools/stamp_version.py
 
-      - name: Rebuild changelog.html from docs/changelog_human/
+      - name: Rebuild changelog.html from CHANGELOG.md
         run: |
           python3 tools/generate_changelog_html.py
-          echo "changelog.html rebuilt from docs/changelog_human/*.md"
+          echo "changelog.html rebuilt from CHANGELOG.md (single source)"
 
       - name: Commit stamp drift (if any)
         run: |
