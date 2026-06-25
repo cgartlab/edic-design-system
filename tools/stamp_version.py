@@ -97,35 +97,6 @@ def read_version() -> str:
     return first_line
 
 
-def stamp_file(text: str, version: str) -> tuple[str, int]:
-    """替换文件中所有 {{DS_VERSION}} 占位符。
-
-    适用于所有文件类型（HTML、CSS、JS、JSON、MD）。
-    也处理 YAML frontmatter version: 和 badge URL 版本号。
-    返回 (新文本, 替换次数)。
-    """
-    count = 0
-    new_text, n = PLACEHOLDER_RE.subn(version, text)
-    count += n
-
-    # Handle YAML frontmatter version: X.Y.Z
-    text, n_yaml = re.subn(
-        rf'^version:\s*["\']?{re.escape(version)}(?:\s+#.*)?$',
-        f"version: {version}",
-        text,
-        flags=re.MULTILINE,
-    )
-    count += n_yaml
-
-    # Handle version in badge URLs: /Version-X.Y.Z- or /Version-vX.Y.Z-
-    text, n_badge = re.subn(
-        rf"(badge/Version[-:])(v?)[\d.]+(-\w+\.svg)", rf"\1\2{version}\3", text
-    )
-    count += n_badge
-
-    return text, count
-
-
 def restore_placeholders(text: str, version: str) -> tuple[str, int]:
     """反向操作：把已 stamp 的值还原为 {{DS_VERSION}} 占位符。
 

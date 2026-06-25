@@ -74,7 +74,6 @@ HARDCODED_SCAN_EXCEPTIONS = [
     re.compile(r"^<!--.*-->\s*$"),
     re.compile(r"https?://[^\s]*v?\d+\.\d+\.\d+"),
     re.compile(r"\?v=\d"),
-    re.compile(r"badge/Version"),
     re.compile(r"^---$"),
 ]
 
