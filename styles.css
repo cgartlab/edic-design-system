@@ -1,4 +1,4 @@
-/* ===== EDIC Design System v1.9.0 — Tokens & Styles ===== */
+/* ===== EDIC Design System v1.9.1 — Tokens & Styles ===== */
 
 :root {
   --ds-color-bg: oklch(97% 0.012 80);
@@ -1485,7 +1485,7 @@ a.ds-feature-card:focus-visible{outline:2px solid var(--ds-accent);outline-offse
 
 
 /* =========================================================================
-   CGArtLab Design System v1.9.0 — Gravitas & Glow
+   CGArtLab Design System v1.9.1 — Gravitas & Glow
    Dark-mode editorial presence: warm olive undertone on shadow depths,
    luminous borders, soft auras, and inner-surface glow. Light mode
    stays restrained (0% opacity tokens, classes visually inert).
