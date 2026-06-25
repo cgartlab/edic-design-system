@@ -2,7 +2,7 @@
 name: edic-design-system
 slug: edic-design-system
 displayName: EDIC 设计系统
-version: 1.7.0
+version: 1.9.1
 description: >-
   Generate UI components, full pages, documents, emails, and assets that
   strictly follow the EDIC design system (Editorial × Olive Green, OKLch
