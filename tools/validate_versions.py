@@ -50,9 +50,55 @@ STAMP_TARGETS = [
     "CLAUDE.md",
     "CONTRIBUTING.md",
     "skills/edic-design-system/README.md",
+    "skills/edic-design-system/SKILL.md",
     "docs/VERSIONING.md",
     "DEVELOPMENT-GUIDE.md",
 ]
+
+HARDCODED_SCAN_TARGETS = [
+    "README.md",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "CONTRIBUTING.md",
+    "skills/edic-design-system/README.md",
+    "skills/edic-design-system/SKILL.md",
+    "docs/VERSIONING.md",
+    "DEVELOPMENT-GUIDE.md",
+    "package.json",
+    "tokens.json",
+]
+
+HARDCODED_SCAN_EXCEPTIONS = [
+    re.compile(r"\{\{DS_VERSION\}\}"),
+    re.compile(r"^##\s+\["),
+    re.compile(r"^<!--.*-->\s*$"),
+    re.compile(r"https?://[^\s]*v?\d+\.\d+\.\d+"),
+    re.compile(r"\?v=\d"),
+    re.compile(r"badge/Version"),
+    re.compile(r"^---$"),
+]
+
+
+def check_hardcoded_semver(expected: str) -> list[tuple[str, int, str]]:
+    """Find hardcoded X.Y.Z semver strings that should equal `expected`."""
+    expected_major_minor = ".".join(expected.split(".")[:2])
+    violations: list[tuple[str, int, str]] = []
+    for name in HARDCODED_SCAN_TARGETS:
+        p = Path(name)
+        if not p.exists():
+            continue
+        for lineno, line in enumerate(
+            p.read_text(encoding="utf-8", errors="replace").splitlines(), 1
+        ):
+            if any(pat.search(line) for pat in HARDCODED_SCAN_EXCEPTIONS):
+                continue
+            for m in re.finditer(r"\b(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)\b", line):
+                found = m.group(1)
+                if found != expected and found.startswith(expected_major_minor + "."):
+                    violations.append((name, lineno, line.strip()))
+                    break
+    return violations
+
 
 # Files/patterns where {{DS_VERSION}} is intentional and should NOT be flagged
 # Example: downloads.html uses {{DS_VERSION}} in ZIP filename as a template placeholder
@@ -130,6 +176,13 @@ def main() -> int:
             if version != expected:
                 print(f"  [ERROR] 与 VERSION {expected} 不一致（需 stamp）")
                 errors += 1
+
+    hardcoded_violations = check_hardcoded_semver(expected)
+    if hardcoded_violations:
+        print(f"\n[ERROR] 发现硬编码过期版本号：")
+        for name, lineno, content in hardcoded_violations:
+            print(f"  {name}:{lineno}: {content[:100]}")
+        errors += len(hardcoded_violations)
 
     no_version = []
     for path in html_files:

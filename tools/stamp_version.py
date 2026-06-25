@@ -269,6 +269,22 @@ def replace_old_version(
         text,
     )
     count += n
+
+    # Pattern 4: version: X.Y.Z (YAML frontmatter, no v prefix, no quotes)
+    text, n = _sub(
+        rf"(?m)^version:\s*['\"]?{re.escape(old_version)}['\"]?(?:\s+#.*)?$",
+        f"version: {new_version}",
+        text,
+    )
+    count += n
+
+    # Pattern 5: **Version:** X.Y.Z (visible markdown text, no v prefix)
+    text, n = _sub(
+        rf"\*\*Version:\*\*\s*{re.escape(old_version)}\b",
+        f"**Version:** {new_version}",
+        text,
+    )
+    count += n
     return text, count
 
 
