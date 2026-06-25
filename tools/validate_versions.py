@@ -53,6 +53,7 @@ STAMP_TARGETS = [
     "skills/edic-design-system/SKILL.md",
     "docs/VERSIONING.md",
     "DEVELOPMENT-GUIDE.md",
+    ".release-please-manifest.json",
 ]
 
 HARDCODED_SCAN_TARGETS = [
@@ -66,6 +67,7 @@ HARDCODED_SCAN_TARGETS = [
     "DEVELOPMENT-GUIDE.md",
     "package.json",
     "tokens.json",
+    ".release-please-manifest.json",
 ]
 
 HARDCODED_SCAN_EXCEPTIONS = [

@@ -70,7 +70,7 @@ CSS_TARGETS = ["styles.css"]
 
 JS_TARGETS = ["scripts.js"]
 
-JSON_TARGETS = ["package.json", "tokens.json"]
+JSON_TARGETS = ["package.json", "tokens.json", ".release-please-manifest.json"]
 
 MD_TARGETS = [
     "README.md",
