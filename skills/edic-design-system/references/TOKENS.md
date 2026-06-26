@@ -112,7 +112,7 @@ Always add `@media (prefers-reduced-motion: reduce)` override when using duratio
 | `--ds-text-body` | 1rem | 16px | **Default body** |
 | `--ds-text-body-lg` | 1.125rem | 18px | Lead paragraphs |
 | `--ds-text-lead` | 1.25rem | 20px | Hero subtitles |
-| `--ds-text-h5` | 1.5rem | 24px | Section headings |
+| `--ds-text-h5` | 1.25rem | 20px | Sub-headings, navbar brand |
 | `--ds-text-h4` | 1.5rem | 24px | Card headings |
 | `--ds-text-h3` | 1.875rem | 30px | Sub-section |
 | `--ds-text-h2` | 2.25rem | 36px | Page sections |
@@ -160,3 +160,19 @@ Always add `@media (prefers-reduced-motion: reduce)` override when using duratio
 | `--ds-z-overlay` | 300 | Backdrop overlays |
 | `--ds-z-modal` | 400 | Modal dialogs |
 | `--ds-z-toast` | 500 | Toast notifications |
+
+
+---
+
+## Blur (`--ds-blur-*`)
+
+Used with `backdrop-filter` on glass surfaces. Always pair with a colored background parent.
+
+| Token | Value | Use case |
+|-------|-------|----------|
+| `--ds-blur-sm` | 4px | Subtle frosted hint |
+| `--ds-blur-md` | 12px | Frosted nav, light glass |
+| `--ds-blur-lg` | **24px** | Glass cards, modal backdrops — **default** |
+| `--ds-blur-xl` | 48px | Heavy frosted overlay |
+
+> `backdrop-filter` requires the element to have a translucent background (e.g. `var(--ds-glass-bg)` at ~55% opacity). A fully opaque background makes blur invisible.
