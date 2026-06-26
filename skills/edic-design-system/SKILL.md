@@ -2,7 +2,7 @@
 name: edic-design-system
 slug: edic-design-system
 displayName: EDIC 设计系统
-version: 1.9.1
+version: 1.9.2
 description: >-
   Generate UI components, full pages, documents, emails, and assets that
   strictly follow the EDIC design system (Editorial × Olive Green, OKLch
@@ -204,6 +204,14 @@ h4 1.5 · h3 1.875 · h2 2.25 · h1 3 · display 3.75 · hero 4.5.
   <a class="ds-btn ds-btn--primary ds-mt-4" href="#">阅读全文</a>
 </article>
 ```
+
+## Reference files
+
+Load these on demand when you need precise values or complex component structure:
+
+- [Complete token values — spacing, radius, shadow, motion, type scale](references/TOKENS.md)
+- [Component HTML examples — glass card, docs layout, navbar, toast, accordion, modal, tabs, dropdown](references/EXAMPLES.md)
+- [Anti-patterns & correct replacements — color, spacing, inline style, BEM, a11y, motion](references/ANTI-PATTERNS.md)
 
 ## Reference
 - Website: https://edic.cgartlab.com/

@@ -1,8 +1,8 @@
-# EDIC Design System Skill Package v1.9.1
-# EDIC 设计系统 Skill 技能包 v1.9.1
+# EDIC Design System Skill Package v1.9.2
+# EDIC 设计系统 Skill 技能包 v1.9.2
 
 [![License: MIT-0](https://img.shields.io/badge/License-MIT%200-blue.svg)](https://spdx.org/licenses/MIT-0.html)
-[![Version](https://img.shields.io/badge/Version-1.9.1-green.svg)](https://edic.cgartlab.com/)
+[![Version](https://img.shields.io/badge/Version-1.9.2-green.svg)](https://edic.cgartlab.com/)
 
 ---
 
@@ -133,6 +133,13 @@ mkdir -p .kiro/steering
 ---
 
 ## 更新日志 Changelog
+
+### v1.9.2 (2026-06)
+- 新增 `references/` 目录，包含三个按需加载的参考文件
+- `references/EXAMPLES.md`：8 个高频复合组件（Glass Card、Docs 布局、Navbar、Toast、Accordion、Modal、Tabs、Dropdown）完整 HTML 结构示例
+- `references/TOKENS.md`：间距 / 圆角 / 阴影 / 动效 / 排版令牌完整实际值速查表（含 px 换算）
+- `references/ANTI-PATTERNS.md`：反模式 × 正确替代对照表，覆盖颜色、间距、Inline Style、BEM、无障碍、动效
+- `SKILL.md` 末尾新增 Reference Files 章节，通过标准 Markdown 链接按需触发加载
 
 ### v1.9.1 (2026-06)
 - 重构 tokens.json 为 flat 结构，与 CSS `--ds-*` 变量名一一对应
