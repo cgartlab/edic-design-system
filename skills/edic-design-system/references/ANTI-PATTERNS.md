@@ -223,7 +223,7 @@ font-family: var(--ds-font-mono);     /* code: JetBrains Mono, IBM Plex Mono */
 <div style="position:relative; display:inline-block;">
   <button>Open</button>
   <div class="ds-dropdown"
-       style="position:absolute; top:calc(100% + 4px); right:0;
+       style="position:absolute; top:calc(100% + var(--ds-space-1)); right:0;
               z-index:var(--ds-z-dropdown);">...</div>
 </div>
 ```
