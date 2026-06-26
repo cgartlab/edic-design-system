@@ -4,11 +4,17 @@ slug: edic-design-system
 displayName: EDIC 设计系统
 version: 1.9.1
 description: >-
+  为 EDIC 设计系统（编辑橄榄绿 × OKLch 色彩令牌 × 暗色模式 × CJK 优化）生成
+  UI 组件、完整页面、文档、邮件和视觉资产。适合：内容型网站、博客/文章排版、
+  企业官网、内部报告、邮件模板、个人主页、需要精致 CJK 排版的项目、AI 生成界面原型。
+  目前不适合：游戏 UI、重 Glassmorphism 风格、移动端原生应用、需要完全定制品牌色的项目
+  （以上场景未来不排除支持）。
+  触发词：EDIC 设计系统、editorial olive、橄榄绿组件、ds-btn、--ds-* 令牌。
   Generate UI components, full pages, documents, emails, and assets that
-  strictly follow the EDIC design system (Editorial × Olive Green, OKLch
-  tokens, dark-mode ready, CJK-optimized). Use this skill whenever the user asks
-  to build, style, or refactor anything for EDIC, or explicitly requests the
-  EDIC / "editorial olive" design system. Output token-driven, accessible,
+  strictly follow the EDIC design system (Editorial × Olive Green, OKLch tokens,
+  dark-mode ready, CJK-optimized). Use this skill whenever the user asks to
+  build, style, or refactor anything for EDIC, or explicitly requests the EDIC /
+  "editorial olive" design system. Output token-driven, accessible,
   framework-agnostic HTML/CSS.
 license: MIT-0
 ---
