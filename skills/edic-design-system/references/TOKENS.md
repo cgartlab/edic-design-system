@@ -2,7 +2,7 @@
 # 完整令牌实际值速查
 
 > Loaded on demand when spacing, radius, shadow, or motion token values are needed.
-> Ground truth is `styles.css`. This file reflects values as of v1.9.2.
+> Ground truth is `styles.css`. This file reflects values as of v1.9.1.
 
 ---
 
