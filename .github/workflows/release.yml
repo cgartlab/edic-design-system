@@ -32,7 +32,20 @@ jobs:
     timeout-minutes: 15
 
     steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Make scripts executable
+        run: chmod +x tools/validate_*.py scripts/*.py scripts/*.sh 2>/dev/null || true
+
       # ── workflow_dispatch 手动指定版本：同步 VERSION 文件 ──
+      # NOTE: must run AFTER checkout so the written files are not overwritten
       - name: Sync VERSION file (manual dispatch)
         if: inputs.version != ''
         run: |
@@ -42,7 +55,8 @@ jobs:
 
           # 同步 tokens.json 和 package.json
           python3 -c "
-          import json, sys
+          import json
+          VERSION = '${VERSION}'
           for fname in ['tokens.json', 'package.json']:
               with open(fname, 'r+', encoding='utf-8') as f:
                   d = json.load(f)
@@ -55,18 +69,6 @@ jobs:
 
           # 调用 stamp_version.py
           python3 tools/stamp_version.py
-
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Make scripts executable
-        run: chmod +x tools/validate_*.py scripts/*.py scripts/*.sh 2>/dev/null || true
 
       # ── Sync VERSION from tag name ─────────────────────────────────
       # release-please's generic updater doesn't update the plain-text VERSION
