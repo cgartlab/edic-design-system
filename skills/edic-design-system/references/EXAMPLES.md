@@ -189,6 +189,7 @@ JS from `scripts.js` toggles the `open` class on `ds-accordion-item`.
   <!-- Item 1: open by default -->
   <div class="ds-accordion-item open">
     <div class="ds-accordion-header"
+         role="button" tabindex="0"
          aria-expanded="true"
          aria-controls="acc-panel-1">
       <span>EDIC 是否需要构建工具？</span>
@@ -206,6 +207,7 @@ JS from `scripts.js` toggles the `open` class on `ds-accordion-item`.
   <!-- Item 2: collapsed -->
   <div class="ds-accordion-item">
     <div class="ds-accordion-header"
+         role="button" tabindex="0"
          aria-expanded="false"
          aria-controls="acc-panel-2">
       <span>支持 React / Vue 吗？</span>
@@ -227,19 +229,18 @@ JS from `scripts.js` toggles the `open` class on `ds-accordion-item`.
 ## 6. Modal (`ds-modal`)
 
 Modal requires an **overlay wrapper** to provide the dimmed backdrop.
-Use `ds-overlay-bg` (or a custom `position:fixed` overlay) as the parent.
-Focus trap and `Esc` handling must be added via JS.
+Use `ds-overlay-layer` as the parent — it is `position:fixed`, covers the viewport,
+and already provides `display:flex` + centering. Focus trap and `Esc` handling must be added via JS.
 
 ```html
-<!-- Overlay backdrop (position:fixed, covers viewport) -->
-<div class="ds-overlay-bg" id="modal-overlay" role="dialog"
-     aria-modal="true" aria-labelledby="modal-title"
-     style="display:flex; align-items:center; justify-content:center;">
+<!-- Overlay backdrop: ds-overlay-layer = position:fixed + flex centering -->
+<div class="ds-overlay-layer" id="modal-overlay" role="dialog"
+     aria-modal="true" aria-labelledby="modal-title">
 
   <div class="ds-modal">
     <div class="ds-modal-header">
       <h2 id="modal-title" style="font-family:var(--ds-font-display);
-          font-size:var(--ds-text-h4); margin:0;">确认删除</h2>
+          font-size:var(--ds-text-h4);">确认删除</h2>
       <button class="ds-modal-close" aria-label="关闭弹窗">×</button>
     </div>
 
@@ -325,7 +326,7 @@ It is not a `<select>` — it is a styled floating panel.
   </button>
 
   <div class="ds-dropdown" id="dd-menu" role="menu"
-       style="display:none; position:absolute; top:calc(100% + 4px); right:0; z-index:var(--ds-z-dropdown);">
+       style="display:none; position:absolute; top:calc(100% + var(--ds-space-1)); right:0; z-index:var(--ds-z-dropdown);">
     <div class="ds-dropdown-item" role="menuitem">
       <svg width="16" height="16" aria-hidden="true"><use href="#icon-edit"></use></svg>
       编辑
