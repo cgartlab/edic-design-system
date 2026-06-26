@@ -2,11 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main, dev/*, fix/*, write/*, release/**]
+    branches: [main, dev/*, fix/*, release/**]
   pull_request:
     branches: [main]
-  schedule:
-    - cron: "0 0 * * 1"
   workflow_dispatch:
 
 permissions:
@@ -41,6 +39,7 @@ jobs:
         if: ${{ !startsWith(github.head_ref, 'release-please--') }}
         run: python3 tools/validate_versions.py || rc=$?; if [ ${rc:-0} -eq 1 ]; then exit 1; elif [ ${rc:-0} -eq 2 ]; then exit 0; fi
       - id: links
+        if: always()
         run: python3 tools/validate_links.py || rc=$?; if [ ${rc:-0} -eq 1 ]; then exit 1; elif [ ${rc:-0} -eq 2 ]; then exit 0; fi
       - id: cssref
         continue-on-error: true
