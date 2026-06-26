@@ -2,9 +2,12 @@
 """scripts/package_skill.py — Package EDIC Design System Skill for distribution.
 
 Creates assets/downloads/edic-design-system-skill.zip containing:
-  - SKILL.md      (agent skill instructions)
-  - README.md     (installation guide)
-  - tokens.json   (design tokens reference)
+  - SKILL.md                       (agent skill instructions)
+  - README.md                      (installation guide)
+  - tokens.json                    (design tokens reference)
+  - references/EXAMPLES.md         (component HTML structure examples)
+  - references/TOKENS.md           (complete token values)
+  - references/ANTI-PATTERNS.md    (anti-patterns & correct replacements)
 
 Usage:
   python3 scripts/package_skill.py          # package
@@ -24,6 +27,7 @@ import argparse
 ROOT = Path(__file__).resolve().parent.parent
 VERSION_FILE = ROOT / "VERSION"
 SKILL_DIR = ROOT / "skills" / "edic-design-system"
+REFS_DIR = SKILL_DIR / "references"
 DIST_DIR = ROOT / "assets" / "downloads"
 PKG_NAME = f"edic-design-system-skill-v{VERSION_FILE.read_text().strip().splitlines()[0].strip()}"
 ZIP_PATH = DIST_DIR / f"{PKG_NAME}.zip"
@@ -31,6 +35,11 @@ SOURCES = [
     SKILL_DIR / "SKILL.md",
     SKILL_DIR / "README.md",
     ROOT / "tokens.json",
+]
+REFERENCE_SOURCES = [
+    REFS_DIR / "EXAMPLES.md",
+    REFS_DIR / "TOKENS.md",
+    REFS_DIR / "ANTI-PATTERNS.md",
 ]
 
 
@@ -45,7 +54,7 @@ def sha256(path: Path) -> str:
 def preflight() -> list[str]:
     """Check all source files exist. Returns list of missing files."""
     missing = []
-    for src in SOURCES:
+    for src in SOURCES + REFERENCE_SOURCES:
         if not src.exists():
             missing.append(str(src))
     return missing
@@ -67,6 +76,8 @@ def build_zip() -> None:
     with zipfile.ZipFile(ZIP_PATH, "w", zipfile.ZIP_DEFLATED) as zf:
         for src in SOURCES:
             zf.write(src, src.name)
+        for src in REFERENCE_SOURCES:
+            zf.write(src, f"references/{src.name}")
 
     size = ZIP_PATH.stat().st_size
     print(f"✅ {ZIP_PATH} created ({size} bytes)")
@@ -87,7 +98,9 @@ def check_zip() -> int:
 
     with zipfile.ZipFile(ZIP_PATH, "r") as zf:
         actual_names = set(zf.namelist())
-        expected_names = {src.name for src in SOURCES}
+        expected_names = {src.name for src in SOURCES} | {
+            f"references/{src.name}" for src in REFERENCE_SOURCES
+        }
 
         if actual_names != expected_names:
             print("ERROR: ZIP contents mismatch")
@@ -95,13 +108,17 @@ def check_zip() -> int:
             print(f"  actual:   {sorted(actual_names)}")
             return 2
 
-        for src in SOURCES:
+        all_sources = SOURCES + REFERENCE_SOURCES
+        arc_names = [src.name for src in SOURCES] + [
+            f"references/{src.name}" for src in REFERENCE_SOURCES
+        ]
+        for src, arc_name in zip(all_sources, arc_names):
             expected_hash = sha256(src)
             with zipfile.ZipFile(ZIP_PATH, "r") as zf_check:
-                actual_bytes = zf_check.read(src.name)
+                actual_bytes = zf_check.read(arc_name)
                 actual_hash = hashlib.sha256(actual_bytes).hexdigest()
                 if actual_hash != expected_hash:
-                    print(f"ERROR: {src.name} — content hash mismatch (stale ZIP)")
+                    print(f"ERROR: {arc_name} — content hash mismatch (stale ZIP)")
                     return 2
 
     print(f"✅ {ZIP_PATH} — contents match sources (OK)")
@@ -122,12 +139,19 @@ def diff() -> int:
         return 2
 
     stale: list[str] = []
+    all_sources = SOURCES + REFERENCE_SOURCES
+    arc_names = [src.name for src in SOURCES] + [
+        f"references/{src.name}" for src in REFERENCE_SOURCES
+    ]
     with zipfile.ZipFile(ZIP_PATH, "r") as zf:
-        for src in SOURCES:
-            expected_hash = sha256(src)
-            actual_hash = hashlib.sha256(zf.read(src.name)).hexdigest()
-            if actual_hash != expected_hash:
-                stale.append(src.name)
+        for src, arc_name in zip(all_sources, arc_names):
+            try:
+                actual_hash = hashlib.sha256(zf.read(arc_name)).hexdigest()
+            except KeyError:
+                stale.append(arc_name + " (missing from ZIP)")
+                continue
+            if sha256(src) != actual_hash:
+                stale.append(arc_name)
 
     if stale:
         print("Stale files (ZIP would change):")

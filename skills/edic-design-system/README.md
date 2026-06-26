@@ -278,6 +278,13 @@ import './path/to/styles.css';
 
 ## 更新日志 Changelog
 
+### v1.9.2 (2026-06)
+- 新增 `references/` 目录，包含三个按需加载的参考文件
+- `references/EXAMPLES.md`：8 个高频复合组件（Glass Card、Docs 布局、Navbar、Toast、Accordion、Modal、Tabs、Dropdown）完整 HTML 结构示例
+- `references/TOKENS.md`：间距 / 圆角 / 阴影 / 动效 / 排版令牌完整实际值速查表（含 px 换算）
+- `references/ANTI-PATTERNS.md`：反模式 × 正确替代对照表，覆盖颜色、间距、Inline Style、BEM、无障碍、动效
+- `SKILL.md` 末尾新增 Reference Files 章节，通过标准 Markdown 链接按需触发加载
+
 ### v1.9.1 (2026-06)
 - 重构 tokens.json 为 flat 结构，与 CSS `--ds-*` 变量名一一对应
 - 添加统一构建工具链 `scripts/lint.py` 和 `scripts/build.py`
