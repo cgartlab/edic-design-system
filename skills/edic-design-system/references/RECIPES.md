@@ -224,7 +224,7 @@ Key rules:
     <!-- Pattern 6 content here -->
   </article>
 
-  <aside style="position:sticky; top:calc(64px + var(--ds-space-8))">
+  <aside style="position:sticky; top:calc(var(--ds-space-16) + var(--ds-space-8))">
     <nav class="ds-toc-article" aria-label="本文目录">
       <span class="ds-toc-article-title ds-caption">本文目录</span>
       <ol class="ds-toc-list">
