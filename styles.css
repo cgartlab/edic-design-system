@@ -1481,7 +1481,7 @@ a.ds-feature-card:focus-visible{outline:2px solid var(--ds-accent);outline-offse
 .ds-card-heading{font-family:var(--ds-font-display);font-size:var(--ds-text-body);font-weight:var(--ds-weight-semibold);color:var(--ds-color-fg-strong);margin-bottom:var(--ds-space-2);line-height:var(--ds-leading-snug)}
 .ds-cta-h2{font-family:var(--ds-font-display);font-size:var(--ds-text-h2);font-weight:var(--ds-weight-bold);color:var(--ds-color-fg-strong);letter-spacing:var(--ds-tracking-tight);line-height:var(--ds-leading-snug)}
 
-.ds-pt-0{padding:0}
+.ds-pt-0{padding-top:0}
 
 
 /* =========================================================================
