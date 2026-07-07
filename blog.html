@@ -59,7 +59,8 @@
 .blog-article-body blockquote cite { display: block; margin-top: var(--ds-space-3); font-size: var(--ds-text-body-sm); font-family: var(--ds-font-body); color: var(--ds-color-muted); font-style: normal; }
 .blog-article-body figure { margin: var(--ds-space-8) 0; }
 .blog-article-body figure img { width: 100%; border-radius: var(--ds-radius-lg); background: var(--ds-color-surface-overlay); aspect-ratio: 16/9; object-fit: cover; }
-.blog-article-body figcaption { margin-top: var(--ds-space-2); font-size: var(--ds-text-body-sm); color: var(--ds-color-muted); text-align: center; font-family: var(--ds-font-mono); }
+ .blog-article-body .blog-figure-placeholder{width:100%;aspect-ratio:16/9;background:var(--ds-color-surface-overlay);border-radius:var(--ds-radius-lg);display:flex;align-items:center;justify-content:center;color:var(--ds-color-border);font-family:var(--ds-font-mono)}
+ .blog-article-body figcaption { margin-top: var(--ds-space-2); font-size: var(--ds-text-body-sm); color: var(--ds-color-muted); text-align: center; font-family: var(--ds-font-mono); }
 .blog-article-body ul, .blog-article-body ol { margin-bottom: var(--ds-space-6); padding-left: var(--ds-space-6); }
 .blog-article-body li { margin-bottom: var(--ds-space-2); }
 .blog-article-body code { font-family: var(--ds-font-mono); font-size: var(--ds-text-body-sm); background: var(--ds-color-surface-overlay); padding: 2px 6px; border-radius: var(--ds-radius-sm); }
@@ -87,7 +88,7 @@
 .blog-archive-list .blog-archive-date { font-family: var(--ds-font-mono); font-size: var(--ds-text-body-sm); color: var(--ds-color-muted); min-width: 80px; }
 .blog-archive-list a { color: var(--ds-color-fg); text-decoration: none; font-size: var(--ds-text-body); }
 .blog-archive-list a:hover { color: var(--ds-accent); }
-.blog-archive-list .blog-archive-tag { font-family: var(--ds-font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: var(--ds-tracking-wider); color: var(--ds-accent); margin-left: auto; }
+  .blog-archive-list .blog-archive-tag { font-family: var(--ds-font-mono); font-size: var(--ds-text-caption); text-transform: uppercase; letter-spacing: var(--ds-tracking-wider); color: var(--ds-accent); margin-left: auto; }
 
 /* --- Footer --- */
 .blog-footer { border-top: 1px solid var(--ds-color-border); padding: var(--ds-space-10) 0; display: flex; justify-content: space-between; align-items: center; }
@@ -101,8 +102,8 @@
 .blog-section.active { display: block; }
 
 /* --- Hamburger toggle --- */
-.blog-nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: var(--ds-space-2); min-width: 44px; min-height: 44px; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
-.blog-nav-toggle-bar { display: block; width: 24px; height: 2px; background: var(--ds-color-fg); border-radius: 1px; transition: transform var(--ds-duration-200) var(--ds-ease-out), opacity var(--ds-duration-150); }
+  .blog-nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: var(--ds-space-2); min-width: 44px; min-height: 44px; flex-direction: column; align-items: center; justify-content: center; gap: var(--ds-space-1); }
+  .blog-nav-toggle-bar { display: block; width: var(--ds-space-6); height: var(--ds-space-0-5); background: var(--ds-color-fg); border-radius: 1px; transition: transform var(--ds-duration-200) var(--ds-ease-out), opacity var(--ds-duration-150); }
 .blog-nav-toggle[aria-expanded="true"] .blog-nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .blog-nav-toggle[aria-expanded="true"] .blog-nav-toggle-bar:nth-child(2) { opacity: 0; }
 .blog-nav-toggle[aria-expanded="true"] .blog-nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -121,7 +122,7 @@
 }
 </style>
 </head>
-<body style="background:var(--ds-color-bg);color:var(--ds-color-fg);">
+<body>
 
 <!-- Navigation -->
 <nav class="blog-nav blog-wrapper">
@@ -214,7 +215,7 @@
         <span>作者：陈逸帆</span>
       </div>
     </div>
-    <div class="blog-article-hero"><span style="color:var(--ds-color-border);font-family:var(--ds-font-mono);">Featured Image</span></div>
+    <div class="blog-article-hero"><span>Featured Image</span></div>
     <div class="blog-article-body">
       <p>2010 年，当第一台 Retina 显示屏 iPhone 4 发布时，大多数人注意到的是像素密度的数字——326 ppi。很少有人意识到，这个数字意味着一个拐点：屏幕分辨率首次超过了铜版纸的印刷精度（约 300 dpi）。排版，这门绵延五百余年的手艺，其技术基础正在被悄然重写。</p>
 
@@ -232,7 +233,7 @@
       <p>但目前可变字体在实际应用中仍然面临两个瓶颈：一是中文字体由于字符集庞大，可变字体的文件体积尚难接受；二是设计工具的字体面板尚未完全适配可变轴的操作逻辑。这两者都在快速改善中。</p>
 
       <figure>
-        <div style="width:100%;aspect-ratio:16/9;background:var(--ds-color-surface-overlay);border-radius:var(--ds-radius-lg);display:flex;align-items:center;justify-content:center;color:var(--ds-color-border);font-family:var(--ds-font-mono);">字形演变示意图</div>
+        <div class="blog-figure-placeholder">字形演变示意图</div>
         <figcaption>从 Gutenberg 铅字到当代可变字体，排版的每一次进化都伴随着技术的跃迁。</figcaption>
       </figure>
 
@@ -252,7 +253,7 @@
   <section class="blog-archive blog-wrapper blog-wrapper--narrow">
     <div class="blog-archive-header">
       <h1>归档</h1>
-      <p style="color:var(--ds-color-muted);font-size:var(--ds-text-body-lg);">共 36 篇文章 · 始于 2023</p>
+      <p class="ds-text-body-lg ds-text-muted">共 36 篇文章 · 始于 2023</p>
     </div>
     <div class="blog-archive-year">
       <h2>2026</h2>
@@ -289,7 +290,7 @@
         <p>「纸间」是一份关注设计、文化与技术的独立刊物。由 EDIC 团队创办，旨在以编辑主义的视觉语言，探讨数字时代的设计实践与思考。</p>
         <p>我们相信好的设计写作应当像好的设计本身一样——清晰、克制、有温度。每一篇文章都经过严格的编辑与排版，因为我们不只是写关于设计的内容，我们也在实践设计的理念。</p>
         <p>本刊所有内容采用 <strong>CC BY-NC 4.0</strong> 协议发布。欢迎转载，但请注明出处并保持原文完整性。</p>
-        <p style="margin-top:var(--ds-space-8);"><a href="mailto:hello@cgartlab.com" class="ds-btn ds-btn--primary">联系编辑部</a></p>
+        <p class="ds-mt-8"><a href="mailto:hello@cgartlab.com" class="ds-btn ds-btn--primary">联系编辑部</a></p>
       </div>
       <div class="blog-about-stats">
         <div class="blog-stat"><div class="blog-stat-num">36</div><div class="blog-stat-label">已发布文章</div></div>
