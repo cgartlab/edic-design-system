@@ -1,4 +1,4 @@
-/* ===== EDIC Design System v1.9.1 — Icon Grid & Token Table ===== */
+﻿/* ===== EDIC Design System v1.9.1 — Icon Grid & Token Table ===== */
 
 const ICONS = [
   {id:"archive",svg:'<svg viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>'},
@@ -894,6 +894,46 @@ const TOKENS = [
   Array.prototype.forEach.call(els, function(el) { el.textContent = year; });
 })();
 
+
+/* ===== Tooltip ===== */
+(function() {
+  var tooltipWrappers = document.querySelectorAll("[data-tooltip]");
+  if (!tooltipWrappers.length) return;
+
+  function showTooltip(wrapper) {
+    var tooltip = wrapper._tooltip;
+    if (!tooltip) {
+      var id = "ds-tooltip-" + Math.random().toString(36).slice(2);
+      tooltip = document.createElement("span");
+      tooltip.className = "ds-tooltip";
+      tooltip.id = id;
+      tooltip.textContent = wrapper.getAttribute("data-tooltip");
+      wrapper.appendChild(tooltip);
+      wrapper._tooltip = tooltip;
+      wrapper.setAttribute("aria-describedby", id);
+    }
+    tooltip.style.opacity = "1";
+    tooltip.setAttribute("aria-hidden", "false");
+  }
+
+  function hideTooltip(wrapper) {
+    var tooltip = wrapper._tooltip;
+    if (tooltip) {
+      tooltip.style.opacity = "0";
+      tooltip.setAttribute("aria-hidden", "true");
+    }
+  }
+
+  Array.prototype.forEach.call(tooltipWrappers, function(wrapper) {
+    wrapper.style.position = "relative";
+    wrapper.setAttribute("tabindex", "0");
+
+    wrapper.addEventListener("mouseenter", function() { showTooltip(this); });
+    wrapper.addEventListener("mouseleave", function() { hideTooltip(this); });
+    wrapper.addEventListener("focus", function() { showTooltip(this); });
+    wrapper.addEventListener("blur", function() { hideTooltip(this); });
+  });
+})();
 /* ===== Toast auto-dismiss functionality ===== */
 (function() {
   // Auto-dismiss toast notifications after 5 seconds
