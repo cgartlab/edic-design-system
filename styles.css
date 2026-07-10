@@ -479,6 +479,7 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .ds-section-header p{color:var(--ds-color-muted);font-size:var(--ds-text-body-lg)}
 .ds-toc{scroll-margin-top:var(--ds-space-24)}
 .ds-body-sm{font-size:var(--ds-text-body-sm)}
+.ds-body-lg{font-size:var(--ds-text-body-lg)}
 
 /* ===== Color Swatches ===== */
 .ds-swatch{display:flex;flex-direction:column;gap:var(--ds-space-2)}
