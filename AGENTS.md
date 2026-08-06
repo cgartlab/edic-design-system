@@ -197,10 +197,11 @@ release/{version}      # release prep
 
 ## Release Process
 
-### 发布策略：release-please 自动 tag + GitHub Release（Draft）
+### 发布策略：release-please 辅助 + 人工 tag 触发正式发布
 
-`release-please` 自动完成 Release PR、CHANGELOG、版本号同步、tag 创建与 GitHub Release（Draft）。
-`release.yml` 由 tag push 事件触发，负责构建资产并上传至 GitHub Release，将其从 Draft 发布为正式 Release。
+`release-please` 负责 Release PR 和 CHANGELOG 更新，**不会**自动打 tag。
+只有人类明确执行 `git tag -s vX.Y.Z && git push origin vX.Y.Z` 之后，
+`release.yml` 才会触发，构建资产并创建 GitHub Release。
 
 ### 正常发布流程
 
@@ -211,12 +212,14 @@ release-please 分析 Conventional Commits → 创建/更新 Release PR（含 CH
     ↓
 人类审查 Release PR（如需润色，直接编辑 CHANGELOG.md 对应版本节）
     ↓
-合并 Release PR → release-please 自动：
-  ① 更新 VERSION / tokens.json / package.json
-  ② 创建 tag vX.Y.Z + GitHub Release（Draft）
-  ③ post-merge-stamp：stamp_version.py（同步 ?v= 缓存戳）+ generate_changelog_html.py
+合并 Release PR → release-please 更新 VERSION / tokens.json / package.json
     ↓
-release.yml 触发（tag push）→ 构建 PDF/ZIP → 上传至 Release → 发布 Draft
+post-merge-stamp：检测 VERSION 变化 → stamp_version.py（同步 ?v= 缓存戳）
+                  + generate_changelog_html.py（重建网站变更页）
+    ↓
+人类执行：git tag -s vX.Y.Z -m "Release vX.Y.Z" && git push origin vX.Y.Z
+    ↓
+release.yml 触发（tag push）→ 构建 PDF/ZIP → 创建 GitHub Release
 ```
 
 ### 网站变更页（changelog.html）

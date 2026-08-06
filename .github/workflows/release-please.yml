@@ -68,22 +68,23 @@ jobs:
           manifest-file: .release-please-manifest.json
           release-as: ${{ inputs.release-as }}
           prerelease: ${{ inputs.prerelease }}
-          # ── 全自动发布：Release PR 合并后自动创建 GitHub Release + tag ──
-          # release-please 负责 Release PR + CHANGELOG 更新 + 创建 GitHub Release。
-          # tag 创建后触发 release.yml（push: tags/v*），自动构建资产并发布。
+          # ── 手工 tag 发布：release-please 仅创建/更新 Release PR ──
+          # tag 由人类 `git tag -s vX.Y.Z && git push origin vX.Y.Z` 创建，
+          # release.yml（push: tags/v*）随后构建资产并创建 GitHub Release。
+          # 注意：skip-github-release: true 时 release-please-action 不设置
+          # release_created / tag_name / version outputs（见 action 源码 src/index.ts），
+          # 因此 post-merge-stamp 依赖检测 VERSION 文件变化来触发，而非 release_created。
           skip-github-release: "true"
 
-      - name: Show release result
-        if: steps.rp.outputs.release_created == 'true'
+      - name: Show release PR result
+        if: steps.rp.outputs.prs_created == 'true'
         run: |
-          echo "Release created: ${{ steps.rp.outputs.tag_name }}"
-          echo "Version: ${{ steps.rp.outputs.version }}"
+          echo "Release PR created/updated: ${{ steps.rp.outputs.pr }}"
 
-      - name: No release needed
-        if: steps.rp.outputs.release_created != 'true'
+      - name: No release PR needed
+        if: steps.rp.outputs.prs_created != 'true'
         run: |
           echo "No releasable commits since last release."
-          echo "Release PR may have been updated even without a new release."
 
   # ── post-merge-stamp ─────────────────────────────────────────
   # Release PR 合并后自动完成两件事：
@@ -94,10 +95,15 @@ jobs:
   # 人类可以在任意时间执行：
   #   git tag vX.Y.Z && git push origin vX.Y.Z
   # 来触发 release.yml 构建资产并创建 GitHub Release。
+  # ── post-merge-stamp ─────────────────────────────────────────
+  # skip-github-release: true 时 release-please-action 不输出
+  # release_created/version（见 action 源码 src/index.ts），
+  # 因此改为检测 VERSION 文件变化来触发 stamp。
+  #
+  # Release PR 合并后 VERSION 文件被更新（extra-files 机制），
+  # 本 job 对比 HEAD~1 与 HEAD 的 VERSION，若变化则执行 stamp。
   post-merge-stamp:
     name: Stamp HTML/MD after Release PR merge
-    needs: release-please
-    if: needs.release-please.outputs.release_created == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -107,46 +113,47 @@ jobs:
         with:
           token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
           ref: main
-          fetch-depth: 0
+          fetch-depth: 2
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      # ── Sync VERSION to the released version BEFORE stamping ─────
-      # release-please updates VERSION via extra-files (see
-      # release-please-config.json), but in case it didn't (or was
-      # skipped), we re-write VERSION here from the release-please
-      # output. Without this guard, stamp_version.py reads the stale
-      # VERSION and uses replace_old_version() to revert the just-
-      # released version in package.json / tokens.json back to the
-      # old one (v1.6.0 → v1.5.5 bug, see commit ed3cc03).
-      - name: Sync VERSION from release-please output
+      # ── 检测 VERSION 是否变化（Release PR 合并后 VERSION 更新）──
+      - name: Detect VERSION bump (Release PR merged)
+        id: detect
         run: |
-          VERSION="${{ needs.release-please.outputs.version }}"
-          echo "Released version: v${VERSION}"
-          printf '%s\n' "$VERSION" > VERSION
-          cat VERSION
+          OLD="$(git show HEAD~1:VERSION 2>/dev/null || echo '')"
+          NEW="$(cat VERSION)"
+          if [[ -n "$OLD" && "$OLD" != "$NEW" ]]; then
+            echo "VERSION changed: $OLD → $NEW"
+            echo "detected=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No VERSION change ($NEW)"
+            echo "detected=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Run stamp_version.py
+        if: steps.detect.outputs.detected == 'true'
         run: python3 tools/stamp_version.py
 
       - name: Rebuild changelog.html from CHANGELOG.md
+        if: steps.detect.outputs.detected == 'true'
         run: |
           python3 tools/generate_changelog_html.py
           echo "changelog.html rebuilt from CHANGELOG.md (single source)"
 
       - name: Commit stamp drift (if any)
+        if: steps.detect.outputs.detected == 'true'
         run: |
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # 检查是否有未提交的变更
           if [[ -n "$(git status --porcelain)" ]]; then
             echo "Stamping changed HTML/MD files — committing with [skip ci]"
             git add -A
-            git commit -m "chore(release): post-merge stamp to v${{ needs.release-please.outputs.version }} [skip ci]"
+            git commit -m "chore(release): post-merge stamp to v$(cat VERSION) [skip ci]"
             git push
           else
             echo "No stamp drift — all HTML/MD files already up to date."
@@ -157,14 +164,7 @@ jobs:
         run: |
           echo "## ⚠️ POST-MERGE-STAMP FAILED" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**`post-merge-stamp` failed to sync VERSION and stamp HTML/MD files on main.**" >> $GITHUB_STEP_SUMMARY
+          echo "**\`post-merge-stamp\` failed to stamp HTML/MD files on main.**" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "This means main branch still has the OLD version (`VERSION` file). All subsequent stamps and asset builds will use the wrong version." >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Action required:** Manually run the `post-merge-stamp` job or fix the VERSION file on main." >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "If this job fails repeatedly, check:" >> $GITHUB_STEP_SUMMARY
-          echo "1. `RELEASE_PLEASE_TOKEN` has not expired" >> $GITHUB_STEP_SUMMARY
-          echo "2. No git conflicts on main" >> $GITHUB_STEP_SUMMARY
-          echo "3. Network connectivity to GitHub" >> $GITHUB_STEP_SUMMARY
+          echo "**Action required:** Manually run \`python3 tools/stamp_version.py\` on main." >> $GITHUB_STEP_SUMMARY
           exit 1
