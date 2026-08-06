@@ -71,7 +71,7 @@ jobs:
           # ── 全自动发布：Release PR 合并后自动创建 GitHub Release + tag ──
           # release-please 负责 Release PR + CHANGELOG 更新 + 创建 GitHub Release。
           # tag 创建后触发 release.yml（push: tags/v*），自动构建资产并发布。
-          skip-github-release: "false"
+          skip-github-release: "true"
 
       - name: Show release result
         if: steps.rp.outputs.release_created == 'true'
