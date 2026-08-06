@@ -50,8 +50,6 @@ jobs:
   release-please:
     name: Create/Update Release PR
     runs-on: ubuntu-latest
-    outputs:
-      prs_created: ${{ steps.rp.outputs.prs_created }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -71,7 +69,7 @@ jobs:
           # release.yml（push: tags/v*）随后构建资产并创建 GitHub Release。
           # 注意：skip-github-release: true 时 release-please-action 不设置
           # release_created / tag_name / version outputs（见 action 源码 src/index.ts），
-          # 因此 post-merge-stamp 依赖检测 VERSION 文件变化来触发，而非 release_created。
+          # 因此 post-merge-stamp 依赖检测 .release-please-manifest.json 变化来触发，
           skip-github-release: "true"
 
       - name: Show release PR result
@@ -87,10 +85,14 @@ jobs:
   # ── post-merge-stamp ─────────────────────────────────────────
   # skip-github-release: true 时 release-please-action 不输出
   # release_created/version（见 action 源码 src/index.ts），
-  # 因此改为检测 VERSION 文件变化来触发 stamp。
+  # 因此改为检测 .release-please-manifest.json 变化来触发 stamp。
   #
-  # Release PR 合并后 VERSION 文件被更新（extra-files 机制），
-  # 本 job 对比 HEAD~1 与 HEAD 的 VERSION，若变化则执行 stamp。
+  # Release PR 合并后 manifest 被更新（release-please 唯一保证更新的文件），
+  # 本 job 遍历提交范围检测 manifest 版本变化，若变化则同步 VERSION 并 stamp。
+  #
+  # 注意：VERSION 纯文本文件因无 x-release-please-version 标注，
+  # GenericUpdater 无法更新它（见 release-please src/updaters/generic.ts），
+  # 因此需要从 manifest 反向同步 VERSION。
   post-merge-stamp:
     name: Stamp HTML/MD after Release PR merge
     runs-on: ubuntu-latest
@@ -108,19 +110,29 @@ jobs:
         with:
           python-version: "3.11"
 
-      # ── 检测 VERSION 是否变化（Release PR 合并后 VERSION 更新）──
-      - name: Detect VERSION bump (Release PR merged)
+      # ── 检测 manifest 版本变化（Release PR 合并后 manifest 更新）──
+      # VERSION 纯文本因无 x-release-please-version 标注，GenericUpdater 无法更新，
+      # 因此以 .release-please-manifest.json 为版本变化的可靠信号。
+      - name: Detect version bump (via manifest)
         id: detect
         run: |
-          OLD="$(git show HEAD~1:VERSION 2>/dev/null || echo '')"
-          NEW="$(cat VERSION)"
-          if [[ -n "$OLD" && "$OLD" != "$NEW" ]]; then
-            echo "VERSION changed: $OLD → $NEW"
+          OLD="$(git show HEAD~1:.release-please-manifest.json 2>/dev/null | python3 -c 'import json,sys;print(json.load(sys.stdin)["."])' || echo '')"
+          NEW="$(python3 -c 'import json;print(json.load(open(".release-please-manifest.json"))["."])' 2>/dev/null || echo '')"
+          if [[ -n "$NEW" && -n "$OLD" && "$OLD" != "$NEW" ]]; then
+            echo "VERSION bumped: $OLD → $NEW"
             echo "detected=true" >> "$GITHUB_OUTPUT"
+            echo "version=$NEW" >> "$GITHUB_OUTPUT"
           else
-            echo "No VERSION change ($NEW)"
+            echo "No version change ($NEW)"
             echo "detected=false" >> "$GITHUB_OUTPUT"
           fi
+
+      # ── 从 manifest 同步 VERSION 文件（GenericUpdater 无法更新纯文本 VERSION）──
+      - name: Sync VERSION from manifest
+        if: steps.detect.outputs.detected == 'true'
+        run: |
+          printf '%s\n' "${{ steps.detect.outputs.version }}" > VERSION
+          cat VERSION
 
       - name: Run stamp_version.py
         if: steps.detect.outputs.detected == 'true'
