@@ -87,15 +87,6 @@ jobs:
           echo "No releasable commits since last release."
 
   # ── post-merge-stamp ─────────────────────────────────────────
-  # Release PR 合并后自动完成两件事：
-  #   1. 同步 VERSION → 所有 HTML/MD 的 ?v= 缓存戳（stamp_version.py）
-  #   2. 从 CHANGELOG.md 单源重建网站变更页（generate_changelog_html.py）
-  #
-  # 此 job 完成后，main 分支上的网站已完全同步到新版本，
-  # 人类可以在任意时间执行：
-  #   git tag vX.Y.Z && git push origin vX.Y.Z
-  # 来触发 release.yml 构建资产并创建 GitHub Release。
-  # ── post-merge-stamp ─────────────────────────────────────────
   # skip-github-release: true 时 release-please-action 不输出
   # release_created/version（见 action 源码 src/index.ts），
   # 因此改为检测 VERSION 文件变化来触发 stamp。
