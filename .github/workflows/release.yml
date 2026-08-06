@@ -13,7 +13,7 @@ on:
         required: false
         type: string
       skip_validation:
-        description: "跳过验证步骤（仅用于紧急热修复）"
+        description: "⚠️ 跳过验证步骤（仅限紧急热修复，可能导致发布含破坏性变更）"
         required: false
         default: "false"
         type: boolean
@@ -197,7 +197,7 @@ jobs:
               --title "$TAG" \
               --notes "$BODY" \
               --prerelease="$PRERELEASE" \
-              --draft=false \
+              --draft=true \
               assets/downloads/*.pdf \
               assets/downloads/*.zip \
               assets/downloads/CHECKSUMS.txt
@@ -210,6 +210,14 @@ jobs:
           echo ""
           echo "=== Checksums ==="
           sha256sum assets/downloads/*.pdf assets/downloads/*.zip
+
+      # ── 资产全部上传完毕后，将 Draft 转为正式发布 ────────────
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: gh release edit "$TAG" --draft=false
+        working-directory: assets/downloads
 
       # ── Guard against orphaned 'untagged-' asset URLs ─────────────
       # When a release object loses its tag binding (e.g. tag deleted

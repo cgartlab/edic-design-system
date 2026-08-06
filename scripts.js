@@ -1,4 +1,4 @@
-﻿/* ===== EDIC Design System v1.9.1 — Icon Grid & Token Table ===== */
+﻿/* ===== EDIC Design System v1.10.0 — Icon Grid & Token Table ===== */
 
 const ICONS = [
   {id:"archive",svg:'<svg viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>'},
@@ -342,6 +342,8 @@ const TOKENS = [
   window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function(e) {
     if (document.documentElement.getAttribute("data-theme-mode") === "system") {
       document.documentElement.setAttribute("data-theme", e.matches ? "dark" : "light");
+      // P1-2: 系统主题变化时同步更新按钮图标/aria-label
+      updateButton("system");
     }
   });
 })();
@@ -429,6 +431,7 @@ const TOKENS = [
   let isOpen = false;
   let savedScrollY = 0;
   let lastFocused = null;
+  let savedOverflow, savedTouchAction;
 
   function open(shouldFocusMenu) {
     if (isOpen) return;
@@ -681,11 +684,17 @@ const TOKENS = [
         const past = firstTarget ? firstTarget.getBoundingClientRect().top <= 80 : true;
         nav.classList.toggle("ds-pagenav--hidden", !past);
       };
-      if ("IntersectionObserver" in window) {
+      // P2-7: 修正条件反转 — 支持 IO 时优先用 IO（无 reflow），不支持时回退 scroll 事件
+      if ("IntersectionObserver" in window && firstTarget) {
+        const railObs = new IntersectionObserver(function(entries) {
+          nav.classList.toggle("ds-pagenav--hidden", !entries[0].isIntersecting);
+        }, { threshold: 0, rootMargin: "-80px 0px 0px 0px" });
+        railObs.observe(firstTarget);
+        window.addEventListener("unload", function() { railObs.disconnect(); });
+      } else {
+        // Fallback: scroll + getBoundingClientRect（无 IO 时使用）
         window.addEventListener("scroll", updateReveal, { passive: true });
         updateReveal();
-      } else {
-        nav.classList.remove("ds-pagenav--hidden");
       }
     }
 
@@ -850,6 +859,8 @@ const TOKENS = [
 (function() {
   const headers = document.querySelectorAll(".ds-accordion-header");
   if (!headers.length) return;
+  // S-4: 递增计数器生成面板 ID，避免 Math.random 非确定
+  var panelCounter = 0;
   Array.prototype.forEach.call(headers, function(h) {
     // [Fix B2] Accordion headers are <div> elements. Without role=button and
     // tabindex=0 the Tab key skips them entirely and screen readers don't
@@ -857,14 +868,31 @@ const TOKENS = [
     h.setAttribute("role", "button");
     h.setAttribute("tabindex", "0");
 
-    // Initialize ARIA attributes on first load
+    // P2-3: 以 DOM 内联 aria 属性为准；若 HTML 已声明则不覆盖
     const item = h.closest(".ds-accordion-item");
     if (item) {
       const panel = item.querySelector(".ds-accordion-content");
-      const panelId = panel ? panel.id || (panel.id = "ds-accordion-panel-" + Math.random().toString(36).slice(2)) : null;
-      h.setAttribute("aria-expanded", item.classList.contains("open") ? "true" : "false");
-      if (panel) panel.setAttribute("aria-hidden", item.classList.contains("open") ? "false" : "true");
-      if (panelId) h.setAttribute("aria-controls", panelId);
+      // S-4: 递增计数器命名
+      var panelId = null;
+      if (panel) {
+        if (panel.id) {
+          panelId = panel.id;
+        } else {
+          panelCounter++;
+          panel.id = "ds-accordion-panel-" + panelCounter;
+          panelId = panel.id;
+        }
+      }
+      // P2-3: 优先读取 HTML 已有的 aria-expanded，否则从 class 推导
+      if (!h.hasAttribute("aria-expanded")) {
+        h.setAttribute("aria-expanded", item.classList.contains("open") ? "true" : "false");
+      }
+      if (panel && !panel.hasAttribute("aria-hidden")) {
+        panel.setAttribute("aria-hidden", item.classList.contains("open") ? "false" : "true");
+      }
+      if (panelId && !h.hasAttribute("aria-controls")) {
+        h.setAttribute("aria-controls", panelId);
+      }
     }
 
     function toggleAccordion(header) {
@@ -877,11 +905,33 @@ const TOKENS = [
     }
 
     h.addEventListener("click", function() { toggleAccordion(this); });
-    // Keyboard activation: Enter and Space
+    // P1-2: 键盘处理 — Enter/Space 切换 + 方向键/Home/End 焦点移动（WAI-ARIA Accordion Pattern）
     h.addEventListener("keydown", function(e) {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         toggleAccordion(this);
+        return;
+      }
+      // 方向键导航：在当前 accordion 组件内的所有 header 间移动
+      var container = this.closest(".ds-accordion");
+      if (!container) return;
+      var allHeaders = container.querySelectorAll(".ds-accordion-header");
+      var idx = Array.prototype.indexOf.call(allHeaders, this);
+      if (idx === -1) return;
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        var next = allHeaders[(idx + 1) % allHeaders.length];
+        next.focus();
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        var prev = allHeaders[(idx - 1 + allHeaders.length) % allHeaders.length];
+        prev.focus();
+      } else if (e.key === "Home") {
+        e.preventDefault();
+        allHeaders[0].focus();
+      } else if (e.key === "End") {
+        e.preventDefault();
+        allHeaders[allHeaders.length - 1].focus();
       }
     });
   });
@@ -986,5 +1036,1373 @@ const TOKENS = [
         toast.parentNode.removeChild(toast);
       }
     }, 300); // Match CSS transition duration
+  }
+})();
+
+/* ===== Unified SVG Chart Engine ===== */
+(function () {
+  'use strict';
+  var SVG_NS = 'http://www.w3.org/2000/svg';
+  var BAR_WIDTH_RATIO = 0.5;
+  var BAR_MIN_WIDTH = 14;
+  var BAR_MAX_WIDTH = 64;
+  var charts = document.querySelectorAll('[data-chart]');
+  if (!charts.length) return;
+
+  var COLOR_DEFAULTS = [
+    'var(--ds-chart-1)', 'var(--ds-chart-2)', 'var(--ds-chart-3)',
+    'var(--ds-chart-4)', 'var(--ds-chart-5)', 'var(--ds-chart-6)',
+    'var(--ds-chart-7)', 'var(--ds-chart-8)'
+  ];
+
+  /* ---------- SVG element factory ---------- */
+  function el(tag, attrs, parent) {
+    var node = document.createElementNS(SVG_NS, tag);
+    if (attrs) {
+      for (var k in attrs) {
+        if (!attrs.hasOwnProperty(k)) continue;
+        if (k === 'class') node.setAttribute('class', attrs[k]);
+        else node.setAttribute(k, attrs[k]);
+      }
+    }
+    if (parent) parent.appendChild(node);
+    return node;
+  }
+
+  /* ---------- Backward-compat config normalizer ---------- */
+  function normalizeConfig(raw) {
+    var cfg = raw || {};
+    cfg.options = cfg.options || {};
+    var o = cfg.options;
+    o.colors = o.colors || [];
+    if (cfg.color && o.colors.indexOf(cfg.color) === -1) o.colors.unshift(cfg.color);
+
+    // area → line + fill
+    if (cfg.type === 'area') { cfg.type = 'line'; o.fill = true; }
+
+    // old combo top-level bar/line → series
+    if (cfg.type === 'combo' && !cfg.series && (cfg.bar || cfg.line)) {
+      cfg.series = [];
+      if (cfg.bar) cfg.series.push({ name: 'Bar', data: cfg.bar, color: cfg.barColor || o.colors[0] || COLOR_DEFAULTS[0], chartType: 'bar' });
+      if (cfg.line) cfg.series.push({ name: 'Line', data: cfg.line, color: cfg.lineColor || o.colors[1] || COLOR_DEFAULTS[1], chartType: 'line' });
+    }
+
+    // old multiline: keep series; ensure each has a color
+    if ((cfg.type === 'multiline' || cfg.type === 'combo' || cfg.type === 'donut') && cfg.series) {
+      for (var i = 0; i < cfg.series.length; i++) {
+        var s = cfg.series[i];
+        if (!s.color) s.color = o.colors[i] || COLOR_DEFAULTS[i % COLOR_DEFAULTS.length];
+        if (!s.chartType) s.chartType = (cfg.type === 'combo') ? (i === 0 ? 'bar' : 'line') : 'line';
+      }
+    }
+
+    // single-series (bar/hbar/line/pie/donut data) → normalize single color
+    if (!cfg.series) {
+      cfg._singleColor = o.colors[0] || COLOR_DEFAULTS[0];
+    }
+
+    o.height = o.height || (cfg.type === 'sparkline' ? 28 : 250);
+    o.animate = o.animate !== false;
+    o.tooltip = o.tooltip !== false;
+    o.legend = o.legend === true;
+    o.grid = o.grid !== false;
+    o.gridLines = o.gridLines || 4;
+    o.donutHole = o.donutHole != null ? o.donutHole : 0.55;
+
+    // Unified axis defaults
+    o.xAxis = o.xAxis || {};
+    o.xAxis.show = o.xAxis.show !== false;
+    o.xAxis.title = o.xAxis.title || '';
+    o.xAxis.ticks = (typeof o.xAxis.ticks === 'number' && o.xAxis.ticks > 0) ? o.xAxis.ticks : 4;
+    o.xAxis.format = o.xAxis.format || 'auto';
+    o.yAxis = o.yAxis || {};
+    o.yAxis.show = o.yAxis.show !== false;
+    o.yAxis.title = o.yAxis.title || '';
+    o.yAxis.ticks = (typeof o.yAxis.ticks === 'number' && o.yAxis.ticks > 0) ? o.yAxis.ticks : 4;
+    o.yAxis.format = o.yAxis.format || 'auto';
+    o.yAxis.min = o.yAxis.min != null ? o.yAxis.min : (o.yMin != null ? o.yMin : 'auto');
+    o.yAxis.max = o.yAxis.max != null ? o.yAxis.max : (o.yMax != null ? o.yMax : 'auto');
+    o.startAngle = o.startAngle != null ? o.startAngle : -90;
+    o.fill = !!o.fill;
+    o.dots = !!o.dots;
+    o.showValues = !!o.showValues;
+
+    // default labels for indexed data
+    if (!cfg.labels && cfg.data) {
+      cfg.labels = [];
+      for (var j = 0; j < cfg.data.length; j++) cfg.labels.push(String(j + 1));
+    }
+
+    return cfg;
+  }
+
+  /* ---------- Context (viewBox dimensions) ---------- */
+  function makeCtx(cfg) {
+    var type = cfg.type, o = cfg.options;
+    var h = o.height;
+    var w = 500; // logical viewBox width; scales via CSS
+    // Pie/donut must use a square viewBox so circles stay circular
+    // (preserveAspectRatio="none" would otherwise stretch them into ellipses).
+    if (type === 'pie' || type === 'donut') { w = 200; h = 200; }
+    var pad;
+    if (type === 'sparkline') { w = 120; h = o.height || 28; pad = 0; }
+    else if (type === 'pie' || type === 'donut') pad = 8;
+    else if (type === 'hbar') pad = { top: 12, right: 40, bottom: 54, left: 88 };
+    else pad = { top: 12, right: 12, bottom: 54, left: 52 };
+    var padT = typeof pad === 'number' ? pad : pad.top;
+    var padR = typeof pad === 'number' ? pad : pad.right;
+    var padB = typeof pad === 'number' ? pad : pad.bottom;
+    var padL = typeof pad === 'number' ? pad : pad.left;
+    return {
+      w: w, h: h,
+      padT: padT, padR: padR, padB: padB, padL: padL,
+      plotW: w - padL - padR,
+      plotH: h - padT - padB
+    };
+  }
+
+  /* ---------- Scales ---------- */
+  function scaleLinear(domMin, domMax, rMin, rMax) {
+    var d = domMax - domMin;
+    if (d === 0) d = 1;
+    return function (v) { return rMin + ((v - domMin) / d) * (rMax - rMin); };
+  }
+  function scaleBand(count, rMin, rMax, padding) {
+    var p = padding != null ? padding : 0.2;
+    var step = (rMax - rMin) / count;
+    var bw = step * (1 - p);
+    return function (i) { return rMin + i * step + (step - bw) / 2; };
+  }
+
+  /* ---------- Bar width clamp ---------- */
+  function clampBarWidth(step) {
+    var w = step * BAR_WIDTH_RATIO;
+    if (w < BAR_MIN_WIDTH) return BAR_MIN_WIDTH;
+    if (w > BAR_MAX_WIDTH) return BAR_MAX_WIDTH;
+    return w;
+  }
+
+  /* ---------- Tick helpers ---------- */
+  function niceTicks(min, max, targetCount) {
+    if (typeof targetCount !== 'number' || targetCount <= 0) targetCount = 4;
+    var rawStep = (max - min) / targetCount;
+    if (rawStep <= 0) rawStep = 1;
+    var mag = Math.pow(10, Math.floor(Math.log(rawStep) / Math.LN10));
+    var norm = rawStep / mag;
+    var niceStep;
+    if (norm < 1.5) niceStep = 1 * mag;
+    else if (norm < 3.5) niceStep = 2 * mag;
+    else if (norm < 7.5) niceStep = 5 * mag;
+    else niceStep = 10 * mag;
+    var start = Math.ceil(min / niceStep) * niceStep;
+    var ticks = [];
+    var maxTicks = 20; // safety cap against pathological domains
+    for (var v = start; v <= max + niceStep * 0.001 && ticks.length < maxTicks; v += niceStep) {
+      ticks.push(Math.round(v * 1000) / 1000);
+    }
+    return ticks;
+  }
+  function formatTick(v, format) {
+    if (format === 'percent') return v + '%';
+    if (Math.abs(v) >= 1000000) return (v / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+    if (Math.abs(v) >= 1000) return (v / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+    if (Math.round(v) === v) return String(v);
+    return v.toFixed(2).replace(/\.?0+$/, '');
+  }
+
+  /* ---------- Shared: drawAxes (replaces drawGrid + drawXLabels) ---------- */
+  function drawAxes(svg, ctx, cfg, scales) {
+    // scales = { x, y, xType: 'band'|'linear', yType: 'linear'|'band' }
+    var o = cfg.options;
+    var xCfg = o.xAxis || {}, yCfg = o.yAxis || {};
+    var axisGroup = el('g', { 'class': 'ds-chart__axes' }, svg);
+
+    // --- Y axis (left) ---
+    if (yCfg.show !== false) {
+      var yg = el('g', { 'class': 'ds-chart__y-axis' }, axisGroup);
+      el('line', { 'class': 'ds-chart__axis-line', x1: ctx.padL, y1: ctx.padT, x2: ctx.padL, y2: ctx.h - ctx.padB }, yg);
+      if (scales.yType === 'linear') {
+        var yMin = scales.y._min, yMax = scales.y._max;
+        var ticks = niceTicks(yMin, yMax, yCfg.ticks || 4);
+        for (var i = 0; i < ticks.length; i++) {
+          var ty = scales.y(ticks[i]);
+          var tk = el('g', { 'class': 'ds-chart__tick' }, yg);
+          el('line', { 'class': 'ds-chart__tick-line', x1: ctx.padL - 4, y1: ty.toFixed(1), x2: ctx.padL, y2: ty.toFixed(1) }, tk);
+          var lb = el('text', { 'class': 'ds-chart__tick-label ds-chart__axis-label', x: ctx.padL - 15, y: ty.toFixed(1), 'text-anchor': 'end', 'dominant-baseline': 'middle' }, tk);
+          lb.textContent = formatTick(ticks[i], yCfg.format);
+        }
+      } else if (scales.yType === 'band') {
+        var labels = cfg.labels || [];
+        var count = labels.length || cfg.data.length || 1;
+        var stepY = ctx.plotH / count;
+        for (var b = 0; b < count; b++) {
+          var by = ctx.padT + (b + 0.5) * stepY;
+          var tkg = el('g', { 'class': 'ds-chart__tick' }, yg);
+          el('line', { 'class': 'ds-chart__tick-line', x1: ctx.padL - 4, y1: by.toFixed(1), x2: ctx.padL, y2: by.toFixed(1) }, tkg);
+          if (labels[b] != null) {
+            var tlb = el('text', { 'class': 'ds-chart__tick-label ds-chart__axis-label', x: ctx.padL - 15, y: by.toFixed(1), 'text-anchor': 'end', 'dominant-baseline': 'middle' }, tkg);
+            tlb.textContent = labels[b];
+          }
+        }
+      }
+      if (yCfg.title) {
+        var yt = el('text', { 'class': 'ds-chart__axis-title ds-chart__axis-title--y', x: -(ctx.h / 2), y: 20, transform: 'rotate(-90)', 'text-anchor': 'middle' }, yg);
+        yt.textContent = yCfg.title;
+      }
+    }
+
+    // --- X axis (bottom) ---
+    if (xCfg.show !== false) {
+      var xg = el('g', { 'class': 'ds-chart__x-axis' }, axisGroup);
+      el('line', { 'class': 'ds-chart__axis-line', x1: ctx.padL, y1: ctx.h - ctx.padB, x2: ctx.w - ctx.padR, y2: ctx.h - ctx.padB }, xg);
+      if (scales.xType === 'band') {
+        var xLabels = cfg.labels || [];
+        var xCount = xLabels.length || cfg.data.length || 1;
+        var stepX = ctx.plotW / xCount;
+        for (var xb = 0; xb < xCount; xb++) {
+          var bx = ctx.padL + (xb + 0.5) * stepX;
+          var xtkg = el('g', { 'class': 'ds-chart__tick' }, xg);
+          el('line', { 'class': 'ds-chart__tick-line', x1: bx.toFixed(1), y1: ctx.h - ctx.padB, x2: bx.toFixed(1), y2: ctx.h - ctx.padB + 4 }, xtkg);
+          if (xLabels[xb] != null) {
+            var xtlb = el('text', { 'class': 'ds-chart__tick-label ds-chart__tick-label--x ds-chart__axis-label', x: bx.toFixed(1), y: ctx.h - ctx.padB + 18, 'text-anchor': 'middle', 'dominant-baseline': 'middle' }, xtkg);
+            xtlb.textContent = xLabels[xb];
+          }
+        }
+      } else if (scales.xType === 'linear') {
+        var xMin = scales.x._min, xMax = scales.x._max;
+        var xTicks = niceTicks(xMin, xMax, xCfg.ticks || 4);
+        for (var t = 0; t < xTicks.length; t++) {
+          var tx = scales.x(xTicks[t]);
+          var tg = el('g', { 'class': 'ds-chart__tick' }, xg);
+          el('line', { 'class': 'ds-chart__tick-line', x1: tx.toFixed(1), y1: ctx.h - ctx.padB, x2: tx.toFixed(1), y2: ctx.h - ctx.padB + 4 }, tg);
+          var tlb2 = el('text', { 'class': 'ds-chart__tick-label ds-chart__tick-label--x ds-chart__axis-label', x: tx.toFixed(1), y: ctx.h - ctx.padB + 18, 'text-anchor': 'middle', 'dominant-baseline': 'middle' }, tg);
+          tlb2.textContent = formatTick(xTicks[t], xCfg.format);
+        }
+      }
+      if (xCfg.title) {
+        var xt = el('text', { 'class': 'ds-chart__axis-title ds-chart__axis-title--x', x: ctx.w / 2, y: ctx.h - ctx.padB + 52, 'text-anchor': 'middle' }, xg);
+        xt.textContent = xCfg.title;
+      }
+    }
+
+    // --- Grid lines ---
+    if (o.grid !== false && scales.yType === 'linear') {
+      var gg = el('g', { 'class': 'ds-chart__grid' }, axisGroup);
+      var yMin2 = scales.y._min, yMax2 = scales.y._max;
+      var gridTicks = niceTicks(yMin2, yMax2, o.gridLines || 3);
+      for (var g2 = 0; g2 < gridTicks.length; g2++) {
+        var gy = scales.y(gridTicks[g2]);
+        if (Math.abs(gy - (ctx.h - ctx.padB)) < 2) continue; // skip baseline
+        el('line', { 'class': 'ds-chart__grid-line', x1: ctx.padL, y1: gy.toFixed(1), x2: ctx.w - ctx.padR, y2: gy.toFixed(1) }, gg);
+      }
+    } else if (o.grid !== false && scales.yType === 'band' && scales.xType === 'linear') {
+      // HBar: vertical grid lines aligned with X (linear) ticks
+      var vgg = el('g', { 'class': 'ds-chart__grid' }, axisGroup);
+      var xMin2 = scales.x._min, xMax2 = scales.x._max;
+      var xGridTicks = niceTicks(xMin2, xMax2, o.gridLines || 3);
+      for (var g3 = 0; g3 < xGridTicks.length; g3++) {
+        var gx = scales.x(xGridTicks[g3]);
+        if (Math.abs(gx - ctx.padL) < 2) continue; // skip baseline
+        el('line', { 'class': 'ds-chart__grid-line', x1: gx.toFixed(1), y1: ctx.padT, x2: gx.toFixed(1), y2: ctx.h - ctx.padB }, vgg);
+      }
+    }
+    return axisGroup;
+  }
+
+  /* ---------- Renderer: Bar (vertical) ---------- */
+  function renderBar(svg, cfg, ctx) {
+    var data = cfg.data || [];
+    var labels = cfg.labels || [];
+    var color = cfg._singleColor;
+    var yMin = 0;
+    var yMax = -Infinity;
+    for (var i = 0; i < data.length; i++) { if (data[i] > yMax) yMax = data[i]; }
+    if (yMax <= 0) yMax = 1;
+    var yScale = scaleLinear(yMin, yMax, ctx.h - ctx.padB, ctx.padT);
+    yScale._min = yMin; yScale._max = yMax;
+    var xBand = scaleBand(data.length, ctx.padL, ctx.w - ctx.padR, 0.25);
+    var stepX = ctx.plotW / data.length;
+    var bw = clampBarWidth(stepX);
+
+    drawAxes(svg, ctx, cfg, { x: xBand, y: yScale, xType: 'band', yType: 'linear' });
+
+    var g = el('g', { 'class': 'ds-chart__bars' }, svg);
+    var items = [];
+    for (var j = 0; j < data.length; j++) {
+      var v = data[j];
+      var y = yScale(Math.max(v, 0));
+      var h = (ctx.h - ctx.padB) - y;
+      if (h < 0) h = 0;
+      var bx = ctx.padL + (j + 0.5) * stepX - bw / 2;
+      var r = el('rect', {
+        'class': 'ds-chart__bar',
+        x: bx.toFixed(1),
+        y: y.toFixed(1),
+        width: bw.toFixed(1),
+        height: h.toFixed(1),
+        rx: '2',
+        tabindex: '0',
+        'data-index': j,
+        'data-value': v,
+        'data-label': labels[j] || '',
+        role: 'img'
+      }, g);
+      r.style.setProperty('--color', color);
+      if (cfg.options.animate) r.style.setProperty('--d', (j * 40) + 'ms');
+      items.push(r);
+    }
+    return { items: items, meta: { xBand: xBand, bw: bw, yScale: yScale } };
+  }
+
+  /* ---------- Renderer: Horizontal Bar ---------- */
+  function renderHBar(svg, cfg, ctx) {
+    var data = cfg.data || [];
+    var labels = cfg.labels || [];
+    var color = cfg._singleColor;
+    var xMax = -Infinity;
+    for (var i = 0; i < data.length; i++) { if (data[i] > xMax) xMax = data[i]; }
+    if (xMax <= 0) xMax = 1;
+    var xScale = scaleLinear(0, xMax, ctx.padL, ctx.w - ctx.padR);
+    xScale._min = 0; xScale._max = xMax;
+    var yBand = scaleBand(data.length, ctx.padT, ctx.h - ctx.padB, 0.25);
+    var stepY = ctx.plotH / data.length;
+    var bh = clampBarWidth(stepY);
+
+    drawAxes(svg, ctx, cfg, { x: xScale, y: yBand, xType: 'linear', yType: 'band' });
+
+    var g = el('g', { 'class': 'ds-chart__hbars' }, svg);
+    var items = [];
+    for (var j = 0; j < data.length; j++) {
+      var v = data[j];
+      var w = xScale(v) - ctx.padL;
+      if (w < 0) w = 0;
+      var by = ctx.padT + (j + 0.5) * stepY - bh / 2;
+      var r = el('rect', {
+        'class': 'ds-chart__bar',
+        x: ctx.padL,
+        y: by.toFixed(1),
+        width: w.toFixed(1),
+        height: bh.toFixed(1),
+        rx: '2',
+        tabindex: '0',
+        'data-index': j,
+        'data-value': v,
+        'data-label': labels[j] || '',
+        role: 'img'
+      }, g);
+      r.style.setProperty('--color', color);
+      if (cfg.options.animate) r.style.setProperty('--d', (j * 40) + 'ms');
+      items.push(r);
+    }
+    return { items: items, meta: { yBand: yBand, bh: bh, xScale: xScale } };
+  }
+
+  /* ---------- Renderer: Stacked Bar ---------- */
+  function renderStacked(svg, cfg, ctx) {
+    var series = cfg.series || [];
+    var labels = cfg.labels || [];
+    var n = series.length ? series[0].data.length : 0;
+    var totals = [];
+    for (var i = 0; i < n; i++) {
+      var t = 0;
+      for (var s = 0; s < series.length; s++) t += (series[s].data[i] || 0);
+      totals.push(t);
+    }
+    var yMax = -Infinity;
+    for (var j = 0; j < totals.length; j++) { if (totals[j] > yMax) yMax = totals[j]; }
+    if (yMax <= 0) yMax = 1;
+    var yScale = scaleLinear(0, yMax, ctx.h - ctx.padB, ctx.padT);
+    yScale._min = 0; yScale._max = yMax;
+    var xBand = scaleBand(n, ctx.padL, ctx.w - ctx.padR, 0.25);
+    var stepX = ctx.plotW / n;
+    var bw = clampBarWidth(stepX);
+
+    drawAxes(svg, ctx, cfg, { x: xBand, y: yScale, xType: 'band', yType: 'linear' });
+
+    var g = el('g', { 'class': 'ds-chart__stacked' }, svg);
+    var items = [];
+    var cums = [];
+    for (var k = 0; k < n; k++) cums.push(0);
+    for (var si = 0; si < series.length; si++) {
+      var sc = series[si].color;
+      for (var di = 0; di < series[si].data.length; di++) {
+        var v = series[si].data[di] || 0;
+        var baseY = yScale(cums[di]);
+        var topY = yScale(cums[di] + v);
+        var h = baseY - topY;
+        if (h < 0) h = 0;
+        var r = el('rect', {
+          'class': 'ds-chart__bar ds-chart__bar--stacked',
+          x: (ctx.padL + (di + 0.5) * stepX - bw / 2).toFixed(1),
+          y: topY.toFixed(1),
+          width: bw.toFixed(1),
+          height: h.toFixed(1),
+          rx: '2',
+          tabindex: '0',
+          'data-index': di,
+          'data-series': si,
+          'data-value': v,
+          'data-label': labels[di] || '',
+          'data-series-name': series[si].name || '',
+          role: 'img'
+        }, g);
+        r.style.setProperty('--color', sc);
+        if (cfg.options.animate) r.style.setProperty('--d', (di * 40) + 'ms');
+        items.push(r);
+        cums[di] += v;
+      }
+    }
+    return { items: items, meta: { xBand: xBand, bw: bw, yScale: yScale, series: series } };
+  }
+
+  /* ---------- Shared: pie arc path ---------- */
+  function arcPath(cx, cy, rOuter, rInner, startA, endA) {
+    var sr = startA * Math.PI / 180;
+    var er = endA * Math.PI / 180;
+    var sx = cx + rOuter * Math.cos(sr), sy = cy + rOuter * Math.sin(sr);
+    var ex = cx + rOuter * Math.cos(er), ey = cy + rOuter * Math.sin(er);
+    var large = (endA - startA) > 180 ? 1 : 0;
+    if (rInner > 0) {
+      var isx = cx + rInner * Math.cos(er), isy = cy + rInner * Math.sin(er);
+      var iex = cx + rInner * Math.cos(sr), iey = cy + rInner * Math.sin(sr);
+      return [
+        'M', sx.toFixed(2), sy.toFixed(2),
+        'A', rOuter.toFixed(2), rOuter.toFixed(2), 0, large, 1, ex.toFixed(2), ey.toFixed(2),
+        'L', isx.toFixed(2), isy.toFixed(2),
+        'A', rInner.toFixed(2), rInner.toFixed(2), 0, large, 0, iex.toFixed(2), iey.toFixed(2),
+        'Z'
+      ].join(' ');
+    } else {
+      return [
+        'M', cx, cy,
+        'L', sx.toFixed(2), sy.toFixed(2),
+        'A', rOuter.toFixed(2), rOuter.toFixed(2), 0, large, 1, ex.toFixed(2), ey.toFixed(2),
+        'Z'
+      ].join(' ');
+    }
+  }
+
+  /* ---------- Renderer: Pie ---------- */
+  function renderPie(svg, cfg, ctx) {
+    // P1-5: 饼图必须保持比例，避免拉伸为椭圆（与 multi-donut 一致）
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    var data = cfg.data || [];
+    // P1-4: 空数据守卫
+    if (!data.length) return { items: [], meta: {} };
+    var labels = cfg.labels || [];
+    var colors = cfg.options.colors.length ? cfg.options.colors : COLOR_DEFAULTS;
+    var total = 0;
+    for (var i = 0; i < data.length; i++) total += data[i];
+    if (total <= 0) total = 1;
+    var cx = ctx.w / 2, cy = ctx.h / 2;
+    var r = Math.min(ctx.plotW, ctx.plotH) / 2 - 4;
+    var startA = cfg.options.startAngle;
+    var g = el('g', { 'class': 'ds-chart__pie' }, svg);
+    var items = [];
+    for (var j = 0; j < data.length; j++) {
+      var sweep = (data[j] / total) * 360;
+      var endA = startA + sweep;
+      if (endA - startA >= 359.9) endA = startA + 359.9;
+      var p = el('path', {
+        'class': 'ds-chart__slice',
+        d: arcPath(cx, cy, r, 0, startA, endA),
+        tabindex: '0',
+        'data-index': j,
+        'data-value': data[j],
+        'data-label': labels[j] || '',
+        role: 'img'
+      }, g);
+      p.style.setProperty('--color', colors[j % colors.length]);
+      items.push(p);
+      startA = endA;
+    }
+    return { items: items, meta: { cx: cx, cy: cy } };
+  }
+
+  /* ---------- Renderer: Donut ---------- */
+  function renderDonut(svg, cfg, ctx) {
+    // P1-5: 环形图必须保持比例，避免拉伸为椭圆（与 multi-donut 一致）
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    // ---- Multi-donut mode ----
+    if (cfg.series && cfg.series.length > 1) {
+      return renderMultiDonut(svg, cfg, ctx);
+    }
+    // ---- Single donut logic ----
+    var o = cfg.options;
+    var cx = ctx.w / 2, cy = ctx.h / 2;
+    var r = Math.min(ctx.plotW, ctx.plotH) / 2 - 4;
+    var rInner = r * o.donutHole;
+
+    // Single-value donut (like a gauge/progress)
+    if (cfg.value != null) {
+      var pct = Math.min(Math.max(cfg.value, 0), 100);
+      var ring = el('circle', {
+        'class': 'ds-chart__donut-ring',
+        cx: cx, cy: cy, r: ((r + rInner) / 2).toFixed(2),
+        'pathLength': '100'
+      }, svg);
+      var seg = el('circle', {
+        'class': 'ds-chart__donut-seg',
+        cx: cx, cy: cy, r: ((r + rInner) / 2).toFixed(2),
+        'pathLength': '100',
+        'stroke-dasharray': pct + ' ' + (100 - pct),
+        'stroke-dashoffset': '0',
+        transform: 'rotate(' + o.startAngle + ' ' + cx + ' ' + cy + ')'
+      }, svg);
+      seg.style.setProperty('--color', cfg._singleColor);
+      // P1-4: 透明整圆 hit 作为唯一可聚焦元素，seg 仅为视觉展示，去除 tabindex 避免双重 Tab
+      var hit = el('circle', {
+        'class': 'ds-chart__donut-hit',
+        cx: cx, cy: cy, r: r.toFixed(2),
+        fill: 'transparent',
+        tabindex: '0',
+        'data-value': cfg.value,
+        'data-label': (cfg.labels && cfg.labels[0]) || '',
+        role: 'img',
+        'aria-label': cfg.value + '%'
+      }, svg);
+      hit.style.setProperty('--color', cfg._singleColor);
+      var txt = el('g', { 'class': 'ds-chart__donut-text' }, svg);
+      var captionLabel = (cfg.labels && cfg.labels[0]) || '';
+      if (captionLabel) {
+        var tc = el('text', {
+          'class': 'ds-chart__donut-caption',
+          x: cx, y: cy - 12, 'text-anchor': 'middle',
+          'dominant-baseline': 'central'
+        }, txt);
+        tc.textContent = captionLabel;
+      }
+      var tv = el('text', {
+        'class': 'ds-chart__donut-value',
+        x: cx, y: cy + 8, 'text-anchor': 'middle',
+        'dominant-baseline': 'central'
+      }, txt);
+      tv.textContent = pct + '%';
+      return { items: [hit], meta: { cx: cx, cy: cy } };
+    }
+
+    // Multi-slice donut (like pie with hole)
+    var data = cfg.data || [];
+    var labels = cfg.labels || [];
+    var colors = o.colors.length ? o.colors : COLOR_DEFAULTS;
+    var total = 0;
+    for (var i = 0; i < data.length; i++) total += data[i];
+    if (total <= 0) total = 1;
+    var startA = o.startAngle;
+    var g = el('g', { 'class': 'ds-chart__donut' }, svg);
+    var items = [];
+    for (var j = 0; j < data.length; j++) {
+      var sweep = (data[j] / total) * 360;
+      var endA = startA + sweep;
+      if (endA - startA >= 359.9) endA = startA + 359.9;
+      var p = el('path', {
+        'class': 'ds-chart__slice',
+        d: arcPath(cx, cy, r, rInner, startA, endA),
+        tabindex: '0',
+        'data-index': j,
+        'data-value': data[j],
+        'data-label': labels[j] || '',
+        role: 'img'
+      }, g);
+      p.style.setProperty('--color', colors[j % colors.length]);
+      items.push(p);
+      startA = endA;
+    }
+    return { items: items, meta: { cx: cx, cy: cy } };
+  }
+
+  /* ---------- Renderer: Multi-Donut ---------- */
+  function renderMultiDonut(svg, cfg, ctx) {
+    var o = cfg.options;
+    var n = cfg.series.length;
+    var perW = 200, perH = 200;
+    var totalW = perW * n, totalH = perH;
+    svg.setAttribute('viewBox', '0 0 ' + totalW + ' ' + totalH);
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    svg.classList.add('ds-chart__svg--donut-multi');
+    // 每环渲染 160px（匹配标准环形图），总宽 = n × 160px
+    svg.style.width = (n * 160) + 'px';
+    var items = [];
+    var donutSize = 160;
+    var r = donutSize / 2 - 10;
+    var rInner = r * o.donutHole;
+    for (var i = 0; i < n; i++) {
+      var s = cfg.series[i];
+      var cx = perW * i + perW / 2;
+      var cy = perH / 2 - 10;
+      var g = el('g', { 'class': 'ds-chart__donut ds-chart__donut--multi', 'data-series-index': i }, svg);
+      if (s.value != null) {
+        // Single-value ring
+        var pct = Math.min(Math.max(s.value, 0), 100);
+        var ringR = (r + rInner) / 2;
+        el('circle', { 'class': 'ds-chart__donut-ring', cx: cx, cy: cy, r: ringR.toFixed(2), pathLength: '100' }, g);
+        var seg = el('circle', {
+          'class': 'ds-chart__donut-seg', cx: cx, cy: cy, r: ringR.toFixed(2), pathLength: '100',
+          'stroke-dasharray': pct + ' ' + (100 - pct),
+          transform: 'rotate(' + o.startAngle + ' ' + cx + ' ' + cy + ')',
+          tabindex: '0', 'data-value': s.value, 'data-label': s.name || '',
+          role: 'img', 'aria-label': (s.name || '') + ' ' + s.value + '%'
+        }, g);
+        seg.style.setProperty('--color', s.color || o.colors[i] || COLOR_DEFAULTS[i % COLOR_DEFAULTS.length]);
+        items.push(seg);
+        var txt = el('g', { 'class': 'ds-chart__donut-text' }, g);
+        var tv = el('text', { 'class': 'ds-chart__donut-value', x: cx, y: cy + 6, 'text-anchor': 'middle', 'dominant-baseline': 'central' }, txt);
+        tv.textContent = pct + '%';
+      } else if (s.data && s.data.length) {
+        // Multi-slice ring
+        var data = s.data, labels = s.labels || [];
+        var colors = (s.colors && s.colors.length) ? s.colors : (o.colors.length ? o.colors : COLOR_DEFAULTS);
+        var total = 0;
+        for (var d = 0; d < data.length; d++) total += data[d];
+        if (total <= 0) total = 1;
+        var startA = o.startAngle;
+        for (var j = 0; j < data.length; j++) {
+          var sweep = (data[j] / total) * 360;
+          var endA = startA + sweep;
+          if (endA - startA >= 359.9) endA = startA + 359.9;
+          var p = el('path', {
+            'class': 'ds-chart__slice', d: arcPath(cx, cy, r, rInner, startA, endA),
+            tabindex: '0', 'data-index': j, 'data-value': data[j], 'data-label': labels[j] || '',
+            'data-series-index': i, role: 'img'
+          }, g);
+          p.style.setProperty('--color', colors[j % colors.length]);
+          items.push(p);
+          startA = endA;
+        }
+      }
+      // Group label at bottom
+      if (s.name) {
+        var gl = el('text', { 'class': 'ds-chart__donut-group-label', x: cx, y: perH - 16, 'text-anchor': 'middle', fill: 'currentColor' }, g);
+        gl.textContent = s.name;
+      }
+    }
+    return { items: items, meta: { multi: true } };
+  }
+
+  /* ---------- Renderer: Sparkline ---------- */
+  function renderSparkline(svg, cfg, ctx) {
+    var data = cfg.data || [];
+    // P1-4: 空数据守卫
+    if (!data.length) return { items: [], hitRects: [], meta: {} };
+    var color = cfg._singleColor;
+    var o = cfg.options;
+    var min = Infinity, max = -Infinity;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i] < min) min = data[i];
+      if (data[i] > max) max = data[i];
+    }
+    if (max === min) { max = min + 1; }
+    var yScale = scaleLinear(min, max, ctx.h, 0);
+    var stepX = ctx.w / (data.length - 1 || 1);
+    var pts = [];
+    for (var j = 0; j < data.length; j++) {
+      var x = j * stepX;
+      var y = yScale(data[j]);
+      pts.push(x.toFixed(1) + ',' + y.toFixed(1));
+    }
+
+    // 1. Baseline
+    if (o.baseline !== false) {
+      el('line', { 'class': 'ds-chart__sparkline-baseline', x1: 0, y1: (ctx.h - 0.5).toFixed(1), x2: ctx.w, y2: (ctx.h - 0.5).toFixed(1) }, svg);
+    }
+
+    // 2. Area fill (default on)
+    // Sparkline area fill defaults ON, independent of line/area `fill` option
+    if (o.area !== false && data.length >= 2) {
+      var areaPts = pts.slice();
+      areaPts.push(ctx.w.toFixed(1) + ',' + ctx.h);
+      areaPts.unshift('0,' + ctx.h);
+      var area = el('path', { 'class': 'ds-chart__area ds-chart__sparkline-area', d: 'M' + areaPts.join(' L') + ' Z' }, svg);
+      area.style.setProperty('--color', color);
+    }
+
+    // 3. Main line
+    var path = el('path', { 'class': 'ds-chart__line', d: 'M' + pts.join(' L') }, svg);
+    path.style.setProperty('--color', color);
+
+    // 4. Endpoint dot
+    if (o.endpoint !== false && data.length >= 1) {
+      var lastX = (data.length - 1) * stepX;
+      var lastY = yScale(data[data.length - 1]);
+      el('circle', {
+        'class': 'ds-chart__sparkline-endpoint',
+        cx: lastX.toFixed(1), cy: lastY.toFixed(1), r: 2.5,
+        fill: color
+      }, svg);
+    }
+    return { items: [path], meta: { yScale: yScale, stepX: stepX } };
+  }
+
+  /* ---------- Renderer: Line ---------- */
+  function renderLine(svg, cfg, ctx) {
+    var data = cfg.data || [];
+    // P1-4: 空数据守卫
+    if (!data.length) return { items: [], hitRects: [], meta: {} };
+    var labels = cfg.labels || [];
+    var color = cfg._singleColor;
+    var o = cfg.options;
+    var min = Infinity, max = -Infinity;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i] < min) min = data[i];
+      if (data[i] > max) max = data[i];
+    }
+    if (max === min) { max = min + 1; }
+    if (o.yAxis && o.yAxis.min && o.yAxis.min !== 'auto') min = o.yAxis.min;
+    else if (o.yMin && o.yMin !== 'auto') min = o.yMin;
+    if (o.yAxis && o.yAxis.max && o.yAxis.max !== 'auto') max = o.yAxis.max;
+    else if (o.yMax && o.yMax !== 'auto') max = o.yMax;
+    var yScale = scaleLinear(min, max, ctx.h - ctx.padB, ctx.padT);
+    yScale._min = min; yScale._max = max;
+    var xBand = scaleBand(data.length, ctx.padL, ctx.w - ctx.padR, 0);
+    var stepX = ctx.plotW / data.length;
+    var bw = stepX;
+
+    drawAxes(svg, ctx, cfg, { x: xBand, y: yScale, xType: 'band', yType: 'linear' });
+
+    var pts = [];
+    var dots = [];
+    for (var j = 0; j < data.length; j++) {
+      var x = ctx.padL + (j + 0.5) * stepX; // center-aligned with category tick
+      var y = yScale(data[j]);
+      pts.push(x.toFixed(1) + ',' + y.toFixed(1));
+      dots.push({ x: x, y: y, v: data[j] });
+    }
+
+    var g = el('g', { 'class': 'ds-chart__line' }, svg);
+
+    if (o.fill) {
+      var firstX = dots[0].x, lastX = dots[dots.length - 1].x;
+      var area = el('path', {
+        'class': 'ds-chart__area',
+        d: 'M' + pts.join(' L') + ' L' + lastX.toFixed(1) + ',' + (ctx.h - ctx.padB) +
+           ' L' + firstX.toFixed(1) + ',' + (ctx.h - ctx.padB) + ' Z'
+      }, g);
+      area.style.setProperty('--color', color);
+    }
+
+    var path = el('path', {
+      'class': 'ds-chart__line',
+      d: 'M' + pts.join(' L')
+    }, g);
+    path.style.setProperty('--color', color);
+
+    var dotEls = [];
+    if (o.dots) {
+      for (var d = 0; d < dots.length; d++) {
+        var dc = el('circle', {
+          'class': 'ds-chart__dot',
+          cx: dots[d].x.toFixed(1),
+          cy: dots[d].y.toFixed(1),
+          r: '2',
+          'data-index': d,
+          'data-value': data[d],
+          'data-label': labels[d] || ''
+        }, g);
+        dc.style.setProperty('--color', color);
+        dotEls.push(dc);
+      }
+    }
+
+    // transparent hit zones — centered on each data point
+    var hitG = el('g', { 'class': 'ds-chart__hit-zones' }, svg);
+    var hitRects = [];
+    var colW = ctx.plotW / data.length;
+    for (var h = 0; h < data.length; h++) {
+      var hx = ctx.padL + (h + 0.5) * colW - colW / 2;
+      var hw = colW;
+      if (data.length === 1) hw = ctx.plotW;
+      var hr = el('rect', {
+        'class': 'ds-chart__hit-zone',
+        x: hx.toFixed(1),
+        y: ctx.padT,
+        width: hw.toFixed(1),
+        height: ctx.plotH.toFixed(1),
+        fill: 'transparent',
+        tabindex: '0',
+        'data-index': h,
+        role: 'img',
+        'aria-label': (labels[h] || '') + ': ' + data[h]
+      }, hitG);
+      hitRects.push(hr);
+    }
+
+    return {
+      items: [path],
+      dots: dotEls,
+      hitRects: hitRects,
+      meta: { yScale: yScale, xBand: xBand, bw: bw, data: data, labels: labels, series: [{ name: cfg.title || 'Value', color: color, data: data }] }
+    };
+  }
+
+  /* ---------- Renderer: Multi / Combo ---------- */
+  function renderMulti(svg, cfg, ctx) {
+    var series = cfg.series || [];
+    var labels = cfg.labels || [];
+    var o = cfg.options;
+    // P1-4: 空数据守卫
+    if (!series.length) return { items: [], hitRects: [], meta: {} };
+    var dataLen = 0;
+    for (var si = 0; si < series.length; si++) {
+      if (series[si].data && series[si].data.length > dataLen) dataLen = series[si].data.length;
+    }
+    var allMin = Infinity, allMax = -Infinity;
+    for (var sj = 0; sj < series.length; sj++) {
+      var d = series[sj].data;
+      for (var di = 0; di < d.length; di++) {
+        if (d[di] < allMin) allMin = d[di];
+        if (d[di] > allMax) allMax = d[di];
+      }
+    }
+    if (allMax === allMin) { allMax = allMin + 1; }
+    if (allMin > 0) allMin = 0;
+    if (o.yAxis && o.yAxis.min && o.yAxis.min !== 'auto') allMin = o.yAxis.min;
+    else if (o.yMin && o.yMin !== 'auto') allMin = o.yMin;
+    if (o.yAxis && o.yAxis.max && o.yAxis.max !== 'auto') allMax = o.yAxis.max;
+    else if (o.yMax && o.yMax !== 'auto') allMax = o.yMax;
+    var yScale = scaleLinear(allMin, allMax, ctx.h - ctx.padB, ctx.padT);
+    yScale._min = allMin; yScale._max = allMax;
+    var xBand = scaleBand(dataLen, ctx.padL, ctx.w - ctx.padR, 0);
+
+    drawAxes(svg, ctx, cfg, { x: xBand, y: yScale, xType: 'band', yType: 'linear' });
+
+    // count bar series for grouping
+    var barSeries = [];
+    var lineSeries = [];
+    for (var sk = 0; sk < series.length; sk++) {
+      if (series[sk].chartType === 'bar') barSeries.push(series[sk]);
+      else lineSeries.push(series[sk]);
+    }
+
+    var items = [];
+    var dotEls = [];
+    var gBars = null, gLines = null;
+
+    // Bars (grouped)
+    if (barSeries.length) {
+      gBars = el('g', { 'class': 'ds-chart__bars ds-chart__bars--grouped' }, svg);
+      var colW = ctx.plotW / dataLen;
+      var groupW = clampBarWidth(colW);
+      var groupPad = colW - groupW;
+      var barW = groupW / barSeries.length;
+      for (var bi = 0; bi < barSeries.length; bi++) {
+        var bs = barSeries[bi];
+        for (var bj = 0; bj < bs.data.length; bj++) {
+          var v = bs.data[bj];
+          var by = yScale(Math.max(v, 0));
+          var bh = (ctx.h - ctx.padB) - by;
+          if (bh < 0) bh = 0;
+          var bx = ctx.padL + bj * colW + groupPad / 2 + bi * barW;
+          var rect = el('rect', {
+            'class': 'ds-chart__bar',
+            x: bx.toFixed(1),
+            y: by.toFixed(1),
+            width: barW.toFixed(1),
+            height: bh.toFixed(1),
+            rx: '2',
+            tabindex: '0',
+            'data-index': bj,
+            'data-series': bi,
+            'data-value': v,
+            'data-label': labels[bj] || '',
+            'data-series-name': bs.name || '',
+            role: 'img'
+          }, gBars);
+          rect.style.setProperty('--color', bs.color);
+          if (cfg.options.animate) rect.style.setProperty('--d', (bj * 40) + 'ms');
+          items.push(rect);
+        }
+      }
+    }
+
+    // Lines
+    if (lineSeries.length) {
+      gLines = el('g', { 'class': 'ds-chart__lines ds-chart__line' }, svg);
+      var stepX = ctx.plotW / dataLen;
+      for (var li = 0; li < lineSeries.length; li++) {
+        var ls = lineSeries[li];
+        var pts = [];
+        for (var lp = 0; lp < ls.data.length; lp++) {
+          var px = ctx.padL + (lp + 0.5) * stepX; // center-aligned with category tick
+          var py = yScale(ls.data[lp]);
+          pts.push(px.toFixed(1) + ',' + py.toFixed(1));
+        }
+        var lpEl = el('path', {
+          'class': 'ds-chart__line',
+          d: 'M' + pts.join(' L')
+        }, gLines);
+        lpEl.style.setProperty('--color', ls.color);
+        lpEl.setAttribute('data-series', li);
+        items.push(lpEl);
+        if (o.dots) {
+          for (var ld = 0; ld < ls.data.length; ld++) {
+            var dc = el('circle', {
+              'class': 'ds-chart__dot',
+              cx: (ctx.padL + (ld + 0.5) * stepX).toFixed(1),
+              cy: yScale(ls.data[ld]).toFixed(1),
+              r: '2',
+              'data-index': ld,
+              'data-series': li,
+              'data-value': ls.data[ld]
+            }, gLines);
+            dc.style.setProperty('--color', ls.color);
+            dotEls.push(dc);
+          }
+        }
+      }
+    }
+
+    // P1-5: 仅当存在折线系列时创建共享 hit zone（纯柱场景柱条自身已有 tabindex，避免双重 Tab）
+    var hitG = null, hitRects = [];
+    if (lineSeries.length > 0) {
+      hitG = el('g', { 'class': 'ds-chart__hit-zones' }, svg);
+      var colWidth = ctx.plotW / dataLen;
+      for (var h = 0; h < dataLen; h++) {
+        var hx = ctx.padL + (h + 0.5) * colWidth - colWidth / 2;
+        var hw = colWidth;
+        if (dataLen === 1) hw = ctx.plotW;
+        // 构建 aria-label：拼接该列所有系列的值
+        var hitLabelParts = [];
+        for (var hs = 0; hs < series.length; hs++) {
+          var sv = series[hs].data[h];
+          if (sv != null) {
+            hitLabelParts.push((series[hs].name || ('Series ' + (hs + 1))) + ': ' + sv);
+          }
+        }
+        var hr = el('rect', {
+          'class': 'ds-chart__hit-zone',
+          x: hx.toFixed(1),
+          y: ctx.padT,
+          width: hw.toFixed(1),
+          height: ctx.plotH.toFixed(1),
+          fill: 'transparent',
+          tabindex: '0',
+          'data-index': h,
+          role: 'img',
+          'aria-label': (labels[h] || ('Item ' + (h + 1))) + ' — ' + hitLabelParts.join(', ')
+        }, hitG);
+        hitRects.push(hr);
+      }
+    }
+
+    return {
+      items: items,
+      dots: dotEls,
+      hitRects: hitRects,
+      meta: { yScale: yScale, xBand: xBand, series: series, labels: labels }
+    };
+  }
+
+  /* ---------- Legend ---------- */
+  function drawLegend(host, cfg, meta) {
+    var series = (cfg.series && cfg.series.length) ? cfg.series : null;
+    if (!series) {
+      if (cfg.type === 'pie' || cfg.type === 'donut') {
+        if (!cfg.labels || !cfg.data) return;
+        series = [];
+        var colors = cfg.options.colors.length ? cfg.options.colors : COLOR_DEFAULTS;
+        for (var i = 0; i < cfg.data.length; i++) {
+          series.push({ name: cfg.labels[i] || String(i + 1), color: colors[i % colors.length] });
+        }
+      } else {
+        return;
+      }
+    }
+    var leg = document.createElement('div');
+    leg.className = 'ds-chart__legend';
+    var itemsArr = [];
+    for (var j = 0; j < series.length; j++) {
+      var item = document.createElement('span');
+      item.className = 'ds-chart__legend-item';
+      item.setAttribute('data-series', j);
+      item.setAttribute('tabindex', '0');
+      var sw = document.createElement('span');
+      sw.className = 'ds-chart__legend-swatch';
+      sw.style.background = series[j].color;
+      item.appendChild(sw);
+      item.appendChild(document.createTextNode(series[j].name || ('Series ' + (j + 1))));
+      leg.appendChild(item);
+      itemsArr.push(item);
+    }
+    host.appendChild(leg);
+
+    // Hover/focus → highlight series; dim others
+    var allItems = meta.items || [];
+    function setHighlight(idx) {
+      for (var k = 0; k < allItems.length; k++) {
+        var it = allItems[k];
+        // P1-3: pie/donut 切片用 data-index 表示系列索引，fallback 兼容
+        var si = it.getAttribute('data-series');
+        if (si == null) si = it.getAttribute('data-index');
+        if (si == null) continue;
+        var on = String(si) === String(idx);
+        it.style.opacity = on ? '1' : '0.25';
+      }
+    }
+    function clearHighlight() {
+      for (var k = 0; k < allItems.length; k++) {
+        allItems[k].style.opacity = '';
+      }
+    }
+    for (var m = 0; m < itemsArr.length; m++) {
+      (function (mi) {
+        itemsArr[mi].addEventListener('mouseenter', function () { setHighlight(mi); });
+        itemsArr[mi].addEventListener('mouseleave', clearHighlight);
+        itemsArr[mi].addEventListener('focus', function () { setHighlight(mi); });
+        itemsArr[mi].addEventListener('blur', clearHighlight);
+      })(m);
+    }
+  }
+
+  /* ---------- Tooltip (singleton) ---------- */
+  var tooltipEl = null;
+  function ensureTooltip() {
+    if (tooltipEl) return tooltipEl;
+    tooltipEl = document.createElement('div');
+    tooltipEl.className = 'ds-chart__tooltip';
+    tooltipEl.setAttribute('role', 'tooltip');
+    tooltipEl.style.position = 'fixed';
+    tooltipEl.style.pointerEvents = 'none';
+    tooltipEl.style.opacity = '0';
+    tooltipEl.style.transition = 'opacity 150ms ease';
+    tooltipEl.style.zIndex = '500';
+    document.body.appendChild(tooltipEl);
+    return tooltipEl;
+  }
+
+  function showTooltip(evt, items) {
+    var tip = ensureTooltip();
+    // P2-1: 使用 DOM API 构建，避免 innerHTML XSS
+    // 先清空旧内容
+    while (tip.firstChild) tip.removeChild(tip.firstChild);
+    if (items.label) {
+      var titleEl = document.createElement('div');
+      titleEl.className = 'ds-chart__tooltip-title';
+      titleEl.textContent = items.label;
+      tip.appendChild(titleEl);
+    }
+    if (items.values && items.values.length) {
+      for (var i = 0; i < items.values.length; i++) {
+        var v = items.values[i];
+        var row = document.createElement('div');
+        row.className = 'ds-chart__tooltip-row';
+        var swatch = document.createElement('span');
+        swatch.className = 'ds-chart__tooltip-swatch';
+        swatch.style.background = v.color;
+        row.appendChild(swatch);
+        if (v.name) {
+          var nameEl = document.createElement('span');
+          nameEl.className = 'ds-chart__tooltip-name';
+          nameEl.textContent = v.name;
+          row.appendChild(nameEl);
+        }
+        var valEl = document.createElement('span');
+        valEl.className = 'ds-chart__tooltip-value';
+        valEl.textContent = v.value;
+        row.appendChild(valEl);
+        tip.appendChild(row);
+      }
+    }
+    tip.style.opacity = '1';
+    // position
+    var x = evt.clientX + 12;
+    var y = evt.clientY + 12;
+    var tw = tip.offsetWidth, th = tip.offsetHeight;
+    if (x + tw > window.innerWidth - 8) x = evt.clientX - tw - 12;
+    if (y + th > window.innerHeight - 8) y = evt.clientY - th - 12;
+    tip.style.left = x + 'px';
+    tip.style.top = y + 'px';
+  }
+
+  function hideTooltip() {
+    if (tooltipEl) tooltipEl.style.opacity = '0';
+  }
+
+  /* ---------- Interactions ---------- */
+  function bindInteractions(svg, cfg, ctx, result) {
+    var type = cfg.type;
+    var o = cfg.options;
+    if (!o.tooltip) return;
+    var items = result.items;
+    var hitRects = result.hitRects;
+    var meta = result.meta;
+
+    function labelFor(idx) {
+      if (cfg.labels && cfg.labels[idx]) return cfg.labels[idx];
+      return String(idx + 1);
+    }
+
+    // Line / multi / combo: use hit zones
+    if (hitRects && hitRects.length) {
+      var seriesArr = meta.series || [];
+      for (var i = 0; i < hitRects.length; i++) {
+        (function (idx) {
+          var hr = hitRects[idx];
+          function onEnter(e) {
+            var values = [];
+            for (var s = 0; s < seriesArr.length; s++) {
+              var sd = seriesArr[s].data;
+              if (sd && idx < sd.length) {
+                values.push({ name: seriesArr[s].name || '', value: sd[idx], color: seriesArr[s].color });
+              }
+            }
+            showTooltip(e, { label: labelFor(idx), values: values });
+            // highlight dot
+            if (result.dots) {
+              for (var d = 0; d < result.dots.length; d++) {
+                if (String(result.dots[d].getAttribute('data-index')) === String(idx)) {
+                  result.dots[d].classList.add('is-hover');
+                }
+              }
+            }
+          }
+          function onLeave() {
+            hideTooltip();
+            if (result.dots) {
+              for (var d = 0; d < result.dots.length; d++) {
+                result.dots[d].classList.remove('is-hover');
+              }
+            }
+          }
+          hr.addEventListener('mousemove', function (e) {
+            onEnter(e);
+          });
+          hr.addEventListener('mouseleave', onLeave);
+          hr.addEventListener('focus', function (e) {
+            onEnter({ clientX: hr.getBoundingClientRect().left + hr.getBoundingClientRect().width / 2, clientY: hr.getBoundingClientRect().top });
+          });
+          hr.addEventListener('blur', onLeave);
+        })(i);
+      }
+      return;
+    }
+
+    // Bar / pie / donut / hbar / stacked: per-item
+    for (var j = 0; j < items.length; j++) {
+      (function (it) {
+        function onEnter(e) {
+          var v = it.getAttribute('data-value');
+          var lbl = it.getAttribute('data-label') || '';
+          var sn = it.getAttribute('data-series-name');
+          var color = getComputedStyle(it).getPropertyValue('--color').trim() || 'var(--ds-chart-1)';
+          var values = [{ name: sn || '', value: v, color: color }];
+          showTooltip(e, { label: lbl, values: values });
+          it.classList.add('is-hover');
+        }
+        function onLeave() {
+          hideTooltip();
+          it.classList.remove('is-hover');
+        }
+        it.addEventListener('mouseenter', onEnter);
+        it.addEventListener('mouseleave', onLeave);
+        it.addEventListener('focus', function (e) {
+          var r = it.getBoundingClientRect();
+          onEnter({ clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 });
+        });
+        it.addEventListener('blur', onLeave);
+      })(items[j]);
+    }
+  }
+
+  /* ---------- Animations ---------- */
+  function animEnter(svg, type, cfg) {
+    if (!cfg.options.animate) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+
+    // Bar types: CSS class-driven scaleY (add class to svg for descendant selector)
+    if (type === 'bar' || type === 'hbar' || type === 'stacked') {
+      svg.classList.add('ds-chart--anim-in');
+      return;
+    }
+
+    // Line types: stroke-dashoffset draw-in
+    if (type === 'line' || type === 'multiline' || type === 'combo' || type === 'sparkline') {
+      var paths = svg.querySelectorAll('path.ds-chart__line');
+      for (var p = 0; p < paths.length; p++) {
+        var path = paths[p];
+        try {
+          var len = path.getTotalLength();
+          path.style.strokeDasharray = len;
+          path.style.strokeDashoffset = len;
+          // force reflow then transition
+          // eslint-disable-next-line no-unused-expressions
+          path.getBoundingClientRect();
+          path.style.transition = 'stroke-dashoffset 700ms cubic-bezier(0.16, 1, 0.3, 1)';
+          path.style.strokeDashoffset = '0';
+        } catch (e) { console.warn('[EDIC chart] getTotalLength failed', e); }
+      }
+      return;
+    }
+
+    // Pie/donut: CSS-driven staggered fade-in + group-scale zoom (class-based)
+    if (type === 'pie' || type === 'donut') {
+      svg.classList.add('ds-chart--anim-in');
+      var slices = svg.querySelectorAll('.ds-chart__slice, .ds-chart__donut-seg');
+      for (var s = 0; s < slices.length; s++) {
+        slices[s].style.setProperty('--d', (s * 80) + 'ms');
+      }
+      // 动画结束后移除 ds-chart--anim-in，避免 animation-fill-mode:both
+      // 的 forwards 语义持续覆盖内联 opacity，导致图例高亮失效
+      var sliceCount = slices.length;
+      if (sliceCount === 0) {
+        svg.classList.remove('ds-chart--anim-in');
+      } else {
+        var finished = 0;
+        var onAnimEnd = function(e) {
+          if (e.animationName !== 'ds-fade-in') return;
+          e.target.removeEventListener('animationend', onAnimEnd);
+          finished++;
+          if (finished >= sliceCount) {
+            svg.classList.remove('ds-chart--anim-in');
+          }
+        };
+        for (var s2 = 0; s2 < slices.length; s2++) {
+          slices[s2].addEventListener('animationend', onAnimEnd);
+        }
+      }
+    }
+  }
+
+  /* ---------- Data table (sr-only fallback) ---------- */
+  function buildDataTable(cfg) {
+    var tbl = document.createElement('table');
+    tbl.className = 'ds-sr-only';
+    // sr-only 类已保证视觉隐藏但读屏可读，无需额外 aria-hidden
+    if (cfg.title) {
+      var cap = document.createElement('caption');
+      cap.textContent = cfg.title;
+      tbl.appendChild(cap);
+    }
+
+    // P1-6: 单值环形图（gauge）数据在 cfg.value，特殊处理
+    if (cfg.value != null && !cfg.data && !(cfg.series && cfg.series.length)) {
+      var thead0 = document.createElement('thead');
+      var trh0 = document.createElement('tr');
+      var th0 = document.createElement('th');
+      th0.textContent = 'Label';
+      trh0.appendChild(th0);
+      var thv0 = document.createElement('th');
+      thv0.textContent = 'Value';
+      trh0.appendChild(thv0);
+      thead0.appendChild(trh0);
+      tbl.appendChild(thead0);
+      var tbody0 = document.createElement('tbody');
+      var tr0 = document.createElement('tr');
+      var tdLabel = document.createElement('td');
+      tdLabel.textContent = (cfg.labels && cfg.labels[0]) || cfg.title || 'Value';
+      tr0.appendChild(tdLabel);
+      var tdVal = document.createElement('td');
+      tdVal.textContent = cfg.value + '%';
+      tr0.appendChild(tdVal);
+      tbody0.appendChild(tr0);
+      tbl.appendChild(tbody0);
+      return tbl;
+    }
+    var thead = document.createElement('thead');
+    var trh = document.createElement('tr');
+    var th0 = document.createElement('th');
+    th0.textContent = 'Label';
+    trh.appendChild(th0);
+    if (cfg.series && cfg.series.length) {
+      for (var s = 0; s < cfg.series.length; s++) {
+        var th = document.createElement('th');
+        th.textContent = cfg.series[s].name || ('Series ' + (s + 1));
+        trh.appendChild(th);
+      }
+    } else {
+      var thv = document.createElement('th');
+      thv.textContent = 'Value';
+      trh.appendChild(thv);
+    }
+    thead.appendChild(trh);
+    tbl.appendChild(thead);
+
+    var tbody = document.createElement('tbody');
+    var labels = cfg.labels || [];
+    var rows = Math.max(labels.length, (cfg.data && cfg.data.length) || 0);
+    if (cfg.series && cfg.series.length) {
+      rows = cfg.series[0].data ? cfg.series[0].data.length : 0;
+    }
+    for (var i = 0; i < rows; i++) {
+      var tr = document.createElement('tr');
+      var td0 = document.createElement('td');
+      td0.textContent = labels[i] || String(i + 1);
+      tr.appendChild(td0);
+      if (cfg.series && cfg.series.length) {
+        for (var s2 = 0; s2 < cfg.series.length; s2++) {
+          var td = document.createElement('td');
+          td.textContent = cfg.series[s2].data[i] != null ? cfg.series[s2].data[i] : '';
+          tr.appendChild(td);
+        }
+      } else {
+        var td1 = document.createElement('td');
+        td1.textContent = cfg.data && cfg.data[i] != null ? cfg.data[i] : '';
+        tr.appendChild(td1);
+      }
+      tbody.appendChild(tr);
+    }
+    tbl.appendChild(tbody);
+    return tbl;
+  }
+
+  /* ---------- Unified entry ---------- */
+  function renderChart(host, rawCfg) {
+    var cfg = normalizeConfig(rawCfg);
+    var type = cfg.type;
+
+    // SR-only data table
+    host.appendChild(buildDataTable(cfg));
+
+    var ctx = makeCtx(cfg);
+    var svg = el('svg', {
+      'class': 'ds-chart__svg ds-chart__svg--' + type,
+      viewBox: '0 0 ' + ctx.w + ' ' + ctx.h,
+      preserveAspectRatio: 'none',
+      role: 'presentation'
+    });
+
+    var result = { items: [], meta: {} };
+    switch (type) {
+      case 'bar':       result = renderBar(svg, cfg, ctx); break;
+      case 'hbar':      result = renderHBar(svg, cfg, ctx); break;
+      case 'stacked':   result = renderStacked(svg, cfg, ctx); break;
+      case 'pie':       result = renderPie(svg, cfg, ctx); break;
+      case 'donut':     result = renderDonut(svg, cfg, ctx); break;
+      case 'sparkline': result = renderSparkline(svg, cfg, ctx); break;
+      case 'line':      result = renderLine(svg, cfg, ctx); break;
+      case 'multiline':
+      case 'combo':     result = renderMulti(svg, cfg, ctx); break;
+      default: return;
+    }
+
+    host.insertBefore(svg, host.firstChild);
+
+    // Visible chart title (before SVG)
+    var chartTitle = cfg.title || cfg.options.title || cfg.options.chartTitle;
+    if (chartTitle) {
+      var titleEl = document.createElement('div');
+      titleEl.className = 'ds-chart__title';
+      titleEl.textContent = chartTitle;
+      host.insertBefore(titleEl, svg);
+    }
+
+    // Legend
+    if (cfg.options.legend) drawLegend(host, cfg, result);
+
+    // Interactions + tooltip
+    if (cfg.options.tooltip) bindInteractions(svg, cfg, ctx, result);
+
+    // Animate
+    animEnter(svg, type, cfg);
+  }
+
+  /* ---------- Bootstrap ---------- */
+  for (var c = 0; c < charts.length; c++) {
+    var host = charts[c];
+    var raw;
+    try { raw = JSON.parse(host.getAttribute('data-chart')); }
+    catch (err) { console.warn('[EDIC chart] parse error', err); continue; }
+    if (!raw || !raw.type) continue;
+    renderChart(host, raw);
   }
 })();

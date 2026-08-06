@@ -1,4 +1,4 @@
-/* ===== EDIC Design System v1.9.1 — Tokens & Styles ===== */
+/* ===== EDIC Design System v1.10.0 — Tokens & Styles ===== */
 
 :root {
   --ds-color-bg: oklch(97% 0.012 80);
@@ -156,6 +156,38 @@
   --ds-blur-md: 12px;
   --ds-blur-lg: 24px;
   --ds-blur-xl: 48px;
+
+  /* ===== Chart palette (代码高亮色系，chroma 降至 0.03-0.11 素雅化) ===== */
+  --ds-chart-1: oklch(62% 0.09 50);
+  --ds-chart-2: oklch(64% 0.09 145);
+  --ds-chart-3: oklch(58% 0.10 250);
+  --ds-chart-4: oklch(67% 0.11 65);
+  --ds-chart-5: oklch(62% 0.08 185);
+  --ds-chart-6: oklch(62% 0.09 310);
+  --ds-chart-7: oklch(70% 0.09 90);
+  --ds-chart-8: oklch(50% 0.08 30);
+  --ds-chart-bar-radius: var(--ds-radius-sm);
+  --ds-chart-grid-color: var(--ds-color-border-subtle);
+  --ds-chart-axis-color: var(--ds-color-border-strong);
+  --ds-chart-label-color: var(--ds-color-fg-subtle);
+  --ds-chart-axis-label-size: var(--ds-text-h5);       /* 20px，轴标签/轴标题专用字号 */
+  --ds-chart-label-size: var(--ds-text-body);          /* 16px，图例/组标签字号 */
+
+  /* —— 图表视觉样式变量（用户可调） —— */
+  --ds-chart-stroke-width: 2.5;
+  --ds-chart-area-opacity: 0.15;
+  --ds-chart-hover-brightness: 1.1;
+  --ds-chart-tooltip-bg: var(--ds-glass-bg);
+  --ds-chart-tooltip-border: var(--ds-glass-border);
+  --ds-chart-tooltip-shadow: var(--ds-shadow-lg);
+  --ds-chart-dot-size: 3;
+  --ds-chart-slice-gap: var(--ds-space-0-25);       /* 饼图/环形图扇区间细缝 1px */
+  --ds-chart-dot-stroke-width: 1.5;                 /* 数据点描边宽度（在暗色线上清晰） */
+  --ds-chart-dot-hover-scale: 1.67;                 /* 数据点 hover 放大倍数（5/3） */
+  --ds-chart-slice-hover-scale: 1.03;               /* 扇区 hover 自圆心轻微外扩 */
+  --ds-chart-bar-lift: calc(var(--ds-space-0-25) * -1); /* 柱状图 hover 上浮 -1px */
+  --ds-chart-sparkline-stroke-width: 2;             /* 迷你图线宽（120px 加宽后与常规线视觉接近） */
+
   /* ===== Gravitas & Glow (editorial dark-mode presence) =====
      Light mode defaults are 0% opacity — the tokens are defined for
      uniform utility class references, but visually inert. Dark mode
@@ -170,29 +202,29 @@
   --ds-glow-text-hover: 0 0 32px oklch(57% 0.065 115 / 16%);
   --ds-glow-surface: inset 0 1px 0 oklch(52% 0.08 115 / 0%);
   --ds-glow-aura: radial-gradient(ellipse at center,oklch(57% 0.065 115 / 0%) 0%,transparent 70%);
-  /* ===== Code block tokens (always dark bg) ===== */
-  --ds-code-bg: oklch(14% 0.025 60);
-  --ds-code-bg-bar: oklch(16% 0.022 62);
-  --ds-code-text: oklch(90% 0.015 85);
-  --ds-code-print-border: oklch(79% 0 0);
+  /* ===== Code block tokens (light mode: light bg + dark text) ===== */
+  --ds-code-bg: oklch(97% 0.005 85);
+  --ds-code-bg-bar: oklch(94% 0.008 85);
+  --ds-code-text: oklch(22% 0.03 60);
+  --ds-code-print-border: oklch(85% 0.02 60);
 
-  /* ===== Syntax highlighting tokens (always on dark code bg) ===== */
-  --ds-token-comment: oklch(55% 0.035 130);
-  --ds-token-keyword: oklch(78% 0.10 25);
-  --ds-token-string: oklch(82% 0.10 130);
-  --ds-token-function: oklch(85% 0.08 85);
-  --ds-token-number: oklch(80% 0.09 60);
-  --ds-token-tag: oklch(78% 0.09 60);
-  --ds-token-attr-name: oklch(75% 0.06 180);
-  --ds-token-class: oklch(78% 0.07 200);
-  --ds-token-builtin: oklch(80% 0.09 60);
-  --ds-token-operator: oklch(70% 0.02 80);
-  --ds-token-punctuation: oklch(65% 0.02 80);
-  --ds-token-variable: oklch(85% 0.05 70);
-  --ds-token-selector: oklch(85% 0.08 85);
-  --ds-token-inserted: oklch(70% 0.10 145);
-  --ds-token-deleted: oklch(65% 0.14 30);
-  --ds-token-url: oklch(72% 0.08 200);
+  /* ===== Syntax highlighting tokens (light mode: dark on light) ===== */
+  --ds-token-comment: oklch(42% 0.04 130);
+  --ds-token-keyword: oklch(42% 0.20 25);
+  --ds-token-string: oklch(45% 0.15 145);
+  --ds-token-function: oklch(45% 0.14 95);
+  --ds-token-number: oklch(42% 0.17 55);
+  --ds-token-tag: oklch(42% 0.16 40);
+  --ds-token-attr-name: oklch(42% 0.10 200);
+  --ds-token-class: oklch(42% 0.14 260);
+  --ds-token-builtin: oklch(42% 0.16 55);
+  --ds-token-operator: oklch(38% 0.04 80);
+  --ds-token-punctuation: oklch(34% 0.03 80);
+  --ds-token-variable: oklch(40% 0.08 70);
+  --ds-token-selector: oklch(45% 0.14 95);
+  --ds-token-inserted: oklch(40% 0.14 145);
+  --ds-token-deleted: oklch(42% 0.18 25);
+  --ds-token-url: oklch(42% 0.12 250);
 
 }
 
@@ -280,6 +312,23 @@ html[lang="zh-CN"] {
     --ds-code-bg: oklch(18% 0.01 75);
     --ds-code-bg-bar: oklch(20% 0.012 75);
     --ds-code-text: oklch(88% 0.01 85);
+    --ds-code-print-border: oklch(79% 0 0);
+    --ds-token-comment: oklch(55% 0.035 130);
+    --ds-token-keyword: oklch(78% 0.10 25);
+    --ds-token-string: oklch(82% 0.10 130);
+    --ds-token-function: oklch(85% 0.08 85);
+    --ds-token-number: oklch(80% 0.09 60);
+    --ds-token-tag: oklch(78% 0.09 60);
+    --ds-token-attr-name: oklch(75% 0.06 180);
+    --ds-token-class: oklch(78% 0.07 200);
+    --ds-token-builtin: oklch(80% 0.09 60);
+    --ds-token-operator: oklch(70% 0.02 80);
+    --ds-token-punctuation: oklch(65% 0.02 80);
+    --ds-token-variable: oklch(85% 0.05 70);
+    --ds-token-selector: oklch(85% 0.08 85);
+    --ds-token-inserted: oklch(70% 0.10 145);
+    --ds-token-deleted: oklch(65% 0.14 30);
+    --ds-token-url: oklch(72% 0.08 200);
     /* Dark-mode gravitas & glow: warm olive undertone on shadow
        depths and a subtle luminous edge. Stays a whisper, never neon. */
     --ds-glow-xs: 0 0 12px oklch(57% 0.065 115 / 4%);
@@ -291,6 +340,22 @@ html[lang="zh-CN"] {
     --ds-glow-text-hover: 0 0 32px oklch(62% 0.07 115 / 20%);
     --ds-glow-surface: inset 0 1px 0 oklch(57% 0.065 115 / 8%);
     --ds-glow-aura: radial-gradient(ellipse at center,oklch(57% 0.065 115 / 10%) 0%,transparent 70%);
+
+    /* ===== Chart palette (dark mode) ===== */
+    --ds-chart-1: oklch(72% 0.08 50);
+    --ds-chart-2: oklch(74% 0.08 145);
+    --ds-chart-3: oklch(68% 0.09 250);
+    --ds-chart-4: oklch(77% 0.10 65);
+    --ds-chart-5: oklch(72% 0.07 185);
+    --ds-chart-6: oklch(72% 0.08 310);
+    --ds-chart-7: oklch(80% 0.08 90);
+    --ds-chart-8: oklch(60% 0.07 30);
+    --ds-chart-grid-color: var(--ds-color-border-subtle);
+    --ds-chart-axis-color: var(--ds-color-border-strong);
+    --ds-chart-label-color: var(--ds-color-fg-subtle);
+    --ds-chart-tooltip-bg: var(--ds-glass-bg);
+    --ds-chart-tooltip-border: var(--ds-glass-border);
+    --ds-chart-tooltip-shadow: var(--ds-shadow-lg);
   }
 }
 [data-theme="dark"] {
@@ -357,6 +422,23 @@ html[lang="zh-CN"] {
   --ds-code-bg: oklch(18% 0.01 75);
   --ds-code-bg-bar: oklch(20% 0.012 75);
   --ds-code-text: oklch(88% 0.01 85);
+  --ds-code-print-border: oklch(79% 0 0);
+  --ds-token-comment: oklch(55% 0.035 130);
+  --ds-token-keyword: oklch(78% 0.10 25);
+  --ds-token-string: oklch(82% 0.10 130);
+  --ds-token-function: oklch(85% 0.08 85);
+  --ds-token-number: oklch(80% 0.09 60);
+  --ds-token-tag: oklch(78% 0.09 60);
+  --ds-token-attr-name: oklch(75% 0.06 180);
+  --ds-token-class: oklch(78% 0.07 200);
+  --ds-token-builtin: oklch(80% 0.09 60);
+  --ds-token-operator: oklch(70% 0.02 80);
+  --ds-token-punctuation: oklch(65% 0.02 80);
+  --ds-token-variable: oklch(85% 0.05 70);
+  --ds-token-selector: oklch(85% 0.08 85);
+  --ds-token-inserted: oklch(70% 0.10 145);
+  --ds-token-deleted: oklch(65% 0.14 30);
+  --ds-token-url: oklch(72% 0.08 200);
   /* Dark-mode gravitas & glow (manual [data-theme="dark"]): mirror
      the @media values so token resolution is identical regardless
      of which selector triggered dark mode. */
@@ -369,6 +451,22 @@ html[lang="zh-CN"] {
   --ds-glow-text-hover: 0 0 32px oklch(62% 0.07 115 / 20%);
   --ds-glow-surface: inset 0 1px 0 oklch(57% 0.065 115 / 8%);
   --ds-glow-aura: radial-gradient(ellipse at center,oklch(57% 0.065 115 / 10%) 0%,transparent 70%);
+
+  /* ===== Chart palette (dark mode) ===== */
+  --ds-chart-1: oklch(72% 0.08 50);
+  --ds-chart-2: oklch(74% 0.08 145);
+  --ds-chart-3: oklch(68% 0.09 250);
+  --ds-chart-4: oklch(77% 0.10 65);
+  --ds-chart-5: oklch(72% 0.07 185);
+  --ds-chart-6: oklch(72% 0.08 310);
+  --ds-chart-7: oklch(80% 0.08 90);
+  --ds-chart-8: oklch(60% 0.07 30);
+  --ds-chart-grid-color: var(--ds-color-border-subtle);
+  --ds-chart-axis-color: var(--ds-color-border-strong);
+  --ds-chart-label-color: var(--ds-color-fg-subtle);
+  --ds-chart-tooltip-bg: var(--ds-glass-bg);
+  --ds-chart-tooltip-border: var(--ds-glass-border);
+  --ds-chart-tooltip-shadow: var(--ds-shadow-lg);
 }
 
 /* ===== Reset & Base ===== */
@@ -611,6 +709,18 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .ds-accordion-item.open .ds-accordion-arrow{transform:rotate(180deg)}
 .ds-accordion-content{padding:0 var(--ds-space-4) var(--ds-space-4);font-size:var(--ds-text-body-sm);color:var(--ds-color-muted);display:none}
 .ds-accordion-item.open .ds-accordion-content{display:block}
+
+/* ===== Collapsible code blocks (visual handbook) =====
+   Full-width ds-accordion variant: the "查看代码" pill and the ds-code
+   block join into one continuous frame when expanded. Interaction
+   (arrow rotation, hover tint, focus ring, .open class) is inherited
+   from the base accordion; only sizing/borders are redefined. */
+.ds-accordion--code{max-width:none;border:none;overflow:visible;margin-top:var(--ds-space-4)}
+.ds-accordion--code .ds-accordion-item{border-bottom:none}
+.ds-accordion--code .ds-accordion-header{padding:var(--ds-space-2) var(--ds-space-4);font-weight:600;font-size:var(--ds-text-body-sm);color:var(--ds-color-fg-subtle);border:1px solid var(--ds-color-border);border-radius:var(--ds-radius-lg);transition:background var(--ds-duration-150),border-color var(--ds-duration-150)}
+.ds-accordion--code .ds-accordion-item.open .ds-accordion-header{border-radius:var(--ds-radius-lg) var(--ds-radius-lg) 0 0;border-bottom-color:var(--ds-color-border-subtle)}
+.ds-accordion--code .ds-accordion-content{padding:0;font-size:var(--ds-text-body-sm);color:inherit}
+.ds-accordion--code .ds-code{margin:0;border-radius:0 0 var(--ds-radius-xl) var(--ds-radius-xl);border-top:none;box-shadow:none}
 
 /* ===== Tabs ===== */
 .ds-tabs{display:inline-flex;border-radius:var(--ds-radius-xl);background:var(--ds-color-surface);padding:var(--ds-space-0-75);border:1px solid var(--ds-color-border-subtle);gap:var(--ds-space-0-25)}
@@ -1120,7 +1230,7 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .ds-logo-mark svg{width:24px;height:24px}
 .ds-logo-text{display:flex;flex-direction:column;line-height:1}
 .ds-logo-word{font-family:var(--ds-font-display);font-weight:var(--ds-weight-bold);font-size:var(--ds-text-body-lg);letter-spacing:var(--ds-tracking-tight);color:var(--ds-color-fg-strong)}
-.ds-logo-sub{font-family:var(--ds-font-mono);font-size:9px;font-weight:600;letter-spacing:var(--ds-tracking-widest);text-transform:uppercase;color:var(--ds-color-muted);margin-top:3px}
+.ds-logo-sub{font-family:var(--ds-font-mono);font-size:10px;font-weight:600;letter-spacing:var(--ds-tracking-widest);text-transform:uppercase;color:var(--ds-color-muted);margin-top:3px}
 .ds-logo--lg .ds-logo-mark{width:56px;height:56px;border-radius:var(--ds-radius-xl)}
 .ds-logo--lg .ds-logo-mark svg{width:36px;height:36px}
 .ds-logo--lg .ds-logo-word{font-size:var(--ds-text-h3)}
@@ -1480,7 +1590,7 @@ a.ds-feature-card:focus-visible{outline:2px solid var(--ds-accent);outline-offse
 .ds-pt-0{padding-top:0}
 
 /* =========================================================================
-   CGArtLab Design System v1.9.1 — Gravitas & Glow
+   CGArtLab Design System v1.10.0 — Gravitas & Glow
    Dark-mode editorial presence: warm olive undertone on shadow depths,
    luminous borders, soft auras, and inner-surface glow. Light mode
    stays restrained (0% opacity tokens, classes visually inert).
@@ -1537,3 +1647,78 @@ a.ds-feature-card:focus-visible{outline:2px solid var(--ds-accent);outline-offse
 .ds-skip:focus{top:var(--ds-space-4)}
 #ds-main{outline:none}
 #ds-main:focus-visible{outline:2px solid var(--ds-accent);outline-offset:2px}
+
+/* ===== ds-chart: 统一 SVG 图表引擎 ===== */
+.ds-chart{position:relative;font-family:var(--ds-font-body);color:var(--ds-color-fg)}
+.ds-chart__title{font-family:var(--ds-font-display);font-size:var(--ds-text-h5);font-weight:var(--ds-weight-semibold);color:var(--ds-color-fg-strong);margin-bottom:var(--ds-space-3)}
+.ds-chart__subtitle{font-size:var(--ds-text-body-sm);color:var(--ds-color-muted);margin-bottom:var(--ds-space-4)}
+.ds-chart__svg{display:block;width:100%;height:auto;overflow:visible}
+.ds-chart__grid-line{stroke:var(--ds-chart-grid-color);stroke-width:1;stroke-dasharray:3 3}
+.ds-chart__axis-line{stroke:var(--ds-chart-axis-color);stroke-width:1}
+.ds-chart__axis-label{fill:var(--ds-chart-label-color);font-size:var(--ds-chart-axis-label-size);font-family:var(--ds-font-body);font-weight:var(--ds-weight-medium)}
+.ds-chart__bar{fill:var(--color,var(--ds-chart-1));rx:var(--ds-chart-bar-radius);transform-box:fill-box;transform-origin:bottom;cursor:pointer;transition:filter var(--ds-duration-150),transform var(--ds-duration-200) var(--ds-ease-out)}
+.ds-chart__bar.is-hover,.ds-chart__bar:hover,.ds-chart__bar:focus{filter:brightness(var(--ds-chart-hover-brightness));outline:none}
+.ds-chart:not(.ds-chart--horizontal) .ds-chart__bar.is-hover,.ds-chart:not(.ds-chart--horizontal) .ds-chart__bar:hover,.ds-chart:not(.ds-chart--horizontal) .ds-chart__bar:focus{transform:translateY(var(--ds-chart-bar-lift))}
+.ds-chart__bar:focus-visible{outline:2px solid var(--ds-accent);outline-offset:2px}
+.ds-chart__line{fill:none;stroke:var(--color,var(--ds-chart-1));stroke-width:var(--ds-chart-stroke-width);stroke-linejoin:round;stroke-linecap:round;transition:opacity var(--ds-duration-200)}
+.ds-chart__area{fill:var(--color,var(--ds-chart-1));opacity:var(--ds-chart-area-opacity);transition:opacity var(--ds-duration-200)}
+.ds-chart__dot{fill:var(--color,var(--ds-chart-1));r:var(--ds-chart-dot-size);stroke:var(--ds-color-surface);stroke-width:var(--ds-chart-dot-stroke-width);transform-box:fill-box;transform-origin:center;transition:transform var(--ds-duration-200) var(--ds-ease-out)}
+.ds-chart__dot.is-hover,.ds-chart__dot:hover{transform:scale(var(--ds-chart-dot-hover-scale))}
+.ds-chart__slice{fill:var(--color,var(--ds-chart-1));stroke:var(--ds-color-surface);stroke-width:var(--ds-chart-slice-gap);stroke-linejoin:round;transform-box:view-box;transform-origin:center;cursor:pointer;transition:filter var(--ds-duration-150),transform var(--ds-duration-200) var(--ds-ease-out)}
+.ds-chart__slice.is-hover,.ds-chart__slice:hover{filter:brightness(var(--ds-chart-hover-brightness));transform:scale(var(--ds-chart-slice-hover-scale))}
+.ds-chart__slice:focus-visible{outline:2px solid var(--ds-accent);outline-offset:2px}
+.ds-chart__pie,.ds-chart__donut{transform-box:view-box;transform-origin:center}
+.ds-chart__donut-ring{fill:none;stroke:var(--ds-chart-grid-color);stroke-width:10;stroke-linecap:round}
+.ds-chart__donut-seg{fill:none;stroke:var(--color,var(--ds-chart-1));stroke-width:10;stroke-linecap:round;transition:stroke-dasharray var(--ds-duration-500) var(--ds-ease-out)}
+.ds-chart__donut-text{text-anchor:middle;font-family:var(--ds-font-display);pointer-events:none}
+.ds-chart__donut-value{font-size:var(--ds-text-h5);font-weight:var(--ds-weight-bold);letter-spacing:var(--ds-tracking-tight);fill:var(--ds-color-fg-strong)}
+.ds-chart__donut-caption{font-size:var(--ds-text-body-sm);fill:var(--ds-color-muted);letter-spacing:var(--ds-tracking-wide)}
+.ds-chart__legend{display:flex;flex-wrap:wrap;gap:var(--ds-space-3) var(--ds-space-4);margin-top:var(--ds-space-3);font-size:var(--ds-chart-label-size);color:var(--ds-color-fg-subtle)}
+.ds-chart__legend-item{display:flex;align-items:center;gap:var(--ds-space-2);cursor:pointer;transition:opacity var(--ds-duration-150)}
+.ds-chart__legend-item:hover .ds-chart__legend-swatch{filter:brightness(var(--ds-chart-hover-brightness))}
+.ds-chart__legend-swatch{width:var(--ds-space-3);height:var(--ds-space-3);border-radius:var(--ds-radius-sm);border:1px solid var(--ds-chart-tooltip-border);box-sizing:border-box;flex-shrink:0;transition:filter var(--ds-duration-150)}
+.ds-chart__tooltip{position:fixed;background:var(--ds-chart-tooltip-bg);-webkit-backdrop-filter:blur(var(--ds-blur-md));backdrop-filter:blur(var(--ds-blur-md));border:1px solid var(--ds-chart-tooltip-border);border-radius:var(--ds-radius-lg);box-shadow:var(--ds-chart-tooltip-shadow);padding:var(--ds-space-2) var(--ds-space-3);font-size:var(--ds-text-body-sm);color:var(--ds-color-fg);min-width:120px;pointer-events:none;z-index:var(--ds-z-dropdown);opacity:0;transition:opacity var(--ds-duration-150)}
+.ds-chart__tooltip-title{font-weight:var(--ds-weight-semibold);color:var(--ds-color-fg-strong);margin-bottom:var(--ds-space-2);letter-spacing:var(--ds-tracking-wide)}
+.ds-chart__tooltip-row{display:flex;align-items:center;gap:var(--ds-space-2);padding:var(--ds-space-0-5) 0}
+.ds-chart__tooltip-swatch{width:var(--ds-space-2);height:var(--ds-space-2);border-radius:var(--ds-radius-sm);flex-shrink:0}
+.ds-chart__tooltip-name{flex:1;color:var(--ds-color-fg-subtle)}
+.ds-chart__tooltip-value{font-weight:var(--ds-weight-semibold);color:var(--ds-color-fg-strong);font-variant-numeric:tabular-nums;margin-left:var(--ds-space-3)}
+@keyframes ds-chart-bar-grow{from{transform:scaleY(0)}}
+@keyframes ds-chart-bar-grow-x{from{transform:scaleX(0)}}
+@keyframes ds-chart-pie-zoom{from{opacity:0;transform:scale(0.96)}}
+.ds-chart--anim-in .ds-chart__bar{animation:ds-chart-bar-grow var(--ds-duration-500) var(--ds-ease-out) backwards;transform-origin:bottom;animation-delay:var(--d,0ms)}
+.ds-chart__svg--hbar.ds-chart--anim-in .ds-chart__bar{animation-name:ds-chart-bar-grow-x;transform-origin:left}
+.ds-chart--anim-in .ds-chart__slice,.ds-chart--anim-in .ds-chart__donut-seg{animation:ds-fade-in var(--ds-duration-300) var(--ds-ease-out) both;animation-delay:var(--d,0ms)}
+.ds-chart--anim-in .ds-chart__pie,.ds-chart--anim-in .ds-chart__donut{animation:ds-chart-pie-zoom var(--ds-duration-500) var(--ds-ease-out) both}
+/* variants: semantic wrappers for unified SVG engine */
+.ds-chart--bar{display:block}
+.ds-chart--horizontal{display:block}
+.ds-chart--stacked{display:block}
+.ds-chart--pie{display:flex;flex-direction:column;align-items:center}
+.ds-chart--pie .ds-chart__svg{width:160px;height:auto}
+.ds-chart--donut{display:flex;flex-direction:column;align-items:center}
+.ds-chart--donut .ds-chart__svg{width:160px;height:auto}
+.ds-chart--donut .ds-chart__svg--donut-multi{width:auto;height:auto;max-width:100%;max-height:none}
+.ds-chart__donut-group-label{font-size:var(--ds-chart-label-size);font-family:var(--ds-font-body);font-weight:var(--ds-weight-semibold);fill:var(--ds-color-fg)}
+.ds-chart--line{display:block}
+.ds-chart--multiline{display:block}
+.ds-chart--combo{display:block}
+.ds-chart--sparkline{display:inline-flex;vertical-align:middle}
+.ds-chart--sparkline .ds-chart__svg{width:120px;height:28px}
+.ds-chart--sparkline .ds-chart__line{stroke-width:var(--ds-chart-sparkline-stroke-width)}
+.ds-chart__sparkline-baseline{stroke:var(--ds-chart-grid-color);stroke-width:1;opacity:0.6}
+.ds-chart__sparkline-area{opacity:0.15}
+.ds-chart__sparkline-endpoint{stroke:var(--ds-color-surface);stroke-width:1.5}
+.ds-chart__delta{display:inline-block;font-size:var(--ds-text-caption);color:var(--ds-color-muted);margin-left:var(--ds-space-3);vertical-align:middle}
+.ds-chart__hit-layer{pointer-events:none}
+
+/* ===== Chart axis system (引擎 drawAxes 生成) ===== */
+.ds-chart__axes{color:var(--ds-chart-label-color)}
+.ds-chart__tick-line{stroke:var(--ds-chart-axis-color);stroke-width:1}
+.ds-chart__tick-label{fill:var(--ds-chart-label-color);font-size:var(--ds-chart-axis-label-size);font-family:var(--ds-font-body);font-weight:var(--ds-weight-medium);letter-spacing:normal;font-variant-numeric:tabular-nums}
+.ds-chart__axis-title{fill:var(--ds-color-fg-subtle);font-size:var(--ds-chart-axis-label-size);font-family:var(--ds-font-body);font-weight:var(--ds-weight-semibold)}
+@media(prefers-reduced-motion:reduce){
+  .ds-chart__bar,.ds-chart__line,.ds-chart__slice,.ds-chart__donut-seg,.ds-chart__dot,.ds-chart__pie,.ds-chart__donut,.ds-chart--anim-in .ds-chart__bar{animation:none!important;transition:none!important}
+  .ds-chart__line{stroke-dasharray:none!important;stroke-dashoffset:0!important}
+}
+

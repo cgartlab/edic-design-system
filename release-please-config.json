@@ -25,7 +25,9 @@
         "VERSION",
         { "type": "json", "path": "tokens.json",  "jsonpath": "$.version" },
         { "type": "json", "path": "package.json", "jsonpath": "$.version" }
-      ]
+      ],
+      "versioning-strategy": "default",
+      "bump-minor-pre-major": false
     }
   }
 }

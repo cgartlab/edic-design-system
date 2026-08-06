@@ -25,7 +25,7 @@ VALID_CATEGORIES = {
     "space", "radius", "shadow", "duration", "ease", "bp", "z",
     "blur", "glass", "accent", "opacity", "size",
     "code", "token", "cjk", "reveal", "draw", "stack", "brand", "glow",
-    "gradient",
+    "gradient", "chart",
 }
 
 BEM_CLASS = re.compile(r'\bclass="([^"]+)"')
