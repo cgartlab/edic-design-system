@@ -68,12 +68,10 @@ jobs:
           manifest-file: .release-please-manifest.json
           release-as: ${{ inputs.release-as }}
           prerelease: ${{ inputs.prerelease }}
-          # ── 核心策略：不创建 GitHub Release，不打 tag ──────────────────
-          # release-please 只负责 Release PR + CHANGELOG 更新。
-          # 实际 tag 和 Release 由人类在验收 Release PR 后手动执行：
-          #   git tag vX.Y.Z && git push origin vX.Y.Z
-          # 这样避免了未经人类审查就触发资产构建和发布的风险。
-          skip-github-release: "true"
+          # ── 全自动发布：Release PR 合并后自动创建 GitHub Release + tag ──
+          # release-please 负责 Release PR + CHANGELOG 更新 + 创建 GitHub Release。
+          # tag 创建后触发 release.yml（push: tags/v*），自动构建资产并发布。
+          skip-github-release: "false"
 
       - name: Show release result
         if: steps.rp.outputs.release_created == 'true'

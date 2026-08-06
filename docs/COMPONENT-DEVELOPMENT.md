@@ -248,3 +248,29 @@ draft → proposal → in-development → review → stable → deprecated → r
 
 *本指南与 [DEVELOPMENT-GUIDE.md](../DEVELOPMENT-GUIDE.md) 互补：
 DEVELOPMENT-GUIDE.md 是技术参考（已实现的细节），本文是开发流程。*
+
+## 10. 新增图表类型
+
+`ds-chart` 是统一 SVG 图表引擎，支持 bar / line / area / pie / donut / sparkline / combo / stacked / horizontal / multiline 等变体。添加新图表类型时需同步更新以下文件：
+
+### 步骤清单
+
+1. **`scripts.js`**
+   - 编写 `renderXxx(config, container)` 渲染函数（SVG 字符串拼接）
+   - 在 `renderChart(type, ...)` 的 `switch` 中添加新 case
+
+2. **`styles.css`**
+   - 添加 `.ds-chart--xxx` 变体类（布局、尺寸、对齐）
+   - 如需新增 token，在 `:root` 中声明（暗色需在 `[data-theme="dark"]` 与 `@media (prefers-color-scheme: dark)` 两处覆盖）
+
+3. **`docs.html`**
+   - 在 `#visual-charts` 节添加新类型预览卡片
+   - 用折叠代码块包裹（`.ds-accordion--code`），代码块 id 遵循 `chart-code-NN` 编号
+
+4. **`tokens.json`**
+   - 如有新增 token，按 dot-notation 同步（如 `"chart-xxx"`）
+   - 更新 `"version"` 字段
+
+5. **验证**
+   - 运行 `make validate`（全量校验：OKLch 合规、暗色覆盖、token 同步）
+   - 运行 `make stamp-version` 同步 HTML 缓存戳

@@ -81,29 +81,32 @@ release.yml 自动触发 → 构建资产 → 创建 GitHub Release
 
 ---
 
-## 发布阶段（手动打 tag）
+## 发布阶段（验证自动 tag + GitHub Release）
+
+release-please 在 Release PR 合并后**自动**创建 tag 和 GitHub Release（Draft）。
+人工任务仅负责验证和发布：
 
 ```bash
-# 1. 确保本地 main 是最新
-git checkout main && git pull
+# 1. 确认 release-please job 成功（Actions → Release Please）
+#    - tag vX.Y.Z 已创建
+#    - GitHub Release（Draft）已创建
 
-# 2. 验证
-make validate
+# 2. 确认 post-merge-stamp 成功（Actions → Release Please 中的 stamp job）
+#    - VERSION 已更新到新值
+#    - changelog.html 已重建
 
-# 3. 打版本 tag（格式必须是 vX.Y.Z）
-git tag vX.Y.Z
-git push origin vX.Y.Z
-
-# → release.yml 自动触发：
-#   - 构建 PDF、Skill ZIP、完整发行 ZIP
-#   - 生成 CHECKSUMS.txt
-#   - 创建 GitHub Release 并上传所有资产
+# 3. 手动发布 Draft Release：
+#    GitHub UI → Releases → 点击该 Draft → "Publish release"
+#    或：gh release edit vX.Y.Z --publish
 ```
 
-- [ ] tag 已推送：`git push origin vX.Y.Z`
-- [ ] GitHub Actions → Release Pipeline 运行成功
+- [ ] tag 已创建：`git tag -l vX.Y.Z`
+- [ ] GitHub Release（Draft）已存在
+- [ ] post-merge-stamp job 成功
+- [ ] GitHub Actions → Release Pipeline 运行成功（tag push 触发）
 - [ ] GitHub Release 页面存在，资产文件齐全（PDF + ZIP + CHECKSUMS.txt）
 - [ ] 所有资产 URL 不包含 `untagged-`（防止 v1.8.1 事故重现）
+- [ ] 确认 Draft Release 已发布（标题下无 "Draft" 标记）
 - [ ] 验证 GitHub Pages 自动部署成功（Settings → Pages → 部署历史）
 - [ ] 访问 https://edic.cgartlab.com 确认正常
 

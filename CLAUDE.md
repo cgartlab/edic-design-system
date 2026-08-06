@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-**EDIC Design System** (formerly CGArtLab) — Editorial × Olive Green, a zero-runtime-dependency static design system driven by OKLch color science and design tokens. Current version: **v1.9.1**.
+**EDIC Design System** (formerly CGArtLab) — Editorial × Olive Green, a zero-runtime-dependency static design system driven by OKLch color science and design tokens. Current version: **v1.10.0**.
 
 - **Website:** https://edic.cgartlab.com
 - **License:** CC BY 4.0
@@ -48,13 +48,11 @@ All icons are inline SVG in `scripts.js` `ICONS` array. ViewBox must be `0 0 24 
 
 ### Branch Workflow
 
-Follows [BRANCH-WORKFLOW.md](../../BRANCH-WORKFLOW.md). 5 categories (consolidated from 6 legacy types):
-
 - `main` — stable releases, tagged `vX.Y.Z`
-- `feat/<scope>-<desc>` — new features (was `dev-*` and `feature/`)
-- `fix/<scope>-<desc>` — bug fixes (was `fix-*` and `hotfix/`)
-- `docs/<desc>` — docs / content / writing (was `write-*`)
-- `chore/<scope>-<desc>` — refactor / perf / format / tools / deps
+- `dev-{feature-name}` — new features
+- `fix-{bug-name}` — bug fixes
+- `write-{topic}` — docs / content / writing
+- `chore-{scope}` — refactor / perf / format / tools / deps
 - `release/v<X>.<Y>.<Z>` — version release
 
 ## Common Commands
@@ -63,7 +61,7 @@ Follows [BRANCH-WORKFLOW.md](../../BRANCH-WORKFLOW.md). 5 categories (consolidat
 # Start local dev server
 make serve                    # http://localhost:8000
 
-# Run all 6 validators
+# Run all 10 validators
 make validate
 npm run validate
 
@@ -96,7 +94,7 @@ make clean
 
 ## CI / GitHub Actions
 
-- **`.github/workflows/ci.yml`** — runs all 6 validators on push/PR/schedule (weekly Monday UTC 0:00)
+- **`.github/workflows/ci.yml`** — runs all 10 validators on push/PR/schedule (weekly Monday UTC 0:00)
 - Exit codes: 0 = OK, 1 = errors (fail), 2 = warnings-only (pass)
 - **`.github/workflows/release.yml`** — tag-triggered: generates PDFs + creates GitHub Release
 
@@ -113,10 +111,10 @@ make stamp-version
 make validate
 
 # 4. Commit
-git add -A && git commit -m "chore(release): bump to v1.9.1"
+git add -A && git commit -m "chore(release): bump to v1.10.0"
 
 # 5. Tag & push
-git tag v1.9.1 && git push origin v1.9.1
+git tag v1.10.0 && git push origin v1.10.0
 ```
 
 ## Adding a New Component

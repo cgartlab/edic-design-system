@@ -45,7 +45,7 @@ OKLCH_COLOR = re.compile(
 )
 
 # 匹配纯黑（luminance = 0）
-PURE_BLACK = re.compile(r"oklch\s*\(\s*0[\d.]*\s+[\d.]+\s+[\d.]+\s*\)", re.IGNORECASE)
+PURE_BLACK = re.compile(r"oklch\s*\(\s*0(?!\.\d)\s*[\d.]+\s+[\d.]+\s*\)", re.IGNORECASE)
 
 # 匹配纯白（luminance = 100）
 PURE_WHITE = re.compile(r"oklch\s*\(\s*100[\d.]*\s+[\d.]+\s+[\d.]+\s*\)", re.IGNORECASE)

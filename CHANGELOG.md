@@ -1,7 +1,21 @@
 # 更新日志（Changelog）
 
-本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，
+本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
+
+## [Unreleased]
+
+### 新增
+
+### 修复
+
+### 性能优化
+
+### 重构
+
+### 文档
+
+### 样式
 
 ## [1.9.0](https://github.com/cgartlab/edic-design-system/compare/v1.8.1...v1.9.0) (2026-06-24)
 

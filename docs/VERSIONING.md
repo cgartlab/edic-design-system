@@ -72,8 +72,8 @@ MAJOR.MINOR.PATCH[-PRERELEASE][+BUILD]
 由于本项目无构建工具，浏览器/CDN 通过 `?v=` 查询字符串刷新资源缓存：
 
 ```html
-<link rel="stylesheet" href="styles.css?v=1.9.1">
-<script src="scripts.js?v=1.9.1"></script>
+<link rel="stylesheet" href="styles.css?v=1.10.0">
+<script src="scripts.js?v=1.10.0"></script>
 ```
 
 **规则**：
@@ -120,10 +120,10 @@ make stamp-version
 make validate-versions
 
 # 4. 提交
-git add -A && git commit -m "chore(release): bump to v1.9.1"
+git add -A && git commit -m "chore(release): bump to v1.10.0"
 
 # 5. 打 tag
-git tag v1.9.1 && git push origin v1.9.1
+git tag v1.10.0 && git push origin v1.10.0
 ```
 
 ## 分支与版本对应
@@ -152,32 +152,31 @@ release-please / semantic-release 风格的自动化可在未来引入（见 [�
 
 ## 当前版本
 
-- **最新稳定版**：`v1.9.1`（2026-06-08）
+- **最新稳定版**：`v1.10.0`（2026-06-08）
 - **VERSION 文件**：项目根目录 `VERSION` 单行文件存放当前版本号
 
 ## 自动化发布（Release Please）
 
 项目已集成 [release-please](https://github.com/googleapis/release-please) 自动化发布流程。
 
-### 发布策略：手工 tag 触发正式发布
+### 发布策略：release-please 自动 tag + GitHub Release（Draft）
 
-`release-please` **只负责** Release PR 和 CHANGELOG，**不会**自动打 tag，**不会**自动触发 release 流水线。
-只有人类明确执行 `git tag vX.Y.Z && git push origin vX.Y.Z` 之后，`release.yml` 才会触发。
+`release-please` 自动完成 Release PR、CHANGELOG、版本号同步、tag 创建与 GitHub Release（Draft）。
+`release.yml` 由 tag push 事件触发，负责构建资产（PDF/ZIP/Skill ZIP）并上传至 GitHub Release，随后将其从 Draft 发布为正式 Release。
 
-这样设计的原因：
-- 避免"一合并就发布"的自动链路绕过人类审查
-- 人类可以在 Release PR 合并后、发布前做最终验收
-- 版本发布时机完全由人类决定（比如避开周五下午）
+这样设计的好处：
+- 避免"一合并就发布"的自动链路绕过人类审查（Release PR 仍需人工 Review）
+- release-please 在 PR 合并后自动创建 tag 和 Draft Release，减少人工操作环节
+- 人类在发布前仍可编辑 Release notes 并决定是否 Publish
 
 ### 触发方式
 
 | 方式 | 说明 |
 |------|------|
 | **自动（创建 Release PR）** | push to `main` → release-please 分析 commits → 创建/更新 Release PR |
-| **合并 Release PR** | 合并后 post-merge-stamp 自动同步 ?v= 和 changelog.html |
-| **手动发布（打 tag）** | `git tag vX.Y.Z && git push origin vX.Y.Z` → 触发 release.yml |
-| **强制版本** | `workflow_dispatch` + `release-as` 输入 → 强制指定版本号 |
-| **预发布** | `workflow_dispatch` + `prerelease=true` → 标记为预发布 |
+| **合并 Release PR** | 合并后 release-please 自动创建 tag + GitHub Release（Draft） |
+| **workflow_dispatch** | 手动触发 release-please.yml，可强制版本号（release-as）或标记预发布（prerelease） |
+| **紧急热修复** | 手动 `git tag -s vX.Y.Z+1` + `gh workflow run release.yml`（见 [AGENTS.md](../../AGENTS.md)） |
 
 ### 完整发布流程
 
@@ -187,14 +186,17 @@ release-please / semantic-release 风格的自动化可在未来引入（见 [�
   → 创建/更新 Release PR（CHANGELOG.md + 版本 bump）
   → 人类审查 Release PR（如需润色措辞，直接编辑 CHANGELOG.md 对应节）
   → 合并 Release PR
+  → release-please 自动：
+      ① 更新 VERSION / tokens.json / package.json
+      ② 创建 tag vX.Y.Z + GitHub Release（Draft）
   → post-merge-stamp 自动：
       ① stamp_version.py（同步 ?v= 缓存戳）
       ② generate_changelog_html.py（从 CHANGELOG.md 重建网站变更页）
   ↓
-  人类决定发布时机：
-  git tag vX.Y.Z && git push origin vX.Y.Z
-  → release.yml 触发
-  → 构建 PDF/ZIP 资产 + GitHub Release
+  release.yml 触发（tag push）
+  → 构建 PDF/ZIP 资产
+  → 上传至 GitHub Release
+  → 发布 Draft Release
 ```
 
 ### Release PR 包含的内容

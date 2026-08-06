@@ -1,6 +1,6 @@
 # EDIC Design System — 极度详细的网站开发指南
 
-**版本:** v1.9.1  
+**版本:** v1.10.0  
 **生成日期:** 2026-05-28  
 **适用对象:** 任何大模型 AI 助手 / 前端开发者 / 设计师
 
@@ -88,19 +88,31 @@
 
 ```
 edic-design-system/
-├── index.html              # 主页面（731行）— 设计系统视觉目录
-├── styles.css              # 样式表（677行）— Token + 组件CSS + 响应式
-├── scripts.js              # 脚本（427行）— 图标渲染 + 令牌表 + 交互
+├── index.html              # 主页面 — 设计系统视觉目录
+├── styles.css              # 样式表 — Token + 组件CSS + 响应式
+├── scripts.js              # 脚本 — 图标渲染 + 令牌表 + 交互
 ├── tokens.json             # 结构化令牌数据 — 程序化导入用
 ├── AGENTS.md               # AI 知识库 / 项目说明
 ├── blog.html               # 博客页面（使用设计系统）
 ├── company.html            # 公司页面
 ├── resume.html             # 简历页面
 ├── report.html             # 报告页面
-├── edic-design-system.html  # 设计系统详情页
-├── ediccom_qrcode.svg  # 二维码 SVG
-├── opencode.json           # OpenCode 配置
-└── *.artifact.json         # Artifact 元数据文件
+├── docs.html               # 设计系统详情与组件手册
+├── prompts.html            # AI 提示词与 Skill 包
+├── downloads.html          # PDF 参考、令牌导出、品牌资产
+├── CHANGELOG.md            # 更新日志（release-please 维护）
+├── CONTRIBUTING.md         # 贡献指南
+├── CLAUDE.md               # Claude Code 项目说明
+├── DEVELOPMENT-GUIDE.md    # 技术参考指南
+├── VERSION                 # 版本号（单一来源）
+├── LICENSE                 # CC BY 4.0 许可证
+├── prompts/                # system-prompt.md / quick-prompt.md
+├── skills/edic-design-system/   # Claude Code SKILL 包
+├── tools/                  # 验证脚本（validate_*.py）
+├── tests/                  # 验证夹具
+├── docs/                   # VERSIONING / COMPONENT-DEVELOPMENT / TESTING / RELEASE-CHECKLIST
+├── scripts/                # 本地开发脚本（lint.py / build.py）
+└── .github/                # Issue / PR 模板 / Workflows
 ```
 
 ### 2.2 依赖关系图
@@ -1387,6 +1399,8 @@ timeline, contact-form, toast, glass-card, glass-btn
 | 32 | Article TOC | `.ds-toc-article` | — |
 | 33 | Divider | `.ds-divider` | — |
 | 34 | Empty State | `.ds-empty-state` | — |
+| 35 | Accordion (code) | `.ds-accordion--code` | — |
+| 36 | Chart | `.ds-chart` / `.ds-chart-*` | `--bar`, `--line`, `--area`, `--pie`, `--donut`, `--horizontal`, `--stacked`, `--sparkline` |
 
 ---
 
@@ -1411,30 +1425,42 @@ timeline, contact-form, toast, glass-card, glass-btn
 
 ## 附录 C：tokens.json 数据结构
 
+`tokens.json` 采用 **flat 结构**（扁平化），键名直接对应 CSS `--ds-*` 变量后缀，用 `--ds-` 前缀连接。
+示例：`"color-bg"` → `--ds-color-bg`，`"color-olive-400"` → `--ds-color-olive-400`。
+暗色模式 token 使用 `-dark` 后缀，映射到 `[data-theme="dark"]` 中的对应变量。
+
 ```json
 {
   "name": "EDIC Design Tokens",
-  "version": "1.9.1",
+  "version": "1.10.0",
+  "description": "Editorial × Olive Green design system tokens",
   "tokens": {
-    "colors": {
-      "neutral": { "bg": "oklch(...)", ... },
-      "olive": { "50": "oklch(...)", ..., "900": "oklch(...)" },
-      "semantic": { "success": "...", "warning": "...", "error": "...", "info": "..." }
-    },
-    "typography": {
-      "families": { "display": [...], "body": [...], "mono": [...] },
-      "scale": { "caption": "0.75rem", ..., "hero": "4.5rem" }
-    },
-    "spacing": {
-      "unit": "4px",
-      "scale": { "0": "0", "1": "4px", ..., "32": "128px" }
-    },
-    "radius": { "none": "0", "sm": "2px", ..., "full": "9999px" }
+    "color-bg": "oklch(97% 0.012 80)",
+    "color-surface": "oklch(99% 0.005 80)",
+    "color-olive-400": "oklch(52% 0.08 115)",
+    "color-success": "oklch(55% 0.1 145)",
+    "color-error": "oklch(50% 0.14 30)",
+    "color-warning": "oklch(65% 0.1 85)",
+    "color-info": "oklch(55% 0.08 240)",
+    "color-bg-dark": "oklch(15% 0.008 75)",
+    "color-fg-dark": "oklch(84% 0.008 72)",
+    "text-caption": "0.75rem",
+    "text-body": "1rem",
+    "text-hero": "4.5rem",
+    "space-4": "1rem",
+    "space-16": "4rem",
+    "radius-md": "4px",
+    "radius-xl": "12px",
+    "shadow-sm": "0 1px 3px oklch(0% 0 0 / 6%)",
+    "shadow-lg": "0 10px 15px oklch(0% 0 0 / 8%)",
+    "duration-150": "150ms",
+    "ease-out": "cubic-bezier(.16, 1, .3, 1)"
   }
 }
 ```
 
-此文件是结构化数据源，供未来的 style-dictionary / token 构建工具使用，当前不被运行时代码引用。
+> ⚠️ 此文件的 **ground truth 是 `styles.css`**（`styles.css` 是源，`tokens.json` 是从 `styles.css` 导出的结构化快照）。
+> 修改 token 时，先改 `styles.css` `:root` 和 `[data-theme="dark"]`，再同步更新 `tokens.json`。
 
 ---
 
@@ -1469,4 +1495,4 @@ timeline, contact-form, toast, glass-card, glass-btn
 
 ---
 
-*本文档基于项目源代码 v1.9.1 自动生成，如代码有更新请同步维护本指南。*
+*本文档基于项目源代码 v1.10.0 自动生成，如代码有更新请同步维护本指南。*

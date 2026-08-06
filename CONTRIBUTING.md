@@ -26,8 +26,8 @@
 
 ```bash
 # 克隆
-git clone https://github.com/cgartlab/cgartlab-design-system.git
-cd cgartlab-design-system
+git clone https://github.com/cgartlab/edic-design-system.git
+cd edic-design-system
 
 # 本地预览（任选其一）
 python3 -m http.server 8000
@@ -39,7 +39,7 @@ npx serve .
 
 ### 2. 创建分支
 
-遵循根工作区 [`BRANCH-WORKFLOW.md`](../BRANCH-WORKFLOW.md) 的命名规范：
+遵循以下命名规范（参见 [`AGENTS.md`](../AGENTS.md#branch-naming)）：
 
 ```bash
 # 开发
@@ -63,7 +63,7 @@ docs(handbook): 补全 Slider 组件示例
 style(swatch): 调整间距
 refactor(scripts): 拆分图标渲染 IIFE
 test(validate): 增加 token 名称正则校验
-chore(release): bump v1.9.1
+chore(release): bump v1.10.0
 ```
 
 ### 3. 本地验证
@@ -71,15 +71,17 @@ chore(release): bump v1.9.1
 在提 PR 前必须运行：
 
 ```bash
-# 全部校验（推荐）
-make validate
-# 等价于：
+# 全部校验（推荐）— 等价于 make validate（全部 10 个验证器）
 python3 tools/validate_tokens.py
 python3 tools/validate_naming.py
 python3 tools/validate_html.py
 python3 tools/validate_a11y.py
 python3 tools/validate_versions.py
 python3 tools/validate_links.py
+python3 tools/validate_cssref.py
+python3 tools/validate_darkmode.py
+python3 tools/validate_verext.py
+python3 tools/validate_hardcode.py
 ```
 
 或单独运行某一项：
@@ -138,13 +140,15 @@ make serve             # 本地预览
 
 ### 发布流程
 
-发布已自动化。贡献者无需手动发布：
+发布由 release-please 辅助 + 人工打 tag 触发。贡献者无需手动发布：
 
 - **提交符合 Conventional Commits** 的 PR（`feat:`、`fix:`、`docs:` 等）
-- 合并到 `main` 后，`release-please` 自动创建 Release PR
-- Release PR 合并后自动打 tag → GitHub Release 包含 PDF/ZIP 附件
+- 合并到 `main` 后，`release-please` 自动创建/更新 Release PR（更新 `CHANGELOG.md` + 版本 bump）
+- Release PR 合并后，`post-merge-stamp` 自动同步 `?v=` 缓存戳和 `changelog.html`
+- 人工执行 `git tag vX.Y.Z && git push origin vX.Y.Z` 触发 `release.yml` 构建 GitHub Release（含 PDF/ZIP 附件）
 
-详见 [`docs/VERSIONING.md`](./docs/VERSIONING.md) 和 [`docs/RELEASE-CHECKLIST.md`](./docs/RELEASE-CHECKLIST.md)。
+> release-please **只负责 Release PR 和 CHANGELOG，不会自动打 tag** — 发布时机完全由人类决定。
+> 详见 [`docs/VERSIONING.md`](./docs/VERSIONING.md) 和 [`docs/RELEASE-CHECKLIST.md`](./docs/RELEASE-CHECKLIST.md)。
 
 ## 目录结构（参考）
 

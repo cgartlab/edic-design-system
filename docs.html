@@ -5,7 +5,7 @@
 <title>使用文档 · EDIC Design System</title>
 <meta name="description" content="EDIC 设计系统使用文档：安装引入、设计令牌、色彩主题、暗色模式、排版、组件、动效、图标、可访问性、定制扩展与 FAQ。">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="styles.css?v=1.9.1">
+<link rel="stylesheet" href="styles.css?v=1.10.0">
 <!-- Prism.js syntax highlighting (CDN, no extra CSS — custom theme in styles.css) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js"
         integrity="sha384-xAgN7OCsK5s0d3G18tqRYrxy8hWsPA14E26TMh7Mi9ZM09vaz4EA0DBTl+80F5yC"
@@ -81,11 +81,12 @@
               <li><a class="ds-pagenav-link" href="#visual-typography"><span class="ds-pagenav-num">16</span><span class="ds-pagenav-text">视觉手册 · 字体系统</span></a></li>
               <li><a class="ds-pagenav-link" href="#visual-spacing"><span class="ds-pagenav-num">17</span><span class="ds-pagenav-text">视觉手册 · 间距尺寸</span></a></li>
               <li><a class="ds-pagenav-link" href="#visual-components"><span class="ds-pagenav-num">18</span><span class="ds-pagenav-text">视觉手册 · 组件库</span></a></li>
-              <li><a class="ds-pagenav-link" href="#visual-icons"><span class="ds-pagenav-num">19</span><span class="ds-pagenav-text">视觉手册 · 图标库</span></a></li>
-              <li><a class="ds-pagenav-link" href="#visual-effects"><span class="ds-pagenav-num">20</span><span class="ds-pagenav-text">视觉手册 · 遮罩模糊</span></a></li>
-              <li><a class="ds-pagenav-link" href="#visual-timeline"><span class="ds-pagenav-num">21</span><span class="ds-pagenav-text">视觉手册 · 时间轴</span></a></li>
-              <li><a class="ds-pagenav-link" href="#visual-contact"><span class="ds-pagenav-num">22</span><span class="ds-pagenav-text">视觉手册 · 联系表单</span></a></li>
-              <li><a class="ds-pagenav-link" href="#token-index"><span class="ds-pagenav-num">23</span><span class="ds-pagenav-text">令牌索引</span></a></li>
+              <li><a class="ds-pagenav-link" href="#visual-charts"><span class="ds-pagenav-num">19</span><span class="ds-pagenav-text">视觉手册 · 图表库</span></a></li>
+              <li><a class="ds-pagenav-link" href="#visual-icons"><span class="ds-pagenav-num">20</span><span class="ds-pagenav-text">视觉手册 · 图标库</span></a></li>
+              <li><a class="ds-pagenav-link" href="#visual-effects"><span class="ds-pagenav-num">21</span><span class="ds-pagenav-text">视觉手册 · 遮罩模糊</span></a></li>
+              <li><a class="ds-pagenav-link" href="#visual-timeline"><span class="ds-pagenav-num">22</span><span class="ds-pagenav-text">视觉手册 · 时间轴</span></a></li>
+              <li><a class="ds-pagenav-link" href="#visual-contact"><span class="ds-pagenav-num">23</span><span class="ds-pagenav-text">视觉手册 · 联系表单</span></a></li>
+              <li><a class="ds-pagenav-link" href="#token-index"><span class="ds-pagenav-num">24</span><span class="ds-pagenav-text">令牌索引</span></a></li>
             </ol>
           </details>
         </nav>
@@ -111,17 +112,17 @@
           <p>无需 npm、无需打包器。把 <code>styles.css</code> 与 <code>scripts.js</code> 拷贝到你的项目，并在页面中引入即可。</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-install" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-            <pre id="c-install"><code class="language-html">&lt;!doctype html&gt;
+            <pre id="c-install" tabindex="0"><code class="language-html">&lt;!doctype html&gt;
 &lt;html lang="zh-CN" data-theme=""&gt;
   &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
     &lt;link rel="icon" type="image/svg+xml" href="favicon.svg"&gt;
-    &lt;link rel="stylesheet" href="styles.css?v=1.9.1"&gt;
+    &lt;link rel="stylesheet" href="styles.css?v=1.10.0"&gt;
   &lt;/head&gt;
   &lt;body&gt;
     &lt;!-- 你的内容 --&gt;
-    &lt;script src="scripts.js?v=1.9.1"&gt;&lt;/script&gt;
+    &lt;script src="scripts.js?v=1.10.0"&gt;&lt;/script&gt;
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
           </figure>
@@ -133,7 +134,7 @@
           <p>令牌定义在 <code>:root</code> 中，命名遵循 <code>--ds-{类别}-{名称}</code>。在任意属性中用 <code>var()</code> 引用，永远不要硬编码具体数值。</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">css</span><button class="ds-copy-btn" data-copy="#c-token" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-            <pre id="c-token"><code class="language-css">.promo-card {
+            <pre id="c-token" tabindex="0"><code class="language-css">.promo-card {
   background: var(--ds-color-surface-raised);
   color: var(--ds-color-fg);
   border: 1px solid var(--ds-color-border);
@@ -158,7 +159,7 @@
           <p>需要混色时使用 <code>color-mix(in oklch, …)</code>，以保持色彩空间一致：</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">css</span><button class="ds-copy-btn" data-copy="#c-mix" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-            <pre id="c-mix"><code class="language-css">.ring {
+            <pre id="c-mix" tabindex="0"><code class="language-css">.ring {
   box-shadow: 0 0 0 3px
     color-mix(in oklch, var(--ds-accent) 15%, transparent);
 }</code></pre>
@@ -170,7 +171,7 @@
           <p>暗色由 <code>&lt;html data-theme="dark"&gt;</code> 触发，整套令牌会被重写为暖灰基底（<em>而非纯黑</em>），强调色自动亮化 5–10%。<code>scripts.js</code> 提供 <code>toggleDarkMode()</code> 并做了系统偏好兜底与 <code>localStorage</code> 持久化。</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-dark" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-            <pre id="c-dark"><code class="language-html">&lt;button onclick="toggleDarkMode()" aria-label="切换主题"&gt;切换&lt;/button&gt;
+            <pre id="c-dark" tabindex="0"><code class="language-html">&lt;button onclick="toggleDarkMode()" aria-label="切换主题"&gt;切换&lt;/button&gt;
 
 &lt;!-- 想默认暗色，直接写在 html 上： --&gt;
 &lt;html lang="zh-CN" data-theme="dark"&gt;</code></pre>
@@ -192,7 +193,7 @@
           </ul>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-type" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-            <pre id="c-type"><code class="language-html">&lt;h1 class="ds-display ds-h1"&gt;色彩定义情绪&lt;/h1&gt;
+            <pre id="c-type" tabindex="0"><code class="language-html">&lt;h1 class="ds-display ds-h1"&gt;色彩定义情绪&lt;/h1&gt;
 &lt;p class="ds-measure"&gt;正文使用 Body 字族，行长受 65ch 约束。&lt;/p&gt;
 &lt;span class="ds-caption"&gt;SECTION LABEL&lt;/span&gt;</code></pre>
           </figure>
@@ -221,7 +222,7 @@
           </div>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-comp" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-            <pre id="c-comp"><code class="language-html">&lt;button class="ds-btn ds-btn--primary"&gt;主要按钮&lt;/button&gt;
+            <pre id="c-comp" tabindex="0"><code class="language-html">&lt;button class="ds-btn ds-btn--primary"&gt;主要按钮&lt;/button&gt;
 &lt;span class="ds-badge ds-badge--accent"&gt;Accent&lt;/span&gt;
 
 &lt;article class="ds-card ds-card--hoverable"&gt;
@@ -247,7 +248,7 @@
 
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-nav" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-            <pre id="c-nav"><code class="language-html">&lt;nav class="ds-navbar"&gt;
+            <pre id="c-nav" tabindex="0"><code class="language-html">&lt;nav class="ds-navbar"&gt;
   &lt;div class="ds-navbar-inner"&gt;
     &lt;a href="/" class="ds-logo"&gt;…&lt;/a&gt;
     &lt;button class="ds-mnav-trigger" id="mnav-trigger"
@@ -298,7 +299,7 @@
           <p>动效统一由 <code>--ds-duration-*</code> 与 <code>--ds-ease-*</code> 令牌驱动。给元素加 <code>.ds-reveal</code> 即可在进入视口时淡入上移；用内联自定义属性 <code>--d</code> 设置错峰延迟。</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-motion" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-            <pre id="c-motion"><code class="language-html">&lt;div class="ds-reveal"&gt;进入视口淡入&lt;/div&gt;
+            <pre id="c-motion" tabindex="0"><code class="language-html">&lt;div class="ds-reveal"&gt;进入视口淡入&lt;/div&gt;
 &lt;div class="ds-reveal" style="--d:80ms"&gt;延迟 80ms&lt;/div&gt;
 &lt;div class="ds-reveal ds-reveal--left"&gt;从左滑入&lt;/div&gt;
 &lt;span class="ds-anim-float"&gt;持续漂浮&lt;/span&gt;</code></pre>
@@ -314,7 +315,7 @@
           <p>在 <code>&lt;pre&gt;</code> 或 <code>&lt;code&gt;</code> 上添加 <code>class="language-xxxx"</code>（如 <code>language-html</code>、<code>language-css</code>），Prism.js 会自动识别并高亮：</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-code-example" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-            <pre id="c-code-example"><code class="language-html">&lt;figure class="ds-code"&gt;
+            <pre id="c-code-example" tabindex="0"><code class="language-html">&lt;figure class="ds-code"&gt;
   &lt;pre&gt;&lt;code class="language-html"&gt;
     &amp;lt;!-- 代码内容 —— 需转义 &amp;lt; &amp;amp; ——&amp;gt;
   &lt;/code&gt;&lt;/pre&gt;
@@ -358,7 +359,7 @@
           <p>Prism.js 通过 cdnjs 加载（<code>prism@1.30.0</code>，含 SRI 完整性校验防 CDN 篡改），零安装、零构建，与设计系统的纯静态哲学一致。建议在自有项目中同样锁定版本号与 SRI：</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-prism-cdn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-            <pre id="c-prism-cdn"><code class="language-html">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js"
+            <pre id="c-prism-cdn" tabindex="0"><code class="language-html">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js"
         integrity="sha384-xAgN7OCsK5s0d3G18tqRYrxy8hWsPA14E26TMh7Mi9ZM09vaz4EA0DBTl+80F5yC"
         crossorigin="anonymous"
         defer&gt;&lt;/script&gt;</code></pre>
@@ -370,7 +371,7 @@
           <p>100 枚 1.5px 线性图标，遵循 24×24 视框、<code>currentColor</code> 描边，因此颜色随文字自动变化。直接内联 SVG，或在<a href="#visual-icons">图标库</a>点击下载单枚。</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-icon" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-            <pre id="c-icon"><code class="language-html">&lt;svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+            <pre id="c-icon" tabindex="0"><code class="language-html">&lt;svg width="20" height="20" viewBox="0 0 24 24" fill="none"
      stroke="currentColor" stroke-width="1.5"
      stroke-linecap="round" stroke-linejoin="round"&gt;
   &lt;circle cx="11" cy="11" r="8"/&gt;
@@ -395,7 +396,7 @@
           <p>替换强调色只需覆盖橄榄绿色阶与 <code>--ds-accent</code> 系列——其余组件无需改动即可整体换肤：</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">css</span><button class="ds-copy-btn" data-copy="#c-custom" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-            <pre id="c-custom"><code class="language-css">:root {
+            <pre id="c-custom" tabindex="0"><code class="language-css">:root {
   /* 改为品牌蓝，色相 H≈250，其余明度/彩度沿用 */
   --ds-color-olive-400: oklch(52% 0.12 250);
   --ds-color-olive-500: oklch(45% 0.13 250);
@@ -410,20 +411,20 @@
           <h2>常见问题</h2>
           <div class="ds-accordion">
             <div class="ds-accordion-item open">
-              <div class="ds-accordion-header">需要 npm 或构建工具吗？<svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-              <div class="ds-accordion-content">不需要。它是纯静态的 CSS + 原生 JS，复制文件、引入即可用。</div>
+              <div class="ds-accordion-header" aria-expanded="true" aria-controls="faq-panel-01">需要 npm 或构建工具吗？<svg class="ds-accordion-arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+              <div class="ds-accordion-content" id="faq-panel-01" aria-hidden="false">不需要。它是纯静态的 CSS + 原生 JS，复制文件、引入即可用。</div>
             </div>
             <div class="ds-accordion-item">
-              <div class="ds-accordion-header">OKLch 的浏览器兼容性如何？<svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-              <div class="ds-accordion-content">所有现代浏览器（Chrome/Edge 111+、Safari 15.4+、Firefox 113+）均支持 OKLch 与 color-mix。面向更老环境可在构建期降级为 sRGB 回退。</div>
+              <div class="ds-accordion-header" aria-expanded="false" aria-controls="faq-panel-02">OKLch 的浏览器兼容性如何？<svg class="ds-accordion-arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+              <div class="ds-accordion-content" id="faq-panel-02" aria-hidden="true">所有现代浏览器（Chrome/Edge 111+、Safari 15.4+、Firefox 113+）均支持 OKLch 与 color-mix。面向更老环境可在构建期降级为 sRGB 回退。</div>
             </div>
             <div class="ds-accordion-item">
-              <div class="ds-accordion-header">能用在 React / Vue 里吗？<svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-              <div class="ds-accordion-content">可以。引入 <code>styles.css</code> 后，把 class 写到 JSX/模板上即可；令牌也可在组件库中以变量形式引用。</div>
+              <div class="ds-accordion-header" aria-expanded="false" aria-controls="faq-panel-03">能用在 React / Vue 里吗？<svg class="ds-accordion-arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+              <div class="ds-accordion-content" id="faq-panel-03" aria-hidden="true">可以。引入 <code>styles.css</code> 后，把 class 写到 JSX/模板上即可；令牌也可在组件库中以变量形式引用。</div>
             </div>
             <div class="ds-accordion-item">
-              <div class="ds-accordion-header">如何让 AI 按这套系统输出？<svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-              <div class="ds-accordion-content">前往<a href="prompts.html">提示词</a>页，复制系统提示词或 Skill 粘贴给你的 Agent 即可。</div>
+              <div class="ds-accordion-header" aria-expanded="false" aria-controls="faq-panel-04">如何让 AI 按这套系统输出？<svg class="ds-accordion-arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+              <div class="ds-accordion-content" id="faq-panel-04" aria-hidden="true">前往<a href="prompts.html">提示词</a>页，复制系统提示词或 Skill 粘贴给你的 Agent 即可。</div>
             </div>
           </div>
         </section>
@@ -608,6 +609,23 @@
               <button class="ds-btn ds-btn--primary ds-btn--lg">Large</button>
               <button class="ds-btn ds-btn--secondary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Download</button>
             </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-01">
+                  <span aria-label="查看 Button 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-01" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-01" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-01" tabindex="0"><code class="language-html">&lt;button class="ds-btn ds-btn--primary"&gt;Primary&lt;/button&gt;
+&lt;button class="ds-btn ds-btn--secondary"&gt;Secondary&lt;/button&gt;
+&lt;button class="ds-btn ds-btn--ghost"&gt;Ghost&lt;/button&gt;
+&lt;button class="ds-btn ds-btn--primary ds-btn--sm"&gt;Small&lt;/button&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">02 · Card</div>
@@ -615,6 +633,25 @@
               <div class="ds-card" style="max-width:260px;"><h3 style="font-family:var(--ds-font-display);font-size:var(--ds-text-h4);margin-bottom:var(--ds-space-3);">Card Title</h3><p style="font-size:var(--ds-text-body-sm);color:var(--ds-color-muted);">A raised card with border.</p></div>
               <div class="ds-card ds-card--hoverable" style="max-width:260px;"><h3 style="font-family:var(--ds-font-display);font-size:var(--ds-text-h4);margin-bottom:var(--ds-space-3);">Hover Card</h3><p style="font-size:var(--ds-text-body-sm);color:var(--ds-color-muted);">Hover for shadow transition.</p></div>
               <div class="ds-card ds-card--flat" style="max-width:260px;"><h3 style="font-family:var(--ds-font-display);font-size:var(--ds-text-h4);margin-bottom:var(--ds-space-3);">Flat Card</h3><p style="font-size:var(--ds-text-body-sm);color:var(--ds-color-muted);">Borderless with subtle shadow.</p></div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-02">
+                  <span aria-label="查看 Card 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-02" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-02" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-02" tabindex="0"><code class="language-html">&lt;div class="ds-card"&gt;
+  &lt;h3&gt;Card Title&lt;/h3&gt;
+  &lt;p&gt;A raised card with border.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="ds-card ds-card--hoverable"&gt;&lt;/div&gt;
+&lt;div class="ds-card ds-card--flat"&gt;&lt;/div&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
             </div>
           </div>
           <div class="ds-component-group">
@@ -624,10 +661,43 @@
               <div><label class="ds-label">Password</label><input class="ds-input" type="password" placeholder="••••••••"><p class="ds-hint">At least 8 characters</p></div>
               <div><label class="ds-label">With Error</label><input class="ds-input ds-input--error" type="text" value="invalid@"><p class="ds-hint ds-form-hint--error">Please enter a valid email</p></div>
             </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-03">
+                  <span aria-label="查看 Text Input 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-03" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-03" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-03" tabindex="0"><code class="language-html">&lt;label class="ds-label"&gt;Email&lt;/label&gt;
+&lt;input class="ds-input" type="email" placeholder="your@email.com"&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">04 · Select</div>
             <div class="ds-component-preview"><div><label class="ds-label">Role</label><select class="ds-select"><option>Designer</option><option>Developer</option><option>Product Manager</option><option>Other</option></select></div></div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-04">
+                  <span aria-label="查看 Select 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-04" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-04" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-04" tabindex="0"><code class="language-html">&lt;label class="ds-label"&gt;Role&lt;/label&gt;
+&lt;select class="ds-select"&gt;
+  &lt;option&gt;Designer&lt;/option&gt;
+  &lt;option&gt;Developer&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">05 · Checkbox</div>
@@ -635,6 +705,22 @@
               <label class="ds-checkbox"><input type="checkbox" checked=""> Remember me</label>
               <label class="ds-checkbox"><input type="checkbox"> I agree to the terms</label>
               <label class="ds-checkbox"><input type="checkbox" disabled=""> Disabled</label>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-05">
+                  <span aria-label="查看 Checkbox 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-05" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-05" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-05" tabindex="0"><code class="language-html">&lt;label class="ds-checkbox"&gt;
+  &lt;input type="checkbox" checked&gt; Remember me
+&lt;/label&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
             </div>
           </div>
           <div class="ds-component-group">
@@ -644,12 +730,46 @@
               <label class="ds-radio"><input type="radio" name="r"> Dark</label>
               <label class="ds-radio"><input type="radio" name="r"> System</label>
             </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-06">
+                  <span aria-label="查看 Radio 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-06" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-06" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-06" tabindex="0"><code class="language-html">&lt;label class="ds-radio"&gt;
+  &lt;input type="radio" name="theme" checked&gt; Light
+&lt;/label&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">07 · Toggle / Switch</div>
             <div class="ds-component-preview">
               <label class="ds-toggle"><input type="checkbox"><span class="ds-toggle-track"><span class="ds-toggle-thumb"></span></span> Notifications</label>
               <label class="ds-toggle"><input type="checkbox" checked=""><span class="ds-toggle-track"><span class="ds-toggle-thumb"></span></span> Dark Mode</label>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-07">
+                  <span aria-label="查看 Toggle Switch 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-07" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-07" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-07" tabindex="0"><code class="language-html">&lt;label class="ds-toggle"&gt;
+  &lt;input type="checkbox" checked&gt;
+  &lt;span class="ds-toggle-track"&gt;&lt;span class="ds-toggle-thumb"&gt;&lt;/span&gt;&lt;/span&gt;
+  Dark Mode
+&lt;/label&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
             </div>
           </div>
           <div class="ds-component-group">
@@ -661,6 +781,24 @@
               <span class="ds-badge ds-badge--warning">Pending</span>
               <span class="ds-badge ds-badge--error">Error</span>
             </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-08">
+                  <span aria-label="查看 Badge 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-08" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-08" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-08" tabindex="0"><code class="language-html">&lt;span class="ds-badge ds-badge--default"&gt;Default&lt;/span&gt;
+&lt;span class="ds-badge ds-badge--accent"&gt;New&lt;/span&gt;
+&lt;span class="ds-badge ds-badge--success"&gt;Live&lt;/span&gt;
+&lt;span class="ds-badge ds-badge--warning"&gt;Pending&lt;/span&gt;
+&lt;span class="ds-badge ds-badge--error"&gt;Error&lt;/span&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">09 · Chip / Pill</div>
@@ -669,6 +807,22 @@
               <span class="ds-chip ds-chip--active">Vue</span>
               <span class="ds-chip">Svelte<span class="ds-chip-remove"> ×</span></span>
               <span class="ds-chip">Angular<span class="ds-chip-remove"> ×</span></span>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-09">
+                  <span aria-label="查看 Chip 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-09" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-09" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-09" tabindex="0"><code class="language-html">&lt;span class="ds-chip"&gt;React&lt;/span&gt;
+&lt;span class="ds-chip ds-chip--active"&gt;Vue&lt;/span&gt;
+&lt;span class="ds-chip"&gt;Angular&lt;span class="ds-chip-remove"&gt; ×&lt;/span&gt;&lt;/span&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
             </div>
           </div>
           <div class="ds-component-group">
@@ -679,6 +833,26 @@
               <div class="ds-alert ds-alert--warning"><svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><div><div class="ds-alert-title">Warning</div>Storage almost full.</div></div>
               <div class="ds-alert ds-alert--error"><svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg><div><div class="ds-alert-title">Error</div>Something went wrong.</div></div>
             </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-10">
+                  <span aria-label="查看 Alert 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-10" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-10" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-10" tabindex="0"><code class="language-html">&lt;div class="ds-alert ds-alert--info"&gt;
+  &lt;svg class="ds-alert-icon"&gt;…&lt;/svg&gt;
+  &lt;div&gt;&lt;div class="ds-alert-title"&gt;Info&lt;/div&gt;Message text.&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="ds-alert ds-alert--success"&gt;…&lt;/div&gt;
+&lt;div class="ds-alert ds-alert--warning"&gt;…&lt;/div&gt;
+&lt;div class="ds-alert ds-alert--error"&gt;…&lt;/div&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">11 · Modal</div>
@@ -687,6 +861,30 @@
                 <div class="ds-modal-header"><h3 style="font-family:var(--ds-font-display);font-size:var(--ds-text-h4);">Confirm Delete</h3><button class="ds-modal-close">×</button></div>
                 <div class="ds-modal-body">Delete "Draft-03"? This cannot be undone.</div>
                 <div class="ds-modal-footer"><button class="ds-btn ds-btn--ghost">Cancel</button><button class="ds-btn ds-btn--primary" style="background:var(--ds-color-error);border-color:var(--ds-color-error);">Delete</button></div>
+              </div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-11">
+                  <span aria-label="查看 Modal 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-11" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-11" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-11" tabindex="0"><code class="language-html">&lt;div class="ds-modal"&gt;
+  &lt;div class="ds-modal-header"&gt;
+    &lt;h3&gt;Confirm Delete&lt;/h3&gt;
+    &lt;button class="ds-modal-close"&gt;×&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="ds-modal-body"&gt;Delete "Draft-03"?&lt;/div&gt;
+  &lt;div class="ds-modal-footer"&gt;
+    &lt;button class="ds-btn ds-btn--ghost"&gt;Cancel&lt;/button&gt;
+    &lt;button class="ds-btn ds-btn--primary"&gt;Delete&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                  </figure>
+                </div>
               </div>
             </div>
           </div>
@@ -699,6 +897,23 @@
                 <button class="ds-tab" role="tab" aria-selected="false">Tokens</button>
               </div>
             </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-12">
+                  <span aria-label="查看 Tabs 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-12" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-12" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-12" tabindex="0"><code class="language-html">&lt;div class="ds-tabs" role="tablist"&gt;
+  &lt;button class="ds-tab ds-tab--active" role="tab" aria-selected="true"&gt;Overview&lt;/button&gt;
+  &lt;button class="ds-tab" role="tab" aria-selected="false"&gt;Components&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">13 · Avatar</div>
@@ -706,6 +921,22 @@
               <div class="ds-avatar ds-avatar--sm" style="background:var(--ds-color-olive-200);color:var(--ds-color-olive-800);font-weight:600;">ED</div>
               <div class="ds-avatar" style="background:var(--ds-color-olive-300);color:var(--ds-color-olive-900);font-weight:600;">EDIC</div>
               <div class="ds-avatar ds-avatar--lg" style="background:var(--ds-color-olive-400);color:var(--ds-color-white);font-weight:600;">Design System</div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-13">
+                  <span aria-label="查看 Avatar 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-13" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-13" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-13" tabindex="0"><code class="language-html">&lt;div class="ds-avatar ds-avatar--sm"&gt;ED&lt;/div&gt;
+&lt;div class="ds-avatar"&gt;EDIC&lt;/div&gt;
+&lt;div class="ds-avatar ds-avatar--lg"&gt;Design System&lt;/div&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
             </div>
           </div>
           <div class="ds-component-group">
@@ -715,12 +946,44 @@
               <div class="ds-progress ds-progress--success"><div class="ds-progress-bar" style="width:85%"></div></div>
               <div class="ds-progress ds-progress--error"><div class="ds-progress-bar" style="width:30%"></div></div>
             </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-14">
+                  <span aria-label="查看 Progress 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-14" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-14" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-14" tabindex="0"><code class="language-html">&lt;div class="ds-progress"&gt;
+  &lt;div class="ds-progress-bar" style="width:60%"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="ds-progress ds-progress--success"&gt;…&lt;/div&gt;
+&lt;div class="ds-progress ds-progress--error"&gt;…&lt;/div&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">15 · Tooltip</div>
             <div class="ds-component-preview">
               <span role="button" data-tooltip="Tooltip text" tabindex="0">Hover me</span>
               <button class="ds-btn ds-btn--ghost" data-tooltip="Save action">Button tooltip</button>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-15">
+                  <span aria-label="查看 Tooltip 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-15" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-15" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-15" tabindex="0"><code class="language-html">&lt;span role="button" data-tooltip="Tooltip text" tabindex="0"&gt;Hover me&lt;/span&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
             </div>
           </div>
           <div class="ds-component-group">
@@ -731,6 +994,21 @@
               <div class="ds-skeleton" style="height:12px;width:100%"></div>
               <div class="ds-skeleton" style="height:12px;width:80%"></div>
             </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-16">
+                  <span aria-label="查看 Skeleton 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-16" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-16" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-16" tabindex="0"><code class="language-html">&lt;div class="ds-skeleton" style="height:16px;width:60%"&gt;&lt;/div&gt;
+&lt;div class="ds-skeleton" style="height:12px;width:100%"&gt;&lt;/div&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">17 · Divider</div>
@@ -738,6 +1016,22 @@
               <div style="padding:var(--ds-space-3) 0;">Above content</div>
               <hr class="ds-divider">
               <div style="padding:var(--ds-space-3) 0;">Below content</div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-17">
+                  <span aria-label="查看 Divider 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-17" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-17" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-17" tabindex="0"><code class="language-html">&lt;div&gt;Above content&lt;/div&gt;
+&lt;hr class="ds-divider"&gt;
+&lt;div&gt;Below content&lt;/div&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
             </div>
           </div>
           <div class="ds-component-group">
@@ -751,6 +1045,25 @@
                 <span aria-current="page">Data</span>
               </nav>
             </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-18">
+                  <span aria-label="查看 Breadcrumb 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-18" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-18" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-18" tabindex="0"><code class="language-html">&lt;nav class="ds-breadcrumb" aria-label="Breadcrumb"&gt;
+  &lt;a href="#"&gt;Home&lt;/a&gt;
+  &lt;svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;polyline points="9 18 15 12 9 6"&gt;&lt;/polyline&gt;&lt;/svg&gt;
+  &lt;a href="#"&gt;Library&lt;/a&gt;
+  &lt;span aria-current="page"&gt;Data&lt;/span&gt;
+&lt;/nav&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">19 · Pagination</div>
@@ -763,6 +1076,24 @@
                 <button class="ds-pagination-item" aria-label="Next page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
               </nav>
             </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-19">
+                  <span aria-label="查看 Pagination 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-19" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-19" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-19" tabindex="0"><code class="language-html">&lt;nav class="ds-pagination" aria-label="Pagination"&gt;
+  &lt;button class="ds-pagination-item"&gt;1&lt;/button&gt;
+  &lt;button class="ds-pagination-item ds-pagination-item--active"&gt;2&lt;/button&gt;
+  &lt;button class="ds-pagination-item"&gt;3&lt;/button&gt;
+&lt;/nav&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">20 · Empty State</div>
@@ -772,6 +1103,25 @@
                 <h4 style="font-family:var(--ds-font-display);font-size:var(--ds-text-h4);margin-bottom:var(--ds-space-2);">No items yet</h4>
                 <p style="font-size:var(--ds-text-body-sm);color:var(--ds-color-muted);margin-bottom:var(--ds-space-4);">Create your first item to get started.</p>
                 <button class="ds-btn ds-btn--primary">Create item</button>
+              </div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-20">
+                  <span aria-label="查看 Empty State 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-20" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-20" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-20" tabindex="0"><code class="language-html">&lt;div class="ds-empty-state"&gt;
+  &lt;svg&gt;…&lt;/svg&gt;
+  &lt;h4&gt;No items yet&lt;/h4&gt;
+  &lt;p&gt;Create your first item to get started.&lt;/p&gt;
+  &lt;button class="ds-btn ds-btn--primary"&gt;Create item&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                  </figure>
+                </div>
               </div>
             </div>
           </div>
@@ -793,6 +1143,26 @@
                 </div>
               </div>
             </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-21">
+                  <span aria-label="查看 Accordion 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-21" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-21" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-21" tabindex="0"><code class="language-html">&lt;div class="ds-accordion"&gt;
+  &lt;div class="ds-accordion-item open"&gt;
+    &lt;div class="ds-accordion-header"&gt;&lt;span&gt;Question?&lt;/span&gt;&lt;span class="ds-accordion-arrow"&gt;▾&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="ds-accordion-content"&gt;Answer text.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="ds-accordion-item"&gt;…&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">22 · Table</div>
@@ -806,6 +1176,28 @@
                     <tr><td>Sofia Park</td><td>PM</td><td><span class="ds-badge ds-badge--default">Away</span></td><td>1 hour ago</td></tr>
                   </tbody>
                 </table>
+              </div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-22">
+                  <span aria-label="查看 Table 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-22" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-22" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-22" tabindex="0"><code class="language-html">&lt;div class="ds-table-wrap" tabindex="0"&gt;
+  &lt;table class="ds-table"&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Role&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;&lt;td&gt;Elena Chen&lt;/td&gt;&lt;td&gt;Designer&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Marcus Liu&lt;/td&gt;&lt;td&gt;Developer&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+                  </figure>
+                </div>
               </div>
             </div>
           </div>
@@ -824,6 +1216,29 @@
                 <div class="ds-dropdown-item" style="color:var(--ds-color-error);">Delete</div>
               </div>
             </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-23">
+                  <span aria-label="查看 Navigation Dropdown 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-23" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-23" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-23" tabindex="0"><code class="language-html">&lt;nav class="ds-nav"&gt;
+  &lt;div class="ds-nav-section-label"&gt;Overview&lt;/div&gt;
+  &lt;a class="ds-nav-item ds-nav-item--active" href="#"&gt;Dashboard&lt;/a&gt;
+  &lt;a class="ds-nav-item" href="#"&gt;Projects&lt;/a&gt;
+&lt;/nav&gt;
+&lt;div class="ds-dropdown"&gt;
+  &lt;div class="ds-dropdown-item"&gt;Edit&lt;/div&gt;
+  &lt;div class="ds-dropdown-divider"&gt;&lt;/div&gt;
+  &lt;div class="ds-dropdown-item"&gt;Delete&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">24 · Icon Button / Toolbar</div>
@@ -832,6 +1247,26 @@
               <button class="ds-icon-btn" aria-label="分享"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
               <button class="ds-icon-btn" aria-label="编辑"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg></button>
               <button class="ds-icon-btn" aria-label="搜索"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-24">
+                  <span aria-label="查看 Icon Button 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-24" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-24" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-24" tabindex="0"><code class="language-html">&lt;button class="ds-icon-btn" aria-label="下载"&gt;
+  &lt;svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"&gt;&lt;/path&gt;
+    &lt;polyline points="7 10 12 15 17 10"&gt;&lt;/polyline&gt;
+    &lt;line x1="12" y1="15" x2="12" y2="3"&gt;&lt;/line&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
             </div>
           </div>
           <div class="ds-component-group">
@@ -852,6 +1287,29 @@
                   <input class="ds-slider" type="range" min="0" max="100" value="40" data-val-id="slider-val-2">
                 </div>
                 <div class="ds-slider-labels"><span>0%</span><span>100%</span></div>
+              </div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-25">
+                  <span aria-label="查看 Slider 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-25" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-25" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-25" tabindex="0"><code class="language-html">&lt;div class="ds-slider-group"&gt;
+  &lt;div class="ds-slider-label-row"&gt;
+    &lt;label class="ds-label"&gt;Volume&lt;/label&gt;
+    &lt;span class="ds-slider-value"&gt;65%&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="ds-slider-track-wrap"&gt;
+    &lt;div class="ds-slider-track"&gt;&lt;div class="ds-slider-fill" style="width:65%"&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;input class="ds-slider" type="range" min="0" max="100" value="65"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                  </figure>
+                </div>
               </div>
             </div>
           </div>
@@ -891,6 +1349,26 @@
               </div>
             </div>
           </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-26">
+                  <span aria-label="查看 Date Time Picker 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-26" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-26" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-26" tabindex="0"><code class="language-html">&lt;div class="ds-date-group"&gt;
+  &lt;div class="ds-date-wrap"&gt;
+    &lt;svg class="ds-date-icon"&gt;…&lt;/svg&gt;
+    &lt;input class="ds-date-input" type="text" placeholder="选择日期…"&gt;
+  &lt;/div&gt;
+  &lt;div class="ds-date-calendar"&gt;…&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">27 · Article TOC</div>
@@ -908,6 +1386,25 @@
                   <li><a href="#" class="ds-toc-link"><span class="ds-toc-indicator"></span>API Reference</a></li>
                 </ul>
               </nav>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-27">
+                  <span aria-label="查看 Article TOC 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-27" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-27" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-27" tabindex="0"><code class="language-html">&lt;nav class="ds-toc-article"&gt;
+  &lt;div class="ds-toc-article-title"&gt;On this page&lt;/div&gt;
+  &lt;ul class="ds-toc-list"&gt;
+    &lt;li&gt;&lt;a href="#" class="ds-toc-link ds-toc-link--active"&gt;&lt;span class="ds-toc-indicator"&gt;&lt;/span&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
             </div>
           </div>
           <div class="ds-component-group">
@@ -947,6 +1444,380 @@
                 </div>
               </div>
             </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-28">
+                  <span aria-label="查看 Contact Form 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="code-panel-28" aria-hidden="true">
+                  <figure class="ds-code">
+                    <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-28" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+                    <pre id="pre-code-panel-28" tabindex="0"><code class="language-html">&lt;div class="ds-contact-form"&gt;
+  &lt;div class="ds-form-row"&gt;
+    &lt;div class="ds-form-group"&gt;
+      &lt;label class="ds-form-label"&gt;姓名 &lt;span class="ds-form-required"&gt;*&lt;/span&gt;&lt;/label&gt;
+      &lt;input class="ds-form-input" type="text" placeholder="张三" required&gt;
+    &lt;/div&gt;
+    &lt;div class="ds-form-group"&gt;
+      &lt;label class="ds-form-label"&gt;邮箱 &lt;span class="ds-form-required"&gt;*&lt;/span&gt;&lt;/label&gt;
+      &lt;input class="ds-form-input" type="email" placeholder="hello@example.com" required&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="ds-form-group ds-mt-5"&gt;
+    &lt;label class="ds-form-label"&gt;主题&lt;/label&gt;
+    &lt;select class="ds-form-select"&gt;&lt;option&gt;合作咨询&lt;/option&gt;&lt;/select&gt;
+  &lt;/div&gt;
+  &lt;div class="ds-form-group ds-mt-5"&gt;
+    &lt;label class="ds-form-label"&gt;留言 &lt;span class="ds-form-required"&gt;*&lt;/span&gt;&lt;/label&gt;
+    &lt;textarea class="ds-form-textarea" placeholder="请描述你的需求…" required&gt;&lt;/textarea&gt;
+  &lt;/div&gt;
+  &lt;button class="ds-btn ds-btn--primary ds-mt-5"&gt;发送留言&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ds-doc-block" id="visual-charts">
+          <h2>视觉手册 · 图表库</h2>
+          <p>10 种图表类型（环形图含单值与多组双变体）由统一 SVG 引擎渲染，零运行时依赖，支持 hover tooltip、键盘聚焦与过渡动画。视觉样式通过 <code>--ds-chart-*</code> 配置变量调整。</p>
+
+          <!-- Bar Chart -->
+          <div class="ds-component-group">
+            <div class="ds-component-label">柱状图 · Bar</div>
+            <div class="ds-component-preview ds-mb-5">
+              <div class="ds-chart ds-chart--bar" aria-labelledby="bar-v-title">
+                <span class="ds-sr-only" id="bar-v-title">月度销售额柱状图：一月 65，二月 80，三月 45，四月 92，五月 70，六月 88</span>
+                <div data-chart='{"type":"bar","title":"月度销售额","data":[65,80,45,92,70,88],"labels":["Jan","Feb","Mar","Apr","May","Jun"],"options":{"colors":["var(--ds-chart-1)"],"animate":true,"tooltip":true,"xAxis":{"title":"月份"}}}'></div>
+              </div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="chart-code-01">
+                  <span aria-label="查看 柱状图 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="chart-code-01" aria-hidden="true">
+            <figure class="ds-code">
+              <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-chart-code-01" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+              <pre id="pre-chart-code-01" tabindex="0"><code class="language-html">&lt;div class="ds-chart ds-chart--bar"&gt;
+  &lt;div data-chart='{"type":"bar","title":"月度销售额","data":[65,80,45,92,70,88],
+    "labels":["Jan","Feb","Mar","Apr","May","Jun"],
+    "options":{"colors":["var(--ds-chart-1)"],
+      "animate":true,"tooltip":true,
+      "xAxis":{"title":"月份"}}}'&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Horizontal Bar -->
+          <div class="ds-component-group">
+            <div class="ds-component-label">条形图 · Bar (Horizontal)</div>
+            <div class="ds-component-preview ds-mb-5">
+              <div class="ds-chart ds-chart--horizontal" aria-labelledby="bar-h-title">
+                <span class="ds-sr-only" id="bar-h-title">设备使用分布：桌面端 55%，移动端 35%，平板 10%</span>
+                <div data-chart='{"type":"hbar","title":"设备使用分布","data":[55,35,10],"labels":["桌面端","移动端","平板"],"options":{"colors":["var(--ds-chart-1)"],"animate":true,"tooltip":true,"xAxis":{"title":"占比（%）"}}}'></div>
+              </div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="chart-code-02">
+                  <span aria-label="查看 条形图 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="chart-code-02" aria-hidden="true">
+            <figure class="ds-code">
+              <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-chart-code-02" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+              <pre id="pre-chart-code-02" tabindex="0"><code class="language-html">&lt;div class="ds-chart ds-chart--horizontal"&gt;
+  &lt;div data-chart='{"type":"hbar","title":"设备使用分布","data":[55,35,10],
+    "labels":["桌面端","移动端","平板"],
+    "options":{"colors":["var(--ds-chart-1)"],"animate":true,"tooltip":true,
+      "xAxis":{"title":"占比（%）"}}}'&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stacked Bar -->
+          <div class="ds-component-group">
+            <div class="ds-component-label">堆叠柱状图 · Stacked Bar</div>
+            <div class="ds-component-preview ds-mb-5">
+              <div class="ds-chart ds-chart--bar ds-chart--stacked" aria-labelledby="stacked-title">
+                <span class="ds-sr-only" id="stacked-title">季度营收堆叠柱状图：Q1 产品A 40 产品B 30，Q2 产品A 50 产品B 45</span>
+                <div data-chart='{"type":"stacked","title":"季度营收","labels":["Q1","Q2"],"series":[{"name":"产品A","data":[40,50],"color":"var(--ds-chart-1)"},{"name":"产品B","data":[30,45],"color":"var(--ds-chart-2)"}],"options":{"legend":true,"animate":true,"tooltip":true,"xAxis":{"title":"季度"}}}'></div>
+              </div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="chart-code-03">
+                  <span aria-label="查看 堆叠柱状图 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="chart-code-03" aria-hidden="true">
+            <figure class="ds-code">
+              <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-chart-code-03" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+              <pre id="pre-chart-code-03" tabindex="0"><code class="language-html">&lt;div class="ds-chart ds-chart--bar ds-chart--stacked"&gt;
+  &lt;div data-chart='{"type":"stacked","title":"季度营收","labels":["Q1","Q2"],
+    "series":[
+      {"name":"产品A","data":[40,50],"color":"var(--ds-chart-1)"},
+      {"name":"产品B","data":[30,45],"color":"var(--ds-chart-2)"}
+    ],"options":{"legend":true,"animate":true,"tooltip":true,
+      "xAxis":{"title":"季度"}}}'&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pie Chart -->
+          <div class="ds-component-group">
+            <div class="ds-component-label">饼图 · Pie</div>
+            <div class="ds-component-preview">
+              <div class="ds-chart ds-chart--pie" aria-labelledby="pie-title">
+                <span class="ds-sr-only" id="pie-title">流量来源分布：搜索引擎 35%，社交媒体 30%，直接访问 20%，其他 15%</span>
+                <div data-chart='{"type":"pie","title":"流量来源分布","data":[35,30,20,15],"labels":["搜索引擎","社交媒体","直接访问","其他"],"options":{"legend":true,"tooltip":true}}'></div>
+              </div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="chart-code-04">
+                  <span aria-label="查看 饼图 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="chart-code-04" aria-hidden="true">
+            <figure class="ds-code">
+              <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-chart-code-04" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+              <pre id="pre-chart-code-04" tabindex="0"><code class="language-html">&lt;div class="ds-chart ds-chart--pie"&gt;
+  &lt;div data-chart='{"type":"pie","title":"流量来源分布","data":[35,30,20,15],
+    "labels":["搜索引擎","社交媒体","直接访问","其他"],
+    "options":{"legend":true,"tooltip":true}}'&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Donut Chart -->
+          <div class="ds-component-group">
+            <div class="ds-component-label">环形图 · Donut</div>
+            <div class="ds-component-preview">
+              <div class="ds-chart ds-chart--donut" aria-labelledby="donut-title">
+                <span class="ds-sr-only" id="donut-title">完成率 73%</span>
+                <div data-chart='{"type":"donut","title":"完成率","value":73,"labels":["完成率"],"options":{"colors":["var(--ds-chart-1)"],"animate":true}}'></div>
+              </div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="chart-code-05">
+                  <span aria-label="查看 环形图 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="chart-code-05" aria-hidden="true">
+            <figure class="ds-code">
+              <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-chart-code-05" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+              <pre id="pre-chart-code-05" tabindex="0"><code class="language-html">&lt;div class="ds-chart ds-chart--donut"&gt;
+  &lt;div data-chart='{"type":"donut","title":"完成率","value":73,"labels":["完成率"],
+    "options":{"colors":["var(--ds-chart-1)"],"animate":true}}'&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Donut Multi-group -->
+          <div class="ds-component-group">
+            <div class="ds-component-label">多组环形图 · Donut (Multi)</div>
+            <div class="ds-component-preview">
+              <div class="ds-chart ds-chart--donut" aria-labelledby="donut-multi-title">
+                <span class="ds-sr-only" id="donut-multi-title">月度完成率：1月 75%，2月 42%，3月 完成60% 进行30% 失败10%</span>
+                <div data-chart='{"type":"donut","title":"月度完成率","series":[{"name":"1月","value":75,"color":"var(--ds-chart-1)"},{"name":"2月","value":42,"color":"var(--ds-chart-2)"},{"name":"3月","data":[60,30,10],"labels":["完成","进行","失败"],"colors":["var(--ds-chart-3)","var(--ds-chart-4)","var(--ds-chart-5)"]}],"options":{"animate":true,"tooltip":true}}'></div>
+              </div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="chart-code-06">
+                  <span aria-label="查看 多组环形图 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="chart-code-06" aria-hidden="true">
+            <figure class="ds-code">
+              <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-chart-code-06" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+              <pre id="pre-chart-code-06" tabindex="0"><code class="language-html">&lt;div class="ds-chart ds-chart--donut"&gt;
+  &lt;div data-chart='{"type":"donut","title":"月度完成率",
+    "series":[
+      {"name":"1月","value":75,"color":"var(--ds-chart-1)"},
+      {"name":"2月","value":42,"color":"var(--ds-chart-2)"},
+      {"name":"3月","data":[60,30,10],"labels":["完成","进行","失败"],
+        "colors":["var(--ds-chart-3)","var(--ds-chart-4)","var(--ds-chart-5)"]}
+    ],"options":{"animate":true,"tooltip":true}}'&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sparkline -->
+          <div class="ds-component-group">
+            <div class="ds-component-label">迷你趋势图 · Sparkline</div>
+            <div class="ds-component-preview">
+              <div class="ds-chart ds-chart--sparkline" aria-label="近 7 日趋势：上升趋势">
+                <div data-chart='{"type":"sparkline","data":[30,55,42,78,65,90,72],"options":{"colors":["var(--ds-chart-1)"]}}'></div>
+              </div>
+              <span class="ds-chart__delta">+12.4%</span>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="chart-code-07">
+                  <span aria-label="查看 迷你趋势图 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="chart-code-07" aria-hidden="true">
+            <figure class="ds-code">
+              <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-chart-code-07" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+              <pre id="pre-chart-code-07" tabindex="0"><code class="language-html">&lt;div class="ds-chart ds-chart--sparkline"&gt;
+  &lt;div data-chart='{"type":"sparkline","data":[30,55,42,78,65,90,72],
+    "options":{"colors":["var(--ds-chart-1)"]}}'&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Line Chart -->
+          <div class="ds-component-group">
+            <div class="ds-component-label">折线图 · Line</div>
+            <div class="ds-component-preview">
+              <div class="ds-chart ds-chart--line" aria-labelledby="line-title">
+                <span class="ds-sr-only" id="line-title">7 天用户活跃度趋势：从 30 逐步上升至 72</span>
+                <div data-chart='{"type":"line","title":"7 天用户活跃度","data":[30,55,42,78,65,90,72],"options":{"colors":["var(--ds-chart-1)"],"dots":true,"tooltip":true,"animate":true,"xAxis":{"title":"日期"}}}'></div>
+              </div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="chart-code-08">
+                  <span aria-label="查看 折线图 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="chart-code-08" aria-hidden="true">
+            <figure class="ds-code">
+              <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-chart-code-08" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+<pre id="pre-chart-code-08" tabindex="0"><code class="language-html">&lt;div class="ds-chart ds-chart--line"&gt;
+  &lt;div data-chart='{"type":"line","title":"7 天用户活跃度","data":[30,55,42,78,65,90,72],
+    "options":{"colors":["var(--ds-chart-1)"],"dots":true,"tooltip":true,"animate":true,
+      "xAxis":{"title":"日期"}}}'&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Area Chart -->
+          <div class="ds-component-group">
+            <div class="ds-component-label">面积图 · Area</div>
+            <div class="ds-component-preview">
+              <div class="ds-chart ds-chart--line" aria-labelledby="area-title">
+                <span class="ds-sr-only" id="area-title">月访问量面积图，从 40 增长至 85</span>
+                <div data-chart='{"type":"area","title":"月访问量","data":[40,55,48,62,70,78,85],"options":{"colors":["var(--ds-chart-1)"],"dots":true,"tooltip":true,"animate":true,"xAxis":{"title":"月份"}}}'></div>
+              </div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="chart-code-09">
+                  <span aria-label="查看 面积图 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="chart-code-09" aria-hidden="true">
+            <figure class="ds-code">
+              <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-chart-code-09" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+              <pre id="pre-chart-code-09" tabindex="0"><code class="language-html">&lt;div class="ds-chart ds-chart--line"&gt;
+  &lt;div data-chart='{"type":"area","title":"月访问量","data":[40,55,48,62,70,78,85],
+    "options":{"colors":["var(--ds-chart-1)"],
+      "dots":true,"tooltip":true,"animate":true,
+      "xAxis":{"title":"月份"}}}'&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Multi-line Chart -->
+          <div class="ds-component-group">
+            <div class="ds-component-label">多系列折线图 · Multi-line</div>
+            <div class="ds-component-preview">
+              <div class="ds-chart ds-chart--line ds-chart--multiline" aria-labelledby="ml-title">
+                <span class="ds-sr-only" id="ml-title">桌面端和移动端用户数趋势对比</span>
+                <div data-chart='{"type":"multiline","title":"用户数趋势对比","labels":["1","2","3","4","5","6","7"],"series":[{"name":"桌面端","data":[50,65,45,78,60,85,70],"color":"var(--ds-chart-1)"},{"name":"移动端","data":[30,45,55,60,70,75,90],"color":"var(--ds-chart-2)"}],"options":{"legend":true,"dots":true,"tooltip":true,"animate":true,"xAxis":{"title":"日期"}}}'></div>
+              </div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="chart-code-10">
+                  <span aria-label="查看 多系列折线图 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="chart-code-10" aria-hidden="true">
+            <figure class="ds-code">
+              <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-chart-code-10" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+              <pre id="pre-chart-code-10" tabindex="0"><code class="language-html">&lt;div class="ds-chart ds-chart--line ds-chart--multiline"&gt;
+  &lt;div data-chart='{"type":"multiline","title":"用户数趋势对比",
+    "labels":["1","2","3","4","5","6","7"],
+    "series":[
+      {"name":"桌面端","data":[50,65,45,78,60,85,70],"color":"var(--ds-chart-1)"},
+      {"name":"移动端","data":[30,45,55,60,70,75,90],"color":"var(--ds-chart-2)"}
+    ],"options":{"legend":true,"dots":true,"tooltip":true,"animate":true,
+      "xAxis":{"title":"日期"}}}'&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Combo Chart -->
+          <div class="ds-component-group">
+            <div class="ds-component-label">组合图 · Combo (Bar + Line)</div>
+            <div class="ds-component-preview">
+              <div class="ds-chart ds-chart--combo" aria-labelledby="combo-title">
+                <span class="ds-sr-only" id="combo-title">收入与增长率组合图</span>
+                <div data-chart='{"type":"combo","title":"收入与增长率","labels":["1","2","3","4","5","6"],"series":[{"name":"收入","chartType":"bar","data":[40,55,48,62,70,78],"color":"var(--ds-chart-1)"},{"name":"增长率","chartType":"line","data":[10,22,18,28,25,35],"color":"var(--ds-chart-2)"}],"options":{"legend":true,"tooltip":true,"dots":true,"animate":true,"xAxis":{"title":"月份"}}}'></div>
+              </div>
+            </div>
+            <div class="ds-accordion ds-accordion--code">
+              <div class="ds-accordion-item">
+                <div class="ds-accordion-header" aria-expanded="false" aria-controls="chart-code-11">
+                  <span aria-label="查看 组合图 代码">查看代码</span>
+                  <svg class="ds-accordion-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="ds-accordion-content" id="chart-code-11" aria-hidden="true">
+            <figure class="ds-code">
+              <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-chart-code-11" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+              <pre id="pre-chart-code-11" tabindex="0"><code class="language-html">&lt;div class="ds-chart ds-chart--combo"&gt;
+  &lt;div data-chart='{"type":"combo","title":"收入与增长率","labels":["1","2","3","4","5","6"],
+    "series":[
+      {"name":"收入","chartType":"bar","data":[40,55,48,62,70,78],"color":"var(--ds-chart-1)"},
+      {"name":"增长率","chartType":"line","data":[10,22,18,28,25,35],"color":"var(--ds-chart-2)"}
+    ],"options":{"legend":true,"tooltip":true,"dots":true,"animate":true,
+      "xAxis":{"title":"月份"}}}'&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </figure>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -983,7 +1854,7 @@
                 <p>玻璃卡片使用 <code>backdrop-filter: blur(24px)</code>，背景为系统色盘中相邻色的渐变。</p>
                 <div class="ds-glass-meta">
                   <span>EDIC Design System</span>
-                  <span>v1.0</span>
+                  <span>v1.10.0</span>
                 </div>
               </div>
             </div>
@@ -1046,7 +1917,7 @@
                   <div class="ds-timeline-dot"></div>
                   <div class="ds-timeline-content">
                     <span class="ds-timeline-tag">发布</span>
-                    <div class="ds-timeline-date">2026.06 — v1.9.1</div>
+                    <div class="ds-timeline-date">2026.06 — v1.10.0</div>
                     <div class="ds-timeline-title">编辑主义暗色深化</div>
                     <p>暗色模式 Gravitas &amp; Glow、Prism 代码高亮主题适配、统一页面目录组件、6 个验证器全部 exit 0。</p>
                   </div>
@@ -1180,14 +2051,14 @@
     <div class="ds-footer-bottom">
       <span>© <span class="ds-year">2026</span> EDIC · CGArtLab</span>
       <div class="ds-cluster">
-        <span class="ds-mono" data-ds-version>v1.9.1</span>
+        <span class="ds-mono" data-ds-version>v1.10.0</span>
         <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:var(--ds-accent);text-decoration:none" title="本设计系统采用 CC BY 4.0 许可证">CC BY 4.0</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script src="scripts.js?v=1.9.1"></script>
+<script src="scripts.js?v=1.10.0"></script>
 <button id="theme-toggle-btn-fixed" class="ds-theme-toggle-btn ds-theme-toggle-btn--fixed" type="button" aria-label="跟随系统 · 点击切换">
   <span class="theme-icon"></span>
 </button>
