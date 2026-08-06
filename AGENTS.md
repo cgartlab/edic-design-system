@@ -242,7 +242,7 @@ changelog.html（自动生成，勿手动编辑）
 
 ### 紧急热修复（手动 tag）
 
-正常发布由 release-please 自动完成。仅当需要紧急热修复时，才使用手动 tag：
+正常发布由人工 tag 触发（`git tag -s`），热修复流程与其一致：
 
 ```bash
 # 1. 创建 hotfix 分支
@@ -311,16 +311,16 @@ All changes go through Pull Requests — no direct pushes to `main` for features
 └─────────────────────────────────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ release-please (auto tag + Release Draft)                     │
-│  1. Creates git tag vX.Y.Z + GitHub Release (Draft)          │
-│  2. post-merge-stamp: stamp_version.py + changelog.html      │
+│ post-merge-stamp: stamp_version.py + changelog.html          │
+│  检测 VERSION 变化 → 自动同步 ?v= 缓存戳                     │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ release.yml (build + publish)                                │
+│ 人类执行：git tag -s vX.Y.Z -m "Release vX.Y.Z"             │
+│           && git push origin vX.Y.Z                          │
+│  → release.yml（push: tags/v*）构建资产并创建 GitHub Release  │
 │  1. Builds: styles.css.gz, scripts.js.gz, PDFs, Skill ZIP   │
 │  2. Uploads assets to GitHub Release                         │
-│  3. Publishes Draft Release                                  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -335,7 +335,7 @@ Release PR（分支名以 `release-please--` 开头）存活期间，CI 校验�
 - `validate_release_notes.py`：此脚本校验 **`CHANGELOG.md` 中是否存在当前版本节**（变更日志唯一来源，由 `release-please` 维护）。即使在 Release PR 分支上，如果缺失该版本节，CI 必须失败并**物理阻断该 Release PR 的合并**（否则网站变更页与 GitHub Release notes 都会是空的）。
 
 > ⚠️ `post-merge-stamp` 若静默失败（网络抖动 / Token 过期 / Git 冲突），main 分支的 `VERSION` 将停滞在旧版本，导致后续所有 Stamp 注入和资产打包全部使用错误版本号。该 Job 已在 `GITHUB_STEP_SUMMARY` 中配置失败告警。
-> ⚠️ 若 `release-please` job 本身失败，`post-merge-stamp` 因 `needs: release-please` 依赖而**自动跳过**，需人工介入排查原因后重新触发 workflow。
+> ⚠️ 若 `release-please` job 本身失败，`post-merge-stamp` 不会自动跳过（已移除 `needs: release-please` 依赖，改为独立检测 VERSION 变化），但若 VERSION 文件未更新，同样不会触发 stamp。需人工介入排查原因后重新触发 workflow。
 
 ### 4. Version Sync
 

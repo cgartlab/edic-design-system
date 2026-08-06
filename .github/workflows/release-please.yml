@@ -51,9 +51,7 @@ jobs:
     name: Create/Update Release PR
     runs-on: ubuntu-latest
     outputs:
-      release_created: ${{ steps.rp.outputs.release_created }}
-      tag_name: ${{ steps.rp.outputs.tag_name }}
-      version: ${{ steps.rp.outputs.version }}
+      prs_created: ${{ steps.rp.outputs.prs_created }}
     steps:
       - uses: actions/checkout@v5
         with:
