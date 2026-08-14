@@ -81,28 +81,23 @@ release.yml 自动触发 → 构建资产 → 创建 GitHub Release
 
 ---
 
-## 发布阶段（验证自动 tag + GitHub Release）
+## 发布阶段（手工 tag 触发正式发布）
 
-release-please 在 Release PR 合并后**自动**创建 tag 和 GitHub Release（Draft）。
-人工任务仅负责验证和发布：
+release-please **只**创建/更新 Release PR，**不自动**打 tag 或建 Release。
+人类审查 Release PR → 合并 → post-merge-stamp 同步 → 手工 tag：
 
 ```bash
-# 1. 确认 release-please job 成功（Actions → Release Please）
-#    - tag vX.Y.Z 已创建
-#    - GitHub Release（Draft）已创建
-
-# 2. 确认 post-merge-stamp 成功（Actions → Release Please 中的 stamp job）
+# 1. 确认 post-merge-stamp 成功（Actions → Release Please）
 #    - VERSION 已更新到新值
 #    - changelog.html 已重建
 
-# 3. 手动发布 Draft Release：
-#    GitHub UI → Releases → 点击该 Draft → "Publish release"
-#    或：gh release edit vX.Y.Z --publish
+# 2. 打签名标签并推送（触发 release.yml）
+git tag -s vX.Y.Z -m "Release vX.Y.Z" && git push origin vX.Y.Z
+# 触发 release.yml（push: tags/v*）→ 构建资产 → 创建 GitHub Release
 ```
 
-- [ ] tag 已创建：`git tag -l vX.Y.Z`
-- [ ] GitHub Release（Draft）已存在
-- [ ] post-merge-stamp job 成功
+- [ ] post-merge-stamp job 成功（VERSION 已更新、changelog.html 已重建）
+- [ ] tag 已推送：`git push origin vX.Y.Z`
 - [ ] GitHub Actions → Release Pipeline 运行成功（tag push 触发）
 - [ ] GitHub Release 页面存在，资产文件齐全（PDF + ZIP + CHECKSUMS.txt）
 - [ ] 所有资产 URL 不包含 `untagged-`（防止 v1.8.1 事故重现）

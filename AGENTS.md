@@ -1,6 +1,6 @@
 # EDIC Design System — Agent Instructions
 
-**Version:** 1.10.0 | **Site:** https://edic.cgartlab.com | **License:** CC BY 4.0
+**Version:** 1.9.1 | **Site:** https://edic.cgartlab.com | **License:** CC BY 4.0
 
 ---
 
@@ -197,10 +197,11 @@ release/{version}      # release prep
 
 ## Release Process
 
-### 发布策略：release-please 自动 tag + GitHub Release（Draft）
+### 发布策略：release-please 辅助 + 人工 tag 触发正式发布
 
-`release-please` 自动完成 Release PR、CHANGELOG、版本号同步、tag 创建与 GitHub Release（Draft）。
-`release.yml` 由 tag push 事件触发，负责构建资产并上传至 GitHub Release，将其从 Draft 发布为正式 Release。
+`release-please` 负责 Release PR 和 CHANGELOG 更新，**不会**自动打 tag。
+只有人类明确执行 `git tag -s vX.Y.Z && git push origin vX.Y.Z` 之后，
+`release.yml` 才会触发，构建资产并创建 GitHub Release。
 
 ### 正常发布流程
 
@@ -211,12 +212,14 @@ release-please 分析 Conventional Commits → 创建/更新 Release PR（含 CH
     ↓
 人类审查 Release PR（如需润色，直接编辑 CHANGELOG.md 对应版本节）
     ↓
-合并 Release PR → release-please 自动：
-  ① 更新 VERSION / tokens.json / package.json
-  ② 创建 tag vX.Y.Z + GitHub Release（Draft）
-  ③ post-merge-stamp：stamp_version.py（同步 ?v= 缓存戳）+ generate_changelog_html.py
+合并 Release PR → release-please 更新 VERSION / tokens.json / package.json
     ↓
-release.yml 触发（tag push）→ 构建 PDF/ZIP → 上传至 Release → 发布 Draft
+post-merge-stamp：检测 VERSION 变化 → stamp_version.py（同步 ?v= 缓存戳）
+                  + generate_changelog_html.py（重建网站变更页）
+    ↓
+人类执行：git tag -s vX.Y.Z -m "Release vX.Y.Z" && git push origin vX.Y.Z
+    ↓
+release.yml 触发（tag push）→ 构建 PDF/ZIP → 创建 GitHub Release
 ```
 
 ### 网站变更页（changelog.html）
@@ -239,7 +242,7 @@ changelog.html（自动生成，勿手动编辑）
 
 ### 紧急热修复（手动 tag）
 
-正常发布由 release-please 自动完成。仅当需要紧急热修复时，才使用手动 tag：
+正常发布由人工 tag 触发（`git tag -s`），热修复流程与其一致：
 
 ```bash
 # 1. 创建 hotfix 分支
@@ -308,16 +311,16 @@ All changes go through Pull Requests — no direct pushes to `main` for features
 └─────────────────────────────────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ release-please (auto tag + Release Draft)                     │
-│  1. Creates git tag vX.Y.Z + GitHub Release (Draft)          │
-│  2. post-merge-stamp: stamp_version.py + changelog.html      │
+│ post-merge-stamp: stamp_version.py + changelog.html          │
+│  检测 VERSION 变化 → 自动同步 ?v= 缓存戳                     │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ release.yml (build + publish)                                │
+│ 人类执行：git tag -s vX.Y.Z -m "Release vX.Y.Z"             │
+│           && git push origin vX.Y.Z                          │
+│  → release.yml（push: tags/v*）构建资产并创建 GitHub Release  │
 │  1. Builds: styles.css.gz, scripts.js.gz, PDFs, Skill ZIP   │
 │  2. Uploads assets to GitHub Release                         │
-│  3. Publishes Draft Release                                  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -332,7 +335,7 @@ Release PR（分支名以 `release-please--` 开头）存活期间，CI 校验�
 - `validate_release_notes.py`：此脚本校验 **`CHANGELOG.md` 中是否存在当前版本节**（变更日志唯一来源，由 `release-please` 维护）。即使在 Release PR 分支上，如果缺失该版本节，CI 必须失败并**物理阻断该 Release PR 的合并**（否则网站变更页与 GitHub Release notes 都会是空的）。
 
 > ⚠️ `post-merge-stamp` 若静默失败（网络抖动 / Token 过期 / Git 冲突），main 分支的 `VERSION` 将停滞在旧版本，导致后续所有 Stamp 注入和资产打包全部使用错误版本号。该 Job 已在 `GITHUB_STEP_SUMMARY` 中配置失败告警。
-> ⚠️ 若 `release-please` job 本身失败，`post-merge-stamp` 因 `needs: release-please` 依赖而**自动跳过**，需人工介入排查原因后重新触发 workflow。
+> ⚠️ 若 `release-please` job 本身失败，`post-merge-stamp` 不会自动跳过（已移除 `needs: release-please` 依赖，改为独立检测 VERSION 变化），但若 VERSION 文件未更新，同样不会触发 stamp。需人工介入排查原因后重新触发 workflow。
 
 ### 4. Version Sync
 
@@ -363,7 +366,7 @@ If limits are exceeded, CI blocks the release.
 
 All releases are archived on GitHub Releases with:
 
-- Version tag (e.g., `v1.10.0`)
+- Version tag (e.g., `v1.9.1`)
 - Release notes (from `CHANGELOG.md`)
 - Checksums (SHA-256)
 - Pre-built assets (`.gz` files)
