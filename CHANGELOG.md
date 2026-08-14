@@ -3,6 +3,48 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [1.10.0](https://github.com/cgartlab/edic-design-system/compare/v1.9.1...v1.10.0) (2026-08-14)
+
+
+### 新增
+
+* **charts:** 添加统一 SVG 图表引擎，支持 10 种图表类型 ([9138b88](https://github.com/cgartlab/edic-design-system/commit/9138b88994fe410814f4434be949316887da84ea))
+* **charts:** 添加统一 SVG 图表引擎，支持 10 种图表类型 ([2b3800e](https://github.com/cgartlab/edic-design-system/commit/2b3800e9c11c408074b7a97f904b09a7be8e2369))
+* **skill:** add references/ directory for R dimension improvement ([#208](https://github.com/cgartlab/edic-design-system/issues/208)) ([afb1a88](https://github.com/cgartlab/edic-design-system/commit/afb1a8813dec328406f077845ead8fdefbe8d19d))
+* **skill:** improve TRACE dimensions A/C/E for SkillHub evaluation ([#207](https://github.com/cgartlab/edic-design-system/issues/207)) ([2cd9753](https://github.com/cgartlab/edic-design-system/commit/2cd975343e9779fe8430d8da5290aaf4c8190165))
+* **skill:** R2 reliability — patterns, recipes, self-check, bug fixes ([424794f](https://github.com/cgartlab/edic-design-system/commit/424794f148d737394631c2a0eea5e63dd67da552))
+* **skill:** R2 reliability — patterns, recipes, self-check, bug fixes ([3fbe59a](https://github.com/cgartlab/edic-design-system/commit/3fbe59a00de2b13f3eb070a0e215e2fa7a359fdc))
+* **skill:** R2 reliability — patterns, recipes, self-check, bug fixes ([d55f96f](https://github.com/cgartlab/edic-design-system/commit/d55f96fbeb2aae36bf503ef7bafa8551cba6cff3))
+* **skill:** R2 reliability — patterns, recipes, self-check, bug fixes ([d3ce640](https://github.com/cgartlab/edic-design-system/commit/d3ce64019d6f5c59f1e11144a54e2a6024b15c26))
+* **skill:** R2 reliability — patterns, recipes, self-check, bug fixes ([5c31735](https://github.com/cgartlab/edic-design-system/commit/5c31735d7175e0d19a138370d6dcbc833701104d))
+* **skill:** R2 reliability — PATTERNS, RECIPES, self-check, bug fixes ([5443055](https://github.com/cgartlab/edic-design-system/commit/544305500b1277257999430e91b1e9f47e8a7179))
+
+
+### 修复
+
+* **blog:** remove inline styles and hardcoded values ([ee61287](https://github.com/cgartlab/edic-design-system/commit/ee6128747f3fb70fdcc2ef48ad3b7cdf16cc924a))
+* **blog:** remove inline styles and hardcoded values to comply with design system ([12758ea](https://github.com/cgartlab/edic-design-system/commit/12758ea87b340576a9d96c9d40a7a5eefb61eed3))
+* **charts:** aria-label 无标签时用 String(v) 兜底三元表达式 ([a1e6de5](https://github.com/cgartlab/edic-design-system/commit/a1e6de55ea78488d56f3d17ffd2a8cbb5e9ac523))
+* **css:** add missing ds-body-lg utility class, fix blog.html class ref ([239cdb0](https://github.com/cgartlab/edic-design-system/commit/239cdb09c279c473f9790f5c9a5e049d10d7d18c))
+* **css:** add missing ds-body-lg utility class, fix blog.html class ref ([c527310](https://github.com/cgartlab/edic-design-system/commit/c5273103f00e9febafa2569e3ad37c5e7fabd38f)), closes [#216](https://github.com/cgartlab/edic-design-system/issues/216)
+* **pages:** restore section bottom padding ([dfa64a5](https://github.com/cgartlab/edic-design-system/commit/dfa64a57fe2786168bc2410861fa3457cbdf28ef))
+* **release:** post-merge-stamp detect gate 改为 manifest（修复 P1 阻断） ([f55da87](https://github.com/cgartlab/edic-design-system/commit/f55da8772366e1e5eb63624dd506af4d0f425627))
+* **release:** 修复 post-merge-stamp gate + 同步 AGENTS.md ([3a0c0b3](https://github.com/cgartlab/edic-design-system/commit/3a0c0b3bbce20ee8ae21ae5c088145ada24afc58))
+* **release:** 回退 skip-github-release 为 true，恢复手工 tag 发布 ([b3c5954](https://github.com/cgartlab/edic-design-system/commit/b3c595493365d5404e61c812a8f429220d516a61))
+* **release:** 回退 skip-github-release 为 true，恢复手工 tag 发布 ([c862400](https://github.com/cgartlab/edic-design-system/commit/c86240013ab5dd54152f7b8d897550953354caf1))
+* **release:** 回退幽灵发布 + 简化 post-merge-stamp detect 逻辑 ([ea4df69](https://github.com/cgartlab/edic-design-system/commit/ea4df699516374650420379a21c7658025bd0d77))
+* **release:** 清理死 outputs + 同步文档为手工 tag 流程 ([e153cd9](https://github.com/cgartlab/edic-design-system/commit/e153cd9665a1079da0731aea4449c5b17c13bc5e))
+* **skill:** correct TOKENS.md version ref; replace 64px with --ds-space-16 in RECIPES.md ([f41065d](https://github.com/cgartlab/edic-design-system/commit/f41065d9885821d932b807ed0d0fe4eda4c3969d))
+* **skill:** correct TOKENS.md version ref; replace 64px with --ds-space-16 in RECIPES.md ([83dac31](https://github.com/cgartlab/edic-design-system/commit/83dac3153bddd407a4ff0aa583a8655027a758a5))
+* **tooltip:** add JS interaction + ARIA + role=tooltip, replace inline style with class, remove dead CSS, token padding/z-index/gap (closes [#213](https://github.com/cgartlab/edic-design-system/issues/213)) ([93a727b](https://github.com/cgartlab/edic-design-system/commit/93a727b4ba54160c111d0e46f586e702f54f96b6))
+* **tooltip:** add JS interaction + ARIA support (closes [#213](https://github.com/cgartlab/edic-design-system/issues/213)) ([4c50a97](https://github.com/cgartlab/edic-design-system/commit/4c50a973cf0862495ad2146109002f1224f12ef8))
+* **tooltip:** add JS interaction + ARIA support (closes [#213](https://github.com/cgartlab/edic-design-system/issues/213)) ([5823fa2](https://github.com/cgartlab/edic-design-system/commit/5823fa2798fe13e94337f792106862b4cac06138))
+
+
+### 文档
+
+* rewrite README — bilingual layout + professional badges ([#209](https://github.com/cgartlab/edic-design-system/issues/209)) ([6f8b336](https://github.com/cgartlab/edic-design-system/commit/6f8b33670761cb9af1fa66695ebf58ae05ab7ed9))
+
 ## [Unreleased]
 
 ### 新增
