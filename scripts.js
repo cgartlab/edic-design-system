@@ -1345,7 +1345,7 @@ const TOKENS = [
         'data-value': v,
         'data-label': labels[j] || '',
         role: 'img',
-        'aria-label': (labels[j] || '') + ': ' + v
+        'aria-label': (labels[j] || '') ? (labels[j] + ': ' + v) : String(v)
       }, g);
       r.style.setProperty('--color', color);
       if (cfg.options.animate) r.style.setProperty('--d', (j * 40) + 'ms');
@@ -1388,7 +1388,7 @@ const TOKENS = [
         'data-value': v,
         'data-label': labels[j] || '',
         role: 'img',
-        'aria-label': (labels[j] || '') + ': ' + v
+        'aria-label': (labels[j] || '') ? (labels[j] + ': ' + v) : String(v)
       }, g);
       r.style.setProperty('--color', color);
       if (cfg.options.animate) r.style.setProperty('--d', (j * 40) + 'ms');
@@ -1444,7 +1444,7 @@ const TOKENS = [
           'data-label': labels[di] || '',
           'data-series-name': series[si].name || '',
           role: 'img',
-          'aria-label': (labels[di] || '') + ': ' + v
+          'aria-label': (labels[di] || '') ? (labels[di] + ': ' + v) : String(v)
         }, g);
         r.style.setProperty('--color', sc);
         if (cfg.options.animate) r.style.setProperty('--d', (di * 40) + 'ms');
@@ -1511,7 +1511,7 @@ const TOKENS = [
         'data-value': data[j],
         'data-label': labels[j] || '',
         role: 'img',
-        'aria-label': (labels[j] || '') + ': ' + data[j]
+        'aria-label': (labels[j] || '') ? (labels[j] + ': ' + data[j]) : String(data[j])
       }, g);
       p.style.setProperty('--color', colors[j % colors.length]);
       items.push(p);
@@ -1604,7 +1604,7 @@ const TOKENS = [
         'data-value': data[j],
         'data-label': labels[j] || '',
         role: 'img',
-        'aria-label': (labels[j] || '') + ': ' + data[j]
+        'aria-label': (labels[j] || '') ? (labels[j] + ': ' + data[j]) : String(data[j])
       }, g);
       p.style.setProperty('--color', colors[j % colors.length]);
       items.push(p);
@@ -1823,7 +1823,7 @@ const TOKENS = [
         tabindex: '0',
         'data-index': h,
         role: 'img',
-        'aria-label': (labels[h] || '') + ': ' + data[h]
+        'aria-label': (labels[h] || '') ? (labels[h] + ': ' + data[h]) : String(data[h])
       }, hitG);
       hitRects.push(hr);
     }
@@ -1907,7 +1907,7 @@ const TOKENS = [
             'data-label': labels[bj] || '',
             'data-series-name': bs.name || '',
             role: 'img',
-            'aria-label': (labels[bj] || '') + ': ' + v
+            'aria-label': (labels[bj] || '') ? (labels[bj] + ': ' + v) : String(v)
           }, gBars);
           rect.style.setProperty('--color', bs.color);
           if (cfg.options.animate) rect.style.setProperty('--d', (bj * 40) + 'ms');
