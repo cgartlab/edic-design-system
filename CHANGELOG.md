@@ -3,6 +3,14 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [1.10.3](https://github.com/cgartlab/edic-design-system/compare/v1.10.2...v1.10.3) (2026-08-14)
+
+
+### 修复
+
+* **ci:** 修复 Release PR 合并后 CI 版本验证竞态 ([b50a66f](https://github.com/cgartlab/edic-design-system/commit/b50a66f4cea89faecba92ab6e84de75c356820e2))
+* **ci:** 修复 Release PR 合并后 CI 版本验证竞态 ([be15bc6](https://github.com/cgartlab/edic-design-system/commit/be15bc6586ff3daae6a6d9da29f4305c8d328767))
+
 ## [1.10.2](https://github.com/cgartlab/edic-design-system/compare/v1.10.1...v1.10.2) (2026-08-14)
 
 
