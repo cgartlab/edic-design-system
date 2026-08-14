@@ -197,29 +197,29 @@ release/{version}      # release prep
 
 ## Release Process
 
-### 发布策略：release-please 辅助 + 人工 tag 触发正式发布
+### 发布策略：release-please 自动 tag + GitHub Release
 
-`release-please` 负责 Release PR 和 CHANGELOG 更新，**不会**自动打 tag。
-只有人类明确执行 `git tag -s vX.Y.Z && git push origin vX.Y.Z` 之后，
-`release.yml` 才会触发，构建资产并创建 GitHub Release。
+`release-please`（`skip-github-release: false`）负责 Release PR、CHANGELOG 更新、
+tag 创建与 GitHub Release 自动发布。**无需人类手动执行 `git tag`**。
+`release.yml` 由 `release: published` 事件触发，负责构建资产并上传至已创建的 GitHub Release。
 
 ### 正常发布流程
 
 ```
 普通 PR merge → main
     ↓
-release-please 分析 Conventional Commits → 创建/更新 Release PR（含 CHANGELOG.md）
+release-please（skip-github-release: false）分析 Conventional Commits
     ↓
-人类审查 Release PR（如需润色，直接编辑 CHANGELOG.md 对应版本节）
-    ↓
-合并 Release PR → release-please 更新 VERSION / tokens.json / package.json
-    ↓
-post-merge-stamp：检测 VERSION 变化 → stamp_version.py（同步 ?v= 缓存戳）
-                  + generate_changelog_html.py（重建网站变更页）
-    ↓
-人类执行：git tag -s vX.Y.Z -m "Release vX.Y.Z" && git push origin vX.Y.Z
-    ↓
-release.yml 触发（tag push）→ 构建 PDF/ZIP → 创建 GitHub Release
+创建/更新 Release PR（release-please-- 分支）：
+   ① 更新 CHANGELOG.md（自动分类，中文章节）
+   ② 更新 .release-please-manifest.json / tokens.json / package.json（extra-files）
+     ↓ 人类审查 Release PR → 合并
+release-please（合并后 push main 再触发）→ release_created=true：
+   ① 自动创建 git tag vX.Y.Z（GitHub 后台签名）
+   ② 自动创建 GitHub Release（notes 取自 CHANGELOG）
+   ③ post-merge-stamp：同步 VERSION（从 release-please 的 `version` output）
+     ↓ release: published 事件
+release.yml（Release Pipeline）触发 → 构建 PDF/ZIP/CHECKSUMS → 上传到已创建的 Release
 ```
 
 ### 网站变更页（changelog.html）
@@ -240,9 +240,10 @@ changelog.html（自动生成，勿手动编辑）
 
 本地重建：`make changelog`，CI 检查：`make changelog-check`
 
-### 紧急热修复（手动 tag）
+### 紧急热修复（workflow_dispatch 手动触发）
 
-正常发布由人工 tag 触发（`git tag -s`），热修复流程与其一致：
+正常发布完全自动化（release-please 自动 tag + GitHub Release）。
+紧急热修复仅在自动链路不可用时使用，通过 `workflow_dispatch` 手动触发 `release.yml`：
 
 ```bash
 # 1. 创建 hotfix 分支
@@ -250,17 +251,15 @@ git checkout -b hotfix/vX.Y.Z+1 main
 
 # 2. 修复 → 提交 → PR → merge
 
-# 3. 手动打签名标签（需预先配置 GPG）
-git tag -s vX.Y.Z+1 -m "Hotfix vX.Y.Z+1"
-git push origin vX.Y.Z+1
-
-# 4. 手动触发 release.yml（workflow_dispatch）
+# 3. 手动触发 release.yml（workflow_dispatch）
+#    通过 GitHub Actions UI → "Run workflow"，指定 version 参数
 gh workflow run release.yml -f version=X.Y.Z+1
 
-# 5. 运行 make stamp-version 同步 ?v= 缓存戳
+# 4. 验证 main 上 VERSION / ?v= 已同步
+#    （release.yml 的 workflow_dispatch 路径已自动执行 stamp_version.py）
 ```
 
-> ⚠️ 手动 tag 后必须运行 `make stamp-version` 同步 `?v=` 缓存戳。
+> ⚠️ `workflow_dispatch` 仅作为紧急回退。正常发布请通过合并 Release PR 完成，由 release-please 自动创建 tag 和 GitHub Release。
 
 完整发布清单见 [docs/RELEASE-CHECKLIST.md](./docs/RELEASE-CHECKLIST.md)。
 
@@ -309,18 +308,24 @@ All changes go through Pull Requests — no direct pushes to `main` for features
 │  3. CI checks: CHANGELOG.md has vX.Y.Z section (blocks if not)│
 │  4. Review (polish CHANGELOG.md wording if needed) → Merge   │
 └─────────────────────────────────────────────────────────────┘
-                           ↓
+                            ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ post-merge-stamp: stamp_version.py + changelog.html          │
-│  检测 VERSION 变化 → 自动同步 ?v= 缓存戳                     │
+│ release-please（Release PR 合并后 push main）               │
+│  release_created=true：                                      │
+│  ① 自动创建 git tag vX.Y.Z（GitHub 后台签名，无需本地 GPG） │
+│  ② 自动创建 GitHub Release（notes 取自 CHANGELOG.md）         │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 人类执行：git tag -s vX.Y.Z -m "Release vX.Y.Z"             │
-│           && git push origin vX.Y.Z                          │
-│  → release.yml（push: tags/v*）构建资产并创建 GitHub Release  │
-│  1. Builds: styles.css.gz, scripts.js.gz, PDFs, Skill ZIP   │
-│  2. Uploads assets to GitHub Release                         │
+│ release.yml（release: published 事件触发）                  │
+│  1. Builds: styles.css.gz, scripts.js.gz, PDFs, ZIP         │
+│  2. Uploads assets to the already-created GitHub Release      │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ post-merge-stamp：检测 release_created output                │
+│  → stamp_version.py（同步 ?v= 缓存戳）                      │
+│  + generate_changelog_html.py（重建网站变更页）              │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -335,13 +340,11 @@ Release PR（分支名以 `release-please--` 开头）存活期间，CI 校验�
 - `validate_release_notes.py`：此脚本校验 **`CHANGELOG.md` 中是否存在当前版本节**（变更日志唯一来源，由 `release-please` 维护）。即使在 Release PR 分支上，如果缺失该版本节，CI 必须失败并**物理阻断该 Release PR 的合并**（否则网站变更页与 GitHub Release notes 都会是空的）。
 
 > ⚠️ `post-merge-stamp` 若静默失败（网络抖动 / Token 过期 / Git 冲突），main 分支的 `VERSION` 将停滞在旧版本，导致后续所有 Stamp 注入和资产打包全部使用错误版本号。该 Job 已在 `GITHUB_STEP_SUMMARY` 中配置失败告警。
-> ⚠️ 若 `release-please` job 本身失败，`post-merge-stamp` 不会自动跳过（已移除 `needs: release-please` 依赖，改为独立检测 VERSION 变化），但若 VERSION 文件未更新，同样不会触发 stamp。需人工介入排查原因后重新触发 workflow。
+> ⚠️ `post-merge-stamp` 由 `release-please` 的 `release_created` output 触发。若 `release_created` 输出未设置（如 `skip-github-release` 配置错误），post-merge-stamp 将不会运行。确保 `.github/workflows/release-please.yml` 中 `skip-github-release` 保持为 `false`。
 
 ### 4. Version Sync
 
-### 4. Version Sync
-
-All version references are synced via release-please extra-files (VERSION / tokens.json / package.json) and stamped into HTML/MD via `stamp_version.py`.
+All version references are synced via release-please extra-files (`tokens.json` / `package.json`) and `stamp_version.py`. The `VERSION` file itself is a plain-text semver (e.g. `1.9.1`) — release-please's GenericUpdater only rewrites lines annotated with `x-release-please-version` and **cannot update unannotated plain text**. Therefore `VERSION` is synced by `post-merge-stamp` from release-please's `version` output, then `stamp_version.py` propagates the version to HTML/MD `?v=` cache-busting parameters.
 
 | File | Tool |
 |------|------|
@@ -349,9 +352,9 @@ All version references are synced via release-please extra-files (VERSION / toke
 | `AGENTS.md` | `stamp_version.py` |
 | `tokens.json` `"version"` | release-please `extra-files` |
 | `package.json` `"version"` | release-please `extra-files` |
-| `VERSION` | release-please `extra-files` (source of truth) |
+| `VERSION` | `post-merge-stamp`（GenericUpdater 无法更新无注解纯文本） |
 
-Run `make stamp-version` after bumping VERSION to sync all HTML/MD files.
+Run `make stamp-version` after `post-merge-stamp` to sync all HTML/MD files.
 
 ### 5. Size Monitoring
 

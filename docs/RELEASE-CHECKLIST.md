@@ -9,24 +9,26 @@
 ```
 普通 PR merge → main
     ↓
-release-please 分析 Conventional Commits
+release-please（skip-github-release: false）分析 Conventional Commits
     ↓
 创建/更新 Release PR（自动 CHANGELOG + 版本 bump）
     ↓
 人类审查 Release PR 内容 → 合并
     ↓
-post-merge-stamp 自动：
+release-please 自动：
+  ① 创建 git tag vX.Y.Z（GitHub 后台签名）
+  ② 创建 GitHub Release（notes 取自 CHANGELOG）
+    ↓
+release.yml（release: published 事件）触发 → 构建 PDF/ZIP/CHECKSUMS → 上传资产
+    ↓
+post-merge-stamp（检测 release_created output）自动：
   ① stamp_version.py（同步 ?v= 缓存戳）
   ② generate_changelog_html.py（重建网站变更页）
-    ↓
-人类决定发布时机，手动执行：
-  git tag vX.Y.Z && git push origin vX.Y.Z
-    ↓
-release.yml 自动触发 → 构建资产 → 创建 GitHub Release
 ```
 
-**关键原则：** `release-please` 只做 Release PR 和 CHANGELOG，**不自动打 tag**。
-只有人类明确 `git tag vX.Y.Z && git push origin vX.Y.Z` 才会触发正式发布构建。
+**关键原则：** `release-please` 负责 Release PR、CHANGELOG、tag 创建与 GitHub Release 全链路自动化。
+无需人类手动执行 `git tag`。`release.yml` 由 `release: published` 事件触发。
+`post-merge-stamp` 由 `release_created` output 触发。紧急热修复通过 `workflow_dispatch` 手动触发 `release.yml`。
 
 ---
 
@@ -70,9 +72,13 @@ release.yml 自动触发 → 构建资产 → 创建 GitHub Release
 ## 代码阶段（发布当天：Release PR 已合并时）
 
 > release-please 会自动创建 Release PR 更新 VERSION / CHANGELOG.md。
-> 合并后 `post-merge-stamp` 自动同步。人工任务只是确认和打 tag。
+> 合并后 release-please 自动创建 tag 和 GitHub Release，触发 release.yml 构建资产。
+> post-merge-stamp 在 release_created output 触发后自动同步 ?v= 缓存戳。
 
 - [ ] 确认 Release PR 已合并
+- [ ] 确认 release-please 已自动创建 tag `vX.Y.Z`（GitHub 页面 → Tags）
+- [ ] 确认 GitHub Release 已创建（notes 取自 CHANGELOG.md）
+- [ ] 确认 `release.yml`（Release Pipeline）构建成功，资产已上传
 - [ ] 确认 `post-merge-stamp` job 成功（Actions → 最新 Release Please 运行）
 - [ ] 验证 main 上的 VERSION 已更新为新版本号
 - [ ] 验证 changelog.html 已包含新版本的内容（本地 `make changelog-check`）
@@ -81,27 +87,29 @@ release.yml 自动触发 → 构建资产 → 创建 GitHub Release
 
 ---
 
-## 发布阶段（手工 tag 触发正式发布）
+## 发布阶段（验证 release-please 自动 tag + GitHub Release）
 
-release-please **只**创建/更新 Release PR，**不自动**打 tag 或建 Release。
-人类审查 Release PR → 合并 → post-merge-stamp 同步 → 手工 tag：
+Release PR 合并后，release-please 自动创建 tag 和 GitHub Release。
+人工任务只是验证和确认：
 
 ```bash
-# 1. 确认 post-merge-stamp 成功（Actions → Release Please）
-#    - VERSION 已更新到新值
-#    - changelog.html 已重建
+# 1. 确认 release-please 已自动创建 tag
+#    GitHub → Tags → 查找 vX.Y.Z（或 gh api 检查）
+gh api repos/cgartlab/edic-design-system/git/ref/tags/vX.Y.Z --jq '.ref'
 
-# 2. 打签名标签并推送（触发 release.yml）
-git tag -s vX.Y.Z -m "Release vX.Y.Z" && git push origin vX.Y.Z
-# 触发 release.yml（push: tags/v*）→ 构建资产 → 创建 GitHub Release
+# 2. 确认 GitHub Release 已创建（notes 取自 CHANGELOG.md）
+gh release view vX.Y.Z
+
+# 3. 确认 release.yml 构建资产成功（Actions → Release Pipeline）
+gh run list --workflow release.yml
 ```
 
 - [ ] post-merge-stamp job 成功（VERSION 已更新、changelog.html 已重建）
-- [ ] tag 已推送：`git push origin vX.Y.Z`
-- [ ] GitHub Actions → Release Pipeline 运行成功（tag push 触发）
-- [ ] GitHub Release 页面存在，资产文件齐全（PDF + ZIP + CHECKSUMS.txt）
+- [ ] tag 已自动创建：`refs/tags/vX.Y.Z`（GitHub Tags 页面或 gh api 确认）
+- [ ] GitHub Release 页面存在，标题无 "Draft" 标记
+- [ ] GitHub Actions → Release Pipeline 运行成功（release: published 事件触发）
 - [ ] 所有资产 URL 不包含 `untagged-`（防止 v1.8.1 事故重现）
-- [ ] 确认 Draft Release 已发布（标题下无 "Draft" 标记）
+- [ ] 资产文件齐全：PDF + ZIP + CHECKSUMS.txt
 - [ ] 验证 GitHub Pages 自动部署成功（Settings → Pages → 部署历史）
 - [ ] 访问 https://edic.cgartlab.com 确认正常
 
@@ -110,7 +118,7 @@ git tag -s vX.Y.Z -m "Release vX.Y.Z" && git push origin vX.Y.Z
 ## 发布后（T+1 天）
 
 - [ ] 监控 issue 区是否有 release 相关问题
-- [ ] 如有 hotfix：创建 `hotfix/x.y.z` 分支，修复合并后打 `vX.Y.Z+1` tag
+- [ ] 如有 hotfix：创建 `hotfix/x.y.z` 分支，修复合并后通过 `workflow_dispatch` 触发 `release.yml` 发布
 - [ ] 关闭 milestone（如使用 GitHub Milestones）
 - [ ] 团队庆祝 🎉
 
@@ -121,21 +129,20 @@ git tag -s vX.Y.Z -m "Release vX.Y.Z" && git push origin vX.Y.Z
 如果发布后发现严重问题：
 
 ```bash
-# 1. 删除远程 tag
-git push origin :refs/tags/vX.Y.Z
+# 1. 在 GitHub UI 中删除或标记该 Release 为 pre-release
+#    （tag 和 Release 均由 GitHub 自动管理，无需本地 git 操作）
 
-# 2. 如已创建 GitHub Release，在 GitHub UI 中将其删除或标记为 pre-release
-
-# 3. 恢复 main 到上一个稳定 tag
+# 2. 恢复 main 到上一个稳定 tag
 git checkout main
 git reset --hard vX.Y.Z-1
 git push --force-with-lease
 
-# 4. 修复 → hotfix 分支 → 重新发布
+# 3. 修复 → hotfix 分支 → 提交 → PR → merge
 git checkout -b hotfix/vX.Y.Z
 # ... 修复 ...
-git tag -a vX.Y.Z -m "Hotfix vX.Y.Z"
-git push origin vX.Y.Z
+
+# 4. 手动触发 release.yml 发布（workflow_dispatch）
+gh workflow run release.yml -f version=X.Y.Z+1
 ```
 
 > ⚠️ `--force-with-lease` 比 `--force` 安全，会检测上游是否被改过。
