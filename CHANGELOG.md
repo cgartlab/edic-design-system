@@ -3,6 +3,20 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [1.10.1](https://github.com/cgartlab/edic-design-system/compare/v1.10.0...v1.10.1) (2026-08-14)
+
+
+### 修复
+
+* **release:** 发布流程改为 release-please 官方自动 tag 模型 ([88b4276](https://github.com/cgartlab/edic-design-system/commit/88b4276e6bcd2db0a30a13379940537fa2ad2f33))
+* **release:** 发布流程改为 release-please 官方自动 tag 模型 ([67db170](https://github.com/cgartlab/edic-design-system/commit/67db17028635ae7b336a8a52ad6e0469bfa5cc47))
+* **release:** 响应评审修复 P1/P2/P3（5 条） ([b45701c](https://github.com/cgartlab/edic-design-system/commit/b45701ccf767a4152445112d12e5f8409950a193))
+
+
+### 文档
+
+* **release:** 同步自动 tag 模型 + 修正版本引用 ([2355c51](https://github.com/cgartlab/edic-design-system/commit/2355c517c277af88ac4bf259dc584cdc4a6f02cc))
+
 ## [1.10.0](https://github.com/cgartlab/edic-design-system/compare/v1.9.1...v1.10.0) (2026-08-14)
 
 
