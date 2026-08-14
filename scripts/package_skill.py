@@ -8,6 +8,8 @@ Creates assets/downloads/edic-design-system-skill.zip containing:
   - references/EXAMPLES.md         (component HTML structure examples)
   - references/TOKENS.md           (complete token values)
   - references/ANTI-PATTERNS.md    (anti-patterns & correct replacements)
+  - references/PATTERNS.md         (page-level patterns templates)
+  - references/RECIPES.md          (scene recipes step-by-step)
 
 Usage:
   python3 scripts/package_skill.py          # package
@@ -40,6 +42,8 @@ REFERENCE_SOURCES = [
     REFS_DIR / "EXAMPLES.md",
     REFS_DIR / "TOKENS.md",
     REFS_DIR / "ANTI-PATTERNS.md",
+    REFS_DIR / "PATTERNS.md",
+    REFS_DIR / "RECIPES.md",
 ]
 
 
