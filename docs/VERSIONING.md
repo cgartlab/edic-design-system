@@ -107,23 +107,27 @@ stamp 工具会一次性替换为 VERSION 中的真实版本号（无构建步�
 - pre-commit hook：改 HTML/CSS/JS 时自动 stamp
 - Release workflow：打 tag 前手动 `make stamp-version`
 
-**典型发布流程**：
+**典型发布流程**（release-please 自动 tag 模型）：
 
-```bash
-# 1. 改 VERSION（单行文本）
-echo "1.5.5" > VERSION
-
-# 2. 自动同步所有文件
-make stamp-version
-
-# 3. 验证
-make validate-versions
-
-# 4. 提交
-git add -A && git commit -m "chore(release): bump to v1.10.0"
-
-# 5. 打 tag
-git tag v1.10.0 && git push origin v1.10.0
+```
+Feature PR merge → main
+    ↓
+release-please 分析 Conventional Commits → 创建/更新 Release PR
+    ↓
+人类审查 Release PR（直接编辑 CHANGELOG.md 对应版本节润色措辞）
+    ↓
+合并 Release PR
+    ↓
+release-please 自动：
+  ① 更新 VERSION / .release-please-manifest.json / tokens.json / package.json
+  ② 创建 git tag vX.Y.Z（GitHub 后台签名，无需本地 GPG）
+  ③ 创建 GitHub Release（notes 取自 CHANGELOG.md）
+    ↓
+release.yml（release: published 事件）→ 构建 PDF/ZIP/CHECKSUMS → 上传资产
+    ↓
+post-merge-stamp 自动：
+  ① stamp_version.py（同步 ?v= 缓存戳）
+  ② generate_changelog_html.py（从 CHANGELOG.md 重建网站变更页）
 ```
 
 ## 分支与版本对应
@@ -159,44 +163,44 @@ release-please / semantic-release 风格的自动化可在未来引入（见 [�
 
 项目已集成 [release-please](https://github.com/googleapis/release-please) 自动化发布流程。
 
-### 发布策略：release-please 自动 tag + GitHub Release（Draft）
+### 发布策略：release-please 自动 tag + GitHub Release
 
-`release-please` 自动完成 Release PR、CHANGELOG、版本号同步、tag 创建与 GitHub Release（Draft）。
-`release.yml` 由 tag push 事件触发，负责构建资产（PDF/ZIP/Skill ZIP）并上传至 GitHub Release，随后将其从 Draft 发布为正式 Release。
+`release-please`（`skip-github-release: false`）自动完成 Release PR、CHANGELOG、
+版本号同步、tag 创建与 GitHub Release。
+Release PR 合并后，release-please 自动创建 tag 和 GitHub Release，`release: published`
+事件触发 `release.yml` 构建资产并上传至已创建的 GitHub Release。
 
 这样设计的好处：
-- 避免"一合并就发布"的自动链路绕过人类审查（Release PR 仍需人工 Review）
-- release-please 在 PR 合并后自动创建 tag 和 Draft Release，减少人工操作环节
-- 人类在发布前仍可编辑 Release notes 并决定是否 Publish
+- 避免"一合并就发布"绕过人类审查（Release PR 仍需人工 Review）
+- release-please 在 PR 合并后自动创建 tag 和 GitHub Release，减少人工操作环节
+- 人类在发布前仍可编辑 Release PR 的 CHANGELOG 措辞，发布后通过 `workflow_dispatch` 可做紧急热修复
 
 ### 触发方式
 
 | 方式 | 说明 |
 |------|------|
 | **自动（创建 Release PR）** | push to `main` → release-please 分析 commits → 创建/更新 Release PR |
-| **合并 Release PR** | 合并后 release-please 自动创建 tag + GitHub Release（Draft） |
-| **workflow_dispatch** | 手动触发 release-please.yml，可强制版本号（release-as）或标记预发布（prerelease） |
-| **紧急热修复** | 手动 `git tag -s vX.Y.Z+1` + `gh workflow run release.yml`（见 [AGENTS.md](../../AGENTS.md)） |
+| **合并 Release PR** | 合并后 release-please 自动创建 tag + GitHub Release（notes 取自 CHANGELOG） |
+| **workflow_dispatch** | 手动触发 release-please.yml，可强制版本号（release-as）或标记预发布（prerelease）；紧急热修复时手动触发 release.yml（见 [AGENTS.md](../../AGENTS.md)） |
+| **紧急热修复** | 自动链路不可用时，通过 `workflow_dispatch` 手动触发 `release.yml`，指定 `version` 参数 |
 
 ### 完整发布流程
 
 ```
 提交（Conventional Commits）
   → release-please 分析
-  → 创建/更新 Release PR（CHANGELOG.md + 版本 bump）
+  → 创建/更新 Release PR（CHANGELOG.md + VERSION + tokens.json + package.json）
   → 人类审查 Release PR（如需润色措辞，直接编辑 CHANGELOG.md 对应节）
   → 合并 Release PR
   → release-please 自动：
-      ① 更新 VERSION / tokens.json / package.json
-      ② 创建 tag vX.Y.Z + GitHub Release（Draft）
-  → post-merge-stamp 自动：
+      ① 更新 VERSION / .release-please-manifest.json / tokens.json / package.json
+      ② 创建 git tag vX.Y.Z（GitHub 后台签名）
+      ③ 创建 GitHub Release（notes 取自 CHANGELOG.md）
+  → release.yml（release: published 事件触发）：
+      构建 PDF/ZIP/CHECKSUMS → 上传至已创建的 GitHub Release
+  → post-merge-stamp 自动（检测 release_created output）：
       ① stamp_version.py（同步 ?v= 缓存戳）
       ② generate_changelog_html.py（从 CHANGELOG.md 重建网站变更页）
-  ↓
-  release.yml 触发（tag push）
-  → 构建 PDF/ZIP 资产
-  → 上传至 GitHub Release
-  → 发布 Draft Release
 ```
 
 ### Release PR 包含的内容
@@ -209,7 +213,7 @@ Release PR 包含：
 
 ### 版本同步
 
-Release PR 合并后，`post-merge-stamp` 会自动：
+Release PR 合并后，`post-merge-stamp` 自动（检测 `release_created` output）：
 1. 运行 `stamp_version.py` 同步所有 HTML/MD 中的 `?v=` 缓存 busting 参数
 2. 运行 `generate_changelog_html.py` 从 `CHANGELOG.md` 单源重建网站变更页
 
