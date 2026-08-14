@@ -5,7 +5,7 @@
 <title>使用文档 · EDIC Design System</title>
 <meta name="description" content="EDIC 设计系统使用文档：安装引入、设计令牌、色彩主题、暗色模式、排版、组件、动效、图标、可访问性、定制扩展与 FAQ。">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="styles.css?v=1.10.0">
+<link rel="stylesheet" href="styles.css?v=1.9.1">
 <!-- Prism.js syntax highlighting (CDN, no extra CSS — custom theme in styles.css) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js"
         integrity="sha384-xAgN7OCsK5s0d3G18tqRYrxy8hWsPA14E26TMh7Mi9ZM09vaz4EA0DBTl+80F5yC"
@@ -118,11 +118,11 @@
     &lt;meta charset="UTF-8"&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
     &lt;link rel="icon" type="image/svg+xml" href="favicon.svg"&gt;
-    &lt;link rel="stylesheet" href="styles.css?v=1.10.0"&gt;
+    &lt;link rel="stylesheet" href="styles.css?v=1.9.1"&gt;
   &lt;/head&gt;
   &lt;body&gt;
     &lt;!-- 你的内容 --&gt;
-    &lt;script src="scripts.js?v=1.10.0"&gt;&lt;/script&gt;
+    &lt;script src="scripts.js?v=1.9.1"&gt;&lt;/script&gt;
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
           </figure>
@@ -1489,7 +1489,7 @@
           <div class="ds-component-group">
             <div class="ds-component-label">柱状图 · Bar</div>
             <div class="ds-component-preview ds-mb-5">
-              <div class="ds-chart ds-chart--bar" aria-labelledby="bar-v-title">
+              <div class="ds-chart ds-chart--bar">
                 <span class="ds-sr-only" id="bar-v-title">月度销售额柱状图：一月 65，二月 80，三月 45，四月 92，五月 70，六月 88</span>
                 <div data-chart='{"type":"bar","title":"月度销售额","data":[65,80,45,92,70,88],"labels":["Jan","Feb","Mar","Apr","May","Jun"],"options":{"colors":["var(--ds-chart-1)"],"animate":true,"tooltip":true,"xAxis":{"title":"月份"}}}'></div>
               </div>
@@ -1520,7 +1520,7 @@
           <div class="ds-component-group">
             <div class="ds-component-label">条形图 · Bar (Horizontal)</div>
             <div class="ds-component-preview ds-mb-5">
-              <div class="ds-chart ds-chart--horizontal" aria-labelledby="bar-h-title">
+              <div class="ds-chart ds-chart--horizontal">
                 <span class="ds-sr-only" id="bar-h-title">设备使用分布：桌面端 55%，移动端 35%，平板 10%</span>
                 <div data-chart='{"type":"hbar","title":"设备使用分布","data":[55,35,10],"labels":["桌面端","移动端","平板"],"options":{"colors":["var(--ds-chart-1)"],"animate":true,"tooltip":true,"xAxis":{"title":"占比（%）"}}}'></div>
               </div>
@@ -1550,7 +1550,7 @@
           <div class="ds-component-group">
             <div class="ds-component-label">堆叠柱状图 · Stacked Bar</div>
             <div class="ds-component-preview ds-mb-5">
-              <div class="ds-chart ds-chart--bar ds-chart--stacked" aria-labelledby="stacked-title">
+              <div class="ds-chart ds-chart--bar ds-chart--stacked">
                 <span class="ds-sr-only" id="stacked-title">季度营收堆叠柱状图：Q1 产品A 40 产品B 30，Q2 产品A 50 产品B 45</span>
                 <div data-chart='{"type":"stacked","title":"季度营收","labels":["Q1","Q2"],"series":[{"name":"产品A","data":[40,50],"color":"var(--ds-chart-1)"},{"name":"产品B","data":[30,45],"color":"var(--ds-chart-2)"}],"options":{"legend":true,"animate":true,"tooltip":true,"xAxis":{"title":"季度"}}}'></div>
               </div>
@@ -1582,7 +1582,7 @@
           <div class="ds-component-group">
             <div class="ds-component-label">饼图 · Pie</div>
             <div class="ds-component-preview">
-              <div class="ds-chart ds-chart--pie" aria-labelledby="pie-title">
+              <div class="ds-chart ds-chart--pie">
                 <span class="ds-sr-only" id="pie-title">流量来源分布：搜索引擎 35%，社交媒体 30%，直接访问 20%，其他 15%</span>
                 <div data-chart='{"type":"pie","title":"流量来源分布","data":[35,30,20,15],"labels":["搜索引擎","社交媒体","直接访问","其他"],"options":{"legend":true,"tooltip":true}}'></div>
               </div>
@@ -1611,7 +1611,7 @@
           <div class="ds-component-group">
             <div class="ds-component-label">环形图 · Donut</div>
             <div class="ds-component-preview">
-              <div class="ds-chart ds-chart--donut" aria-labelledby="donut-title">
+              <div class="ds-chart ds-chart--donut">
                 <span class="ds-sr-only" id="donut-title">完成率 73%</span>
                 <div data-chart='{"type":"donut","title":"完成率","value":73,"labels":["完成率"],"options":{"colors":["var(--ds-chart-1)"],"animate":true}}'></div>
               </div>
@@ -1639,7 +1639,7 @@
           <div class="ds-component-group">
             <div class="ds-component-label">多组环形图 · Donut (Multi)</div>
             <div class="ds-component-preview">
-              <div class="ds-chart ds-chart--donut" aria-labelledby="donut-multi-title">
+              <div class="ds-chart ds-chart--donut">
                 <span class="ds-sr-only" id="donut-multi-title">月度完成率：1月 75%，2月 42%，3月 完成60% 进行30% 失败10%</span>
                 <div data-chart='{"type":"donut","title":"月度完成率","series":[{"name":"1月","value":75,"color":"var(--ds-chart-1)"},{"name":"2月","value":42,"color":"var(--ds-chart-2)"},{"name":"3月","data":[60,30,10],"labels":["完成","进行","失败"],"colors":["var(--ds-chart-3)","var(--ds-chart-4)","var(--ds-chart-5)"]}],"options":{"animate":true,"tooltip":true}}'></div>
               </div>
@@ -1672,7 +1672,8 @@
           <div class="ds-component-group">
             <div class="ds-component-label">迷你趋势图 · Sparkline</div>
             <div class="ds-component-preview">
-              <div class="ds-chart ds-chart--sparkline" aria-label="近 7 日趋势：上升趋势">
+              <div class="ds-chart ds-chart--sparkline">
+                <span class="ds-sr-only" id="sparkline-title">近 7 日趋势：上升趋势</span>
                 <div data-chart='{"type":"sparkline","data":[30,55,42,78,65,90,72],"options":{"colors":["var(--ds-chart-1)"]}}'></div>
               </div>
               <span class="ds-chart__delta">+12.4%</span>
@@ -1700,7 +1701,7 @@
           <div class="ds-component-group">
             <div class="ds-component-label">折线图 · Line</div>
             <div class="ds-component-preview">
-              <div class="ds-chart ds-chart--line" aria-labelledby="line-title">
+              <div class="ds-chart ds-chart--line">
                 <span class="ds-sr-only" id="line-title">7 天用户活跃度趋势：从 30 逐步上升至 72</span>
                 <div data-chart='{"type":"line","title":"7 天用户活跃度","data":[30,55,42,78,65,90,72],"options":{"colors":["var(--ds-chart-1)"],"dots":true,"tooltip":true,"animate":true,"xAxis":{"title":"日期"}}}'></div>
               </div>
@@ -1729,7 +1730,7 @@
           <div class="ds-component-group">
             <div class="ds-component-label">面积图 · Area</div>
             <div class="ds-component-preview">
-              <div class="ds-chart ds-chart--line" aria-labelledby="area-title">
+              <div class="ds-chart ds-chart--line">
                 <span class="ds-sr-only" id="area-title">月访问量面积图，从 40 增长至 85</span>
                 <div data-chart='{"type":"area","title":"月访问量","data":[40,55,48,62,70,78,85],"options":{"colors":["var(--ds-chart-1)"],"dots":true,"tooltip":true,"animate":true,"xAxis":{"title":"月份"}}}'></div>
               </div>
@@ -1759,7 +1760,7 @@
           <div class="ds-component-group">
             <div class="ds-component-label">多系列折线图 · Multi-line</div>
             <div class="ds-component-preview">
-              <div class="ds-chart ds-chart--line ds-chart--multiline" aria-labelledby="ml-title">
+              <div class="ds-chart ds-chart--line ds-chart--multiline">
                 <span class="ds-sr-only" id="ml-title">桌面端和移动端用户数趋势对比</span>
                 <div data-chart='{"type":"multiline","title":"用户数趋势对比","labels":["1","2","3","4","5","6","7"],"series":[{"name":"桌面端","data":[50,65,45,78,60,85,70],"color":"var(--ds-chart-1)"},{"name":"移动端","data":[30,45,55,60,70,75,90],"color":"var(--ds-chart-2)"}],"options":{"legend":true,"dots":true,"tooltip":true,"animate":true,"xAxis":{"title":"日期"}}}'></div>
               </div>
@@ -1792,7 +1793,7 @@
           <div class="ds-component-group">
             <div class="ds-component-label">组合图 · Combo (Bar + Line)</div>
             <div class="ds-component-preview">
-              <div class="ds-chart ds-chart--combo" aria-labelledby="combo-title">
+              <div class="ds-chart ds-chart--combo">
                 <span class="ds-sr-only" id="combo-title">收入与增长率组合图</span>
                 <div data-chart='{"type":"combo","title":"收入与增长率","labels":["1","2","3","4","5","6"],"series":[{"name":"收入","chartType":"bar","data":[40,55,48,62,70,78],"color":"var(--ds-chart-1)"},{"name":"增长率","chartType":"line","data":[10,22,18,28,25,35],"color":"var(--ds-chart-2)"}],"options":{"legend":true,"tooltip":true,"dots":true,"animate":true,"xAxis":{"title":"月份"}}}'></div>
               </div>
@@ -1854,7 +1855,7 @@
                 <p>玻璃卡片使用 <code>backdrop-filter: blur(24px)</code>，背景为系统色盘中相邻色的渐变。</p>
                 <div class="ds-glass-meta">
                   <span>EDIC Design System</span>
-                  <span>v1.10.0</span>
+                  <span>v1.9.1</span>
                 </div>
               </div>
             </div>
@@ -1917,7 +1918,7 @@
                   <div class="ds-timeline-dot"></div>
                   <div class="ds-timeline-content">
                     <span class="ds-timeline-tag">发布</span>
-                    <div class="ds-timeline-date">2026.06 — v1.10.0</div>
+                    <div class="ds-timeline-date">2026.06 — v1.9.1</div>
                     <div class="ds-timeline-title">编辑主义暗色深化</div>
                     <p>暗色模式 Gravitas &amp; Glow、Prism 代码高亮主题适配、统一页面目录组件、6 个验证器全部 exit 0。</p>
                   </div>
@@ -2051,14 +2052,14 @@
     <div class="ds-footer-bottom">
       <span>© <span class="ds-year">2026</span> EDIC · CGArtLab</span>
       <div class="ds-cluster">
-        <span class="ds-mono" data-ds-version>v1.10.0</span>
+        <span class="ds-mono" data-ds-version>v1.9.1</span>
         <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:var(--ds-accent);text-decoration:none" title="本设计系统采用 CC BY 4.0 许可证">CC BY 4.0</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script src="scripts.js?v=1.10.0"></script>
+<script src="scripts.js?v=1.9.1"></script>
 <button id="theme-toggle-btn-fixed" class="ds-theme-toggle-btn ds-theme-toggle-btn--fixed" type="button" aria-label="跟随系统 · 点击切换">
   <span class="theme-icon"></span>
 </button>

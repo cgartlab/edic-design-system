@@ -17,6 +17,12 @@
 
 ### 样式
 
+## [1.9.1](https://github.com/cgartlab/edic-design-system/compare/v1.9.0...v1.9.1) (2026-06-25)
+
+### 修复
+
+* **version:** 同步 manifest / VERSION 至 1.9.1（版本发布校准）
+
 ## [1.9.0](https://github.com/cgartlab/edic-design-system/compare/v1.8.1...v1.9.0) (2026-06-24)
 
 

@@ -110,20 +110,28 @@ jobs:
         with:
           python-version: "3.11"
 
-      # ── 检测 manifest 版本变化（Release PR 合并后 manifest 更新）──
+      # ── 检测版本变化（manifest vs VERSION 直接对比，幂等可自愈）──
       # VERSION 纯文本因无 x-release-please-version 标注，GenericUpdater 无法更新，
       # 因此以 .release-please-manifest.json 为版本变化的可靠信号。
+      # 直接对比 manifest 与 VERSION：只要二者漂移即为版本变化（Release PR 合并
+      # 后 manifest 更新、VERSION 未同步 → 必然触发），无需关心提交拓扑或 push 批次。
+      # 失败时 fail-closed（exit 1），由下方 Alert 步骤告警。
       - name: Detect version bump (via manifest)
         id: detect
         run: |
-          OLD="$(git show HEAD~1:.release-please-manifest.json 2>/dev/null | python3 -c 'import json,sys;print(json.load(sys.stdin)["."])' || echo '')"
-          NEW="$(python3 -c 'import json;print(json.load(open(".release-please-manifest.json"))["."])' 2>/dev/null || echo '')"
-          if [[ -n "$NEW" && -n "$OLD" && "$OLD" != "$NEW" ]]; then
-            echo "VERSION bumped: $OLD → $NEW"
+          set -e
+          MANIFEST_VER="$(python3 -c 'import json;print(json.load(open(".release-please-manifest.json"))["."])' 2>/dev/null || echo '')"
+          if [[ -z "$MANIFEST_VER" ]]; then
+            echo "::error::Cannot read .release-please-manifest.json version"
+            exit 1
+          fi
+          CURRENT_VER="$(cat VERSION 2>/dev/null || echo '')"
+          if [[ -n "$CURRENT_VER" && "$MANIFEST_VER" != "$CURRENT_VER" ]]; then
+            echo "VERSION drift: manifest=$MANIFEST_VER VERSION=$CURRENT_VER"
             echo "detected=true" >> "$GITHUB_OUTPUT"
-            echo "version=$NEW" >> "$GITHUB_OUTPUT"
+            echo "version=$MANIFEST_VER" >> "$GITHUB_OUTPUT"
           else
-            echo "No version change ($NEW)"
+            echo "No version drift (both $MANIFEST_VER)"
             echo "detected=false" >> "$GITHUB_OUTPUT"
           fi
 

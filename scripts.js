@@ -1,4 +1,4 @@
-﻿/* ===== EDIC Design System v1.10.0 — Icon Grid & Token Table ===== */
+﻿/* ===== EDIC Design System v1.9.1 — Icon Grid & Token Table ===== */
 
 const ICONS = [
   {id:"archive",svg:'<svg viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>'},
@@ -1340,12 +1340,12 @@ const TOKENS = [
         y: y.toFixed(1),
         width: bw.toFixed(1),
         height: h.toFixed(1),
-        rx: '2',
         tabindex: '0',
         'data-index': j,
         'data-value': v,
         'data-label': labels[j] || '',
-        role: 'img'
+        role: 'img',
+        'aria-label': (labels[j] || '') + ': ' + v
       }, g);
       r.style.setProperty('--color', color);
       if (cfg.options.animate) r.style.setProperty('--d', (j * 40) + 'ms');
@@ -1383,12 +1383,12 @@ const TOKENS = [
         y: by.toFixed(1),
         width: w.toFixed(1),
         height: bh.toFixed(1),
-        rx: '2',
         tabindex: '0',
         'data-index': j,
         'data-value': v,
         'data-label': labels[j] || '',
-        role: 'img'
+        role: 'img',
+        'aria-label': (labels[j] || '') + ': ' + v
       }, g);
       r.style.setProperty('--color', color);
       if (cfg.options.animate) r.style.setProperty('--d', (j * 40) + 'ms');
@@ -1437,14 +1437,14 @@ const TOKENS = [
           y: topY.toFixed(1),
           width: bw.toFixed(1),
           height: h.toFixed(1),
-          rx: '2',
           tabindex: '0',
           'data-index': di,
           'data-series': si,
           'data-value': v,
           'data-label': labels[di] || '',
           'data-series-name': series[si].name || '',
-          role: 'img'
+          role: 'img',
+          'aria-label': (labels[di] || '') + ': ' + v
         }, g);
         r.style.setProperty('--color', sc);
         if (cfg.options.animate) r.style.setProperty('--d', (di * 40) + 'ms');
@@ -1510,7 +1510,8 @@ const TOKENS = [
         'data-index': j,
         'data-value': data[j],
         'data-label': labels[j] || '',
-        role: 'img'
+        role: 'img',
+        'aria-label': (labels[j] || '') + ': ' + data[j]
       }, g);
       p.style.setProperty('--color', colors[j % colors.length]);
       items.push(p);
@@ -1602,7 +1603,8 @@ const TOKENS = [
         'data-index': j,
         'data-value': data[j],
         'data-label': labels[j] || '',
-        role: 'img'
+        role: 'img',
+        'aria-label': (labels[j] || '') + ': ' + data[j]
       }, g);
       p.style.setProperty('--color', colors[j % colors.length]);
       items.push(p);
@@ -1898,14 +1900,14 @@ const TOKENS = [
             y: by.toFixed(1),
             width: barW.toFixed(1),
             height: bh.toFixed(1),
-            rx: '2',
             tabindex: '0',
             'data-index': bj,
             'data-series': bi,
             'data-value': v,
             'data-label': labels[bj] || '',
             'data-series-name': bs.name || '',
-            role: 'img'
+            role: 'img',
+            'aria-label': (labels[bj] || '') + ': ' + v
           }, gBars);
           rect.style.setProperty('--color', bs.color);
           if (cfg.options.animate) rect.style.setProperty('--d', (bj * 40) + 'ms');
