@@ -63,7 +63,7 @@ docs(handbook): 补全 Slider 组件示例
 style(swatch): 调整间距
 refactor(scripts): 拆分图标渲染 IIFE
 test(validate): 增加 token 名称正则校验
-chore(release): bump v1.9.1
+chore(release): bump v1.10.0
 ```
 
 ### 3. 本地验证
