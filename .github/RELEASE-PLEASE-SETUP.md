@@ -71,30 +71,23 @@ release-please 需要一个有写权限的 GitHub Token 来创建 PR 和 tag。
 
 1. 打开 GitHub → **Actions** → **Release Please** → **Run workflow**
 2. 填写参数：
-   - **release-as**：强制版本号（如 `1.6.0`），留空则自动计算
-   - **prerelease**：勾选则标记为预发布
+    - **release-as**：强制版本号（如 `1.6.0`），留空则自动计算
 3. 点击 **Run workflow**
 
-### 紧急热修复（手动 tag）
+### 紧急热修复（workflow_dispatch）
 
-当 GitHub Actions 不可用时：
+正常发布一律通过合并 Release PR 完成，由 release-please 自动创建 tag + GitHub Release。
+紧急热修复仅在自动链路不可用时使用，通过 `release.yml` 的 `workflow_dispatch` 手动触发：
 
-```bash
-# 1. 同步版本
-make sync-versions
+1. 创建 hotfix 分支、修复、提交、PR 合并
+2. 打开 GitHub → **Actions** → **Release Pipeline** → **Run workflow**
+3. 填写参数：
+   - **version**（必填）：版本号（如 `1.6.0`）
+   - **skip_validation**：紧急时勾选跳过验证
+4. 验证 `main` 上 `VERSION` / HTML `?v=` 已同步（workflow_dispatch 路径自动执行 `stamp_version.py`）
 
-# 2. 验证
-make validate
-
-# 3. 提交
-git add -A && git commit -m "chore(release): bump v1.6.0"
-
-# 4. 打 tag 并推送
-git tag -a v1.6.0 -m "Release v1.6.0"
-git push && git push origin v1.6.0
-
-# 5. 手动同步 .release-please-manifest.json（避免下次 release-please 重复发布）
-```
+> ⚠️ **不要手工 `git tag` + 手动预置 manifest**。手工 tag 会导致 release-please 误判，
+> 产生"幽灵发布"（幽灵 Release PR / 重复版本 bump）。正常发布一律走 Release PR 合并。
 
 ---
 
@@ -115,14 +108,19 @@ gh workflow run release-please.yml
 
 ### Release PR 合并后没有创建 tag
 
-**检查**：Actions → Release Please 日志，看是否输出了 `tag_name: vX.Y.Z`
+**检查**：Actions → Release Please 日志，确认：
+1. `release_created` output 是否为 `true`
+2. `tag_name` / `version` output 是否有输出值
+3. `skip-github-release` 是否保持 `false`（release-please.yml 中应为注释而非显式 `true`）
 
 **解决**：
 ```bash
-# 手动创建 tag
-git tag -a v1.6.0 -m "Release v1.6.0"
-git push origin v1.6.0
+# 手动重新触发 release-please.yml，让其重跑
+gh workflow run release-please.yml
 ```
+
+> ⚠️ **不要手工 `git tag`**。手工 tag 会导致 release-please 误判，产生幽灵发布。
+> 如果必须介入，先用 `gh workflow run release-please.yml` 让 release-please-action 重跑一次。
 
 ### 版本不一致（VERSION vs CHANGELOG vs tag）
 
@@ -181,7 +179,10 @@ git add .release-please-manifest.json
 git commit -m "chore: rollback manifest to v1.5.5"
 git push
 
-# 4. 关闭已打开的 Release PR（如果有）
+# 4. 重新触发 release-please.yml 以对齐 manifest
+gh workflow run release-please.yml
+
+# 5. 关闭已打开的 Release PR（如果有）
 ```
 
 ---

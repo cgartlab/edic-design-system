@@ -96,26 +96,39 @@ make clean
 
 - **`.github/workflows/ci.yml`** — runs all 10 validators on push/PR/schedule (weekly Monday UTC 0:00)
 - Exit codes: 0 = OK, 1 = errors (fail), 2 = warnings-only (pass)
-- **`.github/workflows/release.yml`** — tag-triggered: generates PDFs + creates GitHub Release
+- **`.github/workflows/release.yml`** — `release: published`-triggered: builds PDF/ZIP and uploads to the release-please-created GitHub Release
 
 ## Release Workflow
 
-```bash
-# 1. Bump VERSION
-echo "1.4.3" > VERSION
+正常发布完全自动化（release-please 自动 tag + GitHub Release），无需手动执行 `git tag`：
 
-# 2. Stamp all files
-make stamp-version
-
-# 3. Validate
-make validate
-
-# 4. Commit
-git add -A && git commit -m "chore(release): bump to v1.10.0"
-
-# 5. Tag & push
-git tag v1.10.0 && git push origin v1.10.0
 ```
+Feature PR merge → main
+    ↓
+release-please 创建/更新 Release PR（更新 CHANGELOG.md + 版本 bump）
+    ↓
+人类审查 Release PR（如需润色，直接编辑 CHANGELOG.md 对应节）
+    ↓
+合并 Release PR
+    ↓
+release-please 自动：
+  ① 创建 git tag vX.Y.Z（GitHub 后台签名，无需本地 GPG）
+  ② 创建 GitHub Release（notes 取自 CHANGELOG.md）
+    ↓
+post-merge-stamp 自动：
+  ① 从 release-please 的 `version` output 同步 VERSION 文件
+  ② stamp_version.py 同步所有 HTML/MD 中的 `?v=` 缓存戳
+    ↓
+release.yml（release: published 事件触发）→ 构建 PDF/ZIP → 上传到已创建的 GitHub Release
+```
+
+紧急热修复：当自动链路不可用时，通过 `workflow_dispatch` 手动触发 `release.yml`：
+
+```bash
+gh workflow run release.yml -f version=X.Y.Z+1
+```
+
+详见 `AGENTS.md` §发布策略/§紧急热修复，以及 `docs/VERSIONING.md`。
 
 ## Adding a New Component
 
