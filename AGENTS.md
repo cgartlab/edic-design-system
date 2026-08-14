@@ -211,16 +211,15 @@ tag 创建与 GitHub Release 自动发布。**无需人类手动执行 `git tag`
 release-please（skip-github-release: false）分析 Conventional Commits
     ↓
 创建/更新 Release PR（release-please-- 分支）：
-  ① 更新 CHANGELOG.md（自动分类，中文章节）
-  ② 更新 VERSION / .release-please-manifest.json / tokens.json / package.json（extra-files）
-    ↓ 人类审查 Release PR → 合并
+   ① 更新 CHANGELOG.md（自动分类，中文章节）
+   ② 更新 .release-please-manifest.json / tokens.json / package.json（extra-files）
+     ↓ 人类审查 Release PR → 合并
 release-please（合并后 push main 再触发）→ release_created=true：
-  ① 自动创建 git tag vX.Y.Z（GitHub 后台签名）
-  ② 自动创建 GitHub Release（notes 取自 CHANGELOG）
-    ↓ release: published 事件
+   ① 自动创建 git tag vX.Y.Z（GitHub 后台签名）
+   ② 自动创建 GitHub Release（notes 取自 CHANGELOG）
+   ③ post-merge-stamp：同步 VERSION（从 release-please 的 `version` output）
+     ↓ release: published 事件
 release.yml（Release Pipeline）触发 → 构建 PDF/ZIP/CHECKSUMS → 上传到已创建的 Release
-    ↓
-post-merge-stamp（检测 release_created output）→ stamp_version.py + changelog.html
 ```
 
 ### 网站变更页（changelog.html）
@@ -256,7 +255,8 @@ git checkout -b hotfix/vX.Y.Z+1 main
 #    通过 GitHub Actions UI → "Run workflow"，指定 version 参数
 gh workflow run release.yml -f version=X.Y.Z+1
 
-# 4. 运行 make stamp-version 同步 ?v= 缓存戳
+# 4. 验证 main 上 VERSION / ?v= 已同步
+#    （release.yml 的 workflow_dispatch 路径已自动执行 stamp_version.py）
 ```
 
 > ⚠️ `workflow_dispatch` 仅作为紧急回退。正常发布请通过合并 Release PR 完成，由 release-please 自动创建 tag 和 GitHub Release。
@@ -344,9 +344,7 @@ Release PR（分支名以 `release-please--` 开头）存活期间，CI 校验�
 
 ### 4. Version Sync
 
-### 4. Version Sync
-
-All version references are synced via release-please extra-files (VERSION / tokens.json / package.json) and stamped into HTML/MD via `stamp_version.py`.
+All version references are synced via release-please extra-files (`tokens.json` / `package.json`) and `stamp_version.py`. The `VERSION` file itself is a plain-text semver (e.g. `1.9.1`) — release-please's GenericUpdater only rewrites lines annotated with `x-release-please-version` and **cannot update unannotated plain text**. Therefore `VERSION` is synced by `post-merge-stamp` from release-please's `version` output, then `stamp_version.py` propagates the version to HTML/MD `?v=` cache-busting parameters.
 
 | File | Tool |
 |------|------|
@@ -354,9 +352,9 @@ All version references are synced via release-please extra-files (VERSION / toke
 | `AGENTS.md` | `stamp_version.py` |
 | `tokens.json` `"version"` | release-please `extra-files` |
 | `package.json` `"version"` | release-please `extra-files` |
-| `VERSION` | release-please `extra-files` (source of truth) |
+| `VERSION` | `post-merge-stamp`（GenericUpdater 无法更新无注解纯文本） |
 
-Run `make stamp-version` after bumping VERSION to sync all HTML/MD files.
+Run `make stamp-version` after `post-merge-stamp` to sync all HTML/MD files.
 
 ### 5. Size Monitoring
 

@@ -181,7 +181,7 @@ Release PR 合并后，release-please 自动创建 tag 和 GitHub Release，`rel
 |------|------|
 | **自动（创建 Release PR）** | push to `main` → release-please 分析 commits → 创建/更新 Release PR |
 | **合并 Release PR** | 合并后 release-please 自动创建 tag + GitHub Release（notes 取自 CHANGELOG） |
-| **workflow_dispatch** | 手动触发 release-please.yml，可强制版本号（release-as）或标记预发布（prerelease）；紧急热修复时手动触发 release.yml（见 [AGENTS.md](../../AGENTS.md)） |
+| **workflow_dispatch** | 手动触发 release-please.yml，可强制版本号（release-as）；紧急热修复时手动触发 release.yml（见 [AGENTS.md](../../AGENTS.md)） |
 | **紧急热修复** | 自动链路不可用时，通过 `workflow_dispatch` 手动触发 `release.yml`，指定 `version` 参数 |
 
 ### 完整发布流程
@@ -189,13 +189,14 @@ Release PR 合并后，release-please 自动创建 tag 和 GitHub Release，`rel
 ```
 提交（Conventional Commits）
   → release-please 分析
-  → 创建/更新 Release PR（CHANGELOG.md + VERSION + tokens.json + package.json）
+  → 创建/更新 Release PR（CHANGELOG.md + .release-please-manifest.json + tokens.json + package.json）
   → 人类审查 Release PR（如需润色措辞，直接编辑 CHANGELOG.md 对应节）
   → 合并 Release PR
   → release-please 自动：
-      ① 更新 VERSION / .release-please-manifest.json / tokens.json / package.json
+      ① 更新 .release-please-manifest.json / tokens.json / package.json（extra-files）
       ② 创建 git tag vX.Y.Z（GitHub 后台签名）
       ③ 创建 GitHub Release（notes 取自 CHANGELOG.md）
+      ④ post-merge-stamp：从 release-please 的 `version` output 同步 `VERSION` 文件
   → release.yml（release: published 事件触发）：
       构建 PDF/ZIP/CHECKSUMS → 上传至已创建的 GitHub Release
   → post-merge-stamp 自动（检测 release_created output）：
