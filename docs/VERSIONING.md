@@ -72,8 +72,8 @@ MAJOR.MINOR.PATCH[-PRERELEASE][+BUILD]
 由于本项目无构建工具，浏览器/CDN 通过 `?v=` 查询字符串刷新资源缓存：
 
 ```html
-<link rel="stylesheet" href="styles.css?v=1.10.0">
-<script src="scripts.js?v=1.10.0"></script>
+<link rel="stylesheet" href="styles.css?v=1.10.1">
+<script src="scripts.js?v=1.10.1"></script>
 ```
 
 **规则**：
@@ -156,7 +156,7 @@ release-please / semantic-release 风格的自动化可在未来引入（见 [�
 
 ## 当前版本
 
-- **最新稳定版**：`v1.10.0`（2026-08-14）
+- **最新稳定版**：`v1.10.1`（2026-08-14）
 - **VERSION 文件**：项目根目录 `VERSION` 单行文件存放当前版本号
 
 ## 自动化发布（Release Please）

@@ -1,5 +1,5 @@
-# EDIC Design System Skill Package v1.10.0
-# EDIC 设计系统 Skill 技能包 v1.10.0
+# EDIC Design System Skill Package v1.10.1
+# EDIC 设计系统 Skill 技能包 v1.10.1
 
 [![License: MIT-0](https://img.shields.io/badge/License-MIT%200-blue.svg)](https://spdx.org/licenses/MIT-0.html)
 [![Version](https://img.shields.io/badge/Version-1.10.0-green.svg)](https://edic.cgartlab.com/)
@@ -285,7 +285,7 @@ import './path/to/styles.css';
 - `references/ANTI-PATTERNS.md`：反模式 × 正确替代对照表，覆盖颜色、间距、Inline Style、BEM、无障碍、动效
 - `SKILL.md` 末尾新增 Reference Files 章节，通过标准 Markdown 链接按需触发加载
 
-### v1.10.0 (2026-06)
+### v1.10.1 (2026-06)
 - 重构 tokens.json 为 flat 结构，与 CSS `--ds-*` 变量名一一对应
 - 添加统一构建工具链 `scripts/lint.py` 和 `scripts/build.py`
 - 完善打印/PDF 输出样式，添加 `@page` 规则
