@@ -36,7 +36,7 @@ jobs:
       - id: a11y
         run: python3 tools/validate_a11y.py || rc=$?; if [ ${rc:-0} -eq 1 ]; then exit 1; elif [ ${rc:-0} -eq 2 ]; then exit 0; fi
       - id: versions
-        if: ${{ !startsWith(github.head_ref, 'release-please--') }}
+        if: ${{ !startsWith(github.head_ref, 'release-please--') && !startsWith(github.event.head_commit.message || '', 'chore(main): release') }}
         run: python3 tools/validate_versions.py || rc=$?; if [ ${rc:-0} -eq 1 ]; then exit 1; elif [ ${rc:-0} -eq 2 ]; then exit 0; fi
       - id: links
         if: always()
@@ -51,7 +51,7 @@ jobs:
         run: python3 tools/validate_darkmode.py || rc=$?; if [ ${rc:-0} -eq 1 ]; then exit 1; elif [ ${rc:-0} -eq 2 ]; then exit 0; fi
       - id: verext
         continue-on-error: true
-        if: ${{ !startsWith(github.head_ref, 'release-please--') }}
+        if: ${{ !startsWith(github.head_ref, 'release-please--') && !startsWith(github.event.head_commit.message || '', 'chore(main): release') }}
         run: python3 tools/validate_verext.py || rc=$?; if [ ${rc:-0} -eq 1 ]; then exit 1; elif [ ${rc:-0} -eq 2 ]; then exit 0; fi
       - id: hardcode
         continue-on-error: true

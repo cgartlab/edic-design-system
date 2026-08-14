@@ -96,13 +96,13 @@ jobs:
 
       # ── 版本一致性校验 ─────────────────────────────
       - name: Validate version consistency
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.skip_validation != 'true' }}
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.skip_validation }}
         run: |
           python3 tools/validate_versions.py || rc=$?; \
           if [ ${rc:-0} -eq 1 ]; then exit 1; elif [ ${rc:-0} -eq 2 ]; then exit 0; fi
 
       - name: Validate token/CSS consistency
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.skip_validation != 'true' }}
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.skip_validation }}
         run: |
           python3 tools/validate_tokens.py || rc=$?; \
           if [ ${rc:-0} -eq 1 ]; then exit 1; elif [ ${rc:-0} -eq 2 ]; then exit 0; fi
