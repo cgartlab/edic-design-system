@@ -140,14 +140,15 @@ make serve             # 本地预览
 
 ### 发布流程
 
-发布由 release-please 辅助 + 人工打 tag 触发。贡献者无需手动发布：
+发布完全自动化（release-please 自动 tag + GitHub Release），贡献者无需手动发布：
 
 - **提交符合 Conventional Commits** 的 PR（`feat:`、`fix:`、`docs:` 等）
 - 合并到 `main` 后，`release-please` 自动创建/更新 Release PR（更新 `CHANGELOG.md` + 版本 bump）
-- Release PR 合并后，`post-merge-stamp` 自动同步 `?v=` 缓存戳和 `changelog.html`
-- 人工执行 `git tag vX.Y.Z && git push origin vX.Y.Z` 触发 `release.yml` 构建 GitHub Release（含 PDF/ZIP 附件）
+- Release PR 合并后，`release-please` 自动创建 git tag `vX.Y.Z`（GitHub 后台签名）和 GitHub Release（notes 取自 `CHANGELOG.md`）
+- `post-merge-stamp` 自动从 release-please 的 `version` output 同步 `VERSION` 文件，并通过 `stamp_version.py` 同步所有 `?v=` 缓存戳
+- `release.yml`（`release: published` 事件触发）构建并上传 PDF/ZIP 附件到 GitHub Release
 
-> release-please **只负责 Release PR 和 CHANGELOG，不会自动打 tag** — 发布时机完全由人类决定。
+> 紧急热修复：当自动链路不可用时，通过 `workflow_dispatch` 手动触发 `release.yml`，指定 `version` 参数。
 > 详见 [`docs/VERSIONING.md`](./docs/VERSIONING.md) 和 [`docs/RELEASE-CHECKLIST.md`](./docs/RELEASE-CHECKLIST.md)。
 
 ## 目录结构（参考）
