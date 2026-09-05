@@ -31,6 +31,10 @@ Thumbs.db
 desktop.ini
 opencode.json
 
+# Backup / editor swap artifacts — never commit
+*.bak
+*.orig
+
 # IDE / 编辑器
 .vscode/*
 !.vscode/settings.json
