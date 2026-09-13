@@ -10,10 +10,18 @@ from __future__ import annotations
 
 import subprocess
 import sys
+from io import TextIOWrapper
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 TOOLS = ROOT / "tools"
+if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
+    sys.stdout = TextIOWrapper(
+        sys.stdout.buffer,
+        encoding="utf-8",
+        errors="replace",
+        line_buffering=True,
+    )
 
 VALIDATORS = [
     ("tokens",     "tokens.json ↔ styles.css consistency"),
@@ -26,6 +34,11 @@ VALIDATORS = [
     ("darkmode",    "Dark mode token completeness"),
     ("verext",      "Extended version consistency (tokens/pkg/VERSION)"),
     ("hardcode",    "Hardcoded color values (should use --ds-*)"),
+    ("manifest",    "edic-manifest.json structure and reference integrity"),
+    ("manifest_css","Manifest core components have CSS classes"),
+    ("components",  "Component coverage and ARIA contract checks"),
+    ("icons",       "icons.json ↔ scripts.js ↔ icons.svg sync"),
+    ("visual_baseline", "Visual baseline snapshot checks"),
 ]
 
 GREEN = "\033[32m"
@@ -42,6 +55,8 @@ def run_validator(name: str, description: str) -> tuple[str, int, str]:
         [sys.executable, str(script)],
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        errors="replace",
     )
     rc = result.returncode
     stdout = result.stdout

@@ -191,8 +191,8 @@
 ### 提交前自检
 
 ```bash
-make validate           # 全部校验
-make preview            # 启动本地服务器
+npm run audit           # 全部校验与测试
+npx serve -l 8000 .     # 启动本地服务器
 # 浏览器中检查 docs.html 新组件
 ```
 

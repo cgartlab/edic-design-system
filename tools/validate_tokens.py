@@ -95,9 +95,18 @@ def extract_vars_from_block(block: str) -> dict[str, str]:
 
 
 def extract_vars_from_json(data: dict) -> dict[str, str]:
-    """递归从 tokens.json 中提取所有 token 路径 → 值。"""
+    """从 tokens.json v2 或 v1 结构提取 token 名 → 值。"""
     out = {}
-    tokens = data.get("tokens", {})
+    tokens = data.get("tokens", data.get("_legacyTokens", {}))
+
+    if isinstance(tokens, list):
+        for token in tokens:
+            if isinstance(token, dict) and token.get("name") and token.get("value") is not None:
+                out["--ds-" + str(token["name"])] = str(token["value"])
+        return out
+
+    if not isinstance(tokens, dict):
+        return out
 
     def walk(node: dict, prefix: str = "") -> None:
         for key, val in node.items():

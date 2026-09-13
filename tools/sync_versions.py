@@ -28,11 +28,19 @@ import re
 import sys
 from pathlib import Path
 
+import os
+
 ROOT = Path(__file__).resolve().parent.parent
 VERSION_FILE = ROOT / "VERSION"
 TOKENS_FILE = ROOT / "tokens.json"
 PACKAGE_FILE = ROOT / "package.json"
 STAMP_SCRIPT = ROOT / "tools" / "stamp_version.py"
+
+os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
 
 
 # ─── 版本读取 ────────────────────────────────────────────────
@@ -120,8 +128,14 @@ def run_stamp_version(dry_run: bool = False) -> int:
     if dry_run:
         cmd.append("--diff")
 
-    result = subprocess.run(cmd, capture_output=True, text=True)
-    for line in result.stdout.splitlines():
+    result = subprocess.run(
+        cmd,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        env={**os.environ, "PYTHONIOENCODING": "utf-8"},
+    )
+    for line in (result.stdout or "").splitlines():
         print(f"  {line}")
     if result.stderr:
         for line in result.stderr.splitlines():

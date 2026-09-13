@@ -5,7 +5,7 @@
 <title>Agent 提示词与 Skill · EDIC Design System</title>
 <meta name="description" content="复制可直接给任意 AI Agent 使用的系统提示词、精简提示词与 Skill 技能包——让不懂设计的人也能产出排版专业、视觉合规的界面、文档与素材。">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="styles.css?v=1.10.2">
+<link rel="stylesheet" href="styles.css?v=2.0.0">
 </head>
 <body>
 <a href="#ds-main" class="ds-skip">跳至主要内容</a>
@@ -75,7 +75,7 @@
           <span class="ds-compat-item">任意 LLM</span>
         </div>
         <div class="ds-alert ds-alert--info ds-mt-8" role="note">
-          <svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
           <div><div class="ds-alert-title">小贴士</div>若 Agent 能读取仓库文件，直接让它阅读 <code>skills/edic-design-system/SKILL.md</code> 与 <code>tokens.json</code> 效果最佳。</div>
         </div>
       </div>
@@ -104,7 +104,7 @@
         <div class="ds-tabpanel is-active" data-panel="full">
           <div class="ds-prompt">
             <div class="ds-prompt-head">
-              <span class="ds-prompt-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>system-prompt.md</span>
+              <span class="ds-prompt-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>system-prompt.md</span>
               <button class="ds-copy-btn ds-copy-btn--light" data-copy="#p-full" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制全文</span></button>
             </div>
             <pre class="ds-prompt-body" id="p-full"># EDIC 设计系统 — Agent 执行规范（系统提示词）
@@ -189,7 +189,7 @@
         <div class="ds-tabpanel" data-panel="quick">
           <div class="ds-prompt">
             <div class="ds-prompt-head">
-              <span class="ds-prompt-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>quick-prompt.md</span>
+              <span class="ds-prompt-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>quick-prompt.md</span>
               <button class="ds-copy-btn ds-copy-btn--light" data-copy="#p-quick" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button>
             </div>
             <pre class="ds-prompt-body" id="p-quick">你是 EDIC 设计系统的执行者。所有输出严格遵循：
@@ -214,7 +214,7 @@
         <div class="ds-tabpanel" data-panel="skill" id="skill">
           <div class="ds-prompt">
             <div class="ds-prompt-head">
-              <span class="ds-prompt-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>skills/edic-design-system/SKILL.md</span>
+              <span class="ds-prompt-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>skills/edic-design-system/SKILL.md</span>
               <button class="ds-copy-btn ds-copy-btn--light" data-copy="#p-skill" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制全文</span></button>
             </div>
             <pre class="ds-prompt-body" id="p-skill">---
@@ -287,7 +287,7 @@ description: 让产出严格遵循 EDIC 设计系统（Editorial × Olive Green�
 · 视觉手册与 live 令牌：https://edic.cgartlab.com/docs.html
 · 使用文档：https://edic.cgartlab.com/docs.html
 · 结构化令牌：tokens.json</pre>
-            <div class="ds-prompt-foot"><span>持久化 · 放入 Agent 的 skills 目录</span><a href="https://github.com/cgartlab/edic-design-system/releases/download/v1.10.2/edic-design-system-skill-v1.10.2.zip" class="ds-text-accent" download>下载完整包 →</a></div>
+            <div class="ds-prompt-foot"><span>持久化 · 放入 Agent 的 skills 目录</span><a href="https://github.com/cgartlab/edic-design-system/releases/download/v2.0.0/edic-design-system-skill-v2.0.0.zip" class="ds-text-accent" download>下载完整包 →</a></div>
           </div>
         </div>
       </div>
@@ -361,14 +361,14 @@ description: 让产出严格遵循 EDIC 设计系统（Editorial × Olive Green�
     <div class="ds-footer-bottom">
       <span>© <span class="ds-year">2026</span> EDIC · CGArtLab</span>
       <div class="ds-cluster">
-        <span class="ds-mono" data-ds-version>v1.10.2</span>
-        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:var(--ds-accent);text-decoration:none" title="本设计系统采用 CC BY 4.0 许可证">CC BY 4.0</a>
+        <span class="ds-mono" data-ds-version>v2.0.0</span>
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" class="ds-footer-cc ds-text-accent" title="本设计系统采用 CC BY 4.0 许可证">CC BY 4.0</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script src="scripts.js?v=1.10.2"></script>
+<script src="scripts.js?v=2.0.0"></script>
 <button id="theme-toggle-btn-fixed" class="ds-theme-toggle-btn ds-theme-toggle-btn--fixed" type="button" aria-label="跟随系统 · 点击切换">
   <span class="theme-icon"></span>
 </button>

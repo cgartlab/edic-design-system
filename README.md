@@ -30,14 +30,14 @@ It ships as three static files: `styles.css`, `scripts.js`, and `tokens.json`. N
 
 | | |
 |---|---|
-| **Design tokens** | 200+ — color, typography, spacing, radius, shadow, motion |
-| **Components** | 20 core + 5 add-on, all with dark-mode coverage |
-| **Icons** | 100 SVG symbols, 1.5px stroke, `aria-hidden` |
+| **Design tokens** | 276 structured entries — color, typography, spacing, radius, shadow, motion |
+| **Components** | 39 core components, all with dark-mode coverage |
+| **Icons** | 209 SVG symbols, 1.5px stroke, `aria-hidden` |
 | **Color system** | OKLch-only — perceptually uniform, no hex/rgb guesswork |
 | **Dark mode** | `[data-theme="dark"]` + `prefers-color-scheme` media query |
 | **CJK support** | Noto Sans/Serif SC, full-width punctuation, optimized tracking |
 | **AI integration** | Claude Code Skill · Cursor rules · Kiro steering · Copilot instructions |
-| **Engineering** | 10 CI validators, release-please automation, pre-commit hooks |
+| **Engineering** | 15 CI validators, release-please automation, pre-commit hooks |
 
 ---
 
@@ -110,7 +110,7 @@ docs/                           — VERSIONING, COMPONENT-DEVELOPMENT, TESTING, 
 
 ```bash
 make serve      # http://localhost:8000
-make lint       # all 10 validators (one command)
+make lint       # all 15 validators (one command)
 make build      # lint → stamp → icons → PDFs → Skill ZIP
 make validate   # validators individually, with exit-code summary
 ```
@@ -168,14 +168,14 @@ EDIC（**E**ditorial **D**esign **I**nterface for **C**ontent，内容编辑设�
 
 | | |
 |---|---|
-| **设计令牌** | 200+ — 颜色、字体、间距、圆角、阴影、动效 |
-| **组件** | 20 核心 + 5 扩展，全部支持暗色模式 |
-| **图标** | 100 个 SVG 符号，1.5px 描边，`aria-hidden` |
+| **设计令牌** | 276 条结构化条目 — 颜色、字体、间距、圆角、阴影、动效 |
+| **组件** | 39 个组件家族，全部支持暗色模式 |
+| **图标** | 209 个 SVG 符号，1.5px 描边，`aria-hidden` |
 | **色彩系统** | 纯 OKLch — 感知均匀，告别 hex/rgb 猜测 |
 | **暗色模式** | `[data-theme="dark"]` + `prefers-color-scheme` 媒体查询 |
 | **中文支持** | Noto Sans/Serif SC，全角标点，优化字距 |
 | **AI 集成** | Claude Code Skill · Cursor 规则 · Kiro Steering · Copilot 指令 |
-| **工程治理** | 10 个 CI 验证器，release-please 自动化，pre-commit 钩子 |
+| **工程治理** | 15 个 CI 验证器，release-please 自动化，pre-commit 钩子 |
 
 ---
 
@@ -196,7 +196,7 @@ EDIC（**E**ditorial **D**esign **I**nterface for **C**ontent，内容编辑设�
 </html>
 ```
 
-完整组件手册 → [edic.cgartlab.com/docs.html](https://edic.cgartlab.com/docs.html)
+完整组件用法与视觉手册 → [edic.cgartlab.com/docs.html](https://edic.cgartlab.com/docs.html)
 
 ---
 
@@ -226,7 +226,7 @@ scripts.js                      — 图标、主题切换、滚动揭示、复�
 tokens.json                     — 结构化令牌数据（机器可读）
 
 index.html                      — 首页
-docs.html                       — 组件目录 + 使用手册
+docs.html                       — 使用文档 + 视觉手册
 prompts.html                    — AI 提示词与 Skill 包
 downloads.html                  — PDF 参考、令牌导出、品牌资产
 
@@ -237,7 +237,7 @@ report.html                     — 多页报告布局
 
 skills/edic-design-system/      — Claude Code Skill（SKILL.md + references/）
 prompts/                        — system-prompt.md、quick-prompt.md
-tools/                          — 10 个 Python 验证器
+tools/                          — 15 个 Python 验证器
 scripts/                        — build.py、lint.py、dev.sh、pre-commit.sh
 docs/                           — 版本管理、组件开发、测试、发布清单
 ```
@@ -248,7 +248,7 @@ docs/                           — 版本管理、组件开发、测试、发�
 
 ```bash
 make serve      # http://localhost:8000
-make lint       # 全部 10 个验证器（一条命令）
+make lint       # 全部 15 个验证器（一条命令）
 make build      # 校验 → 版本戳 → 图标 → PDF → Skill ZIP
 make validate   # 逐一运行验证器，输出退出码汇总
 ```

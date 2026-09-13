@@ -2,7 +2,7 @@
 name: edic-design-system
 slug: edic-design-system
 displayName: EDIC 设计系统
-version: 1.10.2
+version: 2.0.0
 description: >-
   Generate UI components, full pages, documents, emails, and assets that
   strictly follow the EDIC design system (Editorial × Olive Green, OKLch
@@ -20,6 +20,31 @@ landing sections, documentation, emails, reports — must conform to the EDIC
 design system. **Prefer design tokens (CSS custom properties). Never hard-code
 magic numbers.**
 
+## Manifest-First Workflow
+
+When this skill is active for an EDIC project, use manifest-first behavior:
+
+1. Read `edic-manifest.json` for the authoritative deliverable, token,
+   component, icon, validator, and constraint list.
+2. Read `tokens.json`, `icons.json`, and `AGENT-GUIDE.md` when generating or
+   auditing UI.
+3. Read `docs/component-gap-audit.md` and `docs/component-2.0-backlog.md`
+   before proposing, adding, or claiming completion of a component.
+4. Read `skills/edic-design-system/references/CONTRACTS.md` before creating a
+   new component or improving an interactive component.
+5. Read `references/ANTI-PATTERNS.md` before fixing or reviewing generated UI.
+
+Component generation rules:
+
+- Existing manifest core components must use the documented `ds-*` class family
+  and examples; do not invent parallel class names.
+- New components must follow the component contract in
+  `references/CONTRACTS.md`.
+- Add CSS to `styles.css` before adding HTML examples in `docs.html`.
+- Use token-only visual values and include dark-mode coverage.
+- Include ARIA metadata and keyboard behavior for interactive components.
+- Mark a task complete only after `npm run audit` passes.
+
 ## Design character
 - **Editorial × Olive Green**: magazine-grade restraint, generous whitespace,
   serif headings + sans body, a warm paper background, and a confident — never
@@ -35,6 +60,10 @@ magic numbers.**
 - Components use base + modifier: `ds-btn` / `ds-btn--primary`.
 - No inline `style=` except genuinely dynamic values (e.g. stagger `--d`).
 - Icon-only buttons need `aria-label`; decorative SVGs need `aria-hidden="true"`.
+- Prefer semantic aliases such as `--ds-color-surface-primary`,
+  `--ds-color-text-primary`, `--ds-color-border-default`,
+  `--ds-border-radius-control`, and `--ds-motion-default` over raw scale
+  tokens when both exist.
 
 ## Color tokens (core)
 Light (`:root`):

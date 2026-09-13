@@ -1,8 +1,8 @@
-# EDIC Design System Skill Package v1.10.2
-# EDIC 设计系统 Skill 技能包 v1.10.2
+# EDIC Design System Skill Package v2.0.0
+# EDIC 设计系统 Skill 技能包 v2.0.0
 
 [![License: MIT-0](https://img.shields.io/badge/License-MIT%200-blue.svg)](https://spdx.org/licenses/MIT-0.html)
-[![Version](https://img.shields.io/badge/Version-1.10.0-green.svg)](https://edic.cgartlab.com/)
+[![Version](https://img.shields.io/badge/Version-2.0.0-green.svg)](https://edic.cgartlab.com/)
 
 ---
 
@@ -193,7 +193,7 @@ mkdir -p .kiro/steering
 | Reveal animation / 揭示动效 | `ds-reveal` + `--d` stagger |
 | Toast / 通知 | `ds-toast ds-toast-icon` |
 
-完整组件目录（280+）见 `SKILL.md`。
+完整组件契约（39 个核心组件）见 `SKILL.md`。
 
 ---
 
@@ -221,7 +221,7 @@ mkdir -p .kiro/steering
 
 **Q2：`tokens.json` 是做什么用的？怎么使用？**
 
-`tokens.json` 是设计令牌的结构化导出，格式为 flat JSON，与 CSS 中的 `--ds-*` 变量名一一对应。可用于：生成 Figma Tokens 插件配置、转换为 Tailwind CSS 主题、供程序读取后批量生成其他格式。日常使用 EDIC 无需直接操作此文件。
+`tokens.json` 是 EDIC 的结构化令牌导出：`tokens[]` 为当前机器入口，包含 `name`、`value`、`category`、`description`、`dark`、`aliases`、`status` 等元数据；`_legacyTokens` 保留 1.x 兼容读取。可用于 Figma Tokens 插件配置、Tailwind CSS 主题转换、AI 选择和批量生成。
 
 ---
 
@@ -285,12 +285,12 @@ import './path/to/styles.css';
 - `references/ANTI-PATTERNS.md`：反模式 × 正确替代对照表，覆盖颜色、间距、Inline Style、BEM、无障碍、动效
 - `SKILL.md` 末尾新增 Reference Files 章节，通过标准 Markdown 链接按需触发加载
 
-### v1.10.2 (2026-06)
-- 重构 tokens.json 为 flat 结构，与 CSS `--ds-*` 变量名一一对应
+### v2.0.0 (2026-09)
+- 重构 tokens.json 为结构化数组，并保留 1.x 兼容读取层
 - 添加统一构建工具链 `scripts/lint.py` 和 `scripts/build.py`
 - 完善打印/PDF 输出样式，添加 `@page` 规则
 
 ### v1.5.1 (2026-06)
-- 补全 280+ 遗漏的组件类
-- 统一组件目录结构
+- 维护 39 个核心组件类与新增组件的样式契约
+- 统一组件契约结构
 - 添加双语 README 安装说明

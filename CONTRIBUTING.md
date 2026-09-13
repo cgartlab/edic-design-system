@@ -30,9 +30,11 @@ git clone https://github.com/cgartlab/edic-design-system.git
 cd edic-design-system
 
 # 本地预览（任选其一）
-python3 -m http.server 8000
+make serve
 # 或
 npx serve .
+# 或
+python -m http.server 8000
 ```
 
 > 项目采用**零构建**架构，无需 `npm install` / `pnpm install`。所有文件即用即看。
@@ -63,7 +65,7 @@ docs(handbook): 补全 Slider 组件示例
 style(swatch): 调整间距
 refactor(scripts): 拆分图标渲染 IIFE
 test(validate): 增加 token 名称正则校验
-chore(release): bump v1.10.2
+chore(release): bump v2.0.0
 ```
 
 ### 3. 本地验证
@@ -71,25 +73,19 @@ chore(release): bump v1.10.2
 在提 PR 前必须运行：
 
 ```bash
-# 全部校验（推荐）— 等价于 make validate（全部 10 个验证器）
-python3 tools/validate_tokens.py
-python3 tools/validate_naming.py
-python3 tools/validate_html.py
-python3 tools/validate_a11y.py
-python3 tools/validate_versions.py
-python3 tools/validate_links.py
-python3 tools/validate_cssref.py
-python3 tools/validate_darkmode.py
-python3 tools/validate_verext.py
-python3 tools/validate_hardcode.py
+# 全部校验（推荐）— 等价于 make validate（全部 15 个验证器）
+npm run validate
+# 发布前完整审计
+npm run audit
 ```
 
 或单独运行某一项：
 
 ```bash
-make validate-tokens   # 仅令牌
-make validate-html     # 仅 HTML
-make serve             # 本地预览
+npm run validate:tokens   # 仅令牌
+npm run validate:html     # 仅 HTML
+npm run stamp:check       # 检查版本戳
+make serve                # 本地预览
 ```
 
 ### 4. 提 PR

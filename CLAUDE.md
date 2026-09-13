@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-**EDIC Design System** (formerly CGArtLab) — Editorial × Olive Green, a zero-runtime-dependency static design system driven by OKLch color science and design tokens. Current version: **v1.10.2**.
+**EDIC Design System** (formerly CGArtLab) — Editorial × Olive Green, a zero-runtime-dependency static design system driven by OKLch color science and design tokens. Current version: **v2.0.0**.
 
 - **Website:** https://edic.cgartlab.com
 - **License:** CC BY 4.0
@@ -16,7 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 | File | Role |
 |------|------|
-| `styles.css` | All design tokens (`:root` + `[data-theme="dark"]`), 20 core + 5 add-on components, animations, site shell |
+| `styles.css` | All design tokens (`:root` + `[data-theme="dark"]`), 39 component families, animations, site shell |
 | `scripts.js` | Icon rendering, token table rendering, theme toggle, scroll reveal, copy actions, tab panels |
 | `tokens.json` | Structured JSON of all design tokens — source of truth for programmatic consumption |
 
@@ -61,7 +61,7 @@ All icons are inline SVG in `scripts.js` `ICONS` array. ViewBox must be `0 0 24 
 # Start local dev server
 make serve                    # http://localhost:8000
 
-# Run all 10 validators
+# Run all 15 validators
 make validate
 npm run validate
 
@@ -77,10 +77,10 @@ make validate-links           # Internal anchors + resource references
 make stamp-version
 
 # Preview diff before stamping
-python3 tools/stamp_version.py --diff
+npm run stamp:diff
 
 # Check if stamp is needed
-python3 tools/stamp_version.py --check
+npm run stamp:check
 
 # Generate example PDFs
 make generate-pdfs
@@ -94,7 +94,7 @@ make clean
 
 ## CI / GitHub Actions
 
-- **`.github/workflows/ci.yml`** — runs all 10 validators on push/PR/schedule (weekly Monday UTC 0:00)
+- **`.github/workflows/ci.yml`** — runs all 15 validators on push/PR/schedule (weekly Monday UTC 0:00)
 - Exit codes: 0 = OK, 1 = errors (fail), 2 = warnings-only (pass)
 - **`.github/workflows/release.yml`** — `release: published`-triggered: builds PDF/ZIP and uploads to the release-please-created GitHub Release
 

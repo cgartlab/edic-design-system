@@ -5,7 +5,7 @@
 <title>使用文档 · EDIC Design System</title>
 <meta name="description" content="EDIC 设计系统使用文档：安装引入、设计令牌、色彩主题、暗色模式、排版、组件、动效、图标、可访问性、定制扩展与 FAQ。">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="styles.css?v=1.10.2">
+<link rel="stylesheet" href="styles.css?v=2.0.0">
 <!-- Prism.js syntax highlighting (CDN, no extra CSS — custom theme in styles.css) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js"
         integrity="sha384-xAgN7OCsK5s0d3G18tqRYrxy8hWsPA14E26TMh7Mi9ZM09vaz4EA0DBTl+80F5yC"
@@ -50,7 +50,7 @@
   <div class="ds-wrapper">
     <span class="ds-eyebrow ds-block ds-mb-4">使用文档</span>
     <h1 class="ds-display ds-hero ds-mb-4">使用文档</h1>
-    <p class="ds-lead ds-measure">从零开始把 EDIC 设计系统接入任意项目——纯静态、零依赖、令牌驱动。下面的每个片段都可直接复制。</p>
+    <p class="ds-lead ds-measure">从零开始把 EDIC Design System 接入任意项目。EDIC 保持纯静态、零运行时依赖和编辑主义设计语言，并把结构化令牌、manifest、Agent 规则、组件覆盖与验证体系纳入同一套开发流程。下面的每个片段都可直接复制。</p>
   </div>
 </header>
 
@@ -76,17 +76,21 @@
               <li><a class="ds-pagenav-link" href="#icons"><span class="ds-pagenav-num">11</span><span class="ds-pagenav-text">图标用法</span></a></li>
               <li><a class="ds-pagenav-link" href="#accessibility"><span class="ds-pagenav-num">12</span><span class="ds-pagenav-text">可访问性</span></a></li>
               <li><a class="ds-pagenav-link" href="#customize"><span class="ds-pagenav-num">13</span><span class="ds-pagenav-text">定制与扩展</span></a></li>
-              <li><a class="ds-pagenav-link" href="#faq"><span class="ds-pagenav-num">14</span><span class="ds-pagenav-text">常见问题</span></a></li>
-              <li><a class="ds-pagenav-link" href="#visual-colors"><span class="ds-pagenav-num">15</span><span class="ds-pagenav-text">视觉手册 · 色彩系统</span></a></li>
-              <li><a class="ds-pagenav-link" href="#visual-typography"><span class="ds-pagenav-num">16</span><span class="ds-pagenav-text">视觉手册 · 字体系统</span></a></li>
-              <li><a class="ds-pagenav-link" href="#visual-spacing"><span class="ds-pagenav-num">17</span><span class="ds-pagenav-text">视觉手册 · 间距尺寸</span></a></li>
-              <li><a class="ds-pagenav-link" href="#visual-components"><span class="ds-pagenav-num">18</span><span class="ds-pagenav-text">视觉手册 · 组件库</span></a></li>
-              <li><a class="ds-pagenav-link" href="#visual-charts"><span class="ds-pagenav-num">19</span><span class="ds-pagenav-text">视觉手册 · 图表库</span></a></li>
-              <li><a class="ds-pagenav-link" href="#visual-icons"><span class="ds-pagenav-num">20</span><span class="ds-pagenav-text">视觉手册 · 图标库</span></a></li>
-              <li><a class="ds-pagenav-link" href="#visual-effects"><span class="ds-pagenav-num">21</span><span class="ds-pagenav-text">视觉手册 · 遮罩模糊</span></a></li>
-              <li><a class="ds-pagenav-link" href="#visual-timeline"><span class="ds-pagenav-num">22</span><span class="ds-pagenav-text">视觉手册 · 时间轴</span></a></li>
-              <li><a class="ds-pagenav-link" href="#visual-contact"><span class="ds-pagenav-num">23</span><span class="ds-pagenav-text">视觉手册 · 联系表单</span></a></li>
-              <li><a class="ds-pagenav-link" href="#token-index"><span class="ds-pagenav-num">24</span><span class="ds-pagenav-text">令牌索引</span></a></li>
+              <li><a class="ds-pagenav-link" href="#quality"><span class="ds-pagenav-num">14</span><span class="ds-pagenav-text">质量验证</span></a></li>
+              <li><a class="ds-pagenav-link" href="#ai-collaboration"><span class="ds-pagenav-num">15</span><span class="ds-pagenav-text">AI 协作</span></a></li>
+              <li><a class="ds-pagenav-link" href="#machine-readable"><span class="ds-pagenav-num">16</span><span class="ds-pagenav-text">机器可读资源</span></a></li>
+              <li><a class="ds-pagenav-link" href="#migration"><span class="ds-pagenav-num">17</span><span class="ds-pagenav-text">迁移指南</span></a></li>
+              <li><a class="ds-pagenav-link" href="#faq"><span class="ds-pagenav-num">18</span><span class="ds-pagenav-text">常见问题</span></a></li>
+              <li><a class="ds-pagenav-link" href="#visual-colors"><span class="ds-pagenav-num">19</span><span class="ds-pagenav-text">视觉手册 · 色彩系统</span></a></li>
+              <li><a class="ds-pagenav-link" href="#visual-typography"><span class="ds-pagenav-num">20</span><span class="ds-pagenav-text">视觉手册 · 字体系统</span></a></li>
+              <li><a class="ds-pagenav-link" href="#visual-spacing"><span class="ds-pagenav-num">21</span><span class="ds-pagenav-text">视觉手册 · 间距尺寸</span></a></li>
+              <li><a class="ds-pagenav-link" href="#visual-components"><span class="ds-pagenav-num">22</span><span class="ds-pagenav-text">视觉手册 · 组件库</span></a></li>
+              <li><a class="ds-pagenav-link" href="#visual-charts"><span class="ds-pagenav-num">23</span><span class="ds-pagenav-text">视觉手册 · 图表库</span></a></li>
+              <li><a class="ds-pagenav-link" href="#visual-icons"><span class="ds-pagenav-num">24</span><span class="ds-pagenav-text">视觉手册 · 图标库</span></a></li>
+              <li><a class="ds-pagenav-link" href="#visual-effects"><span class="ds-pagenav-num">25</span><span class="ds-pagenav-text">视觉手册 · 遮罩模糊</span></a></li>
+              <li><a class="ds-pagenav-link" href="#visual-timeline"><span class="ds-pagenav-num">26</span><span class="ds-pagenav-text">视觉手册 · 时间轴</span></a></li>
+              <li><a class="ds-pagenav-link" href="#visual-contact"><span class="ds-pagenav-num">27</span><span class="ds-pagenav-text">视觉手册 · 联系表单</span></a></li>
+              <li><a class="ds-pagenav-link" href="#token-index"><span class="ds-pagenav-num">28</span><span class="ds-pagenav-text">令牌索引</span></a></li>
             </ol>
           </details>
         </nav>
@@ -118,11 +122,11 @@
     &lt;meta charset="UTF-8"&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
     &lt;link rel="icon" type="image/svg+xml" href="favicon.svg"&gt;
-    &lt;link rel="stylesheet" href="styles.css?v=1.10.2"&gt;
+    &lt;link rel="stylesheet" href="styles.css?v=2.0.0"&gt;
   &lt;/head&gt;
   &lt;body&gt;
     &lt;!-- 你的内容 --&gt;
-    &lt;script src="scripts.js?v=1.10.2"&gt;&lt;/script&gt;
+    &lt;script src="scripts.js?v=2.0.0"&gt;&lt;/script&gt;
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
           </figure>
@@ -145,7 +149,7 @@
 }
 .promo-card:hover { box-shadow: var(--ds-shadow-lg); }</code></pre>
           </figure>
-          <p>令牌分为这些类别：<code>color</code>、<code>font</code>、<code>text</code>（字号）、<code>weight</code>、<code>leading</code>、<code>tracking</code>、<code>space</code>、<code>radius</code>、<code>shadow</code>、<code>duration</code>、<code>ease</code>、<code>z</code>、<code>blur</code>。完整清单见<a href="#token-index">令牌索引</a>，结构化数据见 <code>tokens.json</code>。</p>
+          <p>令牌分为这些类别：<code>color</code>、<code>font</code>、<code>text</code>（字号）、<code>weight</code>、<code>leading</code>、<code>tracking</code>、<code>space</code>、<code>radius</code>、<code>shadow</code>、<code>duration</code>、<code>ease</code>、<code>z</code>、<code>blur</code>、<code>border</code>、<code>opacity</code>、<code>grid</code>、<code>breakpoint</code>。完整清单见<a href="#token-index">令牌索引</a>，结构化数据见 <code>tokens.json</code>。</p>
         </section>
 
         <section class="ds-doc-block" id="color">
@@ -177,7 +181,7 @@
 &lt;html lang="zh-CN" data-theme="dark"&gt;</code></pre>
           </figure>
           <div class="ds-alert ds-alert--info ds-mt-4" role="note">
-            <svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
             <div><div class="ds-alert-title">提示</div>暗色模式不要使用 <code>#000</code>，请沿用令牌；自定义组件只要使用 <code>var(--ds-*)</code>，即可自动适配深浅两套主题。</div>
           </div>
         </section>
@@ -214,9 +218,9 @@
           <h2>组件用法</h2>
           <p>组件以基类 + 修饰符表达：<code>ds-btn</code> 是基类，<code>ds-btn--primary</code> 是变体。下面是按钮、徽章与卡片的组合示例（在浅色与暗色下表现一致）。</p>
           <div class="ds-component-preview ds-mb-4">
-            <button class="ds-btn ds-btn--primary">主要按钮</button>
-            <button class="ds-btn ds-btn--secondary">次要</button>
-            <button class="ds-btn ds-btn--ghost">幽灵</button>
+            <button type="button" class="ds-btn ds-btn--primary">主要按钮</button>
+            <button type="button" class="ds-btn ds-btn--secondary">次要</button>
+            <button type="button" class="ds-btn ds-btn--ghost">幽灵</button>
             <span class="ds-badge ds-badge--accent">Accent</span>
             <span class="ds-badge ds-badge--success">Success</span>
           </div>
@@ -230,7 +234,7 @@
   &lt;p&gt;使用令牌的卡片，悬停浮起。&lt;/p&gt;
 &lt;/article&gt;</code></pre>
           </figure>
-          <p>全部 20 个核心 + 5 个附加组件的 live 形态、变体与状态，请见<a href="#visual-components">视觉手册 · 组件库</a>。</p>
+          <p>39 个核心组件家族的 live 形态、变体与状态，请见<a href="#visual-components">视觉手册 · 组件库</a>；本页内同时保留常用用法、ARIA 契约与可复制代码。</p>
 
           <h3>响应式导航 · Mobile Drawer</h3>
           <p>导航栏 <code>.ds-navbar</code> 在桌面端为水平毛玻璃浮动导航，在移动端与平板（&lt;1024px）自动转为右侧滑出抽屉。整套移动端导航严格遵循已有设计令牌。</p>
@@ -270,7 +274,7 @@
           <h4>令牌对照表</h4>
           <div class="ds-table-wrap">
             <table class="ds-table">
-              <thead><tr><th>元素</th><th>令牌</th><th>桌面端</th><th>移动端</th></tr></thead>
+              <thead><tr><th scope="col">元素</th><th scope="col">令牌</th><th scope="col">桌面端</th><th scope="col">移动端</th></tr></thead>
               <tbody>
                 <tr><td>导航栏背景</td><td><code>--ds-glass-bg</code> / <code>--ds-color-surface-raised</code></td><td>毛玻璃（55% + blur）</td><td>实底表面，禁用 blur</td></tr>
                 <tr><td>触发按钮</td><td><code>ds-mnav-trigger</code></td><td>隐藏</td><td>44px · 3-bar → X 动画</td></tr>
@@ -283,7 +287,7 @@
           </div>
 
           <div class="ds-alert ds-alert--warning ds-mt-6" role="note">
-            <svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             <div><div class="ds-alert-title">移动端规范</div>
               <ul style="margin:var(--ds-space-2) 0 0;padding-left:var(--ds-space-5);font-size:var(--ds-text-body-sm);color:var(--ds-color-fg-subtle)">
                 <li>移动端与平板窄屏导航<strong>禁止使用毛玻璃</strong>（<code>--ds-glass-bg</code>）——低端设备性能差且文字可读性不足。</li>
@@ -329,7 +333,7 @@
           <p>语法高亮颜色由以下 CSS 变量定义，可通过覆盖变量整体换肤：</p>
           <div class="ds-table-wrap">
             <table class="ds-table">
-              <thead><tr><th>令牌</th><th>用途</th><th>浅色模式值（暗底）</th><th>暗色模式值（暗底）</th></tr></thead>
+              <thead><tr><th scope="col">令牌</th><th scope="col">用途</th><th scope="col">浅色模式值（暗底）</th><th scope="col">暗色模式值（暗底）</th></tr></thead>
               <tbody>
                 <tr><td><code>--ds-code-bg</code></td><td>代码块背景</td><td><code>oklch(14% 0.025 60)</code></td><td><code>oklch(18% 0.01 75)</code></td></tr>
                 <tr><td><code>--ds-code-text</code></td><td>基础文字色</td><td><code>oklch(90% 0.015 85)</code></td><td><code>oklch(88% 0.01 85)</code></td></tr>
@@ -368,7 +372,7 @@
 
         <section class="ds-doc-block" id="icons">
           <h2>图标用法</h2>
-          <p>100 枚 1.5px 线性图标，遵循 24×24 视框、<code>currentColor</code> 描边，因此颜色随文字自动变化。直接内联 SVG，或在<a href="#visual-icons">图标库</a>点击下载单枚。</p>
+          <p>209 枚 1.5px 线性图标，遵循 24×24 视框、<code>currentColor</code> 描边，因此颜色随文字自动变化。图标元数据由 <code>icons.json</code> 提供，可用于搜索、AI 推荐和文档生成；浏览器展示见<a href="#visual-icons">图标库</a>。</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-icon" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
             <pre id="c-icon" tabindex="0"><code class="language-html">&lt;svg width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -405,6 +409,114 @@
 }</code></pre>
           </figure>
           <p>新增组件时遵循命名约定：基类 <code>ds-{组件}</code>，变体 <code>ds-{组件}--{变体}</code>，并只使用令牌——这样它会自动获得深浅主题、动效与可访问性的一致行为。</p>
+        </section>
+
+        <section class="ds-doc-block" id="quality">
+          <h2>质量验证</h2>
+          <p>EDIC 把质量检查纳入开发循环。提交前运行 <code>npm run audit</code>，它会聚合验证器、视觉基线、体积预算、变更日志和单元测试。</p>
+          <figure class="ds-code">
+            <div class="ds-code-bar"><span class="ds-code-lang">bash</span><button class="ds-copy-btn" data-copy="#c-quality" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+            <pre id="c-quality" tabindex="0"><code class="language-bash">npm run validate
+npm run audit
+npm test</code></pre>
+          </figure>
+          <div class="ds-grid-2">
+            <article class="ds-card">
+              <h3>覆盖范围</h3>
+              <p>token 同步、manifest ↔ CSS、组件命名、ARIA、暗色模式、版本戳、图标数量、视觉基线、gzip 体积与 changelog。</p>
+            </article>
+            <article class="ds-card">
+              <h3>质量门槛</h3>
+              <p>所有 manifest 核心组件必须在 <code>styles.css</code> 中存在；所有交互组件必须有焦点与键盘路径；所有颜色必须走 OKLch token。</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="ds-doc-block" id="ai-collaboration">
+          <h2>AI 协作</h2>
+          <p>EDIC 同时面向人和 AI 可用。生成 UI 时应遵循 manifest-first：先读取能力清单，再使用既有 <code>ds-*</code> class，不发明平行命名。</p>
+          <h3>生成规则</h3>
+          <ul>
+            <li>颜色只用 OKLch 与 <code>var(--ds-*)</code>，组件规则不裸写十六进制、RGB 或 HSL。</li>
+            <li>新组件先落到 <code>styles.css</code>，再出现在文档或示例页面。</li>
+            <li>交互组件必须包含 ARIA、键盘路径、焦点环与暗色模式。</li>
+            <li>新视觉值必须来自 token；确实动态的值才使用内联自定义属性。</li>
+            <li>不要删除或静默重命名已有 token、组件或图标。</li>
+          </ul>
+          <h3>推荐读取顺序</h3>
+          <figure class="ds-code">
+            <div class="ds-code-bar"><span class="ds-code-lang">text</span><button class="ds-copy-btn" data-copy="#c-ai-order" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+            <pre id="c-ai-order" tabindex="0"><code class="language-text">edic-manifest.json
+tokens.json
+icons.json
+AGENT-GUIDE.md
+skills/edic-design-system/SKILL.md</code></pre>
+          </figure>
+        </section>
+
+        <section class="ds-doc-block" id="machine-readable">
+          <h2>机器可读资源</h2>
+          <p>EDIC 把面向工具的结构化数据作为一等交付物：Agent、CI、设计工具和文档生成器可以直接读取 manifest、令牌、图标和规则，而不需要从页面反推能力边界。</p>
+          <figure class="ds-code">
+            <div class="ds-code-bar"><span class="ds-code-lang">json</span><button class="ds-copy-btn" data-copy="#c-machine-token" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+            <pre id="c-machine-token" tabindex="0"><code class="language-json">{
+  "version": "2.0.0",
+  "schema": "2.0.0",
+  "tokens": [
+    {
+      "name": "color-surface-primary",
+      "value": "var(--ds-color-surface)",
+      "category": "color",
+      "description": "Primary app surface.",
+      "aliases": ["color-bg"],
+      "dark": "var(--ds-color-surface-dark)",
+      "deprecated": false,
+      "status": "stable"
+    }
+  ]
+}</code></pre>
+          </figure>
+          <div class="ds-table-wrap">
+            <table class="ds-table">
+              <thead><tr><th scope="col">文件</th><th scope="col">用途</th><th scope="col">读取者</th></tr></thead>
+              <tbody>
+                <tr><td><code>edic-manifest.json</code></td><td>系统能力、组件、图标、约束与验证器清单</td><td>Agent / CI / docs generator</td></tr>
+                <tr><td><code>tokens.json</code></td><td>结构化 token registry 与兼容层</td><td>设计工具 / AI / 验证器</td></tr>
+                <tr><td><code>icons.json</code></td><td>209 枚图标的分类、关键词与 viewBox</td><td>搜索 / 推荐 / Penpot</td></tr>
+                <tr><td><code>AGENT-GUIDE.md</code></td><td>生成 EDIC UI 时必须遵守的规则</td><td>Agent</td></tr>
+                <tr><td><code>skills/edic-design-system/SKILL.md</code></td><td>Codex 自动加载的设计系统上下文</td><td>Codex</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>语义别名</h3>
+          <p>新代码优先使用语义别名，而不是直接选择原始色阶。语义别名仍然解析到 <code>--ds-*</code> 原始令牌，因此旧项目无需改动即可继续运行。</p>
+          <ul>
+            <li>表面：<code>--ds-color-surface-primary</code>、<code>--ds-color-surface-raised</code>、<code>--ds-color-surface-overlay</code>。</li>
+            <li>文本：<code>--ds-color-text-primary</code>、<code>--ds-color-text-muted</code>、<code>--ds-color-text-inverse</code>。</li>
+            <li>边框：<code>--ds-color-border-default</code>、<code>--ds-color-border-strong</code>、<code>--ds-color-border-focus</code>。</li>
+            <li>控件：<code>--ds-border-radius-control</code>、<code>--ds-motion-default</code>、<code>--ds-z-control</code>。</li>
+          </ul>
+          <div class="ds-alert ds-alert--info" role="note">
+            <svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <div><div class="ds-alert-title">保持向后兼容</div><code>_legacyTokens</code> 保留 1.x 扁平结构，旧验证器与脚本不会因 schema 升级而失效。</div>
+          </div>
+        </section>
+
+        <section class="ds-doc-block" id="migration">
+          <h2>迁移指南</h2>
+          <p>EDIC 的升级以增量方式进行。现有 1.x 项目只需要更新 <code>styles.css</code> 和 <code>scripts.js</code> 的版本戳即可继续工作；新代码再逐步采用结构化 token、manifest 与语义别名。</p>
+          <figure class="ds-code">
+            <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-migration" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
+            <pre id="c-migration" tabindex="0"><code class="language-html">&lt;link rel="stylesheet" href="styles.css?v=2.0.0"&gt;
+&lt;script src="scripts.js?v=2.0.0"&gt;&lt;/script&gt;</code></pre>
+          </figure>
+          <h3>可选迁移步骤</h3>
+          <ol>
+            <li>用 <code>tokens.json</code> 审计旧样式中的裸色值，替换为语义 token。</li>
+            <li>用 <code>icons.json</code> 搜索现有图标，替换重复 SVG。</li>
+            <li>对新增 UI 使用 <code>AGENT-GUIDE.md</code> 约束生成结果。</li>
+            <li>运行 <code>npm run audit</code> 作为发布前质量门槛。</li>
+          </ol>
         </section>
 
         <section class="ds-doc-block" id="faq">
@@ -597,17 +709,17 @@
 
         <section class="ds-doc-block" id="visual-components">
           <h2>视觉手册 · 组件库</h2>
-          <p>20 个核心 UI 组件 + 5 个附加组件，包含所有变体状态。</p>
+          <p>当前覆盖 39 个核心组件家族，包含常用变体、状态、ARIA 契约与可复制代码。每个组件都保持纯 CSS + HTML 示例，可直接复制到项目中使用。</p>
           <div class="ds-component-group">
             <div class="ds-component-label">01 · Button</div>
             <div class="ds-component-preview">
-              <button class="ds-btn ds-btn--primary">Primary</button>
-              <button class="ds-btn ds-btn--secondary">Secondary</button>
-              <button class="ds-btn ds-btn--ghost">Ghost</button>
-              <button class="ds-btn ds-btn--primary" disabled="">Disabled</button>
-              <button class="ds-btn ds-btn--primary ds-btn--sm">Small</button>
-              <button class="ds-btn ds-btn--primary ds-btn--lg">Large</button>
-              <button class="ds-btn ds-btn--secondary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Download</button>
+              <button type="button" class="ds-btn ds-btn--primary">Primary</button>
+              <button type="button" class="ds-btn ds-btn--secondary">Secondary</button>
+              <button type="button" class="ds-btn ds-btn--ghost">Ghost</button>
+              <button type="button" class="ds-btn ds-btn--primary" disabled="">Disabled</button>
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--sm">Small</button>
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--lg">Large</button>
+              <button type="button" class="ds-btn ds-btn--secondary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Download</button>
             </div>
             <div class="ds-accordion ds-accordion--code">
               <div class="ds-accordion-item">
@@ -657,9 +769,9 @@
           <div class="ds-component-group">
             <div class="ds-component-label">03 · Text Input</div>
             <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
-              <div><label class="ds-label">Email</label><input class="ds-input" type="email" placeholder="your@email.com"></div>
-              <div><label class="ds-label">Password</label><input class="ds-input" type="password" placeholder="••••••••"><p class="ds-hint">At least 8 characters</p></div>
-              <div><label class="ds-label">With Error</label><input class="ds-input ds-input--error" type="text" value="invalid@"><p class="ds-hint ds-form-hint--error">Please enter a valid email</p></div>
+              <div><label class="ds-label">Email</label><input class="ds-input" type="email" placeholder="your@email.com" aria-label="Email"></div>
+              <div><label class="ds-label">Password</label><input class="ds-input" type="password" placeholder="••••••••" aria-label="Password"><p class="ds-hint">At least 8 characters</p></div>
+              <div><label class="ds-label">With Error</label><input class="ds-input ds-input--error" type="text" value="invalid@" aria-label="Email with error" aria-invalid="true" aria-describedby="email-error"><p class="ds-hint ds-form-hint--error" id="email-error">Please enter a valid email</p></div>
             </div>
             <div class="ds-accordion ds-accordion--code">
               <div class="ds-accordion-item">
@@ -679,7 +791,7 @@
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">04 · Select</div>
-            <div class="ds-component-preview"><div><label class="ds-label">Role</label><select class="ds-select"><option>Designer</option><option>Developer</option><option>Product Manager</option><option>Other</option></select></div></div>
+            <div class="ds-component-preview"><div><label class="ds-label">Role</label><select class="ds-select" aria-label="Role"><option>Designer</option><option>Developer</option><option>Product Manager</option><option>Other</option></select></div></div>
             <div class="ds-accordion ds-accordion--code">
               <div class="ds-accordion-item">
                 <div class="ds-accordion-header" aria-expanded="false" aria-controls="code-panel-04">
@@ -828,10 +940,10 @@
           <div class="ds-component-group">
             <div class="ds-component-label">10 · Alert</div>
             <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
-              <div class="ds-alert ds-alert--info"><svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><div><div class="ds-alert-title">Info</div>Your session expires in 5 min.</div></div>
-              <div class="ds-alert ds-alert--success"><svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><div><div class="ds-alert-title">Saved</div>Changes saved successfully.</div></div>
-              <div class="ds-alert ds-alert--warning"><svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><div><div class="ds-alert-title">Warning</div>Storage almost full.</div></div>
-              <div class="ds-alert ds-alert--error"><svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg><div><div class="ds-alert-title">Error</div>Something went wrong.</div></div>
+              <div class="ds-alert ds-alert--info"><svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><div><div class="ds-alert-title">Info</div>Your session expires in 5 min.</div></div>
+              <div class="ds-alert ds-alert--success"><svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><div><div class="ds-alert-title">Saved</div>Changes saved successfully.</div></div>
+              <div class="ds-alert ds-alert--warning"><svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><div><div class="ds-alert-title">Warning</div>Storage almost full.</div></div>
+              <div class="ds-alert ds-alert--error"><svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg><div><div class="ds-alert-title">Error</div>Something went wrong.</div></div>
             </div>
             <div class="ds-accordion ds-accordion--code">
               <div class="ds-accordion-item">
@@ -857,10 +969,10 @@
           <div class="ds-component-group">
             <div class="ds-component-label">11 · Modal</div>
             <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
-              <div class="ds-modal" style="position:static;box-shadow:var(--ds-shadow-lg);max-width:400px;">
-                <div class="ds-modal-header"><h3 style="font-family:var(--ds-font-display);font-size:var(--ds-text-h4);">Confirm Delete</h3><button class="ds-modal-close">×</button></div>
+              <div class="ds-modal" role="dialog" aria-modal="true" aria-label="Confirm delete" style="position:static;box-shadow:var(--ds-shadow-lg);max-width:400px;">
+                <div class="ds-modal-header"><h3 style="font-family:var(--ds-font-display);font-size:var(--ds-text-h4);">Confirm Delete</h3><button type="button" class="ds-modal-close" aria-label="关闭">×</button></div>
                 <div class="ds-modal-body">Delete "Draft-03"? This cannot be undone.</div>
-                <div class="ds-modal-footer"><button class="ds-btn ds-btn--ghost">Cancel</button><button class="ds-btn ds-btn--primary" style="background:var(--ds-color-error);border-color:var(--ds-color-error);">Delete</button></div>
+                <div class="ds-modal-footer"><button type="button" class="ds-btn ds-btn--ghost">Cancel</button><button type="button" class="ds-btn ds-btn--primary" style="background:var(--ds-color-error);border-color:var(--ds-color-error);">Delete</button></div>
               </div>
             </div>
             <div class="ds-accordion ds-accordion--code">
@@ -872,10 +984,10 @@
                 <div class="ds-accordion-content" id="code-panel-11" aria-hidden="true">
                   <figure class="ds-code">
                     <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-11" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-                    <pre id="pre-code-panel-11" tabindex="0"><code class="language-html">&lt;div class="ds-modal"&gt;
+                    <pre id="pre-code-panel-11" tabindex="0"><code class="language-html">&lt;div class="ds-modal" role="dialog" aria-modal="true" aria-label="Confirm delete"&gt;
   &lt;div class="ds-modal-header"&gt;
     &lt;h3&gt;Confirm Delete&lt;/h3&gt;
-    &lt;button class="ds-modal-close"&gt;×&lt;/button&gt;
+    &lt;button class="ds-modal-close" aria-label="关闭"&gt;×&lt;/button&gt;
   &lt;/div&gt;
   &lt;div class="ds-modal-body"&gt;Delete "Draft-03"?&lt;/div&gt;
   &lt;div class="ds-modal-footer"&gt;
@@ -892,9 +1004,9 @@
             <div class="ds-component-label">12 · Tabs</div>
             <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
               <div class="ds-tabs" role="tablist" aria-label="Sample tabs">
-                <button class="ds-tab ds-tab--active" role="tab" aria-selected="true">Overview</button>
-                <button class="ds-tab" role="tab" aria-selected="false">Components</button>
-                <button class="ds-tab" role="tab" aria-selected="false">Tokens</button>
+                <button type="button" class="ds-tab ds-tab--active" role="tab" aria-selected="true">Overview</button>
+                <button type="button" class="ds-tab" role="tab" aria-selected="false">Components</button>
+                <button type="button" class="ds-tab" role="tab" aria-selected="false">Tokens</button>
               </div>
             </div>
             <div class="ds-accordion ds-accordion--code">
@@ -969,7 +1081,7 @@
             <div class="ds-component-label">15 · Tooltip</div>
             <div class="ds-component-preview">
               <span role="button" data-tooltip="Tooltip text" tabindex="0">Hover me</span>
-              <button class="ds-btn ds-btn--ghost" data-tooltip="Save action">Button tooltip</button>
+              <button type="button" class="ds-btn ds-btn--ghost" data-tooltip="Save action">Button tooltip</button>
             </div>
             <div class="ds-accordion ds-accordion--code">
               <div class="ds-accordion-item">
@@ -1039,9 +1151,9 @@
             <div class="ds-component-preview">
               <nav class="ds-breadcrumb" aria-label="Breadcrumb">
                 <a href="#">Home</a>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
                 <a href="#">Library</a>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
                 <span aria-current="page">Data</span>
               </nav>
             </div>
@@ -1069,11 +1181,11 @@
             <div class="ds-component-label">19 · Pagination</div>
             <div class="ds-component-preview">
               <nav class="ds-pagination" aria-label="Pagination">
-                <button class="ds-pagination-item" aria-label="Previous page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-                <button class="ds-pagination-item">1</button>
-                <button class="ds-pagination-item ds-pagination-item--active">2</button>
-                <button class="ds-pagination-item">3</button>
-                <button class="ds-pagination-item" aria-label="Next page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+                <button type="button" class="ds-pagination-item" aria-label="Previous page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                <button type="button" class="ds-pagination-item">1</button>
+                <button type="button" class="ds-pagination-item ds-pagination-item--active">2</button>
+                <button type="button" class="ds-pagination-item">3</button>
+                <button type="button" class="ds-pagination-item" aria-label="Next page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
               </nav>
             </div>
             <div class="ds-accordion ds-accordion--code">
@@ -1099,10 +1211,10 @@
             <div class="ds-component-label">20 · Empty State</div>
             <div class="ds-component-preview">
               <div class="ds-empty-state">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--ds-color-muted);margin-bottom:var(--ds-space-3);"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--ds-color-muted);margin-bottom:var(--ds-space-3);" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
                 <h4 style="font-family:var(--ds-font-display);font-size:var(--ds-text-h4);margin-bottom:var(--ds-space-2);">No items yet</h4>
                 <p style="font-size:var(--ds-text-body-sm);color:var(--ds-color-muted);margin-bottom:var(--ds-space-4);">Create your first item to get started.</p>
-                <button class="ds-btn ds-btn--primary">Create item</button>
+                <button type="button" class="ds-btn ds-btn--primary">Create item</button>
               </div>
             </div>
             <div class="ds-accordion ds-accordion--code">
@@ -1169,7 +1281,7 @@
             <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
               <div class="ds-table-wrap" tabindex="0">
                 <table class="ds-table">
-                  <thead><tr><th>Name</th><th>Role</th><th>Status</th><th>Active</th></tr></thead>
+                  <thead><tr><th scope="col">Name</th><th scope="col">Role</th><th scope="col">Status</th><th scope="col">Active</th></tr></thead>
                   <tbody>
                     <tr><td>Elena Chen</td><td>Designer</td><td><span class="ds-badge ds-badge--accent">Active</span></td><td>2 min ago</td></tr>
                     <tr><td>Marcus Liu</td><td>Developer</td><td><span class="ds-badge ds-badge--success">Online</span></td><td>Just now</td></tr>
@@ -1205,9 +1317,9 @@
             <div class="ds-component-label">23 · Navigation &amp; Dropdown</div>
             <div class="ds-component-preview">
               <nav class="ds-nav"><div class="ds-nav-section-label">Overview</div>
-                <a class="ds-nav-item ds-nav-item--active" href="#"><svg class="ds-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg> Dashboard</a>
-                <a class="ds-nav-item" href="#"><svg class="ds-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Projects</a>
-                <a class="ds-nav-item" href="#"><svg class="ds-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Settings</a>
+                <a class="ds-nav-item ds-nav-item--active" href="#"><svg class="ds-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg> Dashboard</a>
+                <a class="ds-nav-item" href="#"><svg class="ds-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Projects</a>
+                <a class="ds-nav-item" href="#"><svg class="ds-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Settings</a>
               </nav>
               <div class="ds-dropdown" style="position:static;">
                 <div class="ds-dropdown-item">Edit</div>
@@ -1243,10 +1355,10 @@
           <div class="ds-component-group">
             <div class="ds-component-label">24 · Icon Button / Toolbar</div>
             <div class="ds-component-preview">
-              <button class="ds-icon-btn" aria-label="下载"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></button>
-              <button class="ds-icon-btn" aria-label="分享"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
-              <button class="ds-icon-btn" aria-label="编辑"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg></button>
-              <button class="ds-icon-btn" aria-label="搜索"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+              <button type="button" class="ds-icon-btn" aria-label="下载"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></button>
+              <button type="button" class="ds-icon-btn" aria-label="分享"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+              <button type="button" class="ds-icon-btn" aria-label="编辑"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg></button>
+              <button type="button" class="ds-icon-btn" aria-label="搜索"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
             </div>
             <div class="ds-accordion ds-accordion--code">
               <div class="ds-accordion-item">
@@ -1318,17 +1430,17 @@
             <div class="ds-component-preview" style="flex-direction:column;align-items:flex-start;gap:var(--ds-space-4);">
               <div class="ds-date-group">
                 <div class="ds-date-wrap">
-                  <svg class="ds-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                  <input class="ds-date-input" type="text" placeholder="选择日期…" value="2026-05-12">
+                  <svg class="ds-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  <input class="ds-date-input" type="text" placeholder="选择日期…" value="2026-05-12" aria-label="Date">
                 </div>
               <div class="ds-date-calendar">
                 <div class="ds-cal-header">
-                  <button class="ds-cal-nav" aria-label="上月"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                  <button type="button" class="ds-cal-nav" aria-label="上月"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
                   <div class="ds-cal-month-year">
                     <span class="ds-cal-month">五月</span>
                     <span class="ds-cal-year">2026</span>
                   </div>
-                  <button class="ds-cal-nav" aria-label="下月"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+                  <button type="button" class="ds-cal-nav" aria-label="下月"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
                 </div>
                 <div class="ds-cal-weekdays">
                   <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span>
@@ -1343,8 +1455,8 @@
                   <span class="ds-cal-day ds-cal-muted">1</span><span class="ds-cal-day ds-cal-muted">2</span><span class="ds-cal-day ds-cal-muted">3</span><span class="ds-cal-day ds-cal-muted">4</span><span class="ds-cal-day ds-cal-muted">5</span><span class="ds-cal-day ds-cal-muted">6</span><span class="ds-cal-day ds-cal-muted">7</span>
                 </div>
                 <div class="ds-cal-footer">
-                  <button class="ds-cal-btn">取消</button>
-                  <button class="ds-cal-btn ds-cal-btn--primary">确定</button>
+                  <button type="button" class="ds-cal-btn">取消</button>
+                  <button type="button" class="ds-cal-btn ds-cal-btn--primary">确定</button>
                 </div>
               </div>
             </div>
@@ -1440,7 +1552,7 @@
                     <input type="checkbox" id="demo-consent">
                     <label for="demo-consent">我已阅读并同意 <a href="#">隐私政策</a></label>
                   </div>
-                  <button class="ds-btn ds-btn--primary ds-mt-5">发送留言</button>
+                  <button type="button" class="ds-btn ds-btn--primary ds-mt-5">发送留言</button>
                 </div>
               </div>
             </div>
@@ -1480,6 +1592,136 @@
             </div>
           </div>
         </section>
+
+        <div class="ds-component-group">
+          <div class="ds-component-label">28 · Switch</div>
+          <div class="ds-component-preview">
+            <label class="ds-switch"><input type="checkbox" checked=""><span class="ds-switch-track"><span class="ds-switch-thumb"></span></span><span class="ds-switch-label">通知</span></label>
+            <label class="ds-switch"><input type="checkbox"><span class="ds-switch-track"><span class="ds-switch-thumb"></span></span><span class="ds-switch-label">暗色模式</span></label>
+            <label class="ds-switch"><input type="checkbox" disabled=""><span class="ds-switch-track"><span class="ds-switch-thumb"></span></span><span class="ds-switch-label">已禁用</span></label>
+          </div>
+        </div>
+
+        <div class="ds-component-group">
+          <div class="ds-component-label">29 · Radio Group</div>
+          <div class="ds-component-preview">
+            <fieldset class="ds-radio-group">
+              <legend class="ds-radio-group-legend">主题</legend>
+              <label class="ds-radio"><input type="radio" name="preview-theme" checked="">浅色</label>
+              <label class="ds-radio"><input type="radio" name="preview-theme">暗色</label>
+              <label class="ds-radio"><input type="radio" name="preview-theme">跟随系统</label>
+            </fieldset>
+          </div>
+        </div>
+
+        <div class="ds-component-group">
+          <div class="ds-component-label">30 · Combobox</div>
+          <div class="ds-component-preview">
+            <div class="ds-combobox" aria-expanded="false">
+              <input class="ds-combobox-input" type="text" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="preview-combobox-list" aria-label="选择角色" placeholder="选择角色…">
+              <svg class="ds-combobox-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              <ul class="ds-combobox-list" id="preview-combobox-list" role="listbox" hidden="">
+                <li class="ds-combobox-option" role="option">设计师</li>
+                <li class="ds-combobox-option" role="option">开发者</li>
+                <li class="ds-combobox-option" role="option">产品经理</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-component-group">
+          <div class="ds-component-label">31 · Date Picker</div>
+          <div class="ds-component-preview">
+            <div class="ds-date-picker">
+              <input class="ds-date-picker-input" type="text" aria-label="日期" aria-haspopup="dialog" aria-expanded="true" aria-controls="preview-date-calendar" placeholder="选择日期…" value="2026-09-14">
+              <svg class="ds-date-picker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <div class="ds-date-picker-calendar" id="preview-date-calendar" role="dialog" aria-label="日期选择">
+                <div class="ds-cal-weekdays"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+                <div class="ds-cal-grid-new"><span class="ds-cal-day">1</span><span class="ds-cal-day">2</span><span class="ds-cal-day">3</span><span class="ds-cal-day">4</span><span class="ds-cal-day">5</span><span class="ds-cal-day">6</span><span class="ds-cal-day">7</span><span class="ds-cal-day">8</span><span class="ds-cal-day">9</span><span class="ds-cal-day">10</span><span class="ds-cal-day">11</span><span class="ds-cal-day">12</span><span class="ds-cal-day ds-cal-selected">13</span><span class="ds-cal-day">14</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-component-group">
+          <div class="ds-component-label">32 · Tooltip</div>
+          <div class="ds-component-preview">
+            <span class="ds-tooltip-host" aria-describedby="preview-tooltip"><button class="ds-btn ds-btn--primary" type="button">保存</button><span class="ds-tooltip" id="preview-tooltip" role="tooltip">保存到草稿</span></span>
+          </div>
+        </div>
+
+        <div class="ds-component-group">
+          <div class="ds-component-label">33 · Steps</div>
+          <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
+            <ol class="ds-steps">
+              <li class="ds-step"><span class="ds-step-num">1</span><div class="ds-step-body"><strong>定义</strong><p class="ds-text-muted">确定目标与范围</p></div></li>
+              <li class="ds-step"><span class="ds-step-num">2</span><div class="ds-step-body"><strong>设计</strong><p class="ds-text-muted">建立令牌与原型</p></div></li>
+              <li class="ds-step"><span class="ds-step-num">3</span><div class="ds-step-body"><strong>交付</strong><p class="ds-text-muted">验证并发布</p></div></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="ds-component-group">
+          <div class="ds-component-label">34 · Description List</div>
+          <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
+            <dl class="ds-description-list">
+              <dt class="ds-description-term">版本</dt><dd class="ds-description-value">2.0.0</dd>
+              <dt class="ds-description-term">许可证</dt><dd class="ds-description-value">CC BY 4.0</dd>
+              <dt class="ds-description-term">运行时依赖</dt><dd class="ds-description-value">无</dd>
+            </dl>
+          </div>
+        </div>
+
+        <div class="ds-component-group">
+          <div class="ds-component-label">35 · Stat</div>
+          <div class="ds-component-preview">
+            <div class="ds-stat-grid">
+              <div class="ds-stat"><span class="ds-stat-num">39</span><span class="ds-stat-label">核心组件</span></div>
+              <div class="ds-stat"><span class="ds-stat-num">291</span><span class="ds-stat-label">设计令牌</span></div>
+              <div class="ds-stat"><span class="ds-stat-num">209</span><span class="ds-stat-label">图标</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-component-group">
+          <div class="ds-component-label">36 · Drawer</div>
+          <div class="ds-component-preview" style="padding:0;overflow:hidden;">
+            <div class="ds-drawer ds-drawer--open" role="dialog" aria-modal="true" aria-label="详情抽屉">
+              <div class="ds-drawer-header"><h3 class="ds-drawer-title">项目详情</h3><button class="ds-drawer-close" type="button" aria-label="关闭">×</button></div>
+              <p class="ds-text-muted">抽屉提供上下文详情，可通过 Esc 或关闭按钮返回。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-component-group">
+          <div class="ds-component-label">37 · Popover</div>
+          <div class="ds-component-preview">
+            <span class="ds-popover-host"><button class="ds-btn ds-btn--secondary" type="button">更多操作</button>
+              <div class="ds-popover ds-popover--open" role="dialog" aria-label="操作菜单">
+                <h4>操作</h4>
+                <p>编辑、复制或归档当前条目。</p>
+              </div>
+            </span>
+          </div>
+        </div>
+
+        <div class="ds-component-group">
+          <div class="ds-component-label">38 · Command Palette</div>
+          <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
+            <div class="ds-command-palette" role="dialog" aria-label="命令面板">
+              <div class="ds-command-palette-header">
+                <svg class="ds-command-palette-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+                <input class="ds-command-palette-input" type="text" placeholder="输入命令…" aria-label="搜索命令">
+                <span class="ds-command-palette-kbd">Esc</span>
+              </div>
+              <ul class="ds-command-palette-list">
+                <li class="ds-command-palette-item"><svg class="ds-command-palette-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg><span class="ds-command-palette-item-label">编辑当前页面</span></li>
+                <li class="ds-command-palette-item"><svg class="ds-command-palette-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/></svg><span class="ds-command-palette-item-label">预览切换</span></li>
+                <li class="ds-command-palette-item"><svg class="ds-command-palette-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span class="ds-command-palette-item-label">保存并发布</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
         <section class="ds-doc-block" id="visual-charts">
           <h2>视觉手册 · 图表库</h2>
@@ -1824,9 +2066,9 @@
 
         <section class="ds-doc-block" id="visual-icons">
           <h2>视觉手册 · 图标库</h2>
-          <p>100 枚 SVG 图标，24×24 viewBox，1.5 px 描边。供浏览参考，文件统一在 downloads 页面下载。</p>
+          <p>209 枚 SVG 图标，24×24 viewBox，1.5 px 描边。每个图标同步导出到 <code>icons.json</code>，供搜索、分类、AI 推荐和工具链集成使用。</p>
           <div class="ds-grid-icons" id="icon-grid"></div>
-          <p class="ds-body-sm" style="color:var(--ds-color-muted);margin-top:var(--ds-space-6);">完整图标文件：<code>icons.svg</code>（配套生成）— 可直接导入 Penpot。</p>
+          <p class="ds-body-sm" style="color:var(--ds-color-muted);margin-top:var(--ds-space-6);">完整图标文件：<code>icons.svg</code>（配套生成）— 可直接导入 Penpot。机器可读索引：<code>icons.json</code>。</p>
         </section>
 
         <section class="ds-doc-block" id="visual-effects">
@@ -1855,7 +2097,7 @@
                 <p>玻璃卡片使用 <code>backdrop-filter: blur(24px)</code>，背景为系统色盘中相邻色的渐变。</p>
                 <div class="ds-glass-meta">
                   <span>EDIC Design System</span>
-                  <span>v1.10.2</span>
+                  <span>v2.0.0</span>
                 </div>
               </div>
             </div>
@@ -1878,19 +2120,19 @@
             <div class="ds-glass-demo-bg" style="min-height:180px;">
               <div class="ds-toast-group">
                 <div class="ds-toast ds-toast--success">
-                  <svg class="ds-toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <svg class="ds-toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                   <span class="ds-toast-text">操作成功 · 设计系统已更新</span>
-                  <button class="ds-toast-close" aria-label="关闭">✕</button>
+                  <button type="button" class="ds-toast-close" aria-label="关闭">✕</button>
                 </div>
                 <div class="ds-toast">
-                  <svg class="ds-toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  <svg class="ds-toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                   <span class="ds-toast-text">这是一条普通通知，毛玻璃背景衬托</span>
-                  <button class="ds-toast-close" aria-label="关闭">✕</button>
+                  <button type="button" class="ds-toast-close" aria-label="关闭">✕</button>
                 </div>
                 <div class="ds-toast ds-toast--error">
-                  <svg class="ds-toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                  <svg class="ds-toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
                   <span class="ds-toast-text">出错了 · 请检查后重试</span>
-                  <button class="ds-toast-close" aria-label="关闭">✕</button>
+                  <button type="button" class="ds-toast-close" aria-label="关闭">✕</button>
                 </div>
               </div>
             </div>
@@ -1900,9 +2142,9 @@
             <div class="ds-component-label">玻璃按钮 — Glass Button</div>
             <div class="ds-glass-demo-bg" style="min-height:100px;">
               <div class="ds-glass-btn-row">
-                <button class="ds-glass-btn">默认玻璃</button>
-                <button class="ds-glass-btn" style="font-weight:600;">强化文字</button>
-                <button class="ds-glass-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出文件</button>
+                <button type="button" class="ds-glass-btn">默认玻璃</button>
+                <button type="button" class="ds-glass-btn" style="font-weight:600;">强化文字</button>
+                <button type="button" class="ds-glass-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px;" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出文件</button>
               </div>
             </div>
           </div>
@@ -1918,9 +2160,9 @@
                   <div class="ds-timeline-dot"></div>
                   <div class="ds-timeline-content">
                     <span class="ds-timeline-tag">发布</span>
-                    <div class="ds-timeline-date">2026.06 — v1.10.2</div>
-                    <div class="ds-timeline-title">编辑主义暗色深化</div>
-                    <p>暗色模式 Gravitas &amp; Glow、Prism 代码高亮主题适配、统一页面目录组件、6 个验证器全部 exit 0。</p>
+                    <div class="ds-timeline-date">2026.09 — v2.0.0</div>
+                    <div class="ds-timeline-title">设计基础设施升级</div>
+                    <p>结构化 tokens、manifest、AGENT-GUIDE、209 枚图标索引、39 个核心组件契约，以及 15 个验证器组成的质量门槛。</p>
                   </div>
                 </div>
                 <div class="ds-timeline-item">
@@ -1938,7 +2180,7 @@
                     <span class="ds-timeline-tag">设计</span>
                     <div class="ds-timeline-date">2026.05 — v1.0.0</div>
                     <div class="ds-timeline-title">设计系统正式发布</div>
-                    <p>200+ 设计令牌，20 核心 + 5 附加组件，100 枚 SVG 图标，OKLch 色彩体系，暗色模式，GitHub Pages 部署。</p>
+                    <p>首版设计系统发布：OKLch 色彩体系、暗色模式、编辑主义排版、GitHub Pages 部署与静态组件示例。</p>
                   </div>
                 </div>
               </div>
@@ -1981,7 +2223,7 @@
                     <input type="checkbox" id="consent">
                     <label for="consent">我已阅读并同意 <a href="#">隐私政策</a></label>
                   </div>
-                  <button class="ds-btn ds-btn--primary ds-mt-5">发送留言</button>
+                  <button type="button" class="ds-btn ds-btn--primary ds-mt-5">发送留言</button>
                 </div>
               </div>
             </div>
@@ -1990,10 +2232,10 @@
 
         <section class="ds-doc-block" id="token-index">
           <h2>令牌索引</h2>
-          <p>全部 200+ CSS 自定义属性汇总。可直接复制使用。</p>
+          <p>全部 276 个 CSS 自定义属性汇总。可直接复制使用。</p>
           <div class="ds-table-wrap" style="max-height:600px;overflow-y:auto;">
             <table class="token-table">
-              <thead><tr><th>Token</th><th>Value</th></tr></thead>
+              <thead><tr><th scope="col">Token</th><th scope="col">Value</th></tr></thead>
               <tbody id="token-tbody"></tbody>
             </table>
           </div>
@@ -2052,14 +2294,14 @@
     <div class="ds-footer-bottom">
       <span>© <span class="ds-year">2026</span> EDIC · CGArtLab</span>
       <div class="ds-cluster">
-        <span class="ds-mono" data-ds-version>v1.10.2</span>
+        <span class="ds-mono" data-ds-version>v2.0.0</span>
         <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:var(--ds-accent);text-decoration:none" title="本设计系统采用 CC BY 4.0 许可证">CC BY 4.0</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script src="scripts.js?v=1.10.2"></script>
+<script src="scripts.js?v=2.0.0"></script>
 <button id="theme-toggle-btn-fixed" class="ds-theme-toggle-btn ds-theme-toggle-btn--fixed" type="button" aria-label="跟随系统 · 点击切换">
   <span class="theme-icon"></span>
 </button>
