@@ -103,6 +103,18 @@ const ICONS = [
   {id:"zoom-out",svg:'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>'},
 ];
 
+/* ===== Storage abstraction ===== */
+const safeLocalStorage = {
+  getItem: function(key) {
+    try { return localStorage.getItem(key); }
+    catch (e) { console.warn("[EDIC] " + key + " preference could not be read (localStorage blocked)"); }
+  },
+  setItem: function(key, value) {
+    try { localStorage.setItem(key, value); }
+    catch (e) { console.warn("[EDIC] " + key + " preference could not be saved (localStorage blocked)"); }
+  }
+};
+
 const TOKENS = [
   ["--ds-color-bg","oklch(97% 0.012 80)"],
   ["--ds-color-surface","oklch(99% 0.005 80)"],
@@ -281,7 +293,7 @@ const TOKENS = [
       html.removeAttribute("data-theme-mode");
       html.setAttribute("data-theme-mode", mode);
     }
-    try { localStorage.setItem(THEME_KEY, mode); } catch(e) { console.warn("[EDIC] Theme preference could not be saved (localStorage blocked)"); }
+    safeLocalStorage.setItem(THEME_KEY, mode);
     updateButton(mode);
   }
 
@@ -323,7 +335,7 @@ const TOKENS = [
 
   function init() {
     let saved;
-    try { saved = localStorage.getItem(THEME_KEY); } catch(e) { console.warn("[EDIC] Theme preference could not be read (localStorage blocked)"); }
+    saved = safeLocalStorage.getItem(THEME_KEY);
     const initial = themes.indexOf(saved) !== -1 ? saved : "system";
     applyTheme(initial);
 
@@ -356,7 +368,7 @@ const TOKENS = [
 
   function applyLang(lang) {
     document.documentElement.lang = lang;
-    try { localStorage.setItem(LANG_KEY, lang); } catch(e) { console.warn("[EDIC] Language preference could not be saved (localStorage blocked)"); }
+    safeLocalStorage.setItem(LANG_KEY, lang);
     updateButtons(lang);
   }
 
@@ -385,7 +397,7 @@ const TOKENS = [
 
   function init() {
     var saved;
-    try { saved = localStorage.getItem(LANG_KEY); } catch(e) { console.warn("[EDIC] Language preference could not be read (localStorage blocked)"); }
+    saved = safeLocalStorage.getItem(LANG_KEY);
     var initial = LANGS.indexOf(saved) !== -1 ? saved : document.documentElement.lang || "zh-CN";
     applyLang(initial);
 
