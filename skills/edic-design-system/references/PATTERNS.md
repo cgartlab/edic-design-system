@@ -368,7 +368,7 @@ Use for: company history, product roadmap, personal career timeline, changelog.
         <div class="ds-timeline-content">
           <time class="ds-timeline-date ds-caption">2024 · Q3</time>
           <h3 class="ds-timeline-title">v1.0 发布</h3>
-          <p class="ds-text-muted">20 个核心组件，完整暗色模式支持。</p>
+          <p class="ds-text-muted">39 个核心组件，完整暗色模式支持。</p>
           <span class="ds-timeline-tag ds-badge ds-badge--accent">发布</span>
         </div>
       </div>
