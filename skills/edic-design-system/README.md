@@ -44,9 +44,9 @@
 
 **第三步：粘贴输出，即刻预览**
 
-将 AI 返回的 HTML 片段粘贴进项目，确保已引入 `styles.css` 和 `scripts.js`，刷新即可看到完整样式。
+将 AI 返回的 HTML 片段粘贴进项目，确保已引入 `styles.css` 和 `scripts.js`，刷新即可预览 EDIC 样式。
 
-> **Prompt 技巧：** 可以在描述需求时附加风格关键词，例如「偏杂志排版」「需要暗色模式」「CJK 中文优先」，AI 会自动选用对应的组件和令牌。
+> **Prompt 技巧：** 可以在描述需求时附加风格关键词，例如「偏杂志排版」「需要暗色模式」「CJK 中文优先」，Agent 会优先参考对应的组件和令牌。
 
 ---
 
@@ -193,7 +193,7 @@ mkdir -p .kiro/steering
 | Reveal animation / 揭示动效 | `ds-reveal` + `--d` stagger |
 | Toast / 通知 | `ds-toast ds-toast-icon` |
 
-完整组件契约（39 个核心组件）见 `SKILL.md`。
+完整组件契约（39 个核心组件家族）见 `SKILL.md`。
 
 ---
 

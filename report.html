@@ -14,8 +14,8 @@
 ║                                                                          ║
 ║  【本质】                                                                ║
 ║  本文件既是一份 A4 报告规范，也是一个可即刻填入内容的报告模板。         ║
-║  任何 AI Agent 只需搜索「✎ 标记」即可定位所有待填充位置。              ║
-║  在浏览器中打开 → Ctrl+P → 另存 PDF，即可输出精美的行业分析报告。       ║
+║  AI Agent 可搜索「✎ 标记」定位待填充位置。                            ║
+║  在浏览器中打开 → Ctrl+P → 另存 PDF，即可生成静态报告文档。            ║
 ║                                                                          ║
 ║  【使用方式 — 三步走】                                                   ║
 ║  1. 替换 <title> 为你的报告标题                                          ║
@@ -31,7 +31,7 @@
 ║  EDIC 降维研究方法论                                                ║
 ║  方法论核心：从「你适应工具」转为「工具适应你」——通过设计系统的         ║
 ║  预先封装，将复杂的设计决策压缩为可复用的 tokens + 组件，                ║
-║  使任何内容创作者都能产出专业级别的印刷品。                              ║
+║  帮助内容创作者获得更一致的印刷排版基础。                              ║
 ║                                                                          ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 -->
@@ -1665,7 +1665,7 @@ img, svg, video, canvas {
   <h1>规范总览：设计目标与核心理念</h1>
 
   <div class="rp-body">
-    <p>本规范定义了一套完整的、基于 A4 国际标准纸张的印刷排版体系。其核心目标只有一个：<strong>让任何 AI Agent 或内容创作者，仅需替换文本内容，即可输出专业级别的 PDF 报告文件</strong>。</p>
+    <p>本规范定义了一套基于 A4 国际标准纸张的印刷排版体系。其核心目标是：<strong>让 AI Agent 或内容创作者通过替换文本内容，生成结构一致、便于打印的 PDF 报告文件</strong>。</p>
 
     <p>本规范是 <strong>EDIC Design System</strong>（参见 <code>index.html</code>）在印刷媒介上的延伸。设计系统中的色彩令牌（OKLch 橄榄绿）、字体体系（衬线 Display + 无衬线 Body）、间距比例尺（4pt 栅格）被完整继承并适配为印刷环境下的 <code>pt</code> 单位。</p>
   </div>
@@ -1701,7 +1701,7 @@ img, svg, video, canvas {
 
     <p><strong>2. 印刷优先。</strong> 所有尺寸以 <code>pt</code>（点）为单位，而非 <code>px</code> 或 <code>rem</code>。CSS <code>@page</code> 规则直接控制纸张边距、运行页眉、页码。打印时 <code>print-color-adjust: exact</code> 确保色块保留。</p>
 
-    <p><strong>3. 代理友好。</strong> 全文以 <code>✎ 标记</code> 标注所有待填充位置。任何 AI 只需搜索 <code>✎</code> 即可定位所有内容缺口。头部注释块包含完整使用说明，Agent 可解析执行。</p>
+    <p><strong>3. 代理友好。</strong> 全文以 <code>✎ 标记</code> 标注待填充位置。AI Agent 可搜索 <code>✎</code> 定位内容缺口；头部注释块包含使用说明，可作为 Agent 操作参考。</p>
 
     <p><strong>4. 可扩展。</strong> 基于 CSS 自定义属性体系，替换 <code>:root</code> 中的令牌即可全局换肤。色彩、字体、间距、字号均可独立覆盖。</p>
 
@@ -1752,7 +1752,7 @@ img, svg, video, canvas {
 
     <h3>分页控制规则</h3>
 
-    <p>本规范采用 <strong>智能自然分页</strong> 策略——不强制每章从新页开始，而是由浏览器根据页面剩余空间自动填充，仅在结构性边界处强制分页。配合智能分页引擎（JavaScript），在打印前动态评估各章节内容量，贪心算法最大化每页利用率（目标 ≥ 70%）。</p>
+    <p>本规范采用 <strong>智能自然分页</strong> 策略——不强制每章从新页开始，而是由浏览器根据页面剩余空间填充，仅在结构性边界处强制分页。配合脚本中的分页控制，在打印前调整内容量，目标是减少不必要的大段留白。</p>
   </div>
 
   <!-- 分页规则表 -->
@@ -2361,7 +2361,7 @@ img, svg, video, canvas {
   <h1>模板使用指南（Agent 指令）</h1>
 
   <div class="rp-body">
-    <p>本模板专为 AI Agent 自动填充设计。以下是指令规范，Agent 可按以下流程操作：</p>
+    <p>本模板面向 AI Agent 辅助填充设计。以下是指令规范，Agent 可按以下流程操作：</p>
   </div>
 
   <div class="rp-callout -info">
@@ -2493,7 +2493,7 @@ img, svg, video, canvas {
     <!-- 左侧：品牌信息 -->
     <div class="rp-footer-text">
       <p class="rp-footer-brand">EDIC 降维研究方法论</p>
-      <p class="rp-footer-tagline">从「你适应工具」转为「工具适应你」—— 通过设计系统的预先封装，将复杂的设计决策压缩为可复用的 tokens + 组件，使任何内容创作者都能产出专业级别的印刷品。</p>
+      <p class="rp-footer-tagline">从「你适应工具」转为「工具适应你」—— 通过设计系统的预先封装，将复杂的设计决策压缩为可复用的 tokens + 组件，帮助内容创作者获得更一致的印刷排版基础。</p>
       <hr class="rp-footer-divider" aria-hidden="true">
       <p class="rp-footer-meta">
         <span><a href="terms.html">使用条款</a></span>

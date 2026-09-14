@@ -178,7 +178,7 @@
 · 若对方明确未引入样式表，则附带最小化 &lt;style&gt;，但仍使用 OKLch 与等价令牌值。
 · 邮件/富文本例外：使用内联 sRGB 静态样式，不使用 var(--ds-*) 或 oklch()。
 · 使用语义化结构（header/main/section/nav/footer），标题层级正确。
-· 默认浅色，并保证在 [data-theme="dark"] 下同样成立。
+· 默认浅色，并确保 [data-theme="dark"] 下使用对应暗色令牌。
 · 不确定时，倾向更克制、更留白、更接近编辑主义的方案。
 
 收到本规范后，请仅回复：「已对齐 EDIC 设计系统，请下达需求。」然后等待具体任务。</pre>
@@ -275,7 +275,7 @@ description: 让产出遵循 EDIC 设计系统（Editorial × Olive Green、网�
 · 无样式表时附最小化 &lt;style&gt;，仍用 OKLch 与等价令牌值。
 · 邮件/富文本使用内联 sRGB 静态样式，不使用 var(--ds-*) 或 oklch()。
 · 语义化结构 header/main/section/nav/footer，标题层级正确。
-· 默认浅色并保证 [data-theme="dark"] 同样成立。
+· 默认浅色并确保 [data-theme="dark"] 下使用对应暗色令牌。
 
 ## 示例：令牌驱动卡片
   &lt;article class="ds-card ds-card--hoverable"&gt;

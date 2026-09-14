@@ -167,7 +167,7 @@
 
         <section class="ds-doc-block" id="dark">
           <h2>暗色模式</h2>
-          <p>暗色由 <code>&lt;html data-theme="dark"&gt;</code> 触发，整套令牌会被重写为暖灰基底（<em>而非纯黑</em>），强调色自动亮化 5–10%。<code>scripts.js</code> 提供 <code>toggleDarkMode()</code> 并做了系统偏好兜底与 <code>localStorage</code> 持久化。</p>
+          <p>暗色由 <code>&lt;html data-theme="dark"&gt;</code> 触发，核心颜色令牌会切换为暖灰基底（<em>而非纯黑</em>），强调色随暗色令牌亮化 5–10%。<code>scripts.js</code> 提供 <code>toggleDarkMode()</code> 并做了系统偏好兜底与 <code>localStorage</code> 持久化。</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-dark" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
             <pre id="c-dark" tabindex="0"><code class="language-html">&lt;button id="theme-toggle-btn-fixed" aria-label="切换主题"&gt;切换&lt;/button&gt;
@@ -177,7 +177,7 @@
           </figure>
           <div class="ds-alert ds-alert--info ds-mt-4" role="note">
             <svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-            <div><div class="ds-alert-title">提示</div>暗色模式不要使用 <code>#000</code>，请沿用令牌；自定义组件只要使用 <code>var(--ds-*)</code>，即可自动适配深浅两套主题。</div>
+            <div><div class="ds-alert-title">提示</div>暗色模式不要使用 <code>#000</code>，请沿用令牌；自定义组件优先使用 <code>var(--ds-*)</code>，可获得一致的深浅主题基础。</div>
           </div>
         </section>
 
@@ -232,7 +232,7 @@
           <p>39 个核心组件家族的 live 形态、变体与状态，请见<a href="#visual-components">视觉手册 · 组件库</a>；本页内同时保留常用用法、ARIA 契约与可复制代码。</p>
 
           <h3>响应式导航 · Mobile Drawer</h3>
-          <p>导航栏 <code>.ds-navbar</code> 在桌面端为水平毛玻璃浮动导航，在移动端与平板（&lt;1024px）自动转为右侧滑出抽屉。整套移动端导航严格遵循已有设计令牌。</p>
+          <p>导航栏 <code>.ds-navbar</code> 在桌面端为水平毛玻璃浮动导航，在移动端与平板（&lt;1024px）转为右侧滑出抽屉。移动端导航复用已有设计令牌。</p>
 
           <h4>设计决策与使用令牌</h4>
           <ul>
@@ -396,7 +396,7 @@
   --ds-accent-hover: var(--ds-color-olive-500);
 }</code></pre>
           </figure>
-          <p>新增组件时遵循命名约定：基类 <code>ds-{组件}</code>，变体 <code>ds-{组件}--{变体}</code>，并只使用令牌——这样它会自动获得深浅主题、动效与可访问性的一致行为。</p>
+          <p>新增组件时遵循命名约定：基类 <code>ds-{组件}</code>，变体 <code>ds-{组件}--{变体}</code>，并优先使用令牌——这样可以复用系统已有的深浅主题、动效与可访问性基础。</p>
         </section>
 
         <section class="ds-doc-block" id="quality">

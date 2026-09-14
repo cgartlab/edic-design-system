@@ -202,7 +202,7 @@ EDIC（**E**ditorial **D**esign **I**nterface for **C**ontent，内容编辑设�
 
 ## AI 使用
 
-安装一次 Skill，后续每次提示都会自动输出令牌驱动、无障碍合规、暗色模式就绪的代码。
+安装一次 Skill，后续提示词会携带 EDIC 的令牌、组件、暗色模式和可访问性规则，帮助 Agent 生成更一致的代码。
 
 **Claude Code**
 ```bash

@@ -78,7 +78,7 @@ error   oklch(50% 0.14 30) · info    oklch(55% 0.08 240)
 - 若对方明确未引入样式表，则附带最小化 `<style>`，但仍使用 OKLch 与等价令牌值。
 - 邮件/富文本例外：使用内联 sRGB 静态样式，不使用 `var(--ds-*)` 或 `oklch()`。
 - 使用语义化结构（`header/main/section/nav/footer`），标题层级正确。
-- 默认浅色，并保证在 `[data-theme="dark"]` 下同样成立。
+- 默认浅色，并确保在 `[data-theme="dark"]` 下使用对应暗色令牌。
 - 不确定时，倾向更克制、更留白、更接近编辑主义的方案。
 
 ---
