@@ -1182,7 +1182,7 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .ds-cal-btn:hover{background:var(--ds-color-surface-overlay);color:var(--ds-color-fg)}
 .ds-cal-btn:focus-visible{outline:var(--ds-focus-outline-width) solid var(--ds-accent);outline-offset:var(--ds-space-0-25)}
 .ds-cal-btn--primary{background:var(--ds-accent);color:var(--ds-color-white);font-weight:600}
-.ds-cal-btn--primary:hover{background:color-mix(in oklch,var(--ds-accent) 85%,black)}
+.ds-cal-btn--primary:hover{background:color-mix(in oklch,var(--ds-accent) 85%,var(--ds-color-black))}
 /* ===== Switch (v2.0) ===== */
 .ds-switch{position:relative;display:inline-flex;align-items:center;gap:var(--ds-space-3);cursor:pointer;font-size:var(--ds-text-body-sm);color:var(--ds-color-fg)}
 .ds-switch-track{width:var(--ds-size-touch-sm);height:var(--ds-size-icon-lg);background:var(--ds-color-border-strong);border-radius:var(--ds-radius-full);transition:background var(--ds-duration-150);position:relative;flex-shrink:0}
