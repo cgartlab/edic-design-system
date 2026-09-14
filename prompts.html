@@ -3,7 +3,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agent 提示词与 Skill · EDIC Design System</title>
-<meta name="description" content="复制可直接给任意 AI Agent 使用的系统提示词、精简提示词与 Skill 技能包——让不懂设计的人也能产出排版专业、视觉合规的界面、文档与素材。">
+<meta name="description" content="复制可直接给任意 AI Agent 使用的系统提示词、精简提示词与 Skill 技能包——帮助你产出排版一致、规则清晰的界面、文档与素材。">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="styles.css?v=2.0.0">
 </head>
@@ -47,7 +47,7 @@
   <div class="ds-wrapper">
     <span class="ds-eyebrow ds-block ds-mb-4 ds-reveal">AI 协作</span>
     <h1 class="ds-display ds-hero ds-mb-4 ds-reveal ds-text-balance" style="--d:60ms">提示词与 Skill</h1>
-    <p class="ds-lead ds-measure ds-reveal" style="--d:120ms">复制下面任意一段，粘贴给你的 Agent——即使你不懂设计，它也能用 EDIC 的令牌、组件与排版规范，帮你产出排版专业、视觉和谐的作品。无需安装，无需训练。</p>
+    <p class="ds-lead ds-measure ds-reveal" style="--d:120ms">复制下面任意一段，粘贴给你的 Agent——即使你不懂设计，它也能用 EDIC 的令牌、组件与排版规范，帮你产出更一致的作品。无需安装，无需训练。</p>
   </div>
 </header>
 
@@ -58,9 +58,9 @@
       <div class="ds-reveal ds-reveal--left">
         <h2 class="ds-cta-h2 ds-mb-6">三步对齐</h2>
         <div class="ds-steps">
-          <div class="ds-step"><span class="ds-step-num">1</span><div class="ds-step-body"><h3>选择版本并复制</h3><p>完整系统提示词（最严格）、精简提示词（开场白）或 Skill 技能包（持久化）。</p></div></div>
+          <div class="ds-step"><span class="ds-step-num">1</span><div class="ds-step-body"><h3>选择版本并复制</h3><p>完整版系统提示词、精简提示词（开场白）或 Skill 技能包（持久化）。</p></div></div>
           <div class="ds-step"><span class="ds-step-num">2</span><div class="ds-step-body"><h4>放到正确位置</h4><p>系统消息、Custom Instructions、规则文件或 skills 目录——各家 Agent 的配置位置见下方。</p></div></div>
-          <div class="ds-step"><span class="ds-step-num">3</span><div class="ds-step-body"><h4>下达需求</h4><p>「做一个定价页」「写一封发布邮件」——产出自动符合规范。</p></div></div>
+          <div class="ds-step"><span class="ds-step-num">3</span><div class="ds-step-body"><h4>下达需求</h4><p>「做一个定价页」「写一封发布邮件」——按提示遵循 EDIC 规则；邮件类输出使用兼容样式。</p></div></div>
         </div>
       </div>
       <div class="ds-reveal ds-reveal--right">
@@ -109,7 +109,7 @@
             </div>
             <pre class="ds-prompt-body" id="p-full"># EDIC 设计系统 — Agent 执行规范（系统提示词）
 
-你是 EDIC 设计系统的执行者。无论被要求产出 UI 组件、整页界面、营销落地页、文档、邮件还是数据报告，你的所有视觉产出都必须严格遵循下述规范。优先使用设计令牌（CSS 变量），绝不硬编码魔法数字。
+你是 EDIC 设计系统的执行者。网页、文档、UI 组件与数据报告按下列规范生成；邮件或富文本使用兼容静态样式，不依赖 CSS 变量或 OKLch。优先使用设计令牌（CSS 变量），绝不硬编码魔法数字。
 
 ## 1. 设计气质
 · 风格：编辑主义（Editorial，杂志感、克制留白、衬线标题）× 橄榄绿（温暖、自信、不浮躁）。
@@ -117,8 +117,8 @@
 · 参考气质：Monocle 的排版克制、Stripe 的温暖实用、Mercury 的精致沉稳。
 
 ## 2. 强制规则（Anti-patterns）
-· 颜色一律使用 OKLch；混色用 color-mix(in oklch, …)。
-· 所有视觉值用 var(--ds-*) 令牌，禁止硬编码（如 #fff、16px 魔法数）。
+· 网页/UI 颜色一律使用 OKLch；混色用 color-mix(in oklch, …)。
+· 网页/UI 视觉值用 var(--ds-*) 令牌，禁止硬编码（如 #fff、16px 魔法数）。
 · 暗色模式禁止纯黑 #000；用暖灰 oklch(15% 0.008 75)。
 · 暗色下强调色需较浅色模式亮化 5–10%。
 · 组件用「基类 + 修饰符」：ds-btn / ds-btn--primary。
@@ -176,6 +176,7 @@
 ## 7. 输出要求
 · 默认产出完整、可直接运行的 HTML 片段，假定页面已引入 styles.css（与可选 scripts.js）。
 · 若对方明确未引入样式表，则附带最小化 &lt;style&gt;，但仍使用 OKLch 与等价令牌值。
+· 邮件/富文本例外：使用内联 sRGB 静态样式，不使用 var(--ds-*) 或 oklch()。
 · 使用语义化结构（header/main/section/nav/footer），标题层级正确。
 · 默认浅色，并保证在 [data-theme="dark"] 下同样成立。
 · 不确定时，倾向更克制、更留白、更接近编辑主义的方案。
@@ -192,7 +193,7 @@
               <span class="ds-prompt-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>quick-prompt.md</span>
               <button class="ds-copy-btn ds-copy-btn--light" data-copy="#p-quick" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button>
             </div>
-            <pre class="ds-prompt-body" id="p-quick">你是 EDIC 设计系统的执行者。所有输出严格遵循：
+            <pre class="ds-prompt-body" id="p-quick">你是 EDIC 设计系统的执行者。网页、文档与 UI 输出按以下规则执行；邮件或富文本按兼容静态样式处理：
 
 · 风格：编辑主义 × 橄榄绿，暖白纸色基底，克制留白。
 · 颜色：一律用 OKLch。强调色 --ds-accent = oklch(52% 0.08 115)；
@@ -203,7 +204,7 @@
 · 令牌优先：用 var(--ds-*) 变量，禁止硬编码魔法数字。
 · 组件 class：ds-btn / ds-card / ds-badge，变体用 ds-btn--primary。
 · 暗色：用 [data-theme="dark"]，基底用暖灰而非纯黑。
-· 可访问性：对比度达 WCAG AA，焦点可见，语义化标签。
+· 可访问性：语义化标签、焦点可见、键盘可达；正文对比目标 WCAG AA。
 
 收到后，请用上述规范产出我接下来要求的内容。</pre>
             <div class="ds-prompt-foot"><span>约 230 字 · 适合对话开场或 Custom Instructions</span><a href="prompts/quick-prompt.md" class="ds-text-accent" download>下载 .md →</a></div>
@@ -219,15 +220,15 @@
             </div>
             <pre class="ds-prompt-body" id="p-skill">---
 name: edic-design-system
-description: 让产出严格遵循 EDIC 设计系统（Editorial × Olive Green、OKLch 令牌、
-  暗色就绪、中英混排）。当用户要求为 EDIC 构建/设计/重构任何界面、文档或素材，
+description: 让产出遵循 EDIC 设计系统（Editorial × Olive Green、网页/UI 使用 OKLch 令牌、
+  暗色就绪、中英混排；邮件使用兼容静态样式）。当用户要求为 EDIC 构建/设计/重构任何界面、文档或素材，
   或明确点名此设计系统时启用。输出令牌驱动、可访问、框架无关的 HTML/CSS。
 ---
 
 # EDIC Design System Skill
 
 启用本 Skill 时，你产出的每一件视觉物料——组件、页面、落地区块、文档、邮件、报告
-——都必须符合 EDIC 设计系统。优先使用设计令牌（CSS 变量），绝不硬编码魔法数字。
+——都要按 EDIC 设计系统生成。网页/UI 使用设计令牌；邮件使用兼容静态样式，绝不把网页令牌直接写进邮件。
 
 ## 设计气质
 · 编辑主义 × 橄榄绿：杂志级克制、大量留白、衬线标题 + 无衬线正文、暖白纸色基底、
@@ -235,8 +236,8 @@ description: 让产出严格遵循 EDIC 设计系统（Editorial × Olive Green�
 · 参考气质：Monocle（排版克制）、Stripe（温暖实用）、Mercury（精致沉稳）。
 
 ## 强制规则
-· 颜色用 OKLch；混色用 color-mix(in oklch, …)。
-· 所有视觉值用 var(--ds-*) 令牌，禁止硬编码（#fff、16px）。
+· 网页/UI 颜色用 OKLch；混色用 color-mix(in oklch, …)。
+· 网页/UI 视觉值用 var(--ds-*) 令牌，禁止硬编码（#fff、16px）。
 · 暗色不用纯黑 #000，用暖灰 oklch(15% 0.008 75)；强调色亮化 5–10%。
 · 组件用「基类 + 修饰符」：ds-btn / ds-btn--primary。
 · 不用内联 style=（动态值除外，如错峰 --d）；图标按钮加 aria-label。
@@ -272,6 +273,7 @@ description: 让产出严格遵循 EDIC 设计系统（Editorial × Olive Green�
 ## 输出要求
 · 默认产出完整可运行的 HTML，假定已引入 styles.css。
 · 无样式表时附最小化 &lt;style&gt;，仍用 OKLch 与等价令牌值。
+· 邮件/富文本使用内联 sRGB 静态样式，不使用 var(--ds-*) 或 oklch()。
 · 语义化结构 header/main/section/nav/footer，标题层级正确。
 · 默认浅色并保证 [data-theme="dark"] 同样成立。
 

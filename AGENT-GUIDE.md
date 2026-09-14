@@ -13,24 +13,25 @@ text, and an olive-green accent.
 
 ## Non-negotiable rules
 
-1. Use `var(--ds-*)` tokens for every visual value. No hardcoded hex/rgb/hsl.
-2. All color tokens are OKLch. Bare `oklch()` is only allowed inside `:root`
+1. Use `var(--ds-*)` tokens for every web/UI visual value. No hardcoded hex/rgb/hsl in stylesheet component rules.
+2. Web/UI color tokens are OKLch. Bare `oklch()` is only allowed inside `:root`
    token declarations and `@keyframes`.
 3. Spacing, type size, radius, shadow, and motion come from tokens.
-4. Every color component needs a `[data-theme="dark"]` appearance.
-5. Dark mode uses warm gray, never pure black.
-6. Use BEM classes: `ds-{component}`, `ds-{component}--{variant}`,
+4. Email and rich-text output is the compatibility exception: use inline sRGB static styles, not `var(--ds-*)` or `oklch()`.
+5. Every color component needs a `[data-theme="dark"]` appearance.
+6. Dark mode uses warm gray, never pure black.
+7. Use BEM classes: `ds-{component}`, `ds-{component}--{variant}`,
    `ds-{component}-{element}`. Never write a dangling modifier such as
    `.ds-card a--active`.
-7. Interactive elements must be keyboard accessible and carry ARIA roles and
+8. Interactive elements must be keyboard accessible and carry ARIA roles and
    states. Icon-only buttons need `aria-label`; decorative SVG needs
    `aria-hidden="true"`.
-8. One `<h1>` per page; do not skip heading levels.
-9. Do not overwrite EDIC token variables in consumer projects. Override only
+9. One `<h1>` per page; do not skip heading levels.
+10. Do not overwrite EDIC token variables in consumer projects. Override only
    through documented theme hooks.
-10. Do not delete or rename existing tokens, components, or icons. Mark legacy
+11. Do not delete or rename existing tokens, components, or icons. Mark legacy
     items `deprecated` when a v2 alternative exists.
-11. Do not introduce a runtime framework. Output remains static HTML/CSS/JS.
+12. Do not introduce a runtime framework. Output remains static HTML/CSS/JS.
 
 ## Prefer semantic tokens
 

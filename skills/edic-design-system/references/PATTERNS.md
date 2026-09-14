@@ -70,7 +70,7 @@ Use for: homepage feature list, product overview, "why choose" sections.
       <article class="ds-feature-card ds-reveal" style="--d:.1s">
         <div class="ds-feature-ico" aria-hidden="true"><!-- icon --></div>
         <h3>无运行时依赖</h3>
-        <p class="ds-text-muted">纯 CSS + JS，React、Vue、邮件均可用。</p>
+        <p class="ds-text-muted">纯 CSS + JS，React、Vue 与打印可直接使用；邮件按兼容样式适配。</p>
       </article>
 
       <article class="ds-feature-card ds-reveal" style="--d:.15s">
@@ -146,7 +146,7 @@ Use for: trust section, metrics showcase, "by the numbers" row.
         <span class="ds-stat-label">核心组件</span>
       </div>
       <div class="ds-stat ds-reveal" style="--d:.16s">
-        <span class="ds-stat-num">100</span>
+        <span class="ds-stat-num">209</span>
         <span class="ds-stat-label">SVG 图标</span>
       </div>
       <div class="ds-stat ds-reveal" style="--d:.24s">
@@ -311,7 +311,7 @@ Use for: pricing tiers, feature comparison, plan selection.
           <span class="ds-text-muted">/月</span>
         </div>
         <ul class="ds-stack ds-mt-4" style="list-style:none;padding:0;--stack-gap:var(--ds-space-3)">
-          <li>✓ 全部组件</li>
+          <li>✓ 核心组件家族</li>
           <li>✓ 设计文件</li>
           <li>✓ 优先支持</li>
         </ul>
@@ -368,7 +368,7 @@ Use for: company history, product roadmap, personal career timeline, changelog.
         <div class="ds-timeline-content">
           <time class="ds-timeline-date ds-caption">2024 · Q3</time>
           <h3 class="ds-timeline-title">v1.0 发布</h3>
-          <p class="ds-text-muted">39 个核心组件，完整暗色模式支持。</p>
+          <p class="ds-text-muted">39 个核心组件家族，暗色令牌覆盖。</p>
           <span class="ds-timeline-tag ds-badge ds-badge--accent">发布</span>
         </div>
       </div>

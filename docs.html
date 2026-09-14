@@ -99,7 +99,7 @@
           <p>EDIC 设计系统是一套<strong>纯静态、零构建</strong>的设计系统：所有视觉决策都被沉淀为 CSS 自定义属性（设计令牌），组件以语义化的 <code>ds-*</code> class 暴露。它的气质是<strong>编辑主义 × 橄榄绿</strong>——杂志般克制的排版、温暖的暖白纸色基底，以及自信而不喧哗的橄榄绿强调色。</p>
           <ul>
             <li><strong>令牌优先</strong>：先改变量，再谈样式。不写魔法数字。</li>
-            <li><strong>框架无关</strong>：一份 <code>styles.css</code> 可用于原生 HTML、React、Vue、Svelte、邮件与打印。</li>
+            <li><strong>框架无关</strong>：一份 <code>styles.css</code> 可用于原生 HTML、React、Vue、Svelte 与打印；邮件和富文本可按兼容静态样式转换。</li>
             <li><strong>双主题</strong>：浅色 / 暗色由 <code>[data-theme]</code> 切换，强调色可一键替换。</li>
             <li><strong>中英混排</strong>：针对 CJK 与拉丁文混排做了字距、行高与标点优化。</li>
           </ul>
@@ -375,7 +375,7 @@
         <section class="ds-doc-block" id="accessibility">
           <h2>可访问性</h2>
           <ul>
-            <li>正文与背景对比度满足 <strong>WCAG AA</strong>（≥ 4.5:1）。</li>
+            <li>正文与背景对比目标为 <strong>WCAG AA</strong>（≥ 4.5:1）。</li>
             <li>交互元素提供可见的 <code>:focus-visible</code> 焦点环。</li>
             <li>图标按钮务必加 <code>aria-label</code>；纯装饰图标加 <code>aria-hidden="true"</code>。</li>
             <li>颜色不作为唯一信息载体（语义色配图标 / 文案）。</li>

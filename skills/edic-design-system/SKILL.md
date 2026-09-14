@@ -4,9 +4,10 @@ slug: edic-design-system
 displayName: EDIC 设计系统
 version: 2.0.0
 description: >-
-  Generate UI components, full pages, documents, emails, and assets that
-  strictly follow the EDIC design system (Editorial × Olive Green, OKLch
-  tokens, dark-mode ready, CJK-optimized). Use this skill whenever the user asks
+  Generate UI components, full pages, documents, emails, and assets aligned
+  with the EDIC design system (Editorial × Olive Green, OKLch tokens for
+  web/UI, dark-mode ready, CJK-optimized; emails use compatible static styles).
+  Use this skill whenever the user asks
   to build, style, or refactor anything for EDIC, or explicitly requests the
   EDIC / "editorial olive" design system. Output token-driven, accessible,
   framework-agnostic HTML/CSS.
@@ -16,9 +17,9 @@ license: MIT-0
 # EDIC Design System Skill
 
 When this skill is active, every visual artifact you produce — components, pages,
-landing sections, documentation, emails, reports — must conform to the EDIC
-design system. **Prefer design tokens (CSS custom properties). Never hard-code
-magic numbers.**
+landing sections, documentation, emails, reports — should follow the EDIC
+design system. **Prefer design tokens (CSS custom properties) for web/UI.
+Never hard-code magic numbers. Use compatible static styles for email.**
 
 ## Manifest-First Workflow
 
@@ -53,8 +54,8 @@ Component generation rules:
   Mercury (refined calm).
 
 ## Hard rules (anti-patterns)
-- Define all colors in **OKLch**; mix with `color-mix(in oklch, …)`.
-- Use `var(--ds-*)` tokens for every visual value. No hard-coded `#fff` / `16px`.
+- Define web/UI colors in **OKLch**; mix with `color-mix(in oklch, …)`.
+- Use `var(--ds-*)` tokens for every web/UI visual value. No hard-coded `#fff` / `16px`.
 - Dark mode never uses pure black `#000` — use warm grey `oklch(15% 0.008 75)`.
 - In dark mode, lighten the accent ~5–10% vs. light mode.
 - Components use base + modifier: `ds-btn` / `ds-btn--primary`.

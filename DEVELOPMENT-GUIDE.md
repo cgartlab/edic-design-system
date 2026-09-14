@@ -933,7 +933,7 @@ body { transition: background .4s, color .4s; }
 
 ```
 scripts.js
-├── const ICONS = [...]              // 100个图标数据定义
+├── const ICONS = [...]              // 209 个图标数据定义
 ├── const TOKENS = [...]             // 令牌键值对数组
 ├── IIFE: 图标网格渲染              // → #icon-grid
 ├── IIFE: 令牌表格渲染              // → #token-tbody
@@ -950,7 +950,7 @@ scripts.js
 // 数据结构
 const ICONS = [
   { id: "archive", svg: '<svg viewBox="0 0 24 24">...</svg>' },
-  // ... 100个图标
+  // ... 209 个图标
 ];
 
 // 渲染逻辑
