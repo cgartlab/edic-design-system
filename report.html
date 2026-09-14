@@ -523,6 +523,31 @@ img, svg, video, canvas {
   text-align: right;
 }
 
+.rp-num.rp-text-success {
+  color: var(--color-success);
+}
+
+.rp-num.rp-text-error {
+  color: var(--color-error);
+}
+
+.rp-mt-3 {
+  margin-top: var(--space-3);
+}
+
+.rp-mt-8 {
+  margin-top: var(--space-8);
+}
+
+.rp-ml-2 {
+  margin-left: var(--space-2);
+}
+
+.eagle-drag-images {
+  position: fixed;
+  top: -100000px;
+}
+
 /* ── 紧凑表格 ── */
 .rp-table.-compact th,
 .rp-table.-compact td {
@@ -543,7 +568,7 @@ img, svg, video, canvas {
    =================================================================== */
 
 /* ── KPI 卡片网格 ──
-     默认四列，可覆盖 style="grid-template-columns: repeat(N, 1fr)"
+     默认四列，可按需扩展 CSS grid
      每张卡片包含数字、标签、描述三行。
      数字使用 display 衬线字体 + 橄榄绿强调色。 */
 .rp-kpi-grid {
@@ -612,7 +637,7 @@ img, svg, video, canvas {
 
 /* ── 条形图（纯 CSS）
      标签 + 轨道 + 填充条。
-     填充条可设置 style="width:XX%" 控制宽度。
+     填充条可设置 class="rp-bar-fill--wNN" 控制宽度。
      提供三种色变量：
      - rp-bar-fill（accent 色）
      - rp-bar-fill--accent（强调色）
@@ -672,6 +697,19 @@ img, svg, video, canvas {
   background: var(--accent);
 }
 
+.rp-bar-fill--w9  { width: 9%; }
+.rp-bar-fill--w15 { width: 15%; }
+.rp-bar-fill--w18 { width: 18%; }
+.rp-bar-fill--w22 { width: 22%; }
+.rp-bar-fill--w29 { width: 29%; }
+.rp-bar-fill--w31 { width: 31%; }
+.rp-bar-fill--w34 { width: 34%; }
+.rp-bar-fill--w38 { width: 38%; }
+.rp-bar-fill--w42 { width: 42%; }
+.rp-bar-fill--w43 { width: 43%; }
+.rp-bar-fill--w56 { width: 56%; }
+.rp-bar-fill--w78 { width: 78%; }
+
 /* ── 环形图（纯 CSS）
      使用 conic-gradient 绘制占比。
      中心镂空显示总值。 */
@@ -688,6 +726,10 @@ img, svg, video, canvas {
   position: relative;
   flex-shrink: 0;
   box-shadow: 0 0 0 0.5pt var(--rule);
+}
+
+.rp-donut-ring--penpot {
+  background: conic-gradient(var(--accent) 0deg 126deg, var(--accent-soft) 126deg 216deg, var(--ds-color-fg-subtle) 216deg 360deg);
 }
 
 .rp-donut-center {
@@ -726,6 +768,18 @@ img, svg, video, canvas {
   height: 7pt;
   border-radius: 50%;
   flex-shrink: 0;
+}
+
+.rp-donut-dot--accent {
+  background: var(--accent);
+}
+
+.rp-donut-dot--accent-soft {
+  background: var(--accent-soft);
+}
+
+.rp-donut-dot--muted {
+  background: var(--ds-color-fg-subtle);
 }
 
 /* ===================================================================
@@ -1954,7 +2008,7 @@ img, svg, video, canvas {
       <tbody>
         <tr><td>HEX</td><td class="rp-num">88%</td><td class="rp-num">82%</td><td class="rp-num">71%</td><td class="rp-num">↓ 19%</td></tr>
         <tr><td>HSL</td><td class="rp-num">48%</td><td class="rp-num">45%</td><td class="rp-num">42%</td><td class="rp-num">↓ 13%</td></tr>
-        <tr><td>OKLch</td><td class="rp-num">5%</td><td class="rp-num">12%</td><td class="rp-num">38%</td><td class="rp-num" style="color:var(--color-success);">↑ 660%</td></tr>
+        <tr><td>OKLch</td><td class="rp-num">5%</td><td class="rp-num">12%</td><td class="rp-num">38%</td><td class="rp-num rp-text-success">↑ 660%</td></tr>
         <tr><td>RGB</td><td class="rp-num">32%</td><td class="rp-num">28%</td><td class="rp-num">24%</td><td class="rp-num">↓ 25%</td></tr>
       </tbody>
     </table>
@@ -1971,10 +2025,10 @@ img, svg, video, canvas {
         <tr><th>指标</th><th class="rp-num">2024 Q4</th><th class="rp-num">2025 Q4</th><th class="rp-num">YoY</th></tr>
       </thead>
       <tbody>
-        <tr><td>营收（百万）</td><td class="rp-num">¥12.4</td><td class="rp-num">¥15.8</td><td class="rp-num" style="color:var(--color-success);">+27.4%</td></tr>
-        <tr><td>MAU（百万）</td><td class="rp-num">3.2</td><td class="rp-num">4.1</td><td class="rp-num" style="color:var(--color-success);">+28.1%</td></tr>
-        <tr><td>NRR</td><td class="rp-num">112%</td><td class="rp-num">118%</td><td class="rp-num" style="color:var(--color-success);">+6pp</td></tr>
-        <tr><td>Churn</td><td class="rp-num">4.8%</td><td class="rp-num">3.9%</td><td class="rp-num" style="color:var(--color-error);">−0.9pp</td></tr>
+        <tr><td>营收（百万）</td><td class="rp-num">¥12.4</td><td class="rp-num">¥15.8</td><td class="rp-num rp-text-success">+27.4%</td></tr>
+        <tr><td>MAU（百万）</td><td class="rp-num">3.2</td><td class="rp-num">4.1</td><td class="rp-num rp-text-success">+28.1%</td></tr>
+        <tr><td>NRR</td><td class="rp-num">112%</td><td class="rp-num">118%</td><td class="rp-num rp-text-success">+6pp</td></tr>
+        <tr><td>Churn</td><td class="rp-num">4.8%</td><td class="rp-num">3.9%</td><td class="rp-num rp-text-error">−0.9pp</td></tr>
       </tbody>
     </table>
   </div>
@@ -2030,19 +2084,19 @@ img, svg, video, canvas {
       <div class="rp-bar-group">
         <div class="rp-bar-row">
           <span class="rp-bar-label">完全自建</span>
-          <div class="rp-bar-track"><div class="rp-bar-fill" style="width:31%">31%</div></div>
+          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--w31">31%</div></div>
         </div>
         <div class="rp-bar-row">
           <span class="rp-bar-label">自建 + 开源</span>
-          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--accent" style="width:42%">42%</div></div>
+          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--accent rp-bar-fill--w42">42%</div></div>
         </div>
         <div class="rp-bar-row">
           <span class="rp-bar-label">直接使用开源</span>
-          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--alt" style="width:18%">18%</div></div>
+          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--alt rp-bar-fill--w18">18%</div></div>
         </div>
         <div class="rp-bar-row">
           <span class="rp-bar-label">尚未建设</span>
-          <div class="rp-bar-track"><div class="rp-bar-fill" style="width:9%">9%</div></div>
+          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--w9">9%</div></div>
         </div>
       </div>
     </div>
@@ -2051,19 +2105,19 @@ img, svg, video, canvas {
       <div class="rp-bar-group">
         <div class="rp-bar-row">
           <span class="rp-bar-label">Figma</span>
-          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--accent" style="width:78%">78%</div></div>
+          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--accent rp-bar-fill--w78">78%</div></div>
         </div>
         <div class="rp-bar-row">
           <span class="rp-bar-label">Penpot</span>
-          <div class="rp-bar-track"><div class="rp-bar-fill" style="width:34%">34%</div></div>
+          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--w34">34%</div></div>
         </div>
         <div class="rp-bar-row">
           <span class="rp-bar-label">即时设计</span>
-          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--alt" style="width:22%">22%</div></div>
+          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--alt rp-bar-fill--w22">22%</div></div>
         </div>
         <div class="rp-bar-row">
           <span class="rp-bar-label">Sketch</span>
-          <div class="rp-bar-track"><div class="rp-bar-fill" style="width:15%">15%</div></div>
+          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--w15">15%</div></div>
         </div>
       </div>
     </div>
@@ -2078,13 +2132,13 @@ img, svg, video, canvas {
     <div class="rp-chart">
       <div class="rp-chart-title">Penpot 采纳意愿分布</div>
       <div class="rp-donut">
-        <div class="rp-donut-ring" style="background: conic-gradient(var(--accent) 0deg 126deg, var(--accent-soft) 126deg 216deg, var(--ds-color-fg-subtle) 216deg 360deg);">
+        <div class="rp-donut-ring rp-donut-ring--penpot">
           <div class="rp-donut-center">35%</div>
         </div>
         <div class="rp-donut-legend">
-          <span class="rp-donut-item"><span class="rp-donut-dot" style="background:var(--accent);"></span> 已采用/计划迁移 (35%)</span>
-          <span class="rp-donut-item"><span class="rp-donut-dot" style="background:var(--accent-soft);"></span> 评估中 (25%)</span>
-          <span class="rp-donut-item"><span class="rp-donut-dot" style="background:var(--ds-color-fg-subtle);"></span> 暂不考虑 (40%)</span>
+          <span class="rp-donut-item"><span class="rp-donut-dot rp-donut-dot--accent"></span> 已采用/计划迁移 (35%)</span>
+          <span class="rp-donut-item"><span class="rp-donut-dot rp-donut-dot--accent-soft"></span> 评估中 (25%)</span>
+          <span class="rp-donut-item"><span class="rp-donut-dot rp-donut-dot--muted"></span> 暂不考虑 (40%)</span>
         </div>
       </div>
     </div>
@@ -2093,19 +2147,19 @@ img, svg, video, canvas {
       <div class="rp-bar-group">
         <div class="rp-bar-row">
           <span class="rp-bar-label">文档自动化</span>
-          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--accent" style="width:56%">56%</div></div>
+          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--accent rp-bar-fill--w56">56%</div></div>
         </div>
         <div class="rp-bar-row">
           <span class="rp-bar-label">令牌生成</span>
-          <div class="rp-bar-track"><div class="rp-bar-fill" style="width:43%">43%</div></div>
+          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--w43">43%</div></div>
         </div>
         <div class="rp-bar-row">
           <span class="rp-bar-label">组件变体</span>
-          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--alt" style="width:38%">38%</div></div>
+          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--alt rp-bar-fill--w38">38%</div></div>
         </div>
         <div class="rp-bar-row">
           <span class="rp-bar-label">代码生成</span>
-          <div class="rp-bar-track"><div class="rp-bar-fill" style="width:29%">29%</div></div>
+          <div class="rp-bar-track"><div class="rp-bar-fill rp-bar-fill--w29">29%</div></div>
         </div>
       </div>
     </div>
@@ -2113,7 +2167,7 @@ img, svg, video, canvas {
 
   <div class="rp-body">
     <h3>KPI 卡片网格</h3>
-    <p>默认 4 列布局。使用 <code>style="grid-template-columns: repeat(N, 1fr)"</code> 可自定义列数。</p>
+    <p>默认 4 列布局。使用 CSS grid 可自定义列数；默认四列已封装为 .rp-kpi-grid。</p>
   </div>
 
   <div class="rp-kpi-grid">
@@ -2153,19 +2207,19 @@ img, svg, video, canvas {
           <td><strong>条形图</strong></td>
           <td><code>.rp-bar-group</code></td>
           <td><code>.rp-bar-row / .rp-bar-label / .rp-bar-track / .rp-bar-fill</code></td>
-          <td><code>style="width:XX%"</code> 控制填充比例</td>
+          <td><code>class="rp-bar-fill--wNN"</code> 控制填充比例</td>
         </tr>
         <tr>
           <td><strong>环形图</strong></td>
           <td><code>.rp-donut</code></td>
           <td><code>.rp-donut-ring / .rp-donut-center / .rp-donut-legend</code></td>
-          <td><code>style="background: conic-gradient(...)"</code></td>
+          <td><code>class="rp-donut-ring--penpot"</code> 示例分布</td>
         </tr>
         <tr>
           <td><strong>KPI 卡片</strong></td>
           <td><code>.rp-kpi-grid</code></td>
           <td><code>.rp-kpi / .rp-kpi-num / .rp-kpi-label / .rp-kpi-desc</code></td>
-          <td><code>style="grid-template-columns: repeat(N, 1fr)"</code></td>
+          <td>默认四列；可按需扩展 CSS grid</td>
         </tr>
         <tr>
           <td><strong>图表网格</strong></td>
@@ -2246,14 +2300,14 @@ img, svg, video, canvas {
   <div class="rp-body">
     <h3>Badge（标签）</h3>
     <p>行内标签，用于状态标记。五种颜色 + 描边共六种变体：</p>
-    <p style="margin-top: var(--space-3);">
+    <p class="rp-mt-3">
       <span class="rp-badge -accent">ACCENT</span>
       <span class="rp-badge -success">SUCCESS</span>
       <span class="rp-badge -warning">WARNING</span>
       <span class="rp-badge -error">ERROR</span>
       <span class="rp-badge -info">INFO</span>
       <span class="rp-badge -outline">OUTLINE</span>
-      <span class="rp-badge -accent" style="margin-left:var(--space-2);">DESIGN</span>
+      <span class="rp-badge -accent rp-ml-2">DESIGN</span>
     </p>
   </div>
 </section>
@@ -2427,7 +2481,7 @@ img, svg, video, canvas {
     <li><span class="rp-ref-num">[19]</span> <strong>Design Systems Database</strong>. 由 Adele 维护的设计系统索引，收录 150+ 设计系统案例。<br><a href="https://designsystems.surf/" target="_blank">https://designsystems.surf/</a></li>
   </ul>
 
-  <div class="rp-body" style="margin-top:var(--space-8);">
+  <div class="rp-body rp-mt-8">
     <p><strong>引用建议：</strong>使用本规范生成的报告，建议在封底或脚注注明「基于 EDIC 降维研究报告规范 v3.0」。</p>
   </div>
 </section>
@@ -2759,6 +2813,6 @@ img, svg, video, canvas {
 </script>
 
 
-<div id="eagle-drag-images" style="position: fixed; top: -100000px;"></div>
+<div id="eagle-drag-images" class="eagle-drag-images"></div>
 
 </body></html>
