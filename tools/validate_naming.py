@@ -8,8 +8,8 @@
   4. 反模式：as any / @ts-expect-error / @ts-ignore / 空 catch
   5. JS 顶层禁用 `var`（推荐 const/let）
   6. Dangling BEM 修饰符：`.class element--modifier`（element 是裸标签而非带 . 的 class）
-  7. 非动态内联样式：仅允许 `--d:` 错峰延迟；docs.html 令牌画廊与
-     report/resume 离线模板为明确豁免（它们需要内联展示令牌值 / 数据驱动图表）
+  7. 非动态内联样式：仅允许 `--d:` 错峰延迟；report/resume 离线模板
+     为明确豁免（它们需要数据驱动展示）
 """
 from __future__ import annotations
 
@@ -50,9 +50,10 @@ DANGLING_BEM_MODIFIER_PATTERN = re.compile(
     r"\.([a-z][a-z0-9-]*)\s+([a-z][a-z0-9-]*)--([a-z][a-z0-9-]*)\s*[,:{]"
 )
 
-# 内联样式豁免：动态 --d 延迟；docs.html 令牌画廊；report/resume 离线动态模板
-INLINE_STYLE_EXEMPT_FILES = {"docs.html", "report.html", "resume.html"}
+# 内联样式豁免：动态 --d 延迟；report/resume 离线动态模板
+INLINE_STYLE_EXEMPT_FILES = {"report.html", "resume.html"}
 INLINE_STYLE_DYNAMIC_PATTERN = re.compile(r"style=\"--d:")
+INLINE_STYLE_ENTITY_EXAMPLES = ("&lt;", "&gt;", "&quot;")
 
 
 def is_valid_bem_class(cls: str) -> tuple[bool, str]:
@@ -293,9 +294,12 @@ def check_inline_styles(html_files: list[Path]) -> list[str]:
             value = match.group(1).strip()
             if not value:
                 continue
-            if value.startswith("--d:"):
-                continue
             line_no = text[: match.start()].count("\n") + 1
+            line_text = text.splitlines()[line_no - 1]
+            if any(marker in line_text for marker in INLINE_STYLE_ENTITY_EXAMPLES):
+                continue
+            if re.fullmatch(r"--d:\s*\d+ms", value):
+                continue
             issues.append(
                 f"{path.name}:{line_no} 非动态内联样式（AGENTS.md 禁止）："
                 f"style=\"{value}\"；请改用 ds-* 类或样式表规则"

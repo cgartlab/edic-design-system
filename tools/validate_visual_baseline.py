@@ -23,8 +23,13 @@ ROOT = Path(__file__).resolve().parent.parent
 BASELINE = ROOT / "tests" / "fixtures" / "visual" / "baseline.json"
 
 
+def canonical_line_endings(data: bytes) -> bytes:
+    """Normalize Windows line endings so local and CI hashes stay comparable."""
+    return data.replace(b"\r\n", b"\n")
+
+
 def sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    return hashlib.sha256(canonical_line_endings(path.read_bytes())).hexdigest()
 
 
 def main() -> int:

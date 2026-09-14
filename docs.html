@@ -284,7 +284,7 @@
           <div class="ds-alert ds-alert--warning ds-mt-6" role="note">
             <svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             <div><div class="ds-alert-title">移动端规范</div>
-              <ul style="margin:var(--ds-space-2) 0 0;padding-left:var(--ds-space-5);font-size:var(--ds-text-body-sm);color:var(--ds-color-fg-subtle)">
+              <ul class="ds-alert-list">
                 <li>移动端与平板窄屏导航<strong>禁止使用毛玻璃</strong>（<code>--ds-glass-bg</code>）——低端设备性能差且文字可读性不足。</li>
                 <li>遮罩层使用 <code>--ds-color-overlay-light</code>（12%），<strong>不</strong>使用 <code>--ds-color-overlay</code>（40%）——后者是模态框级别。</li>
                 <li>触控目标不小于 44×44px（符合 WCAG 2.5.5）。</li>
@@ -535,36 +535,36 @@ skills/edic-design-system/SKILL.md</code></pre>
           <p>基于暖白纸色基底 + 橄榄绿强调色。所有颜色以 OKLch 定义。</p>
           <h3>中性色 — Neutral</h3>
           <div class="ds-grid-4">
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-bg)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Background</div><div class="ds-swatch-value">oklch(97% 0.012 80)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-surface)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Surface</div><div class="ds-swatch-value">oklch(99% 0.005 80)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-surface-raised)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Surface Raised</div><div class="ds-swatch-value">oklch(100% 0 0)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-border-subtle)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Border Subtle</div><div class="ds-swatch-value">oklch(92% 0.012 80)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-border)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Border</div><div class="ds-swatch-value">oklch(89% 0.012 80)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-border-strong)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Border Strong</div><div class="ds-swatch-value">oklch(82% 0.015 75)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-muted)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Muted Text</div><div class="ds-swatch-value">oklch(48% 0.015 60)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-fg-subtle)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">FG Subtle</div><div class="ds-swatch-value">oklch(35% 0.018 60)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-fg)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Foreground</div><div class="ds-swatch-value">oklch(20% 0.02 60)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-fg-strong)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">FG Strong</div><div class="ds-swatch-value">oklch(14% 0.025 60)</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="bg"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Background</div><div class="ds-swatch-value">--ds-color-bg</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="surface"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Surface</div><div class="ds-swatch-value">--ds-color-surface</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="surface-raised"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Surface Raised</div><div class="ds-swatch-value">--ds-color-surface-raised</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="border-subtle"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Border Subtle</div><div class="ds-swatch-value">--ds-color-border-subtle</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="border"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Border</div><div class="ds-swatch-value">--ds-color-border</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="border-strong"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Border Strong</div><div class="ds-swatch-value">--ds-color-border-strong</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="muted"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Muted Text</div><div class="ds-swatch-value">--ds-color-muted</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="fg-subtle"></div><div class="ds-swatch-info"><div class="ds-swatch-name">FG Subtle</div><div class="ds-swatch-value">--ds-color-fg-subtle</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="fg"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Foreground</div><div class="ds-swatch-value">--ds-color-fg</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="fg-strong"></div><div class="ds-swatch-info"><div class="ds-swatch-name">FG Strong</div><div class="ds-swatch-value">--ds-color-fg-strong</div></div></div>
           </div>
           <h3>强调色 — Olive Green</h3>
           <div class="ds-grid-4">
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-olive-50)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 50</div><div class="ds-swatch-value">oklch(90% 0.025 115)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-olive-100)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 100</div><div class="ds-swatch-value">oklch(82% 0.035 115)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-olive-200)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 200</div><div class="ds-swatch-value">oklch(72% 0.05 115)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-olive-300)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 300</div><div class="ds-swatch-value">oklch(62% 0.065 115)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-olive-400);border:var(--ds-space-1) solid var(--ds-accent)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 400 ★</div><div class="ds-swatch-value">oklch(52% 0.08 115)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-olive-500)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 500</div><div class="ds-swatch-value">oklch(45% 0.085 115)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-olive-600)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 600</div><div class="ds-swatch-value">oklch(38% 0.08 115)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-olive-700)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 700</div><div class="ds-swatch-value">oklch(30% 0.07 115)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-olive-800)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 800</div><div class="ds-swatch-value">oklch(22% 0.055 115)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-olive-900)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 900</div><div class="ds-swatch-value">oklch(15% 0.04 115)</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="olive-50"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 50</div><div class="ds-swatch-value">--ds-color-olive-50</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="olive-100"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 100</div><div class="ds-swatch-value">--ds-color-olive-100</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="olive-200"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 200</div><div class="ds-swatch-value">--ds-color-olive-200</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="olive-300"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 300</div><div class="ds-swatch-value">--ds-color-olive-300</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="olive-400"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 400 ★</div><div class="ds-swatch-value">--ds-color-olive-400</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="olive-500"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 500</div><div class="ds-swatch-value">--ds-color-olive-500</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="olive-600"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 600</div><div class="ds-swatch-value">--ds-color-olive-600</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="olive-700"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 700</div><div class="ds-swatch-value">--ds-color-olive-700</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="olive-800"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 800</div><div class="ds-swatch-value">--ds-color-olive-800</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="olive-900"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Olive 900</div><div class="ds-swatch-value">--ds-color-olive-900</div></div></div>
           </div>
           <h3>语义色 — Semantic</h3>
           <div class="ds-grid-4">
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-success)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Success</div><div class="ds-swatch-value">oklch(55% 0.1 145)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-warning)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Warning</div><div class="ds-swatch-value">oklch(65% 0.1 85)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-error)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Error</div><div class="ds-swatch-value">oklch(50% 0.14 30)</div></div></div>
-            <div class="ds-swatch"><div class="ds-swatch-color" style="background:var(--ds-color-info)"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Info</div><div class="ds-swatch-value">oklch(55% 0.08 240)</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="success"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Success</div><div class="ds-swatch-value">--ds-color-success</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="warning"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Warning</div><div class="ds-swatch-value">--ds-color-warning</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="error"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Error</div><div class="ds-swatch-value">--ds-color-error</div></div></div>
+            <div class="ds-swatch"><div class="ds-swatch-color" data-color="info"></div><div class="ds-swatch-info"><div class="ds-swatch-name">Info</div><div class="ds-swatch-value">--ds-color-info</div></div></div>
           </div>
         </section>
 
@@ -572,88 +572,88 @@ skills/edic-design-system/SKILL.md</code></pre>
           <h2>视觉手册 · 字体系统</h2>
           <p>衬线 Display + 无衬线 Body 经典编辑主义搭配。</p>
           <div class="ds-grid-4 ds-mb-12">
-            <div class="ds-card"><div class="ds-component-label">Display</div><p style="font-family:var(--ds-font-display);font-size:var(--ds-text-body-sm);color:var(--ds-color-muted);margin-top:var(--ds-space-2);">Iowan Old Style / Charter / Georgia</p><p style="font-family:var(--ds-font-display);font-size:var(--ds-text-h3);margin-top:var(--ds-space-2);">标题用衬线，克制且自信</p></div>
-            <div class="ds-card"><div class="ds-component-label">Body</div><p style="font-family:var(--ds-font-body);font-size:var(--ds-text-body-sm);color:var(--ds-color-muted);margin-top:var(--ds-space-2);">SF Pro / system-ui / Noto Sans SC</p><p style="font-family:var(--ds-font-body);font-size:var(--ds-text-body);margin-top:var(--ds-space-2);">正文无衬线，确保可读性</p></div>
-            <div class="ds-card"><div class="ds-component-label">Mono</div><p style="font-family:var(--ds-font-mono);font-size:var(--ds-text-body-sm);color:var(--ds-color-muted);margin-top:var(--ds-space-2);">JetBrains Mono / IBM Plex Mono</p><p style="font-family:var(--ds-font-mono);font-size:var(--ds-text-body);margin-top:var(--ds-space-2);">const token = "ds-system"</p></div>
-            <div class="ds-card"><div class="ds-component-label">UI</div><p style="font-family:var(--ds-font-ui);font-size:var(--ds-text-body-sm);color:var(--ds-color-muted);margin-top:var(--ds-space-2);">system-ui / Noto Sans SC</p><p style="font-family:var(--ds-font-ui);font-size:var(--ds-text-body);margin-top:var(--ds-space-2);">Button / Input / Nav</p></div>
+            <div class="ds-card"><div class="ds-component-label">Display</div><p class="ds-font-display ds-text-body-sm ds-color-muted ds-mt-2">Iowan Old Style / Charter / Georgia</p><p class="ds-font-display ds-text-h3 ds-mt-2">标题用衬线，克制且自信</p></div>
+            <div class="ds-card"><div class="ds-component-label">Body</div><p class="ds-font-body ds-text-body-sm ds-color-muted ds-mt-2">SF Pro / system-ui / Noto Sans SC</p><p class="ds-font-body ds-text-body ds-mt-2">正文无衬线，确保可读性</p></div>
+            <div class="ds-card"><div class="ds-component-label">Mono</div><p class="ds-font-mono ds-text-body-sm ds-color-muted ds-mt-2">JetBrains Mono / IBM Plex Mono</p><p class="ds-font-mono ds-text-body ds-mt-2">const token = "ds-system"</p></div>
+            <div class="ds-card"><div class="ds-component-label">UI</div><p class="ds-font-ui ds-text-body-sm ds-color-muted ds-mt-2">system-ui / Noto Sans SC</p><p class="ds-font-ui ds-text-body ds-mt-2">Button / Input / Nav</p></div>
           </div>
           <h3>Type Scale — 比例尺</h3>
-          <div style="display:flex;flex-direction:column;gap:var(--ds-space-6);">
-            <div style="display:flex;flex-direction:column;gap:var(--ds-space-3);"><div class="ds-type-label">Hero / 4.5 rem · 72 px <span class="ds-type-label-meta" style="color:var(--ds-color-muted);font-weight:400;font-size:var(--ds-text-caption);">700 ／ <code>--ds-leading-tight</code> 1.1 ／ <code>--ds-tracking-tight</code> -0.02 em</span></div><p style="font-family:var(--ds-font-display);font-size:var(--ds-text-hero);font-weight:var(--ds-weight-bold);line-height:var(--ds-leading-tight);letter-spacing:var(--ds-tracking-tight);margin:0;">AG 设计系统</p></div>
-            <div style="display:flex;flex-direction:column;gap:var(--ds-space-3);"><div class="ds-type-label">Display / 3.75 rem · 60 px <span class="ds-type-label-meta" style="color:var(--ds-color-muted);font-weight:400;font-size:var(--ds-text-caption);">700 ／ <code>--ds-leading-tight</code> 1.1 ／ <code>--ds-tracking-tight</code> -0.02 em</span></div><p style="font-family:var(--ds-font-display);font-size:var(--ds-text-display);font-weight:var(--ds-weight-bold);line-height:var(--ds-leading-tight);letter-spacing:var(--ds-tracking-tight);margin:0;">阅读是设计</p></div>
-            <div style="display:flex;flex-direction:column;gap:var(--ds-space-3);"><div class="ds-type-label">H1 / 3 rem · 48 px <span class="ds-type-label-meta" style="color:var(--ds-color-muted);font-weight:400;font-size:var(--ds-text-caption);">700 ／ <code>--ds-leading-tight</code> 1.1 ／ <code>--ds-tracking-tight</code> -0.02 em</span></div><p style="font-family:var(--ds-font-display);font-size:var(--ds-text-h1);font-weight:var(--ds-weight-bold);line-height:var(--ds-leading-tight);letter-spacing:var(--ds-tracking-tight);margin:0;">色彩定义情绪</p></div>
-            <div style="display:flex;flex-direction:column;gap:var(--ds-space-3);"><div class="ds-type-label">H2 / 2.25 rem · 36 px <span class="ds-type-label-meta" style="color:var(--ds-color-muted);font-weight:400;font-size:var(--ds-text-caption);">700 ／ <code>--ds-leading-snug</code> 1.25 ／ <code>--ds-tracking-normal</code> 0</span></div><p style="font-family:var(--ds-font-display);font-size:var(--ds-text-h2);font-weight:var(--ds-weight-bold);line-height:var(--ds-leading-snug);margin:0;">文字承载信息</p></div>
-            <div style="display:flex;flex-direction:column;gap:var(--ds-space-3);"><div class="ds-type-label">H3 / 1.875 rem · 30 px <span class="ds-type-label-meta" style="color:var(--ds-color-muted);font-weight:400;font-size:var(--ds-text-caption);">700 ／ <code>--ds-leading-snug</code> 1.25 ／ <code>--ds-tracking-normal</code> 0</span></div><p style="font-family:var(--ds-font-display);font-size:var(--ds-text-h3);font-weight:var(--ds-weight-bold);line-height:var(--ds-leading-snug);margin:0;">小组件标题</p></div>
-            <div style="display:flex;flex-direction:column;gap:var(--ds-space-3);"><div class="ds-type-label">H4 / 1.5 rem · 24 px <span class="ds-type-label-meta" style="color:var(--ds-color-muted);font-weight:400;font-size:var(--ds-text-caption);">700 ／ <code>--ds-leading-snug</code> 1.25 ／ <code>--ds-tracking-normal</code> 0</span></div><p style="font-family:var(--ds-font-display);font-size:var(--ds-text-h4);font-weight:var(--ds-weight-bold);line-height:var(--ds-leading-snug);margin:0;">卡片标题</p></div>
-            <div style="display:flex;flex-direction:column;gap:var(--ds-space-3);"><div class="ds-type-label">Body / 1rem · 16 px <span class="ds-type-label-meta" style="color:var(--ds-color-muted);font-weight:400;font-size:var(--ds-text-caption);">400 ／ <code>--ds-leading-normal</code> 1.5 ／ <code>--ds-tracking-normal</code> 0</span></div><p style="font-family:var(--ds-font-body);font-size:var(--ds-text-body);line-height:var(--ds-leading-normal);margin:0;">正文文本，行长受 65ch 约束。中英混排优化字距与标点悬挂。</p></div>
-            <div style="display:flex;flex-direction:column;gap:var(--ds-space-3);"><div class="ds-type-label">Body SM / 0.875 rem · 14 px <span class="ds-type-label-meta" style="color:var(--ds-color-muted);font-weight:400;font-size:var(--ds-text-caption);">400 ／ <code>--ds-leading-normal</code> 1.5 ／ <code>--ds-tracking-normal</code> 0</span></div><p style="font-family:var(--ds-font-body);font-size:var(--ds-text-body-sm);line-height:var(--ds-leading-normal);margin:0;">辅助说明、图注、表单提示。</p></div>
-            <div style="display:flex;flex-direction:column;gap:var(--ds-space-3);"><div class="ds-type-label">Caption / 0.75 rem · 12 px <span class="ds-type-label-meta" style="color:var(--ds-color-muted);font-weight:400;font-size:var(--ds-text-caption);">400 ／ <code>--ds-leading-normal</code> 1.5 ／ <code>--ds-tracking-wide</code> 0.08 em</span></div><p style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);letter-spacing:var(--ds-tracking-wide);margin:0;">LABEL / 标签大写更清晰</p></div>
+          <div class="ds-stack-6">
+            <div class="ds-stack-3"><div class="ds-type-label">Hero / 4.5 rem · 72 px <span class="ds-type-meta">700 ／ <code>--ds-leading-tight</code> 1.1 ／ <code>--ds-tracking-tight</code> -0.02 em</span></div><p class="ds-type-sample ds-type-sample--hero">AG 设计系统</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">Display / 3.75 rem · 60 px <span class="ds-type-meta">700 ／ <code>--ds-leading-tight</code> 1.1 ／ <code>--ds-tracking-tight</code> -0.02 em</span></div><p class="ds-type-sample ds-type-sample--display">阅读是设计</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">H1 / 3 rem · 48 px <span class="ds-type-meta">700 ／ <code>--ds-leading-tight</code> 1.1 ／ <code>--ds-tracking-tight</code> -0.02 em</span></div><p class="ds-type-sample ds-type-sample--h1">色彩定义情绪</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">H2 / 2.25 rem · 36 px <span class="ds-type-meta">700 ／ <code>--ds-leading-snug</code> 1.25 ／ <code>--ds-tracking-normal</code> 0</span></div><p class="ds-type-sample ds-type-sample--h2">文字承载信息</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">H3 / 1.875 rem · 30 px <span class="ds-type-meta">700 ／ <code>--ds-leading-snug</code> 1.25 ／ <code>--ds-tracking-normal</code> 0</span></div><p class="ds-type-sample ds-type-sample--h3">小组件标题</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">H4 / 1.5 rem · 24 px <span class="ds-type-meta">700 ／ <code>--ds-leading-snug</code> 1.25 ／ <code>--ds-tracking-normal</code> 0</span></div><p class="ds-type-sample ds-type-sample--h4">卡片标题</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">Body / 1rem · 16 px <span class="ds-type-meta">400 ／ <code>--ds-leading-normal</code> 1.5 ／ <code>--ds-tracking-normal</code> 0</span></div><p class="ds-type-sample ds-type-sample--body">正文文本，行长受 65ch 约束。中英混排优化字距与标点悬挂。</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">Body SM / 0.875 rem · 14 px <span class="ds-type-meta">400 ／ <code>--ds-leading-normal</code> 1.5 ／ <code>--ds-tracking-normal</code> 0</span></div><p class="ds-type-sample ds-type-sample--body-sm">辅助说明、图注、表单提示。</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">Caption / 0.75 rem · 12 px <span class="ds-type-meta">400 ／ <code>--ds-leading-normal</code> 1.5 ／ <code>--ds-tracking-wide</code> 0.08 em</span></div><p class="ds-type-sample ds-type-sample--caption">LABEL / 标签大写更清晰</p></div>
           </div>
 
           <h3>段落间距规范</h3>
-          <div style="max-width:480px">
-            <div style="margin-bottom:var(--ds-space-6)"><p style="font-family:var(--ds-font-heading);font-size:var(--ds-text-h2);color:var(--ds-color-fg);margin:0 0 var(--ds-space-3) 0;line-height:1.2">The quick brown fox</p><p style="font-family:var(--ds-font-body);font-size:var(--ds-text-body);color:var(--ds-color-fg-muted);margin:0 0 var(--ds-space-2) 0;line-height:1.6">Jumps over the lazy dog. This is body text.</p><p style="font-family:var(--ds-font-body);font-size:var(--ds-text-body);color:var(--ds-color-fg-muted);margin:0;line-height:1.6">The second paragraph continues.</p></div>
-            <div style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted)">margin-bottom: var(--ds-space-2) · 8px</div>
+          <div class="ds-max-w-480">
+            <div class="ds-mb-6"><p class="ds-font-heading ds-text-h2 ds-color-fg ds-margin-bottom-3 ds-line-height-12">The quick brown fox</p><p class="ds-font-body ds-text-body ds-color-fg-muted ds-margin-bottom-2 ds-line-height-16">Jumps over the lazy dog. This is body text.</p><p class="ds-font-body ds-text-body ds-color-fg-muted ds-margin-0 ds-line-height-16">The second paragraph continues.</p></div>
+            <div class="ds-font-ui ds-text-caption ds-color-muted">margin-bottom: var(--ds-space-2) · 8px</div>
           </div>
 
           <h3>Text Align</h3>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--ds-space-4);">
-            <div style="background:var(--ds-color-surface);border-radius:var(--ds-radius-md);padding:var(--ds-space-6);border:1px solid var(--ds-color-border-subtle)">
-              <div style="font-family:var(--ds-font-body);font-size:var(--ds-text-body-sm);color:var(--ds-color-fg-muted);margin-bottom:var(--ds-space-3)">text-align: left</div>
-              <div style="font-family:var(--ds-font-heading);font-size:var(--ds-text-h3);color:var(--ds-color-fg);line-height:1.3;text-align:left">The quick brown fox</div>
+          <div class="ds-grid-2-180">
+            <div class="ds-type-card">
+              <div class="ds-type-card-label ds-type-card-label--body">text-align: left</div>
+              <div class="ds-type-card-title ds-align-left">The quick brown fox</div>
             </div>
-            <div style="background:var(--ds-color-surface);border-radius:var(--ds-radius-md);padding:var(--ds-space-6);border:1px solid var(--ds-color-border-subtle)">
-              <div style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted);margin-bottom:var(--ds-space-3)">text-align: center</div>
-              <div style="font-family:var(--ds-font-heading);font-size:var(--ds-text-h3);color:var(--ds-color-fg);line-height:1.3;text-align:center">The quick brown fox</div>
+            <div class="ds-type-card">
+              <div class="ds-type-card-label">text-align: center</div>
+              <div class="ds-type-card-title ds-align-center">The quick brown fox</div>
             </div>
-            <div style="background:var(--ds-color-surface);border-radius:var(--ds-radius-md);padding:var(--ds-space-6);border:1px solid var(--ds-color-border-subtle)">
-              <div style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted);margin-bottom:var(--ds-space-3)">text-align: right</div>
-              <div style="font-family:var(--ds-font-heading);font-size:var(--ds-text-h3);color:var(--ds-color-fg);line-height:1.3;text-align:right">The quick brown fox</div>
+            <div class="ds-type-card">
+              <div class="ds-type-card-label">text-align: right</div>
+              <div class="ds-type-card-title ds-align-right">The quick brown fox</div>
             </div>
           </div>
 
           <h3>字体组合参考</h3>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--ds-space-4);">
-            <div style="background:var(--ds-color-surface);border-radius:var(--ds-radius-md);padding:var(--ds-space-6);border:1px solid var(--ds-color-border-subtle)">
-              <div style="font-family:var(--ds-font-display);font-size:var(--ds-text-h2);color:var(--ds-color-fg);margin-bottom:var(--ds-space-3)">Gravitas 5</div>
-              <div style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted)">Display · Heading · Hero</div>
+          <div class="ds-grid-2-200">
+            <div class="ds-type-card">
+              <div class="ds-type-card-title ds-type-card-title--display ds-text-h2 ds-color-fg ds-mb-3">Gravitas 5</div>
+              <div class="ds-type-card-caption">Display · Heading · Hero</div>
             </div>
-            <div style="background:var(--ds-color-surface);border-radius:var(--ds-radius-md);padding:var(--ds-space-6);border:1px solid var(--ds-color-border-subtle)">
-              <div style="font-family:var(--ds-font-heading);font-size:var(--ds-text-h2);color:var(--ds-color-fg);margin-bottom:var(--ds-space-3)">Glow Sans</div>
-              <div style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted)">Heading · Title · Sub</div>
+            <div class="ds-type-card">
+              <div class="ds-type-card-title ds-type-card-title--heading ds-text-h2 ds-color-fg ds-mb-3">Glow Sans</div>
+              <div class="ds-type-card-caption">Heading · Title · Sub</div>
             </div>
-            <div style="background:var(--ds-color-surface);border-radius:var(--ds-radius-md);padding:var(--ds-space-6);border:1px solid var(--ds-color-border-subtle)">
-              <div style="font-family:var(--ds-font-body);font-size:var(--ds-text-h2);color:var(--ds-color-fg);margin-bottom:var(--ds-space-3)">Source Han Sans</div>
-              <div style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted)">Body · Content · Code</div>
+            <div class="ds-type-card">
+              <div class="ds-type-card-title ds-type-card-title--body ds-text-h2 ds-color-fg ds-mb-3">Source Han Sans</div>
+              <div class="ds-type-card-caption">Body · Content · Code</div>
             </div>
-            <div style="background:var(--ds-color-surface);border-radius:var(--ds-radius-md);padding:var(--ds-space-6);border:1px solid var(--ds-color-border-subtle)">
-              <div style="font-family:var(--ds-font-ui);font-size:var(--ds-text-h2);color:var(--ds-color-fg);margin-bottom:var(--ds-space-3)">Noto Sans</div>
-              <div style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted)">UI · Caption · Label</div>
+            <div class="ds-type-card">
+              <div class="ds-type-card-title ds-type-card-title--ui ds-text-h2 ds-color-fg ds-mb-3">Noto Sans</div>
+              <div class="ds-type-card-caption">UI · Caption · Label</div>
             </div>
           </div>
 
           <h3>排版规范</h3>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--ds-space-6);">
-            <div style="background:var(--ds-color-surface);border-radius:var(--ds-radius-md);padding:var(--ds-space-6);border:1px solid var(--ds-color-border-subtle)">
-              <div style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted);margin-bottom:var(--ds-space-4)">Line Height</div>
-              <div style="display:flex;flex-direction:column;gap:var(--ds-space-3)">
-                <div><span style="font-family:var(--ds-font-ui);font-size:var(--ds-text-body-sm);color:var(--ds-color-fg);margin-right:var(--ds-space-2);">1.2</span><span style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted)">Heading</span></div>
-                <div><span style="font-family:var(--ds-font-ui);font-size:var(--ds-text-body-sm);color:var(--ds-color-fg);margin-right:var(--ds-space-2);">1.5</span><span style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted)">Body</span></div>
-                <div><span style="font-family:var(--ds-font-ui);font-size:var(--ds-text-body-sm);color:var(--ds-color-fg);margin-right:var(--ds-space-2);">1.6</span><span style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted)">Content</span></div>
+          <div class="ds-grid-2-280">
+            <div class="ds-type-card">
+              <div class="ds-type-card-label">Line Height</div>
+              <div class="ds-type-card-list">
+                <div><span class="ds-type-metric">1.2</span><span class="ds-type-desc">Heading</span></div>
+                <div><span class="ds-type-metric">1.5</span><span class="ds-type-desc">Body</span></div>
+                <div><span class="ds-type-metric">1.6</span><span class="ds-type-desc">Content</span></div>
               </div>
             </div>
-            <div style="background:var(--ds-color-surface);border-radius:var(--ds-radius-md);padding:var(--ds-space-6);border:1px solid var(--ds-color-border-subtle)">
-              <div style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted);margin-bottom:var(--ds-space-4)">Letter Spacing</div>
-              <div style="display:flex;flex-direction:column;gap:var(--ds-space-3)">
-                <div><span style="font-family:var(--ds-font-ui);font-size:var(--ds-text-body-sm);color:var(--ds-color-fg);margin-right:var(--ds-space-2);">-0.02em</span><span style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted)">Display</span></div>
-                <div><span style="font-family:var(--ds-font-ui);font-size:var(--ds-text-body-sm);color:var(--ds-color-fg);margin-right:var(--ds-space-2);">-0.01em</span><span style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted)">Heading</span></div>
-                <div><span style="font-family:var(--ds-font-ui);font-size:var(--ds-text-body-sm);color:var(--ds-color-fg);margin-right:var(--ds-space-2);">0em</span><span style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted)">Body</span></div>
-                <div><span style="font-family:var(--ds-font-ui);font-size:var(--ds-text-body-sm);color:var(--ds-color-fg);margin-right:var(--ds-space-2);">0.08em</span><span style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted)">Caption / Label</span></div>
+            <div class="ds-type-card">
+              <div class="ds-type-card-label">Letter Spacing</div>
+              <div class="ds-type-card-list">
+                <div><span class="ds-type-metric">-0.02em</span><span class="ds-type-desc">Display</span></div>
+                <div><span class="ds-type-metric">-0.01em</span><span class="ds-type-desc">Heading</span></div>
+                <div><span class="ds-type-metric">0em</span><span class="ds-type-desc">Body</span></div>
+                <div><span class="ds-type-metric">0.08em</span><span class="ds-type-desc">Caption / Label</span></div>
               </div>
             </div>
-            <div style="background:var(--ds-color-surface);border-radius:var(--ds-radius-md);padding:var(--ds-space-6);border:1px solid var(--ds-color-border-subtle)">
-              <div style="font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);color:var(--ds-color-muted);margin-bottom:var(--ds-space-4)">Blockquote</div>
-              <div style="border-left:3px solid var(--ds-color-accent);padding-left:var(--ds-space-4);margin:0"><p style="font-family:var(--ds-font-body);font-size:var(--ds-text-body);color:var(--ds-color-fg-muted);margin:0;line-height:1.6">Design is the silent ambassador of your brand.</p></div>
+            <div class="ds-type-card">
+              <div class="ds-type-card-label">Blockquote</div>
+              <div class="ds-quote-demo"><p class="ds-type-quote">Design is the silent ambassador of your brand.</p></div>
             </div>
           </div>
 
@@ -663,35 +663,35 @@ skills/edic-design-system/SKILL.md</code></pre>
           <h2>视觉手册 · 间距 &amp; 尺寸</h2>
           <p>基于 4px 系统，所有值为 4 的倍数。</p>
           <h3>间距比例尺</h3>
-          <div style="display:flex;flex-direction:column;gap:var(--ds-space-3);">
-            <div class="ds-spacing-vis"><div class="ds-spacing-block" style="width:4px;height:12px"></div><span class="ds-mono" style="font-size:var(--ds-text-caption);color:var(--ds-color-muted);">--ds-space-1 · 4 px</span></div>
-            <div class="ds-spacing-vis"><div class="ds-spacing-block" style="width:8px;height:12px"></div><span class="ds-mono" style="font-size:var(--ds-text-caption);color:var(--ds-color-muted);">--ds-space-2 · 8 px</span></div>
-            <div class="ds-spacing-vis"><div class="ds-spacing-block" style="width:12px;height:12px"></div><span class="ds-mono" style="font-size:var(--ds-text-caption);color:var(--ds-color-muted);">--ds-space-3 · 12 px</span></div>
-            <div class="ds-spacing-vis"><div class="ds-spacing-block" style="width:16px;height:12px"></div><span class="ds-mono" style="font-size:var(--ds-text-caption);color:var(--ds-color-muted);">--ds-space-4 · 16 px</span></div>
-            <div class="ds-spacing-vis"><div class="ds-spacing-block" style="width:24px;height:12px"></div><span class="ds-mono" style="font-size:var(--ds-text-caption);color:var(--ds-color-muted);">--ds-space-6 · 24 px</span></div>
-            <div class="ds-spacing-vis"><div class="ds-spacing-block" style="width:32px;height:12px"></div><span class="ds-mono" style="font-size:var(--ds-text-caption);color:var(--ds-color-muted);">--ds-space-8 · 32 px</span></div>
-            <div class="ds-spacing-vis"><div class="ds-spacing-block" style="width:48px;height:12px"></div><span class="ds-mono" style="font-size:var(--ds-text-caption);color:var(--ds-color-muted);">--ds-space-12 · 48 px</span></div>
-            <div class="ds-spacing-vis"><div class="ds-spacing-block" style="width:64px;height:12px"></div><span class="ds-mono" style="font-size:var(--ds-text-caption);color:var(--ds-color-muted);">--ds-space-16 · 64 px</span></div>
-            <div class="ds-spacing-vis"><div class="ds-spacing-block" style="width:96px;height:12px"></div><span class="ds-mono" style="font-size:var(--ds-text-caption);color:var(--ds-color-muted);">--ds-space-24 · 96 px</span></div>
+          <div class="ds-stack-3">
+            <div class="ds-spacing-vis"><div class="ds-spacing-block ds-spacing-block--1"></div><span class="ds-mono ds-text-caption ds-color-muted">--ds-space-1 · 4 px</span></div>
+            <div class="ds-spacing-vis"><div class="ds-spacing-block ds-spacing-block--2"></div><span class="ds-mono ds-text-caption ds-color-muted">--ds-space-2 · 8 px</span></div>
+            <div class="ds-spacing-vis"><div class="ds-spacing-block ds-spacing-block--3"></div><span class="ds-mono ds-text-caption ds-color-muted">--ds-space-3 · 12 px</span></div>
+            <div class="ds-spacing-vis"><div class="ds-spacing-block ds-spacing-block--4"></div><span class="ds-mono ds-text-caption ds-color-muted">--ds-space-4 · 16 px</span></div>
+            <div class="ds-spacing-vis"><div class="ds-spacing-block ds-spacing-block--6"></div><span class="ds-mono ds-text-caption ds-color-muted">--ds-space-6 · 24 px</span></div>
+            <div class="ds-spacing-vis"><div class="ds-spacing-block ds-spacing-block--8"></div><span class="ds-mono ds-text-caption ds-color-muted">--ds-space-8 · 32 px</span></div>
+            <div class="ds-spacing-vis"><div class="ds-spacing-block ds-spacing-block--12"></div><span class="ds-mono ds-text-caption ds-color-muted">--ds-space-12 · 48 px</span></div>
+            <div class="ds-spacing-vis"><div class="ds-spacing-block ds-spacing-block--16"></div><span class="ds-mono ds-text-caption ds-color-muted">--ds-space-16 · 64 px</span></div>
+            <div class="ds-spacing-vis"><div class="ds-spacing-block ds-spacing-block--24"></div><span class="ds-mono ds-text-caption ds-color-muted">--ds-space-24 · 96 px</span></div>
           </div>
           <h3>阴影</h3>
           <div class="ds-grid-6">
-            <div><div class="ds-shadow-vis" style="box-shadow:var(--ds-shadow-xs)">xs</div></div>
-            <div><div class="ds-shadow-vis" style="box-shadow:var(--ds-shadow-sm)">sm</div></div>
-            <div><div class="ds-shadow-vis" style="box-shadow:var(--ds-shadow-md)">md</div></div>
-            <div><div class="ds-shadow-vis" style="box-shadow:var(--ds-shadow-lg)">lg</div></div>
-            <div><div class="ds-shadow-vis" style="box-shadow:var(--ds-shadow-xl)">xl</div></div>
-            <div><div class="ds-shadow-vis" style="box-shadow:var(--ds-shadow-2xl)">2xl</div></div>
+            <div><div class="ds-shadow-vis ds-shadow-vis--xs">xs</div></div>
+            <div><div class="ds-shadow-vis ds-shadow-vis--sm">sm</div></div>
+            <div><div class="ds-shadow-vis ds-shadow-vis--md">md</div></div>
+            <div><div class="ds-shadow-vis ds-shadow-vis--lg">lg</div></div>
+            <div><div class="ds-shadow-vis ds-shadow-vis--xl">xl</div></div>
+            <div><div class="ds-shadow-vis ds-shadow-vis--2xl">2xl</div></div>
           </div>
           <h3>圆角</h3>
           <div class="ds-flex-row">
-            <div><div class="ds-radius-vis" style="border-radius:0">0</div></div>
-            <div><div class="ds-radius-vis" style="border-radius:var(--ds-radius-sm)">sm</div></div>
-            <div><div class="ds-radius-vis" style="border-radius:var(--ds-radius-md)">md</div></div>
-            <div><div class="ds-radius-vis" style="border-radius:var(--ds-radius-lg)">lg</div></div>
-            <div><div class="ds-radius-vis" style="border-radius:var(--ds-radius-xl)">xl</div></div>
-            <div><div class="ds-radius-vis" style="border-radius:var(--ds-radius-2xl)">2xl</div></div>
-            <div><div class="ds-radius-vis" style="border-radius:var(--ds-radius-full);width:60px">∞</div></div>
+            <div><div class="ds-radius-vis ds-radius-vis--0">0</div></div>
+            <div><div class="ds-radius-vis ds-radius-vis--sm">sm</div></div>
+            <div><div class="ds-radius-vis ds-radius-vis--md">md</div></div>
+            <div><div class="ds-radius-vis ds-radius-vis--lg">lg</div></div>
+            <div><div class="ds-radius-vis ds-radius-vis--xl">xl</div></div>
+            <div><div class="ds-radius-vis ds-radius-vis--2xl">2xl</div></div>
+            <div><div class="ds-radius-vis ds-radius-vis--full">∞</div></div>
           </div>
         </section>
 
@@ -730,9 +730,9 @@ skills/edic-design-system/SKILL.md</code></pre>
           <div class="ds-component-group">
             <div class="ds-component-label">02 · Card</div>
             <div class="ds-component-preview">
-              <div class="ds-card" style="max-width:260px;"><h3 style="font-family:var(--ds-font-display);font-size:var(--ds-text-h4);margin-bottom:var(--ds-space-3);">Card Title</h3><p style="font-size:var(--ds-text-body-sm);color:var(--ds-color-muted);">A raised card with border.</p></div>
-              <div class="ds-card ds-card--hoverable" style="max-width:260px;"><h3 style="font-family:var(--ds-font-display);font-size:var(--ds-text-h4);margin-bottom:var(--ds-space-3);">Hover Card</h3><p style="font-size:var(--ds-text-body-sm);color:var(--ds-color-muted);">Hover for shadow transition.</p></div>
-              <div class="ds-card ds-card--flat" style="max-width:260px;"><h3 style="font-family:var(--ds-font-display);font-size:var(--ds-text-h4);margin-bottom:var(--ds-space-3);">Flat Card</h3><p style="font-size:var(--ds-text-body-sm);color:var(--ds-color-muted);">Borderless with subtle shadow.</p></div>
+              <div class="ds-card ds-max-w-260"><h3 class="ds-card-heading">Card Title</h3><p class="ds-card-body">A raised card with border.</p></div>
+              <div class="ds-card ds-card--hoverable ds-max-w-260"><h3 class="ds-card-heading">Hover Card</h3><p class="ds-card-body">Hover for shadow transition.</p></div>
+              <div class="ds-card ds-card--flat ds-max-w-260"><h3 class="ds-card-heading">Flat Card</h3><p class="ds-card-body">Borderless with subtle shadow.</p></div>
             </div>
             <div class="ds-accordion ds-accordion--code">
               <div class="ds-accordion-item">
@@ -743,9 +743,9 @@ skills/edic-design-system/SKILL.md</code></pre>
                 <div class="ds-accordion-content" id="code-panel-02" aria-hidden="true">
                   <figure class="ds-code">
                     <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-02" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-                    <pre id="pre-code-panel-02" tabindex="0"><code class="language-html">&lt;div class="ds-card"&gt;
-  &lt;h3&gt;Card Title&lt;/h3&gt;
-  &lt;p&gt;A raised card with border.&lt;/p&gt;
+                    <pre id="pre-code-panel-02" tabindex="0"><code class="language-html">&lt;div class="ds-card ds-max-w-260"&gt;
+  &lt;h3 class="ds-card-heading"&gt;Card Title&lt;/h3&gt;
+  &lt;p class="ds-card-body"&gt;A raised card with border.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="ds-card ds-card--hoverable"&gt;&lt;/div&gt;
 &lt;div class="ds-card ds-card--flat"&gt;&lt;/div&gt;</code></pre>
@@ -2065,7 +2065,7 @@ skills/edic-design-system/SKILL.md</code></pre>
 
           <div class="ds-component-group">
             <div class="ds-component-label">遮罩层 — Scrim</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--ds-space-4);">
+            <div class="ds-overlay-grid">
               <div>
                 <div class="ds-overlay-sample"><div class="ds-overlay-bg"></div><div class="ds-overlay-layer ds-overlay-strong"><span>40%</span></div></div>
                 <div class="ds-overlay-label"><code>--ds-color-overlay</code> — oklch(0% 0 0 / 40%)</div>
