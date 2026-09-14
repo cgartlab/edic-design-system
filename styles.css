@@ -1,4 +1,4 @@
-/* ===== EDIC Design System v1.10.2 — Tokens & Styles ===== */
+/* ===== EDIC Design System v2.0.0 — Tokens & Styles ===== */
 
 :root {
   --ds-color-bg: oklch(97% 0.012 80);
@@ -1571,40 +1571,6 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
    leak into <code> inside <pre> (e.g. .ds-prose code). Higher specificity
    guarantees the code-block context always wins. */
 .ds-prose .ds-code code,.ds-code code{background:transparent;padding:0;color:inherit;border-radius:0}
-.ds-code .token.comment,.ds-code .token.prolog,.ds-code .token.doctype,.ds-code .token.cdata{color:var(--ds-token-comment);font-style:italic}
-.ds-code .token.punctuation{color:var(--ds-token-punctuation)}
-.ds-code .token.property,.ds-code .token.attr-name{color:var(--ds-token-attr-name)}
-.ds-code .token.tag{color:var(--ds-token-tag)}
-.ds-code .token.boolean,.ds-code .token.number,.ds-code .token.constant,.ds-code .token.symbol{color:var(--ds-token-number)}
-.ds-code .token.selector,.ds-code .token.attr-value{color:var(--ds-token-selector)}
-.ds-code .token.string,.ds-code .token.char{color:var(--ds-token-string)}
-.ds-code .token.builtin{color:var(--ds-token-builtin)}
-.ds-code .token.inserted{color:var(--ds-token-inserted)}
-.ds-code .token.deleted{color:var(--ds-token-deleted)}
-.ds-code .token.operator{color:var(--ds-token-operator)}
-.ds-code .token.entity,.ds-code .token.url{color:var(--ds-token-url)}
-.ds-code .token.variable{color:var(--ds-token-variable)}
-.ds-code .token.atrule,.ds-code .token.keyword{color:var(--ds-token-keyword)}
-.ds-code .token.function,.ds-code .token.class-name{color:var(--ds-token-function)}
-.ds-code .token.important{color:var(--ds-token-keyword);font-weight:700}
-.ds-code .token.bold{font-weight:700}
-.ds-code .token.italic{font-style:italic}
-.ds-code .token.namespace{opacity:.8}
-.ds-code .token.regex{color:var(--ds-token-string)}
-.ds-code .token.parameter{color:var(--ds-token-variable)}
-.ds-code .token.coord{color:var(--ds-token-url)}
-.ds-code .token.unit{color:var(--ds-token-number)}
-.ds-code .token.color,.ds-code .token.hexcode,.ds-code .token["language-css"] .token.string{color:var(--ds-token-string)}
-.ds-code .token.attr-equals,.ds-code .token.tag-punctuation{color:var(--ds-token-punctuation)}
-.ds-code .token.title,.ds-code .token["function-variable"]{color:var(--ds-token-function)}
-.ds-code .token{color:inherit}
-/* Legacy tok-* classes (compat) */
-.ds-code .tok-c{color:var(--ds-token-comment)}
-.ds-code .tok-p{color:var(--ds-token-attr-name)}
-.ds-code .tok-v{color:var(--ds-token-variable)}
-.ds-code .tok-k{color:var(--ds-token-keyword)}
-.ds-code .tok-s{color:var(--ds-token-string)}
-
 /* Copy button (generic) */
 .ds-copy-btn{display:inline-flex;align-items:center;gap:var(--ds-space-2);font-family:var(--ds-font-ui);font-size:var(--ds-text-caption);font-weight:600;padding:var(--ds-space-1) var(--ds-space-3);border-radius:var(--ds-radius-md);border:1px solid var(--ds-color-border-subtle);background:transparent;color:var(--ds-color-muted);cursor:pointer;transition:all var(--ds-duration-150);white-space:nowrap}
 .ds-copy-btn:hover{background:color-mix(in oklch,var(--ds-color-white) 12%,transparent);color:var(--ds-color-fg)}
@@ -1797,7 +1763,7 @@ a.ds-feature-card:focus-visible{outline:var(--ds-focus-outline-width) solid var(
 .ds-pt-0{padding-top:0}
 
 /* =========================================================================
-   CGArtLab Design System v1.10.2 — Gravitas & Glow
+   CGArtLab Design System v2.0.0 — Gravitas & Glow
    Dark-mode editorial presence: warm olive undertone on shadow depths,
    luminous borders, soft auras, and inner-surface glow. Light mode
    stays restrained (0% opacity tokens, classes visually inert).

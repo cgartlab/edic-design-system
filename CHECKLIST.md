@@ -84,11 +84,11 @@
 ## C. 图标系统扩展
 
 - [x] P0 | M | 依赖：P0 工作分支。图标审计与分类规范。
-  审计当前 100 枚图标语义类别；定义命名规范 `{category}-{name}-{style}`，例如 `action-search-outline`，并给旧图标建立兼容别名。
+  审计初始 100 枚图标的语义类别；定义命名规范 `{category}-{name}-{style}`，例如 `action-search-outline`，并为后续扩展到 209 枚建立分类基础。
 
 
-- [x] P1 | L | 依赖：图标规范。扩展图标至 200+。
-  补充语义类别，覆盖 action、nav、status、data、media、communication、commerce、system、editorial、AI/agent 等；新增到 `scripts.js` ICONS 数组并运行 `make icons`。
+- [x] P1 | L | 依赖：图标规范。扩展图标至 209 枚。
+  补充语义类别，最终覆盖 action、nav、status、data、media、communication、commerce、system、editorial、AI/agent 等；新增到 `scripts.js` ICONS 数组并运行 `make icons`。
 
 - [x] P0 | S | 依赖：图标扩展。图标 sprite 同步。
   运行 `make icons` 与 `make icons-check`，确保 `icons.svg` 使用 `<symbol>` + `<use>` 模式并包含全部图标。

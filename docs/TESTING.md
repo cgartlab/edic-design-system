@@ -191,7 +191,7 @@ npm run stamp:diff            # 预览 diff
 **规则**：
 
 - ✅ HTML 中每个 `ds-*` class 必须在 CSS 中有同名选择器
-- ✅ 排除 Prism.js 动态类（`language-*`、`prism-*`、`token-*`）
+- ✅ 仅检查设计系统 `ds-*` class，语言标记示例不触发阻塞
 - ✅ 排除 JS 钩子类（`querySelector('.xxx')` 引用的类）
 - ✅ 排除 `<pre><code>` 和 `.ds-code` 代码块中的示例类名
 - ✅ 支持复合选择器、`@media` 嵌套、后代选择器的类名提取

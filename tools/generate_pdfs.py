@@ -281,7 +281,7 @@ def build_reference():
         p.text(56, yy, it, "F1", 11, RGB["fg"])
         yy += 26
 
-    p.text(56, 690, "200+ design tokens   -   39 components   -   209 icons", "F2", 11, RGB["olive-600"])
+    p.text(56, 690, "292 design tokens   -   39 components   -   209 icons", "F2", 11, RGB["olive-600"])
     p.text(56, 712, "edic.cgartlab.com", "F3", 10, RGB["muted"])
     footer(p, "Page 1 / 4")
     doc.add_page(p)

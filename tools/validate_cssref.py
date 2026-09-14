@@ -2,7 +2,7 @@
 """validate_cssref.py — Cross-references HTML class usage against CSS class definitions.
 
 检查项：
-  1. HTML 中使用的 ds-*/language-*/prism-*/token-* class 是否在 styles.css 中定义
+  1. HTML 中使用的 ds-* class 是否在 styles.css 中定义
   2. 跳过<pre><code> 和 .ds-code 块中的示例代码
   3. 处理多行 class 属性、跨行 CSS 选择器、复合选择器、@media 嵌套
 """
@@ -19,7 +19,7 @@ CSS_FILE = ROOT / "styles.css"
 JS_FILE = ROOT / "scripts.js"
 
 # 需要检查的 class 前缀
-TARGET_PREFIXES = ("ds-", "language-", "prism-", "token-")
+TARGET_PREFIXES = ("ds-",)
 
 # 匹配 HTML class 属性（支持多行）
 HTML_CLASS_PATTERN = re.compile(r'\bclass\s*=\s*["\']([^"\']*)["\']', re.DOTALL)
@@ -159,11 +159,7 @@ def check_cssref(html_files: list[Path], css_file: Path, js_file: Path, verbose:
                 # 排除 JS 钩子 class（用于 querySelector，不需要 CSS 定义）
                 if cls in js_hooks:
                     continue
-                # 只对 ds-* 报错，language-/prism-/token- 是 Prism 动态类
-                if cls.startswith("ds-"):
-                    errors.append(f"{filename}:{line_no} [ERROR] 未定义的 class: {cls}")
-                elif verbose:
-                    warnings.append(f"{filename}:{line_no} [WARN] 未定义的 class: {cls}")
+                errors.append(f"{filename}:{line_no} [ERROR] 未定义的 class: {cls}")
 
     return errors, warnings
 

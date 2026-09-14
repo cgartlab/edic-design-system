@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "node scripts/run-validator.js scripts/lint.py",
     "build": "node scripts/run-validator.js scripts/build.py",
-    "test": "vitest run",
+    "test": "vitest run --pool=threads",
     "audit": "node scripts/run-audit.js",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
