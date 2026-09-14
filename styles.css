@@ -45,6 +45,8 @@
   --ds-color-copy-success-border: oklch(60% 0.12 145);
   --ds-brand-paper: var(--ds-color-surface);
   --ds-brand-ink: var(--ds-color-fg-strong);
+  --ds-brand-demo-paper: oklch(99% 0.005 80);
+  --ds-brand-demo-ink: oklch(15% 0.008 75);
   --ds-font-display: "Iowan Old Style", "Charter", Georgia, "Noto Serif SC", "Source Han Serif SC", serif;
   --ds-font-heading: var(--ds-font-display);
   --ds-font-body: "Noto Sans SC", "Source Han Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
@@ -483,6 +485,8 @@ html[lang="zh-CN"] {
   --ds-color-info-bg: oklch(22% 0.025 240);
   --ds-color-copy-success: oklch(85% 0.10 145);
   --ds-color-copy-success-border: oklch(65% 0.10 145);
+  --ds-brand-demo-paper: oklch(99% 0.005 80);
+  --ds-brand-demo-ink: oklch(15% 0.008 75);
   --ds-shadow-xs: 0 1px 2px oklch(0% 0 0 / 30%);
   --ds-shadow-sm: 0 1px 3px oklch(0% 0 0 / 35%), 0 1px 2px oklch(0% 0 0 / 25%);
   --ds-shadow-md: 0 4px 6px oklch(0% 0 0 / 35%), 0 2px 4px oklch(0% 0 0 / 25%), 0 0 16px oklch(57% 0.065 115 / 4%);
@@ -2000,8 +2004,8 @@ a.ds-feature-card:focus-visible{outline:var(--ds-focus-outline-width) solid var(
 /* ===== Brand constants (theme-independent) ===== */
 .ds-brand-preview{display:flex;align-items:center;justify-content:center;padding:var(--ds-space-6);border-radius:var(--ds-radius-lg);border:1px solid var(--ds-color-border-subtle);min-height:104px}
 .ds-brand-preview img{max-width:100%;height:auto;max-height:56px}
-.ds-brand-preview--paper{background:var(--ds-brand-paper)}
-.ds-brand-preview--ink{background:var(--ds-brand-ink)}
+.ds-brand-preview--paper{background:var(--ds-brand-demo-paper)}
+.ds-brand-preview--ink{background:var(--ds-brand-demo-ink)}
 
 .ds-justify-start{justify-content:flex-start}
 

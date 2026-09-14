@@ -29,7 +29,7 @@ Stack: eyebrow → headline → lead → actions. Background blobs are decorativ
 
     <!-- Lead paragraph: constrained measure, pretty wrap -->
     <p class="ds-lead ds-mb-10 ds-text-pretty ds-mx-auto ds-reveal">
-      OKLch 色彩科学 · 292 个设计令牌 · 零依赖
+      OKLch 色彩科学 · 311 条结构化令牌 · 无运行时依赖
     </p>
 
     <!-- CTA row -->
@@ -69,7 +69,7 @@ Use for: homepage feature list, product overview, "why choose" sections.
 
       <article class="ds-feature-card ds-reveal" style="--d:.1s">
         <div class="ds-feature-ico" aria-hidden="true"><!-- icon --></div>
-        <h3>零依赖</h3>
+        <h3>无运行时依赖</h3>
         <p class="ds-text-muted">纯 CSS + JS，React、Vue、邮件均可用。</p>
       </article>
 
@@ -138,11 +138,11 @@ Use for: trust section, metrics showcase, "by the numbers" row.
   <div class="ds-wrapper">
     <div class="ds-stat-grid">
       <div class="ds-stat ds-reveal" style="--d:.0s">
-        <span class="ds-stat-num">292</span>
-        <span class="ds-stat-label">设计令牌</span>
+        <span class="ds-stat-num">311</span>
+        <span class="ds-stat-label">结构化令牌</span>
       </div>
       <div class="ds-stat ds-reveal" style="--d:.08s">
-        <span class="ds-stat-num">25</span>
+        <span class="ds-stat-num">39</span>
         <span class="ds-stat-label">核心组件</span>
       </div>
       <div class="ds-stat ds-reveal" style="--d:.16s">

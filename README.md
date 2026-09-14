@@ -22,7 +22,7 @@ EDIC (**E**ditorial **D**esign **I**nterface for **C**ontent) is a framework-agn
 
 It ships as three static files: `styles.css`, `scripts.js`, and `tokens.json`. No build step. No runtime dependencies. Drop them in and it works — in React, Vue, plain HTML, email, or print.
 
-**It is also the first design system built to be understood by AI.** A Claude Code Skill package, structured prompts, and a `references/` directory of on-demand component examples let any AI agent produce EDIC-compliant output without a design background.
+**It is built to be machine-readable by AI agents.** A Claude Code Skill package, structured prompts, and a `references/` directory of on-demand component examples let AI agents produce EDIC-compliant output with a clear rule set.
 
 ---
 
@@ -30,7 +30,7 @@ It ships as three static files: `styles.css`, `scripts.js`, and `tokens.json`. N
 
 | | |
 |---|---|
-| **Design tokens** | 292 structured entries — color, typography, spacing, radius, shadow, motion |
+| **Design tokens** | 311 structured entries — color, typography, spacing, radius, shadow, motion |
 | **Components** | 39 core components, all with dark-mode coverage |
 | **Icons** | 209 SVG symbols, 1.5px stroke, `aria-hidden` |
 | **Color system** | OKLch-only — perceptually uniform, no hex/rgb guesswork |
@@ -160,7 +160,7 @@ EDIC（**E**ditorial **D**esign **I**nterface for **C**ontent，内容编辑设�
 
 它只有三个静态文件：`styles.css`、`scripts.js` 和 `tokens.json`。无需构建步骤，无运行时依赖。放进项目即可使用 — 支持 React、Vue、原生 HTML、邮件模板和打印输出。
 
-**它也是第一套为 AI 理解而设计的设计系统。** Claude Code Skill 包、结构化提示词，以及包含按需加载组件示例的 `references/` 目录，让任何 AI Agent 无需设计背景，即可输出符合 EDIC 规范的界面。
+**它也以机器可读方式面向 AI Agent 构建。** Claude Code Skill 包、结构化提示词，以及包含按需加载组件示例的 `references/` 目录，让 AI Agent 可以依据清晰规则输出符合 EDIC 规范的界面。
 
 ---
 
@@ -168,7 +168,7 @@ EDIC（**E**ditorial **D**esign **I**nterface for **C**ontent，内容编辑设�
 
 | | |
 |---|---|
-| **设计令牌** | 292 条结构化条目 — 颜色、字体、间距、圆角、阴影、动效 |
+| **设计令牌** | 311 条结构化条目 — 颜色、字体、间距、圆角、阴影、动效 |
 | **组件** | 39 个组件家族，全部支持暗色模式 |
 | **图标** | 209 个 SVG 符号，1.5px 描边，`aria-hidden` |
 | **色彩系统** | 纯 OKLch — 感知均匀，告别 hex/rgb 猜测 |
