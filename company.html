@@ -5,7 +5,6 @@
 <title>EDIC — 设计 · 品牌 · 数字体验</title>
 <meta name="description" content="EDIC — CGArtLab，专注于设计系统与品牌视觉创意">
 <link rel="stylesheet" href="styles.css?v=2.0.0">
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 <style>
 /* ===== EDIC Company Site v2 — Modern Hybrid Editorial × Tech ===== */
 
@@ -65,9 +64,8 @@
 .cg-hero-cta .ds-btn--secondary { background: transparent; border: 1.5px solid var(--ds-color-border); color: var(--ds-color-fg); }
 .cg-hero-cta .ds-btn--secondary:hover { border-color: var(--ds-accent); color: var(--ds-accent); background: transparent; }
 
-/* Hero 3D background overlay */
+/* Hero static background overlay */
 .cg-hero-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
-.cg-hero-bg canvas { display: block; width: 100% !important; height: 100% !important; }
 .cg-hero-bg::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 65% at 50% 50%, transparent 20%, var(--ds-color-bg) 72%); pointer-events: none; z-index: 1; }
 
 /* ===== STATS ===== */
@@ -195,12 +193,11 @@
     </div>
   </div>
 </nav>
+<main id="ds-main" tabindex="-1">
 
 <!-- ===== HERO ===== -->
 <section class="cg-hero" data-od-id="hero">
-  <div class="cg-hero-bg" data-od-id="hero-bg">
-    <canvas id="hero-canvas" data-od-id="hero-canvas"></canvas>
-  </div>
+  <div class="cg-hero-bg" data-od-id="hero-bg"></div>
   <div class="cg-hero-grid cg-wrapper">
     <div class="reveal" data-od-id="hero-headline">
       <div class="cg-hero-kicker">Brand · Design · Digital</div>
@@ -336,7 +333,7 @@
           <div class="cg-case-tag">设计系统</div>
           <div class="cg-case-info">
             <h3>EDIC Design System</h3>
-            <p>一套完整的开源设计系统：200+ 令牌、20 核心 + 5 附加组件、100 枚图标。基于 OKLch 色彩与编辑主义排版。</p>
+            <p>一套完整的开源设计系统：292 个令牌、39 个组件家族、209 枚图标。基于 OKLch 色彩与编辑主义排版。</p>
           </div>
         </div>
       </div>
@@ -407,7 +404,7 @@
           <div class="cg-contact-card-value">Twitter / GitHub / Behance<small>@cgartlab</small></div>
         </div>
       </div>
-      <form class="cg-form reveal" data-od-id="contact-form" onsubmit="event.preventDefault();alert('消息已发送（演示界面）');">
+      <form class="cg-form reveal" data-od-id="contact-form">
         <div class="cg-form-row">
           <div>
             <label class="ds-label">姓名</label>
@@ -442,6 +439,7 @@
     </div>
   </div>
 </footer>
+</main>
 
 <!-- ===== SCRIPTS ===== -->
 <script>
@@ -514,285 +512,6 @@ function toggleDarkMode() {
   });
 })();
 
-/* ===== Three.js — Frosted Acrylic Solar System, Directional Light from Left ===== */
-(function initHeroScene() {
-  var canvas = document.getElementById("hero-canvas");
-  if (!canvas) return;
-  var container = canvas.parentElement;
-  if (!container) return;
-
-  var scene = new THREE.Scene();
-
-  /* ── Lights (single directional from left + minimal ambient) ── */
-  var ambient = new THREE.AmbientLight(0x606080, 0.06);
-  scene.add(ambient);
-
-  var dirLight = new THREE.DirectionalLight(0xffffff, 3.0);
-  dirLight.position.set(-7, 5, 3);
-  scene.add(dirLight);
-
-  var starPointLight = new THREE.PointLight(0xffcc88, 0.25, 8);
-  starPointLight.position.set(0, 0, 0);
-  scene.add(starPointLight);
-
-  var camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-  camera.position.set(0, 6, 0.001);
-  camera.lookAt(0, 0, 0);
-
-  var renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    alpha: true,
-    antialias: true
-  });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.2;
-
-  /* ── Theme-aware palette ── */
-  function getThemeColors() {
-    var dark = document.documentElement.getAttribute("data-theme") === "dark";
-    return {
-      star:       dark ? 0xf0e0c8 : 0xbf9b6b,
-      starGlow:   dark ? 0xd4a56a : 0x8a6a3e,
-      planet1:    dark ? 0x7ab89e : 0x5c8a7a,
-      planet1G:   dark ? 0xa8e0c8 : 0x7abc9a,
-      planet2:    dark ? 0xc49a7a : 0x9e7a5a,
-      planet2G:   dark ? 0xe0b89a : 0xbe9a7a,
-      planet3:    dark ? 0x8aa9c4 : 0x6a89a4,
-      planet3G:   dark ? 0xb0cee8 : 0x8aaac4,
-      planet4:    dark ? 0xb88aaa : 0x9a6a8a,
-      planet4G:   dark ? 0xd8aaca : 0xba8aaa,
-      ring:       dark ? 0x4a5a5a : 0x3a4a4a
-    };
-  }
-
-  var colors = getThemeColors();
-
-  /* ── Frosted acrylic material factory ── */
-  function acrylicMat(color, opacity, roughness) {
-    return new THREE.MeshPhysicalMaterial({
-      color: color,
-      roughness: roughness != null ? roughness : 0.45,
-      metalness: 0.0,
-      transparent: true,
-      opacity: opacity != null ? opacity : 0.78,
-      clearcoat: 0.0,
-      ior: 1.49,
-      specularIntensity: 0.04,
-      side: THREE.DoubleSide,
-      envMapIntensity: 0.1
-    });
-  }
-
-  /* ── Gradient circle shader (frosted glow halo — NormalBlending) ── */
-  var glowShader = {
-    uniforms: { uColor: { value: new THREE.Color() }, uGlowColor: { value: new THREE.Color() } },
-    vertexShader: [
-      "varying vec2 vUv;",
-      "void main() {",
-      "  vUv = uv;",
-      "  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);",
-      "}"
-    ].join("\n"),
-    fragmentShader: [
-      "uniform vec3 uColor;",
-      "uniform vec3 uGlowColor;",
-      "varying vec2 vUv;",
-      "void main() {",
-      "  float d = distance(vUv, vec2(0.5, 0.5)) * 2.0;",
-      "  if (d > 1.0) discard;",
-      "  float alpha = exp(-d * d * 3.0) * 0.12;",
-      "  vec3 col = mix(uGlowColor, uColor, 1.0 - d * 0.5);",
-      "  gl_FragColor = vec4(col, alpha);",
-      "}"
-    ].join("\n"),
-    transparent: true,
-    depthWrite: false,
-    blending: THREE.NormalBlending,
-    side: THREE.DoubleSide
-  };
-
-  /* ── Central star (frosted acrylic) ── */
-  var starMat = acrylicMat(colors.star, 0.82, 0.50);
-  var star = new THREE.Mesh(new THREE.SphereGeometry(1, 48, 48), starMat);
-  scene.add(star);
-
-  /* Star glow aura — larger, ultra-transparent frosted shell */
-  var starGlowMat = new THREE.MeshPhysicalMaterial({
-    color: colors.starGlow,
-    roughness: 0.6,
-    metalness: 0.0,
-    transparent: true,
-    opacity: 0.06,
-    depthWrite: false,
-    side: THREE.DoubleSide
-  });
-  var starGlow = new THREE.Mesh(new THREE.SphereGeometry(2.4, 32, 32), starGlowMat);
-  scene.add(starGlow);
-
-  /* ── Particle disk ── */
-  var particleCount = 160;
-  var particleGeo = new THREE.BufferGeometry();
-  var positions = new Float32Array(particleCount * 3);
-  for (var i = 0; i < particleCount; i++) {
-    var r = 1.1 + Math.random() * 2.2;
-    var theta = Math.random() * Math.PI * 2;
-    positions[i*3]   = r * Math.cos(theta);
-    positions[i*3+1] = (Math.random() - 0.5) * 0.3;
-    positions[i*3+2] = r * Math.sin(theta);
-  }
-  particleGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-  var particleMat = new THREE.PointsMaterial({
-    color: colors.starGlow,
-    size: 0.035,
-    transparent: true,
-    opacity: 0.15,
-    blending: THREE.NormalBlending,
-    depthWrite: false,
-    sizeAttenuation: true
-  });
-  var particles = new THREE.Points(particleGeo, particleMat);
-  scene.add(particles);
-
-  /* ── Orbit rings ── */
-  function createOrbitRing(radius, opacity) {
-    var seg = 80;
-    var g = new THREE.BufferGeometry();
-    var p = new Float32Array((seg + 1) * 3);
-    for (var i = 0; i <= seg; i++) {
-      var a = (i / seg) * Math.PI * 2;
-      p[i*3]   = radius * Math.cos(a);
-      p[i*3+1] = 0;
-      p[i*3+2] = radius * Math.sin(a);
-    }
-    g.setAttribute("position", new THREE.BufferAttribute(p, 3));
-    return new THREE.Line(g, new THREE.LineBasicMaterial({
-      color: colors.ring,
-      transparent: true,
-      opacity: opacity,
-      depthWrite: false
-    }));
-  }
-  scene.add(createOrbitRing(2.0, 0.06));
-  scene.add(createOrbitRing(2.8, 0.045));
-  scene.add(createOrbitRing(3.6, 0.03));
-
-  /* ── Frosted acrylic planets lit by directional light ── */
-  var planets = [];
-  function makePlanet(orbitR, speed, coreSize, col, glowCol, yOff, angleOff) {
-    var group = new THREE.Group();
-
-    /* Core — frosted acrylic sphere (shaded by directional light) */
-    var core = new THREE.Mesh(
-      new THREE.SphereGeometry(coreSize, 32, 32),
-      acrylicMat(col, 0.75, 0.45)
-    );
-    group.add(core);
-
-    /* Glow disc — soft light-diffusion halo (NormalBlending, very subtle) */
-    var aura = new THREE.Mesh(
-      new THREE.CircleGeometry(coreSize * 4, 32),
-      new THREE.ShaderMaterial({
-        uniforms: {
-          uColor:     { value: new THREE.Color(glowCol) },
-          uGlowColor: { value: new THREE.Color(col) }
-        },
-        vertexShader:   glowShader.vertexShader,
-        fragmentShader: glowShader.fragmentShader,
-        transparent:    true,
-        depthWrite:     false,
-        blending:       THREE.NormalBlending,
-        side:           THREE.DoubleSide
-      })
-    );
-    aura.position.z = -0.02;
-    group.add(aura);
-
-    group.position.x = orbitR * Math.cos(angleOff);
-    group.position.z = orbitR * Math.sin(angleOff);
-    group.position.y = yOff;
-    scene.add(group);
-
-    return {
-      group: group, orbitR: orbitR, speed: speed,
-      angle: angleOff, yOff: yOff,
-      coreMat: core.material, auraMat: aura.material,
-      col: col, glowCol: glowCol
-    };
-  }
-
-  planets.push(makePlanet(2.0,  0.7,  0.14, colors.planet1, colors.planet1G,  0,      0));
-  planets.push(makePlanet(2.8, -0.45, 0.2,  colors.planet2, colors.planet2G,  0.08,   1.5));
-  planets.push(makePlanet(3.6,  0.3,  0.1,  colors.planet3, colors.planet3G, -0.06,   3.0));
-  planets.push(makePlanet(2.4, -0.6,  0.16, colors.planet4, colors.planet4G,  0.1,    4.5));
-
-  /* ── Mouse parallax — gentle pan ── */
-  var mouseX = 0, mouseY = 0, panX = 0, panY = 0;
-  document.addEventListener("mousemove", function(e) {
-    var rect = container.getBoundingClientRect();
-    var cx = rect.left + rect.width / 2;
-    var cy = rect.top + rect.height / 2;
-    mouseX = (e.clientX - cx) / rect.width;
-    mouseY = (e.clientY - cy) / rect.height;
-  }, { passive: true });
-
-  /* ── Resize ── */
-  function resize() {
-    var w = container.clientWidth;
-    var h = container.clientHeight;
-    renderer.setSize(w, h, false);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-  }
-  resize();
-  window.addEventListener("resize", resize);
-
-  /* ── Theme observer ── */
-  var themeObs = new MutationObserver(function() {
-    colors = getThemeColors();
-    starMat.color.setHex(colors.star);
-    starGlowMat.color.setHex(colors.starGlow);
-    particleMat.color.setHex(colors.starGlow);
-    var keys = [["planet1","planet1G"],["planet2","planet2G"],["planet3","planet3G"],["planet4","planet4G"]];
-    planets.forEach(function(p, i) {
-      p.coreMat.color.setHex(colors[keys[i][0]]);
-      p.auraMat.uniforms.uColor.value.setHex(colors[keys[i][1]]);
-      p.auraMat.uniforms.uGlowColor.value.setHex(colors[keys[i][0]]);
-    });
-  });
-  themeObs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-
-  /* ── Animation ── */
-  var clock = new THREE.Clock();
-  function animate() {
-    requestAnimationFrame(animate);
-    var t = clock.getElapsedTime();
-
-    /* Rotate star & glow & particles */
-    star.rotation.y = t * 0.06;
-    starGlow.rotation.y = t * 0.03;
-    particles.rotation.y = t * 0.02;
-
-    /* Orbit planets with bobbing */
-    planets.forEach(function(p) {
-      p.angle += p.speed * 0.008;
-      p.group.position.x = p.orbitR * Math.cos(p.angle);
-      p.group.position.z = p.orbitR * Math.sin(p.angle);
-      p.group.position.y = p.yOff + Math.sin(t * 0.6 + p.angle) * 0.04;
-    });
-
-    /* Camera pan (subtle) */
-    panX += (mouseX * 0.4 - panX) * 0.015;
-    panY += (mouseY * 0.3 - panY) * 0.015;
-    camera.position.x = panX;
-    camera.position.z = 0.001 + panY * 0.4;
-    camera.lookAt(0, 0, 0);
-
-    renderer.render(scene, camera);
-  }
-  animate();
-})();
-</script>
 <script src="scripts.js?v=2.0.0"></script>
 <button id="theme-toggle-btn-fixed" class="ds-theme-toggle-btn ds-theme-toggle-btn--fixed" type="button" aria-label="跟随系统 · 点击切换">
   <span class="theme-icon"></span>

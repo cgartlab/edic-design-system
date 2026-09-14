@@ -6,11 +6,6 @@
 <meta name="description" content="EDIC 设计系统使用文档：安装引入、设计令牌、色彩主题、暗色模式、排版、组件、动效、图标、可访问性、定制扩展与 FAQ。">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="styles.css?v=2.0.0">
-<!-- Prism.js syntax highlighting (CDN, no extra CSS — custom theme in styles.css) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js"
-        integrity="sha384-xAgN7OCsK5s0d3G18tqRYrxy8hWsPA14E26TMh7Mi9ZM09vaz4EA0DBTl+80F5yC"
-        crossorigin="anonymous"
-        defer></script>
 </head>
 <body>
 <a href="#ds-main" class="ds-skip">跳至主要内容</a>
@@ -175,7 +170,7 @@
           <p>暗色由 <code>&lt;html data-theme="dark"&gt;</code> 触发，整套令牌会被重写为暖灰基底（<em>而非纯黑</em>），强调色自动亮化 5–10%。<code>scripts.js</code> 提供 <code>toggleDarkMode()</code> 并做了系统偏好兜底与 <code>localStorage</code> 持久化。</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-dark" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-            <pre id="c-dark" tabindex="0"><code class="language-html">&lt;button onclick="toggleDarkMode()" aria-label="切换主题"&gt;切换&lt;/button&gt;
+            <pre id="c-dark" tabindex="0"><code class="language-html">&lt;button id="theme-toggle-btn-fixed" aria-label="切换主题"&gt;切换&lt;/button&gt;
 
 &lt;!-- 想默认暗色，直接写在 html 上： --&gt;
 &lt;html lang="zh-CN" data-theme="dark"&gt;</code></pre>
@@ -313,10 +308,10 @@
 
         <section class="ds-doc-block" id="code-style">
           <h2>代码样式</h2>
-          <p>本站所有代码块使用 <strong>Prism.js</strong> 做语法高亮，配合一套定制橄榄绿主题。代码块统一使用 <code>&lt;figure class="ds-code"&gt;</code> 结构，由语言标签栏 + 可复制代码区组成。</p>
+          <p>本站所有代码块保持零运行时依赖，不引入语法高亮库。代码块统一使用 <code>&lt;figure class="ds-code"&gt;</code> 结构，由语言标签栏 + 可复制代码区组成；代码内容按 HTML 实体转义后直接展示。</p>
 
           <h3>基本用法</h3>
-          <p>在 <code>&lt;pre&gt;</code> 或 <code>&lt;code&gt;</code> 上添加 <code>class="language-xxxx"</code>（如 <code>language-html</code>、<code>language-css</code>），Prism.js 会自动识别并高亮：</p>
+          <p>在 <code>&lt;pre&gt;</code> 或 <code>&lt;code&gt;</code> 上添加 <code>class="language-xxxx"</code>（如 <code>language-html</code>、<code>language-css</code>），用于标识代码语言，并便于复制与文档生成时解析：</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-code-example" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
             <pre id="c-code-example" tabindex="0"><code class="language-html">&lt;figure class="ds-code"&gt;
@@ -327,7 +322,7 @@
           </figure>
 
           <h3>支持的语言</h3>
-          <p>默认支持 HTML（含 SVG/XML）、CSS、JavaScript 等常见语言。如需其他语言，引入对应的 Prism 组件即可。主题配色通过 CSS 变量 <code>--ds-token-*</code> 统一控制，与设计系统的 OKLch 色彩体系一致。</p>
+          <p>常用示例覆盖 HTML（含 SVG/XML）、CSS、JavaScript、JSON、Bash 与纯文本。代码块背景始终为暗色，文字与标记颜色通过 CSS 变量 <code>--ds-token-*</code> 统一控制，与设计系统的 OKLch 色彩体系一致。</p>
 
           <h3>主题令牌</h3>
           <p>语法高亮颜色由以下 CSS 变量定义，可通过覆盖变量整体换肤：</p>
@@ -358,16 +353,9 @@
             <li><code>.ds-code-bar</code> — 顶栏（语言标签 + 复制按钮）</li>
             <li><code>.ds-code-lang</code> — 语言标签（大写小字，mono 字族）</li>
             <li><code>.ds-copy-btn[data-copy="#id"]</code> — 复制按钮（关联 <code>&lt;pre id="..."&gt;</code>）</li>
-            <li><code>&lt;pre&gt;&lt;code class="language-*"&gt;</code> — Prism 高亮代码区</li>
+            <li><code>&lt;pre&gt;&lt;code class="language-*"&gt;</code> — 语言标记代码区</li>
           </ul>
-          <p>Prism.js 通过 cdnjs 加载（<code>prism@1.30.0</code>，含 SRI 完整性校验防 CDN 篡改），零安装、零构建，与设计系统的纯静态哲学一致。建议在自有项目中同样锁定版本号与 SRI：</p>
-          <figure class="ds-code">
-            <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-prism-cdn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-            <pre id="c-prism-cdn" tabindex="0"><code class="language-html">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js"
-        integrity="sha384-xAgN7OCsK5s0d3G18tqRYrxy8hWsPA14E26TMh7Mi9ZM09vaz4EA0DBTl+80F5yC"
-        crossorigin="anonymous"
-        defer&gt;&lt;/script&gt;</code></pre>
-          </figure>
+          <p>EDIC 不使用外部代码高亮脚本。若消费方需要语法高亮，应在自己的应用层按相同 class 结构接入，并保持本设计系统文件本身零依赖。</p>
         </section>
 
         <section class="ds-doc-block" id="icons">
@@ -2162,7 +2150,7 @@ skills/edic-design-system/SKILL.md</code></pre>
                     <span class="ds-timeline-tag">发布</span>
                     <div class="ds-timeline-date">2026.09 — v2.0.0</div>
                     <div class="ds-timeline-title">设计基础设施升级</div>
-                    <p>结构化 tokens、manifest、AGENT-GUIDE、209 枚图标索引、39 个核心组件契约，以及 15 个验证器组成的质量门槛。</p>
+                    <p>结构化 tokens、manifest、AGENT-GUIDE、209 枚图标索引、39 个核心组件契约，以及 15 个验证器组成的质量门槛；HTML 校验覆盖主内容区、外部资源、`javascript:`、内联事件与标题数量。</p>
                   </div>
                 </div>
                 <div class="ds-timeline-item">
@@ -2232,7 +2220,7 @@ skills/edic-design-system/SKILL.md</code></pre>
 
         <section class="ds-doc-block" id="token-index">
           <h2>令牌索引</h2>
-          <p>全部 276 个 CSS 自定义属性汇总。可直接复制使用。</p>
+          <p>全部 292 个 CSS 自定义属性汇总。可直接复制使用。</p>
           <div class="ds-table-wrap" style="max-height:600px;overflow-y:auto;">
             <table class="token-table">
               <thead><tr><th scope="col">Token</th><th scope="col">Value</th></tr></thead>

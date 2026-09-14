@@ -30,7 +30,7 @@ It ships as three static files: `styles.css`, `scripts.js`, and `tokens.json`. N
 
 | | |
 |---|---|
-| **Design tokens** | 276 structured entries — color, typography, spacing, radius, shadow, motion |
+| **Design tokens** | 292 structured entries — color, typography, spacing, radius, shadow, motion |
 | **Components** | 39 core components, all with dark-mode coverage |
 | **Icons** | 209 SVG symbols, 1.5px stroke, `aria-hidden` |
 | **Color system** | OKLch-only — perceptually uniform, no hex/rgb guesswork |
@@ -99,7 +99,7 @@ report.html                     — multi-page report layout
 
 skills/edic-design-system/      — Claude Code Skill (SKILL.md + references/)
 prompts/                        — system-prompt.md, quick-prompt.md
-tools/                          — 10 Python validators
+tools/                          — 15 Python validators
 scripts/                        — build.py, lint.py, dev.sh, pre-commit.sh
 docs/                           — VERSIONING, COMPONENT-DEVELOPMENT, TESTING, RELEASE-CHECKLIST
 ```
@@ -168,7 +168,7 @@ EDIC（**E**ditorial **D**esign **I**nterface for **C**ontent，内容编辑设�
 
 | | |
 |---|---|
-| **设计令牌** | 276 条结构化条目 — 颜色、字体、间距、圆角、阴影、动效 |
+| **设计令牌** | 292 条结构化条目 — 颜色、字体、间距、圆角、阴影、动效 |
 | **组件** | 39 个组件家族，全部支持暗色模式 |
 | **图标** | 209 个 SVG 符号，1.5px 描边，`aria-hidden` |
 | **色彩系统** | 纯 OKLch — 感知均匀，告别 hex/rgb 猜测 |

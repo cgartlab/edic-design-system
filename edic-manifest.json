@@ -143,6 +143,7 @@
     "validate_hardcode.py",
     "validate_icons.py",
     "validate_manifest.py",
+    "validate_manifest_css.py",
     "validate_components.py",
     "validate_visual_baseline.py"
   ],

@@ -24,7 +24,7 @@
 |------|------|------|------|
 | `validate_tokens.py` | tokens.json ↔ styles.css 一致性 | Python 3.11+ | stdlib |
 | `validate_naming.py` | BEM / token 命名规范 | Python 3.11+ | stdlib |
-| `validate_html.py` | HTML 标签闭合、属性合法性 | Python 3.11+ | stdlib |
+| `validate_html.py` | HTML 结构、主内容区、外部资源、`javascript:`、内联事件与标题数量 | Python 3.11+ | stdlib |
 | `validate_a11y.py` | 基础可访问性（alt / aria / 标题层级） | Python 3.11+ | stdlib |
 | `validate_versions.py` | 资源 `?v=` 与最新版本号同步 | Python 3.11+ | stdlib |
 | `validate_links.py` | 内部链接、锚点、CSS / JS 引用有效性 | Python 3.11+ | stdlib |

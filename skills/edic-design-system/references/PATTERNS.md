@@ -29,7 +29,7 @@ Stack: eyebrow → headline → lead → actions. Background blobs are decorativ
 
     <!-- Lead paragraph: constrained measure, pretty wrap -->
     <p class="ds-lead ds-mb-10 ds-text-pretty ds-mx-auto ds-reveal">
-      OKLch 色彩科学 · 200+ 设计令牌 · 零依赖
+      OKLch 色彩科学 · 292 个设计令牌 · 零依赖
     </p>
 
     <!-- CTA row -->
@@ -138,7 +138,7 @@ Use for: trust section, metrics showcase, "by the numbers" row.
   <div class="ds-wrapper">
     <div class="ds-stat-grid">
       <div class="ds-stat ds-reveal" style="--d:.0s">
-        <span class="ds-stat-num">200+</span>
+        <span class="ds-stat-num">292</span>
         <span class="ds-stat-label">设计令牌</span>
       </div>
       <div class="ds-stat ds-reveal" style="--d:.08s">

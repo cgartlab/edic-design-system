@@ -66,7 +66,7 @@ validate-tokens:  ## 校验 tokens.json ↔ styles.css 一致性
 validate-naming:  ## 校验 BEM / token 命名规范
 	$(PYTHON) tools/validate_naming.py
 
-validate-html:  ## 校验 HTML 结构
+validate-html:  ## 校验 HTML 结构、主内容区、外部资源与事件契约
 	$(PYTHON) tools/validate_html.py
 
 validate-a11y:  ## 校验可访问性

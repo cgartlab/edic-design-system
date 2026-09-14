@@ -26,7 +26,7 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 VALIDATORS = [
     ("tokens",     "tokens.json ↔ styles.css consistency"),
     ("naming",     "BEM / token naming conventions"),
-    ("html",        "HTML structure & required attributes"),
+    ("html",        "HTML structure, landmarks, resources, and event contracts"),
     ("a11y",       "Accessibility checks"),
     ("versions",    "Resource ?v= sync with VERSION file"),
     ("links",       "Internal & cross-page anchor validation"),

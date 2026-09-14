@@ -4,10 +4,13 @@
 检查项：
   1. <html> 有 lang 属性
   2. <head> 含 <meta charset> 与 <meta name="viewport">
-  3. <link rel="stylesheet"> 引用的 CSS 文件存在
-  4. <script src> 引用的 JS 文件存在
-  5. 重复 id 检测
-  6. 必填 meta（description, theme-color）
+  3. 禁止外部运行时 <link>/<script> 与 javascript: 链接
+  4. <link rel="stylesheet"> / <script src> 引用的本地文件存在
+  5. 禁止常见内联事件属性
+  6. 重复 id 检测
+  7. 必填 meta（description, theme-color）
+  8. 存在 <main> 或 role="main" 主内容区
+  9. 页面级 <h1> 数量为 1（打印模板可豁免）
 """
 from __future__ import annotations
 
@@ -18,6 +21,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 HTML_GLOB = "*.html"
+EXTERNAL_RESOURCE_RE = re.compile(r'^(?:https?:)?//|^(?:https?:)')
+JS_HREF_RE = re.compile(r'^\s*javascript:', re.IGNORECASE)
+INLINE_EVENT_ATTRS = {
+    "onclick", "ondblclick", "onmousedown", "onmouseup", "onmousemove",
+    "onmouseover", "onmouseout", "onsubmit", "onchange", "oninput",
+    "onkeydown", "onkeypress", "onkeyup", "onload", "onerror",
+}
+MULTI_H1_EXEMPTIONS = {
+    "report.html": "A4 报告规范/模板按分页结构使用多个 h1",
+}
 
 
 class HTMLChecker(HTMLParser):
@@ -33,11 +46,21 @@ class HTMLChecker(HTMLParser):
         self.html_lang = ""
         self.has_description = False
         self.has_title = False
+        self.external_resources: list[tuple[str, int, str]] = []
+        self.local_links: list[tuple[str, int, str]] = []
+        self.local_scripts: list[tuple[str, int, str]] = []
+        self.inline_events: list[tuple[str, int, str]] = []
+        self.javascript_hrefs: list[tuple[str, int, str]] = []
+        self.has_main = False
+        self.main_count = 0
+        self.h1_count = 0
+        self.h1_lines: list[int] = []
         self.in_head = False
         self.in_body = False
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attr_d = dict(attrs)
+        line = self.getpos()[0]
         if tag == "html":
             self.has_html_lang = "lang" in attr_d
             if self.has_html_lang:
@@ -57,19 +80,37 @@ class HTMLChecker(HTMLParser):
                 self.has_description = True
         elif tag == "title":
             self.has_title = True
+        elif tag == "main" or attr_d.get("role") == "main":
+            self.has_main = True
+            self.main_count += 1
+        elif tag == "h1":
+            self.h1_count += 1
+            self.h1_lines.append(line)
         elif tag == "link":
             href = attr_d.get("href", "")
-            if href and not href.startswith(("http://", "https://", "//")):
-                self.links.append((href, self.getpos()[0]))
+            if href and EXTERNAL_RESOURCE_RE.search(href):
+                self.external_resources.append(("link", line, href))
+            elif href:
+                self.local_links.append(("link", line, href))
         elif tag == "script":
             src = attr_d.get("src", "")
-            if src and not src.startswith(("http://", "https://", "//")):
-                self.scripts.append((src, self.getpos()[0]))
+            if src and EXTERNAL_RESOURCE_RE.search(src):
+                self.external_resources.append(("script", line, src))
+            elif src:
+                self.local_scripts.append(("script", line, src))
         elif tag == "img" or tag == "image":
             # SVG 内的 image 不一定需要 alt
             pass
+        elif tag == "a":
+            href = attr_d.get("href", "")
+            if href and JS_HREF_RE.search(href):
+                self.javascript_hrefs.append(("a", line, href))
+
+        for attr_name in attr_d:
+            if attr_name.lower() in INLINE_EVENT_ATTRS:
+                self.inline_events.append((tag, line, attr_name.lower()))
         if "id" in attr_d:
-            self.ids.append((attr_d["id"], self.getpos()[0]))
+            self.ids.append((attr_d["id"], line))
 
 
 def check_html(path: Path) -> list[tuple[str, str]]:
@@ -99,15 +140,22 @@ def check_html(path: Path) -> list[tuple[str, str]]:
     if not checker.has_title:
         issues.append(("WARN", "<head> 缺少 <title>"))
 
-    # 3. CSS 引用
-    for href, line in checker.links:
+    # 3. 外部资源与 javascript:
+    for kind, line, value in checker.external_resources:
+        issues.append(("ERROR", f"第 {line} 行引用了外部运行时资源（{kind}）：{value}"))
+    for tag, line, value in checker.javascript_hrefs:
+        issues.append(("ERROR", f"第 {line} 行存在 javascript: 链接（{tag}）：{value}"))
+    for tag, line, attr in checker.inline_events:
+        issues.append(("ERROR", f"第 {line} 行存在内联事件属性（{tag}.{attr}）"))
+
+    # 4. CSS / JS 引用
+    for kind, line, href in checker.local_links:
         if href.endswith(".css"):
             css_path = path.parent / href.split("?")[0]
             if not css_path.exists():
                 issues.append(("ERROR", f"第 {line} 行引用了不存在的 CSS：{href}"))
 
-    # 4. JS 引用
-    for src, line in checker.scripts:
+    for kind, line, src in checker.local_scripts:
         js_path = path.parent / src.split("?")[0]
         if not js_path.exists():
             issues.append(("ERROR", f"第 {line} 行引用了不存在的 JS：{src}"))
@@ -119,6 +167,18 @@ def check_html(path: Path) -> list[tuple[str, str]]:
             issues.append(("ERROR", f"重复 id '{id_}'（第 {seen[id_]} 行 与 第 {line} 行）"))
         else:
             seen[id_] = line
+
+    # 6. 主内容区
+    if not checker.has_main:
+        issues.append(("ERROR", "缺少 <main> 或 role=\"main\" 主内容区"))
+    elif checker.main_count > 1:
+        issues.append(("ERROR", f"存在 {checker.main_count} 个主内容区"))
+
+    # 7. 页面标题数量
+    if checker.h1_count == 0:
+        issues.append(("ERROR", "缺少页面级 <h1>"))
+    elif checker.h1_count > 1 and path.name not in MULTI_H1_EXEMPTIONS:
+        issues.append(("ERROR", f"存在 {checker.h1_count} 个 <h1>：{checker.h1_lines}"))
 
     return issues
 

@@ -126,18 +126,19 @@
 
 <!-- Navigation -->
 <nav class="blog-nav blog-wrapper">
-  <a href="javascript:void(0)" class="blog-nav-brand" onclick="showSection('home')">纸间</a>
+  <a href="#section-home" class="blog-nav-brand" data-section="home">纸间</a>
   <button class="blog-nav-toggle" id="blog-nav-toggle" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="blog-nav-links">
     <span class="blog-nav-toggle-bar"></span>
     <span class="blog-nav-toggle-bar"></span>
     <span class="blog-nav-toggle-bar"></span>
   </button>
   <div class="blog-nav-links" id="blog-nav-links">
-    <a href="javascript:void(0)" class="active" onclick="showSection('home')" data-section="home">文章</a>
-    <a href="javascript:void(0)" onclick="showSection('archive')" data-section="archive">归档</a>
-    <a href="javascript:void(0)" onclick="showSection('about')" data-section="about">关于</a>
+    <a href="#section-home" class="active" data-section="home">文章</a>
+    <a href="#section-archive" data-section="archive">归档</a>
+    <a href="#section-about" data-section="about">关于</a>
   </div>
 </nav>
+<main id="ds-main" tabindex="-1">
 
 <!-- ===== HOME ===== -->
 <div id="section-home" class="blog-section active">
@@ -196,7 +197,7 @@
         <div class="blog-card-image"><span>▣</span></div>
         <span class="blog-card-tag">开源项目</span>
         <h3>EDIC 设计系统 v1.0 发布：从设计到代码的完整实践</h3>
-        <p>一套基于 OKLch 色彩、编辑主义排版的开放设计系统。内含 25 个组件、100 枚图标、200+ 设计令牌。</p>
+        <p>一套基于 OKLch 色彩、编辑主义排版的开放设计系统。内含 39 个组件家族、209 枚图标、292 个设计令牌。</p>
         <span class="blog-meta">2026.02.10 · 5 min</span>
       </a>
     </div>
@@ -208,7 +209,7 @@
   <article class="blog-article blog-wrapper blog-wrapper--narrow">
     <div class="blog-article-header">
       <div class="blog-category">设计思潮</div>
-      <h1>数字时代的排版自觉：屏幕如何重塑阅读</h1>
+      <h2>数字时代的排版自觉：屏幕如何重塑阅读</h2>
       <div class="blog-meta-large">
         <span>2026.04.28</span>
         <span>12 min read</span>
@@ -252,7 +253,7 @@
 <div id="section-archive" class="blog-section">
   <section class="blog-archive blog-wrapper blog-wrapper--narrow">
     <div class="blog-archive-header">
-      <h1>归档</h1>
+      <h2>归档</h2>
       <p class="ds-body-lg ds-text-muted">共 11 篇文章 · 始于 2025</p>
     </div>
     <div class="blog-archive-year">
@@ -283,7 +284,7 @@
 <div id="section-about" class="blog-section">
   <section class="blog-about blog-wrapper blog-wrapper--narrow">
     <div class="blog-about-header">
-      <h1>关于纸间</h1>
+      <h2>关于纸间</h2>
     </div>
     <div class="blog-about-content">
       <div class="blog-about-text">
@@ -310,6 +311,7 @@
     <a href="terms.html">使用条款</a>
   </div>
 </footer>
+</main>
 
 <script>
 // Event delegation for section navigation — replaces inline onclick handlers
@@ -333,7 +335,7 @@ document.addEventListener('click', function(e) {
     links.classList.remove('is-open');
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+});
 
 document.addEventListener('DOMContentLoaded', function() {
   const toggle = document.getElementById('blog-nav-toggle');
