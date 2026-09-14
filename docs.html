@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="zh-CN"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -756,7 +756,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">03 · Text Input</div>
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
+            <div class="ds-component-preview ds-flex-col ds-items-stretch">
               <div><label class="ds-label">Email</label><input class="ds-input" type="email" placeholder="your@email.com" aria-label="Email"></div>
               <div><label class="ds-label">Password</label><input class="ds-input" type="password" placeholder="••••••••" aria-label="Password"><p class="ds-hint">At least 8 characters</p></div>
               <div><label class="ds-label">With Error</label><input class="ds-input ds-input--error" type="text" value="invalid@" aria-label="Email with error" aria-invalid="true" aria-describedby="email-error"><p class="ds-hint ds-form-hint--error" id="email-error">Please enter a valid email</p></div>
@@ -801,7 +801,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">05 · Checkbox</div>
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;gap:var(--ds-space-3);">
+            <div class="ds-component-preview ds-flex-col ds-items-stretch ds-gap-3">
               <label class="ds-checkbox"><input type="checkbox" checked=""> Remember me</label>
               <label class="ds-checkbox"><input type="checkbox"> I agree to the terms</label>
               <label class="ds-checkbox"><input type="checkbox" disabled=""> Disabled</label>
@@ -825,7 +825,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">06 · Radio</div>
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;gap:var(--ds-space-3);">
+            <div class="ds-component-preview ds-flex-col ds-items-stretch ds-gap-3">
               <label class="ds-radio"><input type="radio" name="r" checked=""> Light</label>
               <label class="ds-radio"><input type="radio" name="r"> Dark</label>
               <label class="ds-radio"><input type="radio" name="r"> System</label>
@@ -927,7 +927,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">10 · Alert</div>
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
+            <div class="ds-component-preview ds-flex-col ds-items-stretch">
               <div class="ds-alert ds-alert--info"><svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><div><div class="ds-alert-title">Info</div>Your session expires in 5 min.</div></div>
               <div class="ds-alert ds-alert--success"><svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><div><div class="ds-alert-title">Saved</div>Changes saved successfully.</div></div>
               <div class="ds-alert ds-alert--warning"><svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><div><div class="ds-alert-title">Warning</div>Storage almost full.</div></div>
@@ -956,11 +956,11 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">11 · Modal</div>
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
-              <div class="ds-modal" role="dialog" aria-modal="true" aria-label="Confirm delete" style="position:static;box-shadow:var(--ds-shadow-lg);max-width:400px;">
-                <div class="ds-modal-header"><h3 style="font-family:var(--ds-font-display);font-size:var(--ds-text-h4);">Confirm Delete</h3><button type="button" class="ds-modal-close" aria-label="关闭">×</button></div>
+            <div class="ds-component-preview ds-flex-col ds-items-stretch">
+              <div class="ds-modal ds-modal--demo" role="dialog" aria-modal="true" aria-label="Confirm delete">
+                <div class="ds-modal-header"><h3 class="ds-modal-title">Confirm Delete</h3><button type="button" class="ds-modal-close" aria-label="关闭">×</button></div>
                 <div class="ds-modal-body">Delete "Draft-03"? This cannot be undone.</div>
-                <div class="ds-modal-footer"><button type="button" class="ds-btn ds-btn--ghost">Cancel</button><button type="button" class="ds-btn ds-btn--primary" style="background:var(--ds-color-error);border-color:var(--ds-color-error);">Delete</button></div>
+                <div class="ds-modal-footer"><button type="button" class="ds-btn ds-btn--ghost">Cancel</button><button type="button" class="ds-btn ds-btn--danger">Delete</button></div>
               </div>
             </div>
             <div class="ds-accordion ds-accordion--code">
@@ -990,7 +990,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">12 · Tabs</div>
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
+            <div class="ds-component-preview ds-flex-col ds-items-stretch">
               <div class="ds-tabs" role="tablist" aria-label="Sample tabs">
                 <button type="button" class="ds-tab ds-tab--active" role="tab" aria-selected="true">Overview</button>
                 <button type="button" class="ds-tab" role="tab" aria-selected="false">Components</button>
@@ -1018,9 +1018,9 @@ skills/edic-design-system/SKILL.md</code></pre>
           <div class="ds-component-group">
             <div class="ds-component-label">13 · Avatar</div>
             <div class="ds-component-preview">
-              <div class="ds-avatar ds-avatar--sm" style="background:var(--ds-color-olive-200);color:var(--ds-color-olive-800);font-weight:600;">ED</div>
-              <div class="ds-avatar" style="background:var(--ds-color-olive-300);color:var(--ds-color-olive-900);font-weight:600;">EDIC</div>
-              <div class="ds-avatar ds-avatar--lg" style="background:var(--ds-color-olive-400);color:var(--ds-color-white);font-weight:600;">Design System</div>
+              <div class="ds-avatar ds-avatar--sm ds-avatar--olive-light">ED</div>
+              <div class="ds-avatar ds-avatar--olive">EDIC</div>
+              <div class="ds-avatar ds-avatar--lg ds-avatar--olive-dark">Design System</div>
             </div>
             <div class="ds-accordion ds-accordion--code">
               <div class="ds-accordion-item">
@@ -1041,10 +1041,10 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">14 · Progress</div>
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;width:100%;max-width:400px;">
-              <div class="ds-progress"><div class="ds-progress-bar" style="width:60%"></div></div>
-              <div class="ds-progress ds-progress--success"><div class="ds-progress-bar" style="width:85%"></div></div>
-              <div class="ds-progress ds-progress--error"><div class="ds-progress-bar" style="width:30%"></div></div>
+            <div class="ds-component-preview ds-flex-col ds-items-stretch ds-w-full ds-max-w-400">
+              <div class="ds-progress"><div class="ds-progress-bar ds-progress-fill--60"></div></div>
+              <div class="ds-progress ds-progress--success"><div class="ds-progress-bar ds-progress-fill--85"></div></div>
+              <div class="ds-progress ds-progress--error"><div class="ds-progress-bar ds-progress-fill--30"></div></div>
             </div>
             <div class="ds-accordion ds-accordion--code">
               <div class="ds-accordion-item">
@@ -1056,7 +1056,7 @@ skills/edic-design-system/SKILL.md</code></pre>
                   <figure class="ds-code">
                     <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-14" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
                     <pre id="pre-code-panel-14" tabindex="0"><code class="language-html">&lt;div class="ds-progress"&gt;
-  &lt;div class="ds-progress-bar" style="width:60%"&gt;&lt;/div&gt;
+  &lt;div class="ds-progress-bar ds-progress-fill--60"&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="ds-progress ds-progress--success"&gt;…&lt;/div&gt;
 &lt;div class="ds-progress ds-progress--error"&gt;…&lt;/div&gt;</code></pre>
@@ -1088,11 +1088,11 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">16 · Skeleton</div>
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;width:100%;max-width:320px;">
-              <div class="ds-skeleton" style="height:16px;width:60%"></div>
-              <div class="ds-skeleton" style="height:12px;width:100%"></div>
-              <div class="ds-skeleton" style="height:12px;width:100%"></div>
-              <div class="ds-skeleton" style="height:12px;width:80%"></div>
+            <div class="ds-component-preview ds-flex-col ds-items-stretch ds-w-full ds-max-w-320">
+              <div class="ds-skeleton ds-h-16 ds-w-60"></div>
+              <div class="ds-skeleton ds-h-12 ds-w-full"></div>
+              <div class="ds-skeleton ds-h-12 ds-w-full"></div>
+              <div class="ds-skeleton ds-h-12 ds-w-80"></div>
             </div>
             <div class="ds-accordion ds-accordion--code">
               <div class="ds-accordion-item">
@@ -1103,8 +1103,8 @@ skills/edic-design-system/SKILL.md</code></pre>
                 <div class="ds-accordion-content" id="code-panel-16" aria-hidden="true">
                   <figure class="ds-code">
                     <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#pre-code-panel-16" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-                    <pre id="pre-code-panel-16" tabindex="0"><code class="language-html">&lt;div class="ds-skeleton" style="height:16px;width:60%"&gt;&lt;/div&gt;
-&lt;div class="ds-skeleton" style="height:12px;width:100%"&gt;&lt;/div&gt;</code></pre>
+                    <pre id="pre-code-panel-16" tabindex="0"><code class="language-html">&lt;div class="ds-skeleton ds-h-16 ds-w-60"&gt;&lt;/div&gt;
+&lt;div class="ds-skeleton ds-h-12 ds-w-full"&gt;&lt;/div&gt;</code></pre>
                   </figure>
                 </div>
               </div>
@@ -1112,10 +1112,10 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">17 · Divider</div>
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;width:100%;">
-              <div style="padding:var(--ds-space-3) 0;">Above content</div>
+            <div class="ds-component-preview ds-flex-col ds-items-stretch ds-w-full">
+              <div class="ds-px-3 ds-py-3">Above content</div>
               <hr class="ds-divider">
-              <div style="padding:var(--ds-space-3) 0;">Below content</div>
+              <div class="ds-px-3 ds-py-3">Below content</div>
             </div>
             <div class="ds-accordion ds-accordion--code">
               <div class="ds-accordion-item">
@@ -1199,9 +1199,9 @@ skills/edic-design-system/SKILL.md</code></pre>
             <div class="ds-component-label">20 · Empty State</div>
             <div class="ds-component-preview">
               <div class="ds-empty-state">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--ds-color-muted);margin-bottom:var(--ds-space-3);" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-                <h4 style="font-family:var(--ds-font-display);font-size:var(--ds-text-h4);margin-bottom:var(--ds-space-2);">No items yet</h4>
-                <p style="font-size:var(--ds-text-body-sm);color:var(--ds-color-muted);margin-bottom:var(--ds-space-4);">Create your first item to get started.</p>
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="ds-empty-state-icon" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                <h4 class="ds-empty-state-title">No items yet</h4>
+                <p class="ds-empty-state-text">Create your first item to get started.</p>
                 <button type="button" class="ds-btn ds-btn--primary">Create item</button>
               </div>
             </div>
@@ -1227,7 +1227,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">21 · Accordion</div>
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
+            <div class="ds-component-preview ds-flex-col ds-items-stretch">
               <div class="ds-accordion">
                 <div class="ds-accordion-item open">
                   <div class="ds-accordion-header" aria-expanded="true" aria-controls="accordion-panel-1"><span>What is this design system?</span><span class="ds-accordion-arrow">▾</span></div>
@@ -1266,7 +1266,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">22 · Table</div>
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
+            <div class="ds-component-preview ds-flex-col ds-items-stretch">
               <div class="ds-table-wrap" tabindex="0">
                 <table class="ds-table">
                   <thead><tr><th scope="col">Name</th><th scope="col">Role</th><th scope="col">Status</th><th scope="col">Active</th></tr></thead>
@@ -1309,11 +1309,11 @@ skills/edic-design-system/SKILL.md</code></pre>
                 <a class="ds-nav-item" href="#"><svg class="ds-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Projects</a>
                 <a class="ds-nav-item" href="#"><svg class="ds-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Settings</a>
               </nav>
-              <div class="ds-dropdown" style="position:static;">
+              <div class="ds-dropdown ds-dropdown--demo">
                 <div class="ds-dropdown-item">Edit</div>
                 <div class="ds-dropdown-item">Duplicate</div>
                 <div class="ds-dropdown-divider"></div>
-                <div class="ds-dropdown-item" style="color:var(--ds-color-error);">Delete</div>
+                <div class="ds-dropdown-item ds-dropdown-item--error">Delete</div>
               </div>
             </div>
             <div class="ds-accordion ds-accordion--code">
@@ -1371,11 +1371,11 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">25 · Slider</div>
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;gap:var(--ds-space-5);padding:var(--ds-space-8);">
+            <div class="ds-component-preview ds-flex-col ds-items-stretch ds-gap-5 ds-p-8">
               <div class="ds-slider-group">
                 <div class="ds-slider-label-row"><label class="ds-label">Volume</label><span class="ds-slider-value" id="slider-val-1">65%</span></div>
                 <div class="ds-slider-track-wrap">
-                  <div class="ds-slider-track"><div class="ds-slider-fill" style="width:65%"></div></div>
+                  <div class="ds-slider-track"><div class="ds-slider-fill ds-w-65"></div></div>
                   <input class="ds-slider" type="range" min="0" max="100" value="65" data-val-id="slider-val-1">
                 </div>
                 <div class="ds-slider-labels"><span>0%</span><span>100%</span></div>
@@ -1383,7 +1383,7 @@ skills/edic-design-system/SKILL.md</code></pre>
               <div class="ds-slider-group">
                 <div class="ds-slider-label-row"><label class="ds-label">Brightness</label><span class="ds-slider-value" id="slider-val-2">40%</span></div>
                 <div class="ds-slider-track-wrap">
-                  <div class="ds-slider-track"><div class="ds-slider-fill" style="width:40%"></div></div>
+                  <div class="ds-slider-track"><div class="ds-slider-fill ds-w-40"></div></div>
                   <input class="ds-slider" type="range" min="0" max="100" value="40" data-val-id="slider-val-2">
                 </div>
                 <div class="ds-slider-labels"><span>0%</span><span>100%</span></div>
@@ -1404,7 +1404,7 @@ skills/edic-design-system/SKILL.md</code></pre>
     &lt;span class="ds-slider-value"&gt;65%&lt;/span&gt;
   &lt;/div&gt;
   &lt;div class="ds-slider-track-wrap"&gt;
-    &lt;div class="ds-slider-track"&gt;&lt;div class="ds-slider-fill" style="width:65%"&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="ds-slider-track"&gt;&lt;div class="ds-slider-fill ds-w-65"&gt;&lt;/div&gt;&lt;/div&gt;
     &lt;input class="ds-slider" type="range" min="0" max="100" value="65"&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
@@ -1415,7 +1415,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">26 · Date / Time Picker</div>
-            <div class="ds-component-preview" style="flex-direction:column;align-items:flex-start;gap:var(--ds-space-4);">
+            <div class="ds-component-preview ds-flex-col ds-items-start ds-gap-4">
               <div class="ds-date-group">
                 <div class="ds-date-wrap">
                   <svg class="ds-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
@@ -1472,8 +1472,8 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">27 · Article TOC</div>
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;padding:var(--ds-space-6)">
-              <nav class="ds-toc-article" style="max-width:360px;">
+            <div class="ds-component-preview ds-flex-col ds-items-stretch ds-p-6">
+              <nav class="ds-toc-article ds-max-w-360">
                 <div class="ds-toc-article-title">On this page</div>
                 <ul class="ds-toc-list">
                   <li><a href="#" class="ds-toc-link ds-toc-link--active"><span class="ds-toc-indicator"></span>Introduction<span class="ds-toc-badge">1</span></a></li>
@@ -1509,7 +1509,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <div class="ds-component-group">
             <div class="ds-component-label">附加 · Contact Form</div>
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
+            <div class="ds-component-preview ds-flex-col ds-items-stretch">
               <div class="ds-contact-form">
                 <div class="ds-form-row">
                   <div class="ds-form-group">
@@ -1640,7 +1640,7 @@ skills/edic-design-system/SKILL.md</code></pre>
 
         <div class="ds-component-group">
           <div class="ds-component-label">33 · Steps</div>
-          <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
+          <div class="ds-component-preview ds-flex-col ds-items-stretch">
             <ol class="ds-steps">
               <li class="ds-step"><span class="ds-step-num">1</span><div class="ds-step-body"><strong>定义</strong><p class="ds-text-muted">确定目标与范围</p></div></li>
               <li class="ds-step"><span class="ds-step-num">2</span><div class="ds-step-body"><strong>设计</strong><p class="ds-text-muted">建立令牌与原型</p></div></li>
@@ -1651,7 +1651,7 @@ skills/edic-design-system/SKILL.md</code></pre>
 
         <div class="ds-component-group">
           <div class="ds-component-label">34 · Description List</div>
-          <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
+          <div class="ds-component-preview ds-flex-col ds-items-stretch">
             <dl class="ds-description-list">
               <dt class="ds-description-term">版本</dt><dd class="ds-description-value">2.0.0</dd>
               <dt class="ds-description-term">许可证</dt><dd class="ds-description-value">CC BY 4.0</dd>
@@ -1673,7 +1673,7 @@ skills/edic-design-system/SKILL.md</code></pre>
 
         <div class="ds-component-group">
           <div class="ds-component-label">36 · Drawer</div>
-          <div class="ds-component-preview" style="padding:0;overflow:hidden;">
+          <div class="ds-component-preview ds-p-0 ds-overflow-hidden">
             <div class="ds-drawer ds-drawer--open" role="dialog" aria-modal="true" aria-label="详情抽屉">
               <div class="ds-drawer-header"><h3 class="ds-drawer-title">项目详情</h3><button class="ds-drawer-close" type="button" aria-label="关闭">×</button></div>
               <p class="ds-text-muted">抽屉提供上下文详情，可通过 Esc 或关闭按钮返回。</p>
@@ -1695,7 +1695,7 @@ skills/edic-design-system/SKILL.md</code></pre>
 
         <div class="ds-component-group">
           <div class="ds-component-label">38 · Command Palette</div>
-          <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
+          <div class="ds-component-preview ds-flex-col ds-items-stretch">
             <div class="ds-command-palette" role="dialog" aria-label="命令面板">
               <div class="ds-command-palette-header">
                 <svg class="ds-command-palette-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
@@ -2056,7 +2056,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           <h2>视觉手册 · 图标库</h2>
           <p>209 枚 SVG 图标，24×24 viewBox，1.5 px 描边。每个图标同步导出到 <code>icons.json</code>，供搜索、分类、AI 推荐和工具链集成使用。</p>
           <div class="ds-grid-icons" id="icon-grid"></div>
-          <p class="ds-body-sm" style="color:var(--ds-color-muted);margin-top:var(--ds-space-6);">完整图标文件：<code>icons.svg</code>（配套生成）— 可直接导入 Penpot。机器可读索引：<code>icons.json</code>。</p>
+          <p class="ds-body-sm ds-color-muted ds-mt-6">完整图标文件：<code>icons.svg</code>（配套生成）— 可直接导入 Penpot。机器可读索引：<code>icons.json</code>。</p>
         </section>
 
         <section class="ds-doc-block" id="visual-effects">
@@ -2093,7 +2093,7 @@ skills/edic-design-system/SKILL.md</code></pre>
 
           <div class="ds-component-group">
             <div class="ds-component-label">毛玻璃导航 — Frosted Nav</div>
-            <div class="ds-glass-demo-bg" style="min-height:120px;">
+            <div class="ds-glass-demo-bg ds-min-h-120">
               <nav class="ds-frosted-nav">
                 <a href="#" class="ds-active">首页</a>
                 <a href="#">项目</a>
@@ -2105,7 +2105,7 @@ skills/edic-design-system/SKILL.md</code></pre>
 
           <div class="ds-component-group">
             <div class="ds-component-label">通知弹层 — Toast</div>
-            <div class="ds-glass-demo-bg" style="min-height:180px;">
+            <div class="ds-glass-demo-bg ds-min-h-180">
               <div class="ds-toast-group">
                 <div class="ds-toast ds-toast--success">
                   <svg class="ds-toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -2128,11 +2128,11 @@ skills/edic-design-system/SKILL.md</code></pre>
 
           <div class="ds-component-group">
             <div class="ds-component-label">玻璃按钮 — Glass Button</div>
-            <div class="ds-glass-demo-bg" style="min-height:100px;">
+            <div class="ds-glass-demo-bg ds-min-h-100">
               <div class="ds-glass-btn-row">
                 <button type="button" class="ds-glass-btn">默认玻璃</button>
-                <button type="button" class="ds-glass-btn" style="font-weight:600;">强化文字</button>
-                <button type="button" class="ds-glass-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px;" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出文件</button>
+                <button type="button" class="ds-glass-btn ds-glass-btn--strong">强化文字</button>
+                <button type="button" class="ds-glass-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ds-icon-inline-right" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出文件</button>
               </div>
             </div>
           </div>
@@ -2142,7 +2142,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           <h2>视觉手册 · 时间轴</h2>
           <p>Timeline 组件展示设计系统发展历程。</p>
           <div class="ds-component-group">
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;max-width:560px;">
+            <div class="ds-component-preview ds-flex-col ds-items-stretch ds-max-w-560">
               <div class="ds-timeline">
                 <div class="ds-timeline-item">
                   <div class="ds-timeline-dot"></div>
@@ -2180,7 +2180,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           <h2>视觉手册 · 联系表单</h2>
           <p>Contact Form 组件完整展示。</p>
           <div class="ds-component-group">
-            <div class="ds-component-preview" style="flex-direction:column;align-items:stretch;">
+            <div class="ds-component-preview ds-flex-col ds-items-stretch">
               <div class="ds-contact-form">
                 <div class="ds-form-row">
                   <div class="ds-form-group">
@@ -2221,7 +2221,7 @@ skills/edic-design-system/SKILL.md</code></pre>
         <section class="ds-doc-block" id="token-index">
           <h2>令牌索引</h2>
           <p>全部 292 个 CSS 自定义属性汇总。可直接复制使用。</p>
-          <div class="ds-table-wrap" style="max-height:600px;overflow-y:auto;">
+          <div class="ds-table-wrap ds-max-h-600 ds-overflow-y-auto">
             <table class="token-table">
               <thead><tr><th scope="col">Token</th><th scope="col">Value</th></tr></thead>
               <tbody id="token-tbody"></tbody>
@@ -2283,7 +2283,7 @@ skills/edic-design-system/SKILL.md</code></pre>
       <span>© <span class="ds-year">2026</span> EDIC · CGArtLab</span>
       <div class="ds-cluster">
         <span class="ds-mono" data-ds-version>v2.0.0</span>
-        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:var(--ds-accent);text-decoration:none" title="本设计系统采用 CC BY 4.0 许可证">CC BY 4.0</a>
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" class="ds-link" title="本设计系统采用 CC BY 4.0 许可证">CC BY 4.0</a>
       </div>
     </div>
   </div>
