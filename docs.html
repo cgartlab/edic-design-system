@@ -328,19 +328,19 @@
           <p>语法高亮颜色由以下 CSS 变量定义，可通过覆盖变量整体换肤：</p>
           <div class="ds-table-wrap">
             <table class="ds-table">
-              <thead><tr><th scope="col">令牌</th><th scope="col">用途</th><th scope="col">浅色模式值（暗底）</th><th scope="col">暗色模式值（暗底）</th></tr></thead>
+               <thead><tr><th scope="col">令牌</th><th scope="col">用途</th><th scope="col">浅色模式引用（暗底）</th><th scope="col">暗色模式引用（暗底）</th></tr></thead>
               <tbody>
-                <tr><td><code>--ds-code-bg</code></td><td>代码块背景</td><td><code>oklch(14% 0.025 60)</code></td><td><code>oklch(18% 0.01 75)</code></td></tr>
-                <tr><td><code>--ds-code-text</code></td><td>基础文字色</td><td><code>oklch(90% 0.015 85)</code></td><td><code>oklch(88% 0.01 85)</code></td></tr>
-                <tr><td><code>--ds-token-comment</code></td><td>注释</td><td><code>oklch(55% 0.035 130)</code></td><td>同浅色</td></tr>
-                <tr><td><code>--ds-token-keyword</code></td><td>关键字</td><td><code>oklch(78% 0.10 25)</code></td><td>同浅色</td></tr>
-                <tr><td><code>--ds-token-string</code></td><td>字符串</td><td><code>oklch(82% 0.10 130)</code></td><td>同浅色</td></tr>
-                <tr><td><code>--ds-token-function</code></td><td>函数 / 类名</td><td><code>oklch(85% 0.08 85)</code></td><td>同浅色</td></tr>
-                <tr><td><code>--ds-token-number</code></td><td>数字 / 布尔</td><td><code>oklch(80% 0.09 60)</code></td><td>同浅色</td></tr>
-                <tr><td><code>--ds-token-tag</code></td><td>HTML 标签</td><td><code>oklch(78% 0.09 60)</code></td><td>同浅色</td></tr>
-                <tr><td><code>--ds-token-attr-name</code></td><td>属性名</td><td><code>oklch(75% 0.06 180)</code></td><td>同浅色</td></tr>
-                <tr><td><code>--ds-token-operator</code></td><td>运算符</td><td><code>oklch(70% 0.02 80)</code></td><td>同浅色</td></tr>
-                <tr><td><code>--ds-token-punctuation</code></td><td>标点</td><td><code>oklch(65% 0.02 80)</code></td><td>同浅色</td></tr>
+                <tr><td><code>--ds-code-bg</code></td><td>代码块背景</td><td><code>var(--ds-code-bg)</code></td><td><code>var(--ds-code-bg)</code></td></tr>
+                <tr><td><code>--ds-code-text</code></td><td>基础文字色</td><td><code>var(--ds-code-text)</code></td><td><code>var(--ds-code-text)</code></td></tr>
+                <tr><td><code>--ds-token-comment</code></td><td>注释</td><td><code>var(--ds-token-comment)</code></td><td><code>var(--ds-token-comment)</code></td></tr>
+                <tr><td><code>--ds-token-keyword</code></td><td>关键字</td><td><code>var(--ds-token-keyword)</code></td><td><code>var(--ds-token-keyword)</code></td></tr>
+                <tr><td><code>--ds-token-string</code></td><td>字符串</td><td><code>var(--ds-token-string)</code></td><td><code>var(--ds-token-string)</code></td></tr>
+                <tr><td><code>--ds-token-function</code></td><td>函数 / 类名</td><td><code>var(--ds-token-function)</code></td><td><code>var(--ds-token-function)</code></td></tr>
+                <tr><td><code>--ds-token-number</code></td><td>数字 / 布尔</td><td><code>var(--ds-token-number)</code></td><td><code>var(--ds-token-number)</code></td></tr>
+                <tr><td><code>--ds-token-tag</code></td><td>HTML 标签</td><td><code>var(--ds-token-tag)</code></td><td><code>var(--ds-token-tag)</code></td></tr>
+                <tr><td><code>--ds-token-attr-name</code></td><td>属性名</td><td><code>var(--ds-token-attr-name)</code></td><td><code>var(--ds-token-attr-name)</code></td></tr>
+                <tr><td><code>--ds-token-operator</code></td><td>运算符</td><td><code>var(--ds-token-operator)</code></td><td><code>var(--ds-token-operator)</code></td></tr>
+                <tr><td><code>--ds-token-punctuation</code></td><td>标点</td><td><code>var(--ds-token-punctuation)</code></td><td><code>var(--ds-token-punctuation)</code></td></tr>
               </tbody>
             </table>
           </div>
@@ -385,13 +385,13 @@
 
         <section class="ds-doc-block" id="customize">
           <h2>定制与扩展</h2>
-          <p>替换强调色只需覆盖橄榄绿色阶与 <code>--ds-accent</code> 系列——其余组件无需改动即可整体换肤：</p>
+          <p>替换强调色只需覆盖 <code>--ds-color-olive-*</code> 强调色阶与 <code>--ds-accent</code> 系列——其余组件无需改动即可整体换肤：</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">css</span><button class="ds-copy-btn" data-copy="#c-custom" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
             <pre id="c-custom" tabindex="0"><code class="language-css">:root {
-  /* 改为品牌蓝，色相 H≈250，其余明度/彩度沿用 */
-  --ds-color-olive-400: oklch(52% 0.12 250);
-  --ds-color-olive-500: oklch(45% 0.13 250);
+  /* 覆盖强调色阶；按品牌色重新定义 OKLch 明度、彩度与色相 */
+  --ds-color-olive-400: oklch(0% 0 0);
+  --ds-color-olive-500: oklch(0% 0 0);
   --ds-accent: var(--ds-color-olive-400);
   --ds-accent-hover: var(--ds-color-olive-500);
 }</code></pre>
@@ -2068,11 +2068,11 @@ skills/edic-design-system/SKILL.md</code></pre>
             <div class="ds-overlay-grid">
               <div>
                 <div class="ds-overlay-sample"><div class="ds-overlay-bg"></div><div class="ds-overlay-layer ds-overlay-strong"><span>40%</span></div></div>
-                <div class="ds-overlay-label"><code>--ds-color-overlay</code> — oklch(0% 0 0 / 40%)</div>
+                <div class="ds-overlay-label"><code>--ds-color-overlay</code> — 40% scrim</div>
               </div>
               <div>
                 <div class="ds-overlay-sample"><div class="ds-overlay-bg"></div><div class="ds-overlay-layer ds-overlay-light"><span>12%</span></div></div>
-                <div class="ds-overlay-label"><code>--ds-color-overlay-light</code> — oklch(0% 0 0 / 12%)</div>
+                <div class="ds-overlay-label"><code>--ds-color-overlay-light</code> — 12% scrim</div>
               </div>
             </div>
           </div>
