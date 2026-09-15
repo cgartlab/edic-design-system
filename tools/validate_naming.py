@@ -8,6 +8,8 @@
   4. 反模式：as any / @ts-expect-error / @ts-ignore / 空 catch
   5. JS 顶层禁用 `var`（推荐 const/let）
   6. Dangling BEM 修饰符：`.class element--modifier`（element 是裸标签而非带 . 的 class）
+  7. 非动态内联样式：仅允许 `--d:` 错峰延迟；report/resume 离线模板
+     为明确豁免（它们需要数据驱动展示）
 """
 from __future__ import annotations
 
@@ -22,8 +24,10 @@ JS_FILE = ROOT / "scripts.js"
 
 VALID_CATEGORIES = {
     "color", "font", "text", "weight", "leading", "tracking",
-    "space", "radius", "shadow", "duration", "ease", "bp", "z",
-    "blur", "glass", "accent", "opacity", "size",
+    "space", "radius", "border", "shadow", "depth", "duration", "ease",
+    "delay", "motion", "bp", "breakpoint", "z", "grid", "gutter",
+    "blur", "glass", "accent", "opacity", "size", "overlay", "focus",
+    "disabled", "skeleton", "state",
     "code", "token", "cjk", "reveal", "draw", "stack", "brand", "glow",
     "gradient", "chart",
 }
@@ -45,6 +49,11 @@ ANTI_PATTERNS = [
 DANGLING_BEM_MODIFIER_PATTERN = re.compile(
     r"\.([a-z][a-z0-9-]*)\s+([a-z][a-z0-9-]*)--([a-z][a-z0-9-]*)\s*[,:{]"
 )
+
+# 内联样式豁免：动态 --d 延迟；report/resume 离线动态模板
+INLINE_STYLE_EXEMPT_FILES = {"report.html", "resume.html"}
+INLINE_STYLE_DYNAMIC_PATTERN = re.compile(r"style=\"--d:")
+INLINE_STYLE_ENTITY_EXAMPLES = ("&lt;", "&gt;", "&quot;")
 
 
 def is_valid_bem_class(cls: str) -> tuple[bool, str]:
@@ -274,6 +283,30 @@ def check_var_in_js() -> list[str]:
     return issues
 
 
+def check_inline_styles(html_files: list[Path]) -> list[str]:
+    """扫描 HTML 内联 style=。仅允许动态 --d 延迟；其余在豁免文件外报错。"""
+    issues = []
+    for path in html_files:
+        if path.name in INLINE_STYLE_EXEMPT_FILES:
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        for match in re.finditer(r"style=\"([^\"]*)\"", text):
+            value = match.group(1).strip()
+            if not value:
+                continue
+            line_no = text[: match.start()].count("\n") + 1
+            line_text = text.splitlines()[line_no - 1]
+            if any(marker in line_text for marker in INLINE_STYLE_ENTITY_EXAMPLES):
+                continue
+            if re.fullmatch(r"--d:\s*\d+ms", value):
+                continue
+            issues.append(
+                f"{path.name}:{line_no} 非动态内联样式（AGENTS.md 禁止）："
+                f"style=\"{value}\"；请改用 ds-* 类或样式表规则"
+            )
+    return issues
+
+
 def main() -> int:
     html_files = sorted(ROOT.glob(HTML_GLOB))
     if not html_files:
@@ -305,6 +338,10 @@ def main() -> int:
     dangling_targets = css_cli_paths if css_cli_paths else [CSS_FILE]
     dangling_issues = check_dangling_bem_modifier(dangling_targets)
     errors.extend(dangling_issues)
+
+    # 内联样式（非动态）
+    inline_issues = check_inline_styles(html_files)
+    errors.extend(inline_issues)
 
     print(f"─── 命名规范检查 ───")
     print(f"扫描 HTML  : {len(html_files)} 个")

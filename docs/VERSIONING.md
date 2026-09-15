@@ -72,18 +72,18 @@ MAJOR.MINOR.PATCH[-PRERELEASE][+BUILD]
 由于本项目无构建工具，浏览器/CDN 通过 `?v=` 查询字符串刷新资源缓存：
 
 ```html
-<link rel="stylesheet" href="styles.css?v=1.10.2">
-<script src="scripts.js?v=1.10.2"></script>
+<link rel="stylesheet" href="styles.css?v=2.0.0">
+<script src="scripts.js?v=2.0.0"></script>
 ```
 
 **规则**：
 
 1. **MAJOR / MINOR bump** → 同步更新所有 HTML 的 `?v=`
 2. **PATCH bump** → 必须同步更新所有 HTML 的 `?v=`
-3. 自动化校验：`python3 tools/validate_versions.py` 会扫描所有 HTML，
+3. 自动化校验：`npm run validate:versions` 会扫描所有 HTML，
    校验 `?v=` 是否与 `package.json` / `CHANGELOG.md` 中最新版本号一致
 
-> 注意：当前项目没有 `package.json`，版本源在专门的 `VERSION` 单行文件（无构建步骤，GitHub Pages 直接部署静态文件）。
+> 注意：`package.json` 仅承载开发脚本与 npm audit 桥接，运行时无 Node 依赖；版本源仍是 `VERSION` 单行文件，GitHub Pages 可直接部署静态文件。
 
 ### stamp 工具（自动化同步）
 
@@ -92,10 +92,10 @@ MAJOR.MINOR.PATCH[-PRERELEASE][+BUILD]
 
 | 场景 | 命令 |
 |------|------|
-| 修改 VERSION 后同步全部资源 | `python3 tools/stamp_version.py` |
-| CI / pre-commit 检查是否已 stamp | `python3 tools/stamp_version.py --check` |
-| 预览 diff | `python3 tools/stamp_version.py --diff` |
-| 反向还原（开发期） | `python3 tools/stamp_version.py --restore` |
+| 修改 VERSION 后同步全部资源 | `npm run stamp` |
+| CI / pre-commit 检查是否已 stamp | `npm run stamp:check` |
+| 预览 diff | `npm run stamp:diff` |
+| 全量验证 | `npm run validate` |
 
 源码中所有需要跟随 VERSION 同步的位置都使用 `DS_VERSION` 占位符（由双花括号包裹），
 stamp 工具会一次性替换为 VERSION 中的真实版本号（无构建步骤，GitHub Pages 仍可直接部署静态文件）。
@@ -156,7 +156,7 @@ release-please / semantic-release 风格的自动化可在未来引入（见 [�
 
 ## 当前版本
 
-- **最新稳定版**：`v1.10.2`（2026-08-14）
+- **最新稳定版**：`v2.0.0`（2026-09-14）
 - **VERSION 文件**：项目根目录 `VERSION` 单行文件存放当前版本号
 
 ## 自动化发布（Release Please）

@@ -29,13 +29,21 @@ from __future__ import annotations
 import argparse
 import re
 import sys
+import json
+import os
 from collections import Counter
 from difflib import unified_diff
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
 SCRIPTS_JS = ROOT / "scripts.js"
 ICONS_SVG = ROOT / "icons.svg"
+ICONS_JSON = ROOT / "icons.json"
 
 # 匹配 ICONS 数组的起止（DOTALL 让 . 能跨行匹配 svg 字符串内的换行）
 ICONS_ARRAY_RE = re.compile(
@@ -93,6 +101,59 @@ def extract_icons(scripts_text: str) -> list[dict]:
         raise ValueError(f"ICONS 数组存在重复 ID: {dupes}")
 
     return icons
+
+
+def icon_category(icon_id: str) -> str:
+    id_ = icon_id.lower()
+    if id_.startswith(("arrow-", "chevron-", "navigation", "menu", "grid", "sidebar", "list")):
+        return "nav"
+    if id_ in {"check", "x", "plus", "minus", "search", "filter", "edit", "trash", "download", "upload", "copy", "save"}:
+        return "action"
+    if id_ in {"bell", "star", "bookmark", "heart", "flag", "alert", "info", "help", "warning", "success", "error", "circle", "square", "dot"}:
+        return "status"
+    if id_ in {"calendar", "clock", "user", "users", "mail", "phone", "message", "send", "share", "at-sign", "globe"}:
+        return "communication"
+    if id_ in {"camera", "image", "video", "play", "pause", "music", "speaker", "headphones", "zoom-in", "zoom-out", "maximize", "minimize"}:
+        return "media"
+    if id_ in {"bar-chart", "pie-chart", "activity", "trending-up", "trending-down", "database", "server", "code", "terminal", "cpu", "wifi"}:
+        return "data"
+    if id_ in {"archive", "box", "briefcase", "credit-card", "shopping-cart", "shopping-bag", "package", "gift", "dollar-sign", "tag"}:
+        return "commerce"
+    if id_ in {"home", "map-pin", "map", "compass", "book", "file", "folder", "layers", "settings", "tool", "trash"}:
+        return "system"
+    return "action"
+
+
+def icon_keywords(icon_id: str) -> list[str]:
+    words = icon_id.replace("-", " ").split()
+    aliases = {"user": "profile", "mail": "email", "phone": "call", "map": "location"}
+    return words + [aliases[word] for word in words if word in aliases]
+
+
+def build_icon_manifest(icons: list[dict]) -> str:
+    payload = {
+        "version": "2.0.0",
+        "source": "scripts.js ICONS array",
+        "sprite": "icons.svg",
+        "naming": {
+            "legacy": "{name}-{variant}",
+            "v2": "{category}-{name}-{style}",
+            "style": "outline",
+        },
+        "icons": [
+            {
+                "name": icon["id"],
+                "category": icon_category(icon["id"]),
+                "style": "outline",
+                "viewBox": "0 0 24 24",
+                "keywords": icon_keywords(icon["id"]),
+                "aliases": [],
+                "deprecated": False,
+            }
+            for icon in icons
+        ],
+    }
+    return json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
 
 
 def build_symbol(icon_id: str, svg: str) -> str:
@@ -188,16 +249,22 @@ def main() -> int:
     print(f"scripts.js ICONS 数组: {len(icons)} 个图标（{head_ids} ... {tail_ids}）")
 
     sprite = build_sprite(icons)
+    icon_manifest = build_icon_manifest(icons)
 
     if args.check or args.diff:
         if not ICONS_SVG.exists():
             print(f"[ERROR] icons.svg 不存在，需运行生成: {ICONS_SVG}")
             return 2
+        if not ICONS_JSON.exists():
+            print(f"[ERROR] icons.json 不存在，需运行生成: {ICONS_JSON}")
+            return 2
         existing = ICONS_SVG.read_text(encoding="utf-8")
+        existing_manifest = ICONS_JSON.read_text(encoding="utf-8")
         if existing == sprite:
-            print(f"icons.svg: 已同步（{len(icons)} 个 <symbol>）")
-            return 0
-        print(f"[ERROR] icons.svg 与 ICONS 不同步（{len(icons)} vs 现有），需重新生成")
+            if existing_manifest == icon_manifest:
+                print(f"icons.svg: 已同步（{len(icons)} 个 <symbol>）")
+                return 0
+        print(f"[ERROR] icons.svg/icons.json 与 ICONS 不同步（{len(icons)} 个图标）")
         if args.diff:
             diff = unified_diff(
                 existing.splitlines(keepends=True),
@@ -207,11 +274,21 @@ def main() -> int:
                 n=2,
             )
             sys.stdout.writelines(diff)
+            diff = unified_diff(
+                existing_manifest.splitlines(keepends=True),
+                icon_manifest.splitlines(keepends=True),
+                fromfile="icons.json (current)",
+                tofile="icons.json (expected)",
+                n=2,
+            )
+            sys.stdout.writelines(diff)
         return 2
 
     # 生成模式
     ICONS_SVG.write_text(sprite, encoding="utf-8")
+    ICONS_JSON.write_text(icon_manifest, encoding="utf-8")
     print(f"✓ 已生成 {ICONS_SVG.relative_to(ROOT)}（{len(icons)} 个 <symbol>）")
+    print(f"✓ 已生成 {ICONS_JSON.relative_to(ROOT)}（{len(icons)} 条索引）")
     return 0
 
 

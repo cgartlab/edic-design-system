@@ -1,6 +1,6 @@
 # EDIC Design System — Agent Instructions
 
-**Version:** 1.10.2 | **Site:** https://edic.cgartlab.com | **License:** CC BY 4.0
+**Version:** 2.0.0 | **Site:** https://edic.cgartlab.com | **License:** CC BY 4.0
 
 ---
 
@@ -62,25 +62,30 @@ python3 tools/stamp_version.py --diff    # preview changes
 
 ## Validation Commands
 
-Run before every PR:
-
+Run the full 2.0 audit before every PR:
 ```bash
-make validate              # all 10 validators; exit 1 blocks, exit 0/2 pass
+npm run audit         # validators + version checks + icons + visual baseline + tests
+npm run lint           # 15 static validators only
+npm test             # Vitest unit tests
 ```
 
-Individual validators:
-
+Quick component/component-specific checks:
 ```bash
-make validate-tokens       # tokens.json ↔ styles.css consistency
-make validate-naming       # BEM / token naming conventions
-make validate-html         # HTML structure and required attributes
-make validate-a11y         # accessibility (img alt, heading hierarchy, contrast)
-make validate-versions      # ?v= sync with VERSION file
-make validate-links        # internal anchors and cross-page references
-make validate-cssref       # HTML classes defined in styles.css
-make validate-darkmode     # dark mode token completeness
-make validate-verext       # tokens.json / package.json version sync
-make validate-hardcode     # hardcoded color values (should use --ds-* tokens)
+npm run validate:tokens       # tokens.json ↔ styles.css consistency
+npm run validate:naming       # BEM / token naming conventions
+npm run validate:html         # HTML structure and required attributes
+npm run validate:a11y         # accessibility checks
+npm run validate:versions     # ?v= sync with VERSION file
+npm run validate:links        # internal anchors and cross-page references
+npm run validate:cssref       # HTML classes defined in styles.css
+npm run validate:darkmode     # dark mode token completeness
+npm run validate:verext       # tokens/pkg/VERSION version sync
+npm run validate:hardcode     # hardcoded color values
+npm run validate:manifest     # manifest structure and reference integrity
+npm run validate:manifest-css # manifest core components have CSS classes
+npm run validate:components   # component coverage and ARIA contracts
+npm run validate:icons        # icons.json ↔ scripts.js ↔ icons.svg sync
+npm run validate:visual-baseline # visual baseline snapshot checks
 ```
 
 Exit codes: 0 = pass, 1 = blocking error, 2 = warnings only.
@@ -98,7 +103,7 @@ Or Node (requires `npm install`):
 
 ```bash
 npx serve -l 8000 .
-npm run validate           # Node wrapper for validators
+npm run validate           # Node wrapper for all validators
 ```
 
 ---
@@ -170,7 +175,7 @@ After every CSS/HTML change, you MUST do the following before marking the task c
 2. Add corresponding entry to `tokens.json` (uses dot-notation paths, not flattened CSS names)
 3. If adding icons, append to `scripts.js` `ICONS` array → run `make icons` → run `make icons-check`
 4. Add preview to `docs.html` #visual-components section
-5. Run `make validate` — all must pass (exit 1 blocks)
+5. Run `npm run audit` — all blocking checks must pass
 6. Update `tokens.json` `"version"` and `package.json` `"version"` to match VERSION
 7. Run `make stamp-version` to sync `?v=` to all HTML/MD files
 
@@ -275,7 +280,7 @@ All changes go through Pull Requests — no direct pushes to `main` for features
 
 1. Create a branch from `main`: `dev-{feature}`, `fix-{bug}`, `write-{topic}`
 2. Make changes and open a PR against `main`
-3. CI runs all validators (`make validate`)
+3. CI runs the 2.0 audit (`npm run audit`)
 4. PR is reviewed and squash-merged
 
 ### 2. Merge Strategy
@@ -290,7 +295,7 @@ All changes go through Pull Requests — no direct pushes to `main` for features
 ┌─────────────────────────────────────────────────────────────┐
 │ Feature/Bug PR                                               │
 │  1. Developer opens PR (dev-*, fix-*)                       │
-│  2. CI runs: make validate (10 validators)                   │
+│  2. CI runs: npm run audit (2.0 full gate)            │
 │  3. Review → Squash merge to main                            │
 └─────────────────────────────────────────────────────────────┘
                            ↓
@@ -304,7 +309,7 @@ All changes go through Pull Requests — no direct pushes to `main` for features
 ┌─────────────────────────────────────────────────────────────┐
 │ Release PR (release-please--)                                │
 │  1. release-please writes CHANGELOG.md (single source)       │
-│  2. CI runs: make validate + validate_release_notes.py       │
+│  2. CI runs: npm run audit + validate_release_notes.py  │
 │  3. CI checks: CHANGELOG.md has vX.Y.Z section (blocks if not)│
 │  4. Review (polish CHANGELOG.md wording if needed) → Merge   │
 └─────────────────────────────────────────────────────────────┘
@@ -369,7 +374,7 @@ If limits are exceeded, CI blocks the release.
 
 All releases are archived on GitHub Releases with:
 
-- Version tag (e.g., `v1.10.2`)
+- Version tag (e.g., `v2.0.0`)
 - Release notes (from `CHANGELOG.md`)
 - Checksums (SHA-256)
 - Pre-built assets (`.gz` files)

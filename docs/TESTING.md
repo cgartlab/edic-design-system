@@ -24,7 +24,7 @@
 |------|------|------|------|
 | `validate_tokens.py` | tokens.json ↔ styles.css 一致性 | Python 3.11+ | stdlib |
 | `validate_naming.py` | BEM / token 命名规范 | Python 3.11+ | stdlib |
-| `validate_html.py` | HTML 标签闭合、属性合法性 | Python 3.11+ | stdlib |
+| `validate_html.py` | HTML 结构、主内容区、外部资源、`javascript:`、内联事件与标题数量 | Python 3.11+ | stdlib |
 | `validate_a11y.py` | 基础可访问性（alt / aria / 标题层级） | Python 3.11+ | stdlib |
 | `validate_versions.py` | 资源 `?v=` 与最新版本号同步 | Python 3.11+ | stdlib |
 | `validate_links.py` | 内部链接、锚点、CSS / JS 引用有效性 | Python 3.11+ | stdlib |
@@ -32,6 +32,11 @@
 | `validate_darkmode.py` | 暗色模式 token 完整性验证 | Python 3.11+ | stdlib |
 | `validate_verext.py` | tokens.json / package.json 版本一致性 | Python 3.11+ | stdlib |
 | `validate_hardcode.py` | 硬编码颜色检测（强制使用 token） | Python 3.11+ | stdlib |
+| `validate_manifest.py` | `edic-manifest.json` 结构与引用完整性 | Python 3.11+ | stdlib |
+| `validate_manifest_css.py` | manifest 核心组件在 CSS 中存在 | Python 3.11+ | stdlib |
+| `validate_components.py` | 组件覆盖、ARIA 契约与示例完整性 | Python 3.11+ | stdlib |
+| `validate_icons.py` | icons.json / scripts.js / icons.svg 同步 | Python 3.11+ | stdlib |
+| `validate_visual_baseline.py` | 视觉基线快照检查 | Python 3.11+ | stdlib |
 | **CI 自动化** | 上述全部 | GitHub Actions | 无（除 Python） |
 
 > 工具都是**纯 Python stdlib**，无 `pip install` 需求，保持项目"零运行时依赖"特性。
@@ -41,33 +46,33 @@
 ### 全部校验
 
 ```bash
-make validate
+npm run validate
 # 或
-python3 tools/validate_tokens.py && \
-python3 tools/validate_naming.py && \
-python3 tools/validate_html.py && \
-python3 tools/validate_a11y.py && \
-python3 tools/validate_versions.py && \
-python3 tools/validate_links.py && \
-python3 tools/validate_cssref.py && \
-python3 tools/validate_darkmode.py && \
-python3 tools/validate_verext.py && \
-python3 tools/validate_hardcode.py
+make validate
+# 发布前完整审计
+npm run audit
+# 单元测试
+npm test
 ```
 
 ### 单项校验
 
 ```bash
-make validate-tokens
-make validate-naming
-make validate-html
-make validate-a11y
-make validate-versions
-make validate-links
-make validate-cssref
-make validate-darkmode
-make validate-verext
-make validate-hardcode
+npm run validate:tokens
+npm run validate:naming
+npm run validate:html
+npm run validate:a11y
+npm run validate:versions
+npm run validate:links
+npm run validate:cssref
+npm run validate:darkmode
+npm run validate:verext
+npm run validate:hardcode
+npm run validate:manifest
+npm run validate:manifest-css
+npm run validate:components
+npm run validate:icons
+npm run validate:visual-baseline
 ```
 
 ### 在 CI 中
@@ -158,9 +163,9 @@ make validate-hardcode
 **使用**：
 
 ```bash
-python3 tools/stamp_version.py           # 应用变更
-python3 tools/stamp_version.py --check   # 仅检查（CI 用）
-python3 tools/stamp_version.py --diff    # 预览 diff
+npm run stamp                 # 应用变更
+npm run stamp:check           # 仅检查（CI 用）
+npm run stamp:diff            # 预览 diff
 ```
 
 **自动触发**：
@@ -186,7 +191,7 @@ python3 tools/stamp_version.py --diff    # 预览 diff
 **规则**：
 
 - ✅ HTML 中每个 `ds-*` class 必须在 CSS 中有同名选择器
-- ✅ 排除 Prism.js 动态类（`language-*`、`prism-*`、`token-*`）
+- ✅ 仅检查设计系统 `ds-*` class，语言标记示例不触发阻塞
 - ✅ 排除 JS 钩子类（`querySelector('.xxx')` 引用的类）
 - ✅ 排除 `<pre><code>` 和 `.ds-code` 代码块中的示例类名
 - ✅ 支持复合选择器、`@media` 嵌套、后代选择器的类名提取
@@ -269,28 +274,29 @@ python3 tools/stamp_version.py --diff    # 预览 diff
 
 ## 未来工作
 
-### 短期（v1.5）
+### 短期
 
 - [ ] `validate_a11y.py` 集成 `axe-core`（通过 `npx @axe-core/cli`）
 - [ ] HTML 校验工具改用 `html5lib`（更严格）
-- [ ] 视觉回归测试：Playwright 截图对比（GitHub Actions 跑）
+- [ ] 将视觉基线检查扩展到更多浏览器视口组合
+- [ ] 将 gzip 体积预算与 changelog 检查拆为独立 CI summary
 
-### 中期（v1.6+）
+### 中期
 
 - [ ] 引入 Storybook-like 组件 playground
 - [ ] 视觉测试：Chromatic / Percy（需付费，留作可选）
 - [ ] 跨浏览器测试：BrowserStack（可选）
 
-### 长期（v2.0）
+### 长期
 
-- [ ] 引入 Web Test Runner / Vitest
+- [x] 引入 Vitest，覆盖 JS 桥接与审计脚本
 - [ ] 引入 Stylelint 自定义规则
 - [ ] 引入 ESLint（针对 `scripts.js`）
 - [ ] 引入 Lighthouse CI（性能 / SEO / a11y 综合评分）
 
 ## 不在范围内
 
-- ❌ **单元测试组件 JS 行为** — 当前 `scripts.js` 主要是 DOM 操作与渲染，测试 ROI 低
+- ❌ **端到端业务测试** — 当前 `scripts.js` 主要是 DOM 操作与渲染，业务逻辑有限
 - ❌ **端到端测试（E2E）** — 项目是纯静态展示站，无业务逻辑
 - ❌ **服务器端测试** — 项目无后端
 
@@ -300,10 +306,11 @@ python3 tools/stamp_version.py --diff    # 预览 diff
 简述：
 
 1. **触发**：push 到 main、PR、weekly schedule
-2. **环境**：`ubuntu-latest` + `python3 --version` ≥ 3.11
+2. **环境**：`ubuntu-latest` + Node 20+ + Python ≥ 3.11
 3. **步骤**：
    - checkout
-   - 运行 `python3 tools/validate_*.py`
+   - 运行 `npm run validate`
+   - 运行 `npm test`
    - 报告失败 → 阻塞合并
 
 ---

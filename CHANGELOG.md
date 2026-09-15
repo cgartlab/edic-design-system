@@ -3,6 +3,32 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.0.0](https://github.com/cgartlab/edic-design-system/compare/v1.10.2...v2.0.0) (2026-09-13)
+
+### 新增
+
+* **tokens:** 将 `tokens.json` 升级为 2.0 结构化数组，为每个令牌补充 `category`、`description`、`dark`、`aliases`、`status`，并保留 `_legacyTokens` 兼容旧读取方式
+* **tokens:** 扩展语义别名层，覆盖 surface/text/border、depth、motion delay、opacity、grid/gutter/breakpoint 等 2.0 类别
+* **components:** 核心组件清单扩展至 39 个，并为 switch、radio-group、combobox、date-picker、command-palette、drawer、description-list、tooltip 补齐 CSS 契约
+* **icons:** 图标系统扩展至 209 枚，并生成 `icons.json` manifest 与 `<symbol>` sprite
+* **manifest:** 新增 `edic-manifest.json`，集中描述令牌、组件、图标、模式、约束与 AI 使用规则
+* **agents:** 新增 `AGENT-GUIDE.md`、迁移指南、组件 backlog 与 token 2.0 矩阵文档
+* **validation:** 新增 manifest ↔ CSS 组件验证器，并接入 `make validate` 与 `npm run validate`
+* **tooling:** `make test` 现在运行完整验证与 Vitest 单元测试
+
+### 修复
+
+* **manifest:** 修正核心组件命名漂移，确保 `btn`、`nav`、`navbar`、`icon-btn` 与 CSS 实际类名一致
+* **docs:** 更新 README 与 Skill README 的组件/图标数量和 Skill 版本标记
+* **docs:** 修复 `examples/components/index.html` 标题层级与导航类名示例
+* **scripts:** 修复 `run-validators.js` 在显式 `PYTHON` 路径下的数组兼容性问题
+* **tokens:** 更新 `validate_tokens.py` 以读取 2.0 `tokens[]` 结构并兼容旧扁平结构
+
+### 文档
+
+* **release:** 添加 2.0.0 变更日志条目
+* **site:** 同步版本戳并验证 24 个发布目标文件一致
+
 ## [1.10.2](https://github.com/cgartlab/edic-design-system/compare/v1.10.1...v1.10.2) (2026-08-14)
 
 

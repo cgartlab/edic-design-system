@@ -12,7 +12,42 @@ const { spawnSync } = require("node:child_process");
 const path = require("node:path");
 
 const ROOT = path.resolve(__dirname, "..");
-const PYTHON = process.env.PYTHON || (process.platform === "win32" ? "python" : "python3");
+
+function canRunPython(command, args) {
+  try {
+    const result = spawnSync(command, [...args, "--version"], {
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"],
+      timeout: 3000,
+    });
+    if (result.error) return false;
+    const output = `${result.stdout || ""}${result.stderr || ""}`;
+    return result.status === 0 && /Python \d/.test(output);
+  } catch {
+    return false;
+  }
+}
+
+function detectPython() {
+  const explicit = process.env.PY || process.env.PYTHON;
+  if (explicit && canRunPython(explicit, [])) return [explicit];
+
+  const candidates = [];
+  if (process.platform === "win32") {
+    candidates.push(["py", ["-V:Astral/CPython3.12.13"]]);
+    candidates.push(["py", ["--version"]]);
+  }
+  candidates.push(["python3", []]);
+  candidates.push(["python", []]);
+
+  for (const commandArgs of candidates) {
+    if (canRunPython(commandArgs[0], commandArgs.slice(1))) return commandArgs;
+  }
+  return process.platform === "win32" ? ["python"] : ["python3"];
+}
+
+const PYTHON_COMMAND = detectPython();
+const CHILD_ENV = { ...process.env, PYTHONIOENCODING: process.env.PYTHONIOENCODING || "utf-8" };
 
 const VALIDATORS = [
   "validate_tokens.py",
@@ -25,6 +60,11 @@ const VALIDATORS = [
   "validate_darkmode.py",
   "validate_verext.py",
   "validate_hardcode.py",
+  "validate_manifest.py",
+  "validate_manifest_css.py",
+  "validate_components.py",
+  "validate_icons.py",
+  "validate_visual_baseline.py",
 ];
 
 const STAMPERS = [
@@ -36,17 +76,30 @@ const STAMPERS = [
 function runOne(script, args = []) {
   const toolPath = path.join(ROOT, "tools", script);
   const label = args.length ? `${script} ${args.join(" ")}` : script;
-  console.log(`\n── ${label} ──`);
-  const result = spawnSync(PYTHON, [toolPath, ...args], {
-    stdio: "inherit",
+  console.log(`\n-- ${label} --`);
+  const result = spawnSync(PYTHON_COMMAND[0], [...PYTHON_COMMAND.slice(1), toolPath, ...args], {
+    encoding: "utf8",
+    env: CHILD_ENV,
+    stdio: ["ignore", "pipe", "pipe"],
     cwd: ROOT,
   });
+
+  if (result.stdout) process.stdout.write(result.stdout);
+  if (result.stderr) process.stderr.write(result.stderr);
+
+  if (result.error) {
+    console.error(`[ERROR] ${label}: ${result.error.message}`);
+    return "fail";
+  }
+  if (result.status !== 0 && !result.stdout && !result.stderr) {
+    console.error(`[ERROR] ${label}: exit code ${result.status}`);
+  }
   return result.status === 0 ? "ok" : result.status === 2 ? "warn" : "fail";
 }
 
 function main() {
   console.log("EDIC Design System — 验证运行器");
-  console.log("Python:", PYTHON, "\n");
+  console.log("Python:", PYTHON_COMMAND.join(" "), "\n");
 
   let hasFail = false;
   let hasWarn = false;
@@ -61,15 +114,15 @@ function main() {
     if (r === "warn") hasWarn = true;
   }
 
-  console.log("\n────────────────────");
+  console.log("\n----------------------");
   if (hasFail) {
-    console.log("✗ 部分验证失败");
+    console.log("x 部分验证失败");
     process.exit(1);
   } else if (hasWarn) {
-    console.log("⚠ 全部通过（有警告）");
+    console.log("! 全部通过（有警告）");
     process.exit(2);
   } else {
-    console.log("✓ 全部通过");
+    console.log("v 全部通过");
     process.exit(0);
   }
 }

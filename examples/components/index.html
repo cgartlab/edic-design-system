@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件目录 · EDIC Design System</title>
+  <meta name="description" content="EDIC Design System 组件目录、ARIA 契约、暗色模式覆盖与可复制 ds-* 示例。">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="stylesheet" href="../../styles.css?v=2.0.0">
+</head>
+<body>
+  <a href="#ds-main" class="ds-skip">跳至主要内容</a>
+  <main id="ds-main" tabindex="-1">
+    <section class="ds-section ds-section--tight">
+      <div class="ds-wrapper">
+        <span class="ds-eyebrow ds-block ds-mb-4">EDIC Design System</span>
+        <h1 class="ds-display ds-hero ds-mb-4">组件目录</h1>
+        <p class="ds-lead ds-measure">这份目录收录纳入 manifest 的组件家族。示例优先使用现有 CSS class，保持纯 HTML/CSS、可访问和暗色兼容。</p>
+      </div>
+    </section>
+
+    <section class="ds-section ds-pt-0">
+      <div class="ds-wrapper">
+        <h2 class="ds-mb-4">组件示例契约</h2>
+        <div class="ds-grid-2">
+          <article class="ds-card">
+            <h3>ARIA 与键盘</h3>
+            <p>交互组件必须暴露可访问名称、状态和键盘路径。覆盖层使用 <code>role="dialog"</code>，分页和步骤使用 <code>aria-current="page"</code>，展开控件使用 <code>aria-expanded</code>。</p>
+            <ul>
+              <li>焦点顺序从可见主内容开始：<code>tabindex="-1"</code> 用于主区域恢复焦点。</li>
+              <li>当前页、当前步骤、展开状态必须有 aria 属性。</li>
+              <li>Esc 关闭覆盖层；焦点回收由页面 JS 或框架适配层处理。</li>
+            </ul>
+          </article>
+
+          <article class="ds-card">
+            <h3>暗色模式覆盖</h3>
+            <p>组件示例依赖 <code>styles.css</code> 的 <code>[data-theme="dark"]</code> token 覆盖，不新增运行时依赖。</p>
+            <ul>
+              <li>颜色、边框、阴影和骨架屏 token 必须走语义别名。</li>
+              <li>示例页保留 <code>data-theme=""</code>，便于跟随系统或手动切换主题。</li>
+              <li>组件级新增颜色需要同时在浅色和暗色模式验证。</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="ds-grid-2">
+          <article class="ds-card">
+            <h3>数据展示</h3>
+            <ul>
+              <li><code>ds-table</code></li>
+              <li><code>ds-description-list</code></li>
+              <li><code>ds-stat</code></li>
+              <li><code>ds-timeline</code></li>
+            </ul>
+          </article>
+          <article class="ds-card">
+            <h3>导航</h3>
+            <ul>
+              <li><code>ds-breadcrumb</code></li>
+              <li><code>ds-pagination</code></li>
+              <li><code>ds-nav</code></li>
+              <li><code>ds-steps</code></li>
+            </ul>
+          </article>
+          <article class="ds-card">
+            <h3>反馈</h3>
+            <ul>
+              <li><code>ds-toast</code></li>
+              <li><code>ds-alert</code></li>
+              <li><code>ds-progress</code></li>
+              <li><code>ds-skeleton</code></li>
+            </ul>
+          </article>
+          <article class="ds-card">
+            <h3>输入</h3>
+            <ul>
+              <li><code>ds-select</code></li>
+              <li><code>ds-combobox</code></li>
+              <li><code>ds-date-picker</code></li>
+              <li><code>ds-slider</code></li>
+              <li><code>ds-switch</code></li>
+              <li><code>ds-radio-group</code></li>
+            </ul>
+          </article>
+          <article class="ds-card">
+            <h3>覆盖层</h3>
+            <ul>
+              <li><code>ds-popover</code></li>
+              <li><code>ds-tooltip</code></li>
+              <li><code>ds-drawer</code></li>
+              <li><code>ds-command-palette</code></li>
+            </ul>
+          </article>
+          <article class="ds-card">
+            <h3>基础控件</h3>
+            <ul>
+              <li><code>ds-btn</code></li>
+              <li><code>ds-input</code></li>
+              <li><code>ds-checkbox</code></li>
+              <li><code>ds-radio</code></li>
+              <li><code>ds-tabs</code></li>
+              <li><code>ds-accordion</code></li>
+            </ul>
+          </article>
+        </div>
+
+        <h2 class="ds-mb-4">可复制的最小组件片段</h2>
+        <figure class="ds-card">
+          <pre><code>&lt;nav class="ds-breadcrumb" aria-label="Breadcrumb"&gt;
+  &lt;a href="../docs.html"&gt;文档&lt;/a&gt;
+  &lt;span aria-hidden="true"&gt;/&lt;/span&gt;
+  &lt;span aria-current="page"&gt;组件&lt;/span&gt;
+&lt;/nav&gt;
+
+&lt;div class="ds-drawer" role="dialog" aria-modal="true" aria-label="Detail drawer" tabindex="-1"&gt;
+  &lt;h2 id="drawer-title"&gt;详情&lt;/h2&gt;
+  &lt;p&gt;Esc 可关闭；关闭后焦点应回到触发按钮。&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;button type="button" aria-expanded="false" aria-controls="drawer-body"&gt;打开详情&lt;/button&gt;</code></pre>
+        </figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

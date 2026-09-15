@@ -287,3 +287,126 @@ font-family: var(--ds-font-mono);     /* code: JetBrains Mono, IBM Plex Mono */
 
 Note: `styles.css` already includes global `prefers-reduced-motion` rules for
 built-in components. Add overrides only for custom animations you write.
+
+---
+
+## Interactive Component Anti-Patterns
+
+### ❌ Fake button using a div
+
+```html
+<!-- ❌ Wrong — no semantics, no keyboard, no focus contract -->
+<div class="ds-btn" onclick="openMenu()">Open</div>
+```
+
+```html
+<!-- ✅ Correct -->
+<button type="button" class="ds-btn" aria-haspopup="menu" aria-expanded="false"
+        aria-controls="user-menu">Open</button>
+```
+
+**Why:** Only native interactive elements or explicit `role` + keyboard handlers
+produce reliable focus, activation, and accessibility behavior.
+
+---
+
+### ❌ Missing `aria-expanded` on collapsible triggers
+
+```html
+<!-- ❌ Wrong -->
+<button class="ds-btn" id="menu-btn">菜单</button>
+<ul id="menu-list" class="ds-menu"></ul>
+```
+
+```html
+<!-- ✅ Correct -->
+<button type="button" class="ds-btn" id="menu-btn"
+        aria-haspopup="true" aria-expanded="false" aria-controls="menu-list">菜单</button>
+<ul id="menu-list" class="ds-menu" role="menu" hidden></ul>
+```
+
+---
+
+### ❌ Pagination without current state
+
+```html
+<!-- ❌ Wrong — screen readers cannot tell which page is current -->
+<button class="ds-page-btn">1</button>
+<button class="ds-page-btn ds-page-btn--active">2</button>
+```
+
+```html
+<!-- ✅ Correct -->
+<button type="button" class="ds-page-btn">1</button>
+<button type="button" class="ds-page-btn ds-page-btn--active"
+        aria-current="page">2</button>
+```
+
+---
+
+### ❌ Toast without live region
+
+```html
+<!-- ❌ Wrong -->
+<div id="toast"></div>
+```
+
+```html
+<!-- ✅ Correct -->
+<div id="toast" class="ds-toast-group" role="status" aria-live="polite"
+     aria-atomic="false"></div>
+```
+
+---
+
+### ❌ Overlay without trigger relationship or focus recovery
+
+```html
+<!-- ❌ Wrong -->
+<button id="drawer-btn">打开</button>
+<aside id="drawer" class="ds-drawer" hidden>...</aside>
+```
+
+```html
+<!-- ✅ Correct -->
+<button type="button" id="drawer-btn" aria-haspopup="dialog"
+        aria-expanded="false" aria-controls="drawer">打开</button>
+<aside id="drawer" class="ds-drawer" role="dialog" aria-modal="true"
+       aria-labelledby="drawer-title" hidden>
+  <h2 id="drawer-title">设置</h2>
+</aside>
+```
+
+**Why:** Open/closed panels need a stable relationship to their trigger,
+Esc behavior, focus trap where modal, and focus return on close.
+
+---
+
+### ❌ Loading state without disabled/focus handling
+
+```html
+<!-- ❌ Wrong — active users can submit twice -->
+<button class="ds-btn ds-btn--primary">提交</button>
+```
+
+```html
+<!-- ✅ Correct -->
+<button type="button" class="ds-btn ds-btn--primary" disabled
+        aria-busy="true">提交中…</button>
+```
+
+---
+
+### ❌ Icon-only controls without labels
+
+```html
+<!-- ❌ Wrong -->
+<button class="ds-icon-btn"><svg><!-- search --></svg></button>
+```
+
+```html
+<!-- ✅ Correct -->
+<button type="button" class="ds-icon-btn" aria-label="搜索">
+  <svg aria-hidden="true"><!-- search --></svg>
+</button>
+```

@@ -1,7 +1,7 @@
 # EDIC Design System — 极度详细的网站开发指南
 
-**版本:** v1.10.2  
-**生成日期:** 2026-05-28  
+**版本:** v2.0.0
+**生成日期:** 2026-09-14
 **适用对象:** 任何大模型 AI 助手 / 前端开发者 / 设计师
 
 ---
@@ -31,7 +31,7 @@
 
 ### 1.1 项目性质
 
-这是一个 **纯静态单页设计系统文档站点**，没有任何构建工具、框架或打包器。所有代码为原生 HTML + CSS + Vanilla JavaScript。
+这是一个 **纯静态设计系统文档站点**，没有任何构建工具、框架或打包器。所有代码为原生 HTML + CSS + Vanilla JavaScript。
 
 ### 1.2 设计哲学
 
@@ -92,12 +92,14 @@ edic-design-system/
 ├── styles.css              # 样式表 — Token + 组件CSS + 响应式
 ├── scripts.js              # 脚本 — 图标渲染 + 令牌表 + 交互
 ├── tokens.json             # 结构化令牌数据 — 程序化导入用
+├── edic-manifest.json      # 系统能力清单 — Agent / CI / docs generator 读取
+├── icons.json              # 图标索引 — 搜索 / 推荐 / 工具集成
 ├── AGENTS.md               # AI 知识库 / 项目说明
 ├── blog.html               # 博客页面（使用设计系统）
 ├── company.html            # 公司页面
 ├── resume.html             # 简历页面
 ├── report.html             # 报告页面
-├── docs.html               # 设计系统详情与组件手册
+├── docs.html               # 使用文档 + 视觉手册
 ├── prompts.html            # AI 提示词与 Skill 包
 ├── downloads.html          # PDF 参考、令牌导出、品牌资产
 ├── CHANGELOG.md            # 更新日志（release-please 维护）
@@ -108,7 +110,7 @@ edic-design-system/
 ├── LICENSE                 # CC BY 4.0 许可证
 ├── prompts/                # system-prompt.md / quick-prompt.md
 ├── skills/edic-design-system/   # Claude Code SKILL 包
-├── tools/                  # 验证脚本（validate_*.py）
+├── tools/                  # 验证脚本（validate_*.py，统一由 npm/Makefile 调用）
 ├── tests/                  # 验证夹具
 ├── docs/                   # VERSIONING / COMPONENT-DEVELOPMENT / TESTING / RELEASE-CHECKLIST
 ├── scripts/                # 本地开发脚本（lint.py / build.py）
@@ -131,8 +133,14 @@ scripts.js
       └── 操作 DOM：#icon-grid, #token-tbody, #nav-toggle 等
 
 tokens.json
-  └── 独立数据文件，当前未被 JS 直接引用
-      └── 用途：为未来的工程化构建（如 style-dictionary）提供数据源
+  └── 结构化 token registry — 验证器、Agent 与工具链读取
+      └── 浏览器运行时不直接引用，消费者仍通过 CSS 变量使用令牌
+
+edic-manifest.json
+  └── 机器可读能力清单 — 组件、令牌、图标、约束、验证器入口
+
+icons.json
+  └── 图标分类、关键词与 viewBox — 供搜索、推荐和设计工具集成
 ```
 
 ### 2.3 加载顺序与时序
@@ -141,7 +149,7 @@ tokens.json
 2. 浏览器逐步解析 `<body>` 内容 → 渲染各 section
 3. 到达 `<script src="scripts.js">` → 同步执行脚本
 4. 脚本中的 IIFE 立即执行：
-   - 渲染 100 个图标到 `#icon-grid`
+   - 渲染 209 个图标到 `#icon-grid`
    - 渲染令牌表到 `#token-tbody`
    - 初始化暗色模式（读取 localStorage / 系统偏好）
    - 绑定 Slider 同步事件
@@ -697,7 +705,7 @@ h1, h2, h3, h4, h5, h6, ...  { letter-spacing: var(--ds-tracking-cjk-heading) }
 
 ```html
 <div class="ds-accordion-item open">
-  <div class="ds-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+  <div class="ds-accordion-header">
     <span>问题标题</span>
     <span class="ds-accordion-arrow">▾</span>
   </div>
@@ -709,7 +717,8 @@ h1, h2, h3, h4, h5, h6, ...  { letter-spacing: var(--ds-tracking-cjk-heading) }
 - `.ds-accordion-content` 默认 `display: none`
 - `.ds-accordion-item.open .ds-accordion-content` 设为 `display: block`
 - 箭头通过 `.open .ds-accordion-arrow { transform: rotate(180deg) }` 旋转
-- 使用 inline `onclick` 切换 `.open` 类
+- `scripts.js` 为 `.ds-accordion-header` 注入 `role="button"` 与 `tabindex="0"`，
+  并通过 `addEventListener` 切换 `.open`；支持 Enter/Space 与方向键操作
 
 ### 8.7 标签页（Tabs）
 
@@ -924,7 +933,7 @@ body { transition: background .4s, color .4s; }
 
 ```
 scripts.js
-├── const ICONS = [...]              // 100个图标数据定义
+├── const ICONS = [...]              // 209 个图标数据定义
 ├── const TOKENS = [...]             // 令牌键值对数组
 ├── IIFE: 图标网格渲染              // → #icon-grid
 ├── IIFE: 令牌表格渲染              // → #token-tbody
@@ -941,7 +950,7 @@ scripts.js
 // 数据结构
 const ICONS = [
   { id: "archive", svg: '<svg viewBox="0 0 24 24">...</svg>' },
-  // ... 100个图标
+  // ... 209 个图标
 ];
 
 // 渲染逻辑
@@ -1328,9 +1337,10 @@ timeline, contact-form, toast, glass-card, glass-btn
 - `role="navigation"` 在导航元素上
 
 **注意事项：**
-- 部分组件使用 `onclick` 内联事件 — 不影响功能但不是最佳实践
-- Tab 组件的键盘导航未完整实现（无 arrow key 支持）
-- Accordion 使用 `onclick` 而非 `<button>` — 屏幕阅读器可能不识别为可交互
+- 组件事件统一通过 `addEventListener` 绑定，无内联 `onclick`
+- Tabs 遵循 WAI-ARIA APG：`role="tablist"` / `role="tab"` / `role="tabpanel"`，
+  ArrowLeft/ArrowRight 切换 + roving tabindex
+- Accordion 头部由 JS 注入 `role="button"` 与 `tabindex="0"`，支持键盘激活
 
 ### 15.3 打印样式
 
@@ -1432,7 +1442,7 @@ timeline, contact-form, toast, glass-card, glass-btn
 ```json
 {
   "name": "EDIC Design Tokens",
-  "version": "1.10.2",
+  "version": "2.0.0",
   "description": "Editorial × Olive Green design system tokens",
   "tokens": {
     "color-bg": "oklch(97% 0.012 80)",
@@ -1495,4 +1505,4 @@ timeline, contact-form, toast, glass-card, glass-btn
 
 ---
 
-*本文档基于项目源代码 v1.10.2 自动生成，如代码有更新请同步维护本指南。*
+*本文档基于项目源代码 v2.0.0 自动生成，如代码有更新请同步维护本指南。*
