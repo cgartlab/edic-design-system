@@ -5,10 +5,13 @@
 
 ## [2.1.1](https://github.com/cgartlab/edic-design-system/compare/v2.1.0...v2.1.1) (2026-09-17)
 
+2.1.0 发布后的稳定性与一致性修复（详见 [#275](https://github.com/cgartlab/edic-design-system/pull/275)）。
 
 ### 修复
 
-* post-release version sync, visual baseline, and CI exemption (2.1.0) ([#275](https://github.com/cgartlab/edic-design-system/issues/275)) ([9a7b7b7](https://github.com/cgartlab/edic-design-system/commit/9a7b7b7067d2b260d6b23841332a63e3e4357e17))
+* **ci:** 恢复 AGENTS.md §3.1 的 release-please 版本过渡态豁免——v2 审计重构时丢失。`ci.yml` 传入 `AUDIT_SKIP_VERSION_CHECKS`（分支 `release-please--*` 或相关合并提交，表达式 null 安全且兼容 merge/squash 两种形态），`run-audit.js` / `run-validators.js` 相应跳过版本 stamp/sync 与 validate-versions/verext
+* **release:** `icons.json` 与 `edic-manifest.json` 加入 release-please extra-files（此前发布后版本滞后，导致 validate-manifest/validate-icons 失败）；`tools/generate_icons.py` 版本改从 `VERSION` 读取（此前硬编码 2.0.0，运行 `make icons` 会导致 icons.json 版本回退）
+* **test:** 刷新视觉基线（`post-merge-stamp` 修改版本串后 styles.css / scripts.js / examples 哈希漂移）
 
 ## [2.1.0](https://github.com/cgartlab/edic-design-system/compare/v2.0.0...v2.1.0) (2026-09-17)
 
