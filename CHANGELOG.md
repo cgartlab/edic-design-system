@@ -5,22 +5,9 @@
 
 ## [2.0.0](https://github.com/cgartlab/edic-design-system/compare/v1.10.2...v2.0.0) (2026-09-17)
 
-
 ### ⚠ BREAKING CHANGES
 
 * EDIC 2.0 质量审计与可访问性加固 ([#264](https://github.com/cgartlab/edic-design-system/issues/264))
-
-### 新增
-
-* EDIC 2.0 质量审计与可访问性加固 ([#264](https://github.com/cgartlab/edic-design-system/issues/264)) ([fc004d8](https://github.com/cgartlab/edic-design-system/commit/fc004d843624daf1ffe418493cd2f2fecb12cd15))
-
-
-### 修复
-
-* **ci:** 修复 Release PR 合并后 CI 版本验证竞态 ([b50a66f](https://github.com/cgartlab/edic-design-system/commit/b50a66f4cea89faecba92ab6e84de75c356820e2))
-* **ci:** 修复 Release PR 合并后 CI 版本验证竞态 ([be15bc6](https://github.com/cgartlab/edic-design-system/commit/be15bc6586ff3daae6a6d9da29f4305c8d328767))
-
-## [2.0.0](https://github.com/cgartlab/edic-design-system/compare/v1.10.2...v2.0.0) (2026-09-13)
 
 ### 新增
 
@@ -40,6 +27,9 @@
 * **docs:** 修复 `examples/components/index.html` 标题层级与导航类名示例
 * **scripts:** 修复 `run-validators.js` 在显式 `PYTHON` 路径下的数组兼容性问题
 * **tokens:** 更新 `validate_tokens.py` 以读取 2.0 `tokens[]` 结构并兼容旧扁平结构
+* **storage:** 集中化 localStorage 安全读写（`safeLocalStorage` 抽象），新增对应单元测试
+* **ci:** 修复 Release PR 合并后 CI 版本验证竞态 ([b50a66f](https://github.com/cgartlab/edic-design-system/commit/b50a66f4cea89faecba92ab6e84de75c356820e2))
+* **ci:** 修复 Release PR 合并后 CI 版本验证竞态 ([be15bc6](https://github.com/cgartlab/edic-design-system/commit/be15bc6586ff3daae6a6d9da29f4305c8d328767))
 
 ### 文档
 
