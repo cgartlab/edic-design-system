@@ -116,6 +116,11 @@ jobs:
           python3 tools/generate_changelog_html.py
           echo "changelog.html rebuilt from CHANGELOG.md (single source)"
 
+      - name: Refresh visual baseline hashes (stamp changed assets)
+        run: |
+          python3 tools/validate_visual_baseline.py --update
+          echo "visual baseline refreshed after version stamp"
+
       - name: Commit stamp drift (if any)
         run: |
           set -e

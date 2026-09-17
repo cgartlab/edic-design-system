@@ -63,12 +63,15 @@ const CHECKS = [
 
 function effectiveChecks() {
   if (!SKIP_VERSION_CHECKS) return CHECKS;
-  // 除 stamp/sync 外，Icon sprite（generate_icons.py --check）也会因 release-please
-  // 预 bump 的 icons.json 在过渡态与 VERSION 失配，一并跳过。
+  // 除 stamp/sync/Icon sprite 外，Changelog（generate_changelog_html.py --check）
+  // 也会因 release-please 更新 CHANGELOG.md 而暂时滞后于 changelog.html——
+  // 最终同步由 post-merge-stamp 的 generate_changelog_html.py 保障。
   const filtered = CHECKS.filter(
-    ([label]) => label !== "Version stamp" && label !== "Version sync" && label !== "Icon sprite"
+    ([label]) =>
+      label !== "Version stamp" && label !== "Version sync" &&
+      label !== "Icon sprite" && label !== "Changelog"
   );
-  console.log("注：AUDIT_SKIP_VERSION_CHECKS 已启用 — 跳过版本 stamp/sync 与 Icon sprite（release-please 过渡态，post-merge-stamp 收敛）。");
+  console.log("注：AUDIT_SKIP_VERSION_CHECKS 已启用 — 跳过版本 stamp/sync、Icon sprite 与 Changelog（release-please 过渡态，post-merge-stamp 收敛）。");
   return filtered;
 }
 

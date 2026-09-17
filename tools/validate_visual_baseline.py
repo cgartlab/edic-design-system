@@ -13,6 +13,7 @@ Exit codes:
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import sys
@@ -33,6 +34,41 @@ def sha256(path: Path) -> str:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description="校验或更新视觉回归基线")
+    parser.add_argument(
+        "--update",
+        action="store_true",
+        help="重新计算各资产 sha256 并写回 baseline.json（供 post-merge-stamp 在 stamp 后刷新，不做校验）",
+    )
+    args = parser.parse_args()
+
+    if not BASELINE.exists():
+        print("[ERROR] 缺少视觉回归基线文件: tests/fixtures/visual/baseline.json")
+        return 1
+
+    if args.update:
+        try:
+            baseline = json.loads(BASELINE.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            print(f"[ERROR] 视觉回归基线 JSON 解析失败: {exc}", file=sys.stderr)
+            return 1
+        assets = baseline.get("assets")
+        if not isinstance(assets, list) or not assets:
+            print("[ERROR] baseline.assets 必须是非空数组", file=sys.stderr)
+            return 1
+        for entry in assets:
+            if not isinstance(entry, dict) or not entry.get("path"):
+                print("[ERROR] baseline.assets 每一项必须包含 path", file=sys.stderr)
+                return 1
+            asset_path = ROOT / entry["path"]
+            if not asset_path.exists():
+                print(f"[ERROR] 基线资产不存在: {entry['path']}", file=sys.stderr)
+                return 1
+            entry["sha256"] = sha256(asset_path)
+        BASELINE.write_text(json.dumps(baseline, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(f"✓ baseline.json 已更新（{len(assets)} 个资产）。")
+        return 0
+
     errors: list[str] = []
 
     if not BASELINE.exists():
