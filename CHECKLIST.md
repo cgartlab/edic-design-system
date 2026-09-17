@@ -1,10 +1,13 @@
 # EDIC Design System 2.0 执行清单
 
+> **历史文档**：本清单为 v2.0.0 的开发执行计划，已于 2026-09-17 全部完成并发布
+> （当前版本 **v2.1.3**，后续版本与变更见 `CHANGELOG.md`）。
+
 > 初始化状态：本清单已基于当前仓库通读生成，用户已确认直接执行，无需逐项批准。
 >
 > 执行授权：后续子任务直接推进；不要执行 `git commit` / `git push`，由用户审查结果后自行提交。
 >
-> 当前版本：`2.0.0`。当前资产：`tokens.json` 292 项，`edic-manifest.json` 39 个组件家族，`icons.json` / `icons.svg` 209 枚图标，`npm run audit` 通过。
+> 当前版本：`2.1.3`。当前资产：`tokens.json` 311 项，`edic-manifest.json` 39 个组件家族，`icons.json` / `icons.svg` 209 枚图标，`npm run audit` 通过。
 
 ## 执行原则
 
