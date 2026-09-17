@@ -3,6 +3,13 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.1.2](https://github.com/cgartlab/edic-design-system/compare/v2.1.1...v2.1.2) (2026-09-17)
+
+
+### 修复
+
+* **ci:** auto-refresh visual baseline after stamp; exempt changelog sync on release PRs ([#277](https://github.com/cgartlab/edic-design-system/issues/277)) ([9c322b8](https://github.com/cgartlab/edic-design-system/commit/9c322b825c465be53fc4393532bbc941a799fbfa))
+
 ## [2.1.1](https://github.com/cgartlab/edic-design-system/compare/v2.1.0...v2.1.1) (2026-09-17)
 
 2.1.0 发布后的稳定性与一致性修复（详见 [#275](https://github.com/cgartlab/edic-design-system/pull/275)）。
