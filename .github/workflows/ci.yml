@@ -42,5 +42,7 @@ jobs:
         if: github.head_ref != '' && contains(github.head_ref, 'release-please')
         run: python3 tools/validate_release_notes.py
       - name: Verify changelog.html is up to date
-        if: always()
+        # release-please 分支跳过：CHANGELOG.md 由 release-please 先行更新，changelog.html
+        # 由合并后的 post-merge-stamp 重建（validate_release_notes.py 仍强制校验版本节存在）。
+        if: ${{ !(startsWith(github.head_ref, 'release-please--') || contains(github.event.head_commit.message || '', 'release-please--')) }}
         run: python3 tools/generate_changelog_html.py --check
