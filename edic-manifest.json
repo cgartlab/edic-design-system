@@ -1,7 +1,7 @@
 {
   "$schema": "edic-manifest-v2",
   "name": "EDIC Design System",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Editorial × Olive Green design system for humans and AI. This manifest is the single machine-readable entry point for EDIC's capabilities.",
   "philosophy": "Editorial restraint, OKLch color science, token-driven CSS, framework-agnostic HTML/CSS/JS output.",
   "deliverables": {
