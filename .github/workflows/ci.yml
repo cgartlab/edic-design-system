@@ -33,6 +33,9 @@ jobs:
       - name: Full 2.0 audit
         env:
           PYTHONIOENCODING: utf-8
+          # release-please 分支 / `chore(main): release` 合并提交存在版本过渡态
+          # （tokens/package 已 bump、VERSION 待 post-merge-stamp 同步），按 AGENTS.md §3.1 跳过版本检查。
+          AUDIT_SKIP_VERSION_CHECKS: ${{ startsWith(github.head_ref, 'release-please--') || startsWith(github.event.head_commit.message || '', 'chore(main): release') }}
         run: npm run audit
       - name: Validate release notes exist
         if: github.head_ref != '' && contains(github.head_ref, 'release-please')

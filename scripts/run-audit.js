@@ -44,6 +44,12 @@ function detectPython() {
 const PYTHON_COMMAND = detectPython();
 const CHILD_ENV = { ...process.env, PYTHONIOENCODING: process.env.PYTHONIOENCODING || "utf-8" };
 
+// release-please 分支/合并提交存在「tokens/package 已 bump 而 VERSION 未同步」的
+// 预期过渡态（AGENTS.md §3.1），由 post-merge-stamp 收敛。此时跳过版本相关检查。
+const SKIP_VERSION_CHECKS = ["1", "true", "yes"].includes(
+  String(process.env.AUDIT_SKIP_VERSION_CHECKS || "").toLowerCase()
+);
+
 const CHECKS = [
   ["Version stamp", "python", "stamp_version.py", ["--check"]],
   ["Version sync", "python", "sync_versions.py", ["--check"]],
@@ -54,6 +60,13 @@ const CHECKS = [
   ["Changelog", "python", "generate_changelog_html.py", ["--check"]],
   ["Unit tests", "node-script", "node_modules/vitest/vitest.mjs", ["run"]],
 ];
+
+function effectiveChecks() {
+  if (!SKIP_VERSION_CHECKS) return CHECKS;
+  const filtered = CHECKS.filter(([label]) => label !== "Version stamp" && label !== "Version sync");
+  console.log("注：AUDIT_SKIP_VERSION_CHECKS 已启用 — 跳过版本 stamp/sync（release-please 过渡态，post-merge-stamp 收敛）。");
+  return filtered;
+}
 
 function runCheck(label, mode, command, args) {
   console.log(`\n── ${label} ──`);
@@ -84,7 +97,7 @@ function main() {
   let failed = false;
   let warned = false;
 
-  for (const [label, mode, command, args] of CHECKS) {
+  for (const [label, mode, command, args] of effectiveChecks()) {
     const code = runCheck(label, mode, command, args);
     if (code === 1 || code > 2) failed = true;
     else if (code === 2) warned = true;

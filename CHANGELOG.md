@@ -3,6 +3,29 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.1.0](https://github.com/cgartlab/edic-design-system/compare/v2.0.0...v2.1.0) (2026-09-17)
+
+全站质量审计与一致性加固（7 个维度，详见 [#273](https://github.com/cgartlab/edic-design-system/pull/273)）。
+
+### 修复
+
+* **changelog:** 合并重复的 `[1.5.5]` 版本节（此前 `changelog.html` 丢失 2026-06-19 Skill 发布补丁内容）、删除孤儿内容块与空 `[Unreleased]` 残留；生成器按 semver 降序输出并新增**重复版本头检测**（重复即 CI 失败）
+* **docs:** 修正 `docs.html` 中 4 个不存在的语义别名、Type Scale 令牌标注值（-0.02/0/0.08 em、行高 1.5 → 实际 -0.01/0.02/0.04 em、1.55）与令牌类别清单（docs.html ↔ CLAUDE.md ↔ styles.css 真实前缀全集）
+* **tokens:** 修正 `--ds-color-muted` 浅色值——文档/提示词/Skill 误写 `oklch(48% …)`，实际为 `oklch(42% …)`（prompts.html、system-prompt.md、SKILL.md）
+* **copy:** 复制按钮在非安全上下文（http:// LAN 预览）无 Clipboard API 时改用 `execCommand` 降级，不再同步抛错导致复制失效
+* **skill:** 修正失效类名 `ds-tooltip-demo`/`ds-tooltip-bubble` → `ds-tooltip`/`ds-tooltip-host`；移除幽灵类名 `ds-hero-lead`/`ds-hero-meta`；component backlog/gap-audit 同步 2.0.0 已交付状态
+* **report:** 修正「零外部依赖 / 无需外部样式表 / 约 400 行 CSS / CC BY-NC 4.0」等声明与实际不一致
+* **site:** 统一导航与页脚（5 页导航栏新增「更新」入口、prompts/downloads/terms/docs 页脚补「更新日志」、`cgartlab.com` 链接标签统一、index 页脚补「博客」「网站地图」）；修复 docs.html 联系表单隐私政策死链；并列标题层级统一（prompts/company/terms）
+* **docs:** 文案修正——resume「数字绘面」→「数字绘画」、terms「endorsement」→「背书」、blog v1.0 发布文日期与导语
+
+### 清理
+
+* 移除仓库根目录孤儿资产 `preview.png`（约 219KB，无任何引用）
+
+### 测试
+
+* copy 新增 `execCommand` 降级单元测试 ×2（单元测试总计 90 个）
+
 ## [2.0.0](https://github.com/cgartlab/edic-design-system/compare/v1.10.2...v2.0.0) (2026-09-17)
 
 ### ⚠ BREAKING CHANGES
