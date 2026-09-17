@@ -3,6 +3,13 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.1.4](https://github.com/cgartlab/edic-design-system/compare/v2.1.3...v2.1.4) (2026-09-17)
+
+
+### 修复
+
+* sync package-lock version, docs version example, and mark CHECKLIST as historical ([#281](https://github.com/cgartlab/edic-design-system/issues/281)) ([b454442](https://github.com/cgartlab/edic-design-system/commit/b4544429429a7022532c72671347ad8085da0129))
+
 ## [2.1.3](https://github.com/cgartlab/edic-design-system/compare/v2.1.2...v2.1.3) (2026-09-17)
 
 
