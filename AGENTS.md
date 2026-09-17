@@ -1,6 +1,6 @@
 # EDIC Design System — Agent Instructions
 
-**Version:** 2.2.1 | **Site:** https://edic.cgartlab.com | **License:** CC BY 4.0
+**Version:** 2.3.0 | **Site:** https://edic.cgartlab.com | **License:** CC BY 4.0
 
 ---
 
@@ -379,7 +379,7 @@ If limits are exceeded, CI blocks the release.
 
 All releases are archived on GitHub Releases with:
 
-- Version tag (e.g., `v2.2.1`)
+- Version tag (e.g., `v2.3.0`)
 - Release notes (from `CHANGELOG.md`)
 - Checksums (SHA-256)
 - Pre-built assets (`.gz` files)
