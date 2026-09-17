@@ -1,6 +1,6 @@
 # EDIC Design System — 极度详细的网站开发指南
 
-**版本:** v2.1.0
+**版本:** v2.1.1
 **生成日期:** 2026-09-14
 **适用对象:** 任何大模型 AI 助手 / 前端开发者 / 设计师
 
@@ -1442,7 +1442,7 @@ timeline, contact-form, toast, glass-card, glass-btn
 ```json
 {
   "name": "EDIC Design Tokens",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Editorial × Olive Green design system tokens",
   "tokens": {
     "color-bg": "oklch(97% 0.012 80)",
@@ -1505,4 +1505,4 @@ timeline, contact-form, toast, glass-card, glass-btn
 
 ---
 
-*本文档基于项目源代码 v2.1.0 自动生成，如代码有更新请同步维护本指南。*
+*本文档基于项目源代码 v2.1.1 自动生成，如代码有更新请同步维护本指南。*
