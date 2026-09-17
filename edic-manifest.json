@@ -94,7 +94,9 @@
       "timeline",
       "drawer",
       "popover",
-      "command-palette"
+      "command-palette",
+      "spinner",
+      "form-field"
     ],
     "rules": [
       "Each component must expose default, hover, focus-visible, active, and disabled states where applicable.",
@@ -149,4 +151,3 @@
   ],
   "audit": "npm run audit"
 }
-

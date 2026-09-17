@@ -129,6 +129,7 @@ h4 1.5 · h3 1.875 · h2 2.25 · h1 3 · display 3.75 · hero 4.5.
 ### Forms
 - **基础表单**: `ds-input` (`--error`) `ds-label` `ds-hint` `ds-select` `ds-checkbox` `ds-radio` `ds-toggle` (`--track`/`--thumb`)
 - **扩展表单**: `ds-form-input` `ds-form-textarea` `ds-form-select` `ds-form-row` `ds-form-group` `ds-form-label` `ds-form-checkbox` `ds-form-hint` (`--error`) `ds-form-submit` `ds-form-required`
+- **表单字段**: `ds-form-field` (`--error`/`--disabled`) `ds-form-field-label` `ds-form-field-required` `ds-form-field-hint` `ds-form-field-error`
 
 ### Feedback
 - **徽章**: `ds-badge` (`--default`/`--accent`/`--success`/`--warning`/`--error`)
@@ -152,6 +153,7 @@ h4 1.5 · h3 1.875 · h2 2.25 · h1 3 · display 3.75 · hero 4.5.
 - **头像**: `ds-avatar` (`--sm`/`--lg`)
 - **芯片/标签**: `ds-chip` (`--active`) `ds-chip-remove`
 - **骨架屏**: `ds-skeleton`
+- **加载指示器**: `ds-spinner` (`--sm`/`--lg`) `ds-spinner-label`
 - **色卡**: `ds-swatch` `ds-swatch-color` `ds-swatch-info` `ds-swatch-name` `ds-swatch-value`
 - **类型标签**: `ds-type-label` `ds-type-label-meta`
 

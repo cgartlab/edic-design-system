@@ -902,6 +902,15 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .ds-progress--success .ds-progress-fill{background:var(--ds-color-success)}
 .ds-progress--error .ds-progress-fill{background:var(--ds-color-error)}
 
+/* ===== Spinner ===== */
+.ds-spinner{display:inline-block;width:var(--ds-space-5);height:var(--ds-space-5);border:2px solid var(--ds-color-border-subtle);border-top-color:var(--ds-accent);border-radius:var(--ds-radius-full);animation:ds-spin var(--ds-duration-500) linear infinite}
+.ds-spinner--sm{width:var(--ds-space-4);height:var(--ds-space-4);border-width:1.5px}
+.ds-spinner--lg{width:var(--ds-space-8);height:var(--ds-space-8);border-width:3px}
+.ds-spinner-label{margin-left:var(--ds-space-2);font-size:var(--ds-text-body-sm);color:var(--ds-color-muted)}
+@keyframes ds-spin{to{transform:rotate(360deg)}}
+@keyframes ds-spinner-pulse{0%,100%{opacity:0.35}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ds-spinner{animation:ds-spinner-pulse var(--ds-duration-500) ease-in-out infinite}}
+
 /* ===== Avatar ===== */
 .ds-avatar{width:var(--ds-size-avatar);height:var(--ds-size-avatar);border-radius:var(--ds-radius-full);background:var(--ds-accent-soft);color:var(--ds-accent);display:inline-flex;align-items:center;justify-content:center;font-family:var(--ds-font-display);font-weight:700;font-size:var(--ds-text-body);overflow:hidden}
 .ds-avatar--sm{width:var(--ds-size-avatar-sm);height:var(--ds-size-avatar-sm);font-size:var(--ds-text-caption)}
@@ -1497,6 +1506,16 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 @media(max-width:639px){
   .ds-form-row{grid-template-columns:1fr}
 }
+
+/* ===== Form Field ===== */
+.ds-form-field{display:flex;flex-direction:column;gap:var(--ds-space-1)}
+.ds-form-field-label{display:flex;align-items:baseline;gap:var(--ds-space-1);font-family:var(--ds-font-ui);font-size:var(--ds-text-body-sm);font-weight:600;color:var(--ds-color-fg)}
+.ds-form-field-required{color:var(--ds-color-error)}
+.ds-form-field-hint{font-size:var(--ds-text-caption);color:var(--ds-color-muted)}
+.ds-form-field-error{font-size:var(--ds-text-caption);color:var(--ds-color-error)}
+.ds-form-field--error .ds-form-field-label{color:var(--ds-color-error)}
+.ds-form-field--error .ds-input,.ds-form-field--error .ds-form-input{border-color:var(--ds-color-error)}
+.ds-form-field--disabled{opacity:var(--ds-opacity-disabled,0.5);pointer-events:none}
 
 /* ===== Decorative Elements ===== */
 .ds-edge-decor{position:fixed;pointer-events:none;z-index:var(--ds-z-base);opacity:.4}
