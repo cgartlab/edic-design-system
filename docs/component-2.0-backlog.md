@@ -18,17 +18,17 @@ This backlog converts the component gap audit into sequential, auditable tasks.
 | Spinner / Loader | P1 | P1 | CSS-only loader with reduced-motion fallback |
 | Menu | P1 | P1 | `aria-haspopup`, `aria-expanded`, menu item roles |
 | Form Field | P1 | P1 | label, hint, error, disabled, required field wrapper |
-| Empty State | P1 | P1 | existing `ds-empty-state` may need docs/example completion |
+| Empty State | P1 | P1 | existing `ds-empty-state` may need docs/example completion |已有 docs/示例；✅ 2.0.0 已实现 |
 | Alert Dialog | P1 | P1 | modal-like confirmation with focus trap and Esc behavior |
 | File Upload | P1 | P1 | drag area, filename list, progress/error state |
-| Calendar | P1 | P1 | existing date-calendar may need standalone calendar component docs |
-| Description List | P1 | P1 | table-like definition list for settings/profile views |
+| Calendar | P1 | P1 | existing date-calendar may need standalone calendar component docs |✅ 2.0.0 已实现（`ds-date-calendar` / `ds-date-picker`）|
+| Description List | P1 | P1 | table-like definition list for settings/profile views |✅ 2.0.0 已实现（`ds-description-list`）|
 
 ## P2 — Quality And Breadth Expansion
 
 | Component | Priority | Contract owner | Notes |
 | --- | --- | --- | --- |
-| Combobox | P1 quality | P2 | improve listbox, active option, keyboard search contract |
+| Combobox | P1 quality | P2 | improve listbox, active option, keyboard search contract |✅ 2.0.0 已实现（`ds-combobox` 契约 + docs 示例）|
 | Date Range | P2 | P2 | dual calendars and clear button |
 | Time Picker | P2 | P2 | hour/minute/second list or input variant |
 | Rich Text Toolbar | P2 | P2 | static toolbar with labels and disabled states |
@@ -41,7 +41,7 @@ This backlog converts the component gap audit into sequential, auditable tasks.
 | List / ListItem | P2 | P2 | dense data row patterns |
 | Tree | P2 | P2 | expand/collapse and keyboard support |
 | Container / Grid primitive | P2 | P2 | documented layout primitives |
-| Divider | P2 | P2 | existing CSS may need example/docs completion |
+| Divider | P2 | P2 | existing CSS may need example/docs completion |✅ 2.0.0 已实现（`ds-divider` + docs 示例）|
 | Card Actions | P2 | P2 | action footer pattern for cards |
 | Image fallback | P2 | P2 | alt/error/placeholder states |
 | Horizontal Timeline | P2 | P2 | variant of existing vertical timeline |

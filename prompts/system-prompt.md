@@ -24,7 +24,7 @@
 --ds-color-surface: oklch(99% 0.005 80)       /* 卡片表面 */
 --ds-color-surface-raised: oklch(100% 0 0)    /* 弹层/模态 */
 --ds-color-border: oklch(89% 0.012 80)
---ds-color-muted: oklch(48% 0.015 60)         /* 辅助文字 */
+--ds-color-muted: oklch(42% 0.015 60)         /* 辅助文字 */
 --ds-color-fg: oklch(20% 0.02 60)             /* 正文 */
 --ds-color-fg-strong: oklch(14% 0.025 60)     /* 标题 */
 ```
@@ -67,7 +67,7 @@ error   oklch(50% 0.14 30) · info    oklch(55% 0.08 240)
 - 反馈：`ds-badge--{accent|success|warning|error}`、`ds-alert--{info|success|warning|error}`、`ds-toast`
 - 导航：`ds-navbar` `ds-tabs/ds-tab` `ds-breadcrumb` `ds-pagination` `ds-nav-item` `ds-pagenav`(`--rail/--hidden`) `ds-mnav-trigger`
 - 数据：`ds-table` `ds-progress` `ds-avatar` `ds-chip`
-- 覆盖层：`ds-modal` `ds-tooltip-demo` `ds-dropdown`
+- 覆盖层：`ds-modal` `ds-tooltip` `ds-dropdown`
 - 排版：`ds-display` `ds-h1..h4` `ds-caption` `ds-eyebrow` `ds-lead` `ds-serif` `ds-mono`
 - 动效：`ds-reveal`(+`--left/--right/--scale`，错峰用内联 `--d`)、`ds-anim-float/spin-slow/pulse/fade-in/rise/glow-breathe`
 - 进阶：`ds-timeline`、`ds-accordion`、`ds-date-group`、`ds-slider-group`

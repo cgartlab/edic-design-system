@@ -73,7 +73,7 @@ Light (`:root`):
 --ds-color-surface: oklch(99% 0.005 80)
 --ds-color-surface-raised: oklch(100% 0 0)  /* popovers / modals */
 --ds-color-border: oklch(89% 0.012 80)
---ds-color-muted: oklch(48% 0.015 60)       /* secondary text */
+--ds-color-muted: oklch(42% 0.015 60)       /* secondary text */
 --ds-color-fg: oklch(20% 0.02 60)           /* body text */
 --ds-color-fg-strong: oklch(14% 0.025 60)   /* headings */
 ```
@@ -158,7 +158,7 @@ h4 1.5 · h3 1.875 · h2 2.25 · h1 3 · display 3.75 · hero 4.5.
 ### Overlay & Glass
 - **遮罩层**: `ds-overlay-sample` `ds-overlay-bg` `ds-overlay-layer` `ds-overlay-strong` `ds-overlay-light` `ds-overlay-label`
 - **模态框**: `ds-modal` `ds-modal-header` `ds-modal-body` `ds-modal-footer` `ds-modal-close`
-- **工具提示**: `ds-tooltip-demo` `ds-tooltip-bubble`
+- **工具提示**: `ds-tooltip-host` `ds-tooltip`
 - **下拉菜单**: `ds-dropdown` `ds-dropdown-item` `ds-dropdown-divider`
 
 ### Typography
@@ -192,7 +192,7 @@ h4 1.5 · h3 1.875 · h2 2.25 · h1 3 · display 3.75 · hero 4.5.
 - **品牌预览**: `ds-brand-preview` (`--paper`/`--ink`)
 
 ### Site Shell
-- **英雄区**: `ds-hero-section` `ds-hero-inner` `ds-hero-badge` `ds-hero-title` `ds-hero-lead` `ds-hero-actions` `ds-hero-meta` `ds-hero-mark-wrap` `ds-gradient-text`
+- **英雄区**: `ds-hero-section` `ds-hero-inner` `ds-hero-badge` `ds-hero-title` `ds-hero-actions` `ds-hero-mark-wrap` `ds-gradient-text`
 - **数据统计**: `ds-stat-grid` `ds-stat` `ds-stat-num` `ds-stat-label`
 - **步骤列表**: `ds-steps` `ds-step` `ds-step-num` `ds-step-body`
 - **兼容徽章**: `ds-compat-grid` `ds-compat-item` `ds-cta-h2`

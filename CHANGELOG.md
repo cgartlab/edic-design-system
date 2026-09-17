@@ -99,20 +99,6 @@
 
 * rewrite README — bilingual layout + professional badges ([#209](https://github.com/cgartlab/edic-design-system/issues/209)) ([6f8b336](https://github.com/cgartlab/edic-design-system/commit/6f8b33670761cb9af1fa66695ebf58ae05ab7ed9))
 
-## [Unreleased]
-
-### 新增
-
-### 修复
-
-### 性能优化
-
-### 重构
-
-### 文档
-
-### 样式
-
 ## [1.9.1](https://github.com/cgartlab/edic-design-system/compare/v1.9.0...v1.9.1) (2026-06-25)
 
 ### 修复

@@ -49,9 +49,11 @@ deeper contracts.
   toggle button group, checkbox button, navigation drawer, avatar group,
   list/list item, tree, container/grid primitive, image fallback, horizontal
   timeline, alert dialog, error boundary, notification center.
-- Partial: `ds-empty-state`, `ds-avatar`, `ds-progress`, `ds-divider`,
-  `ds-calendar`, `ds-menu`-style dropdown coverage should be verified against
-  docs and manifest before being promoted as complete.
+- Partial: `ds-menu`-style dropdown coverage should be verified against docs and
+  manifest before being promoted as complete.
+- 2.0.0 已交付并文档化（不再视为缺口）：`ds-description-list`、`ds-combobox`、
+  `ds-date-picker` / `ds-date-calendar`、`ds-empty-state`、`ds-divider`，
+  以及 switch / radio-group / command-palette / drawer / tooltip 的契约补齐。
 
 ## Execution Queue
 

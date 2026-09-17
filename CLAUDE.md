@@ -35,7 +35,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 --ds-{category}-{name}[-{modifier}]
 
 Categories: color | font | text | weight | leading | tracking |
-            space | radius | shadow | duration | ease | bp | z | blur | glass
+            space | radius | shadow | duration | delay | ease | bp |
+            breakpoint | blur | glass | border | opacity | grid | gutter |
+            z | focus | motion | depth
 ```
 
 ### Dark Mode

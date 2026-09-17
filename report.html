@@ -1619,12 +1619,12 @@ img, svg, video, canvas {
 <section class="rp-cover" id="cover">
   <div class="rp-cover-tag"><!-- ✎ 报告分类 -->EDIC 设计系统规范文件 · 2026</div>
   <h1><!-- ✎ 报告标题 -->研究报告排版规范 v3.0</h1>
-  <p class="rp-cover-sub"><!-- ✎ 副标题 -->基于 EDIC Design System 的 A4 印刷排版体系。自包含 HTML，零外部依赖，Ctrl+P 即出 PDF。</p>
+  <p class="rp-cover-sub"><!-- ✎ 副标题 -->基于 EDIC Design System 的 A4 印刷排版体系。HTML + 共享 styles.css，无第三方依赖，Ctrl+P 即出 PDF。</p>
   <div class="rp-cover-meta">
     <span class="rp-cover-meta-item"><!-- ✎ 机构 -->EDIC 降维研究方法论</span>
     <span class="rp-cover-meta-item"><!-- ✎ 日期 -->2026.05</span>
     <span class="rp-cover-meta-item"><!-- ✎ 版本 -->v3.0 · 12 页</span>
-    <span class="rp-cover-meta-item"><!-- ✎ 许可 -->CC BY-NC 4.0</span>
+    <span class="rp-cover-meta-item"><!-- ✎ 许可 -->CC BY 4.0</span>
   </div>
 </section>
 
@@ -1697,7 +1697,7 @@ img, svg, video, canvas {
   <div class="rp-body">
     <h2>核心理念</h2>
 
-    <p><strong>1. 自包含。</strong> 单个 HTML 文件包含全部 CSS 令牌、布局系统、组件样式。无需外部样式表、无需 JavaScript 框架、无需字体 CDN。复制即用。</p>
+    <p><strong>1. 轻依赖。</strong> 单个 HTML 文件配合共享的 <code>styles.css</code>（设计令牌 / 布局 / 组件样式）。无需 JavaScript 框架、无需字体 CDN。复制即用。</p>
 
     <p><strong>2. 印刷优先。</strong> 所有尺寸以 <code>pt</code>（点）为单位，而非 <code>px</code> 或 <code>rem</code>。CSS <code>@page</code> 规则直接控制纸张边距、运行页眉、页码。打印时 <code>print-color-adjust: exact</code> 确保色块保留。</p>
 
@@ -1707,7 +1707,7 @@ img, svg, video, canvas {
 
     <div class="rp-callout -info">
       <h3>降维研究方法论</h3>
-      <p>EDIC 降维研究方法论的核心思想：<strong>将复杂的设计决策「降维」为可复用的系统参数。</strong>一个行业分析报告涉及数百个排版决策（字体、字号、间距、色彩、对齐方式……），通过设计系统的「预决策」，内容生产者只需要关注内容本身，而非排版细节。本规范正是这一方法论在印刷领域的实践——把 A4 排版的全部复杂性封装进约 400 行 CSS 中。</p>
+      <p>EDIC 降维研究方法论的核心思想：<strong>将复杂的设计决策「降维」为可复用的系统参数。</strong>一个行业分析报告涉及数百个排版决策（字体、字号、间距、色彩、对齐方式……），通过设计系统的「预决策」，内容生产者只需要关注内容本身，而非排版细节。本规范正是这一方法论在印刷领域的实践——把 A4 排版的全部复杂性封装进 1500 余行 CSS 中。</p>
     </div>
   </div>
 </section>
