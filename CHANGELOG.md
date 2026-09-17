@@ -3,6 +3,13 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.4.0](https://github.com/cgartlab/edic-design-system/compare/v2.3.0...v2.4.0) (2026-09-17)
+
+
+### 新增
+
+* add alert-dialog component with focus trap and keyboard support (P1 backlog) ([#289](https://github.com/cgartlab/edic-design-system/issues/289)) ([25150e8](https://github.com/cgartlab/edic-design-system/commit/25150e83b860452296f33914ec20fb0e5f7e01f9))
+
 ## [2.3.0](https://github.com/cgartlab/edic-design-system/compare/v2.2.1...v2.3.0) (2026-09-17)
 
 
