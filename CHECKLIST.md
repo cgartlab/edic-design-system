@@ -7,7 +7,7 @@
 >
 > 执行授权：后续子任务直接推进；不要执行 `git commit` / `git push`，由用户审查结果后自行提交。
 >
-> 当前版本：`2.1.3`。当前资产：`tokens.json` 311 项，`edic-manifest.json` 39 个组件家族，`icons.json` / `icons.svg` 209 枚图标，`npm run audit` 通过。
+> 当前版本：`2.1.3`。当前资产：`tokens.json` 311 项，`edic-manifest.json` 41 个组件家族，`icons.json` / `icons.svg` 209 枚图标，`npm run audit` 通过。
 
 ## 执行原则
 
