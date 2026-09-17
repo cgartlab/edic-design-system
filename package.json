@@ -42,7 +42,7 @@
     "sync:check": "node scripts/run-validator.js sync_versions.py --check"
   },
   "devDependencies": {
-    "@vitest/coverage-v8": "^4.1.8",
+    "@vitest/coverage-v8": "^4.1.11",
     "jsdom": "^29.1.1",
     "serve": "^14.2.4",
     "vitest": "^4.1.8"
