@@ -338,8 +338,11 @@ All changes go through Pull Requests — no direct pushes to `main` for features
 
 Release PR（分支名以 `release-please--` 开头）存活期间，CI 校验策略如下：
 
-**豁免项（跳过）：**
-- `validate-versions` 和 `validate-verext`：由于 `release-please` 的 `generic` updater 无法处理无 `x-release-please-version` 标注的纯文本 `VERSION` 文件，Release PR 中 `tokens.json`/`package.json`（新版本）与 `VERSION`（旧版本）的不一致是**预期的过渡态**。最终一致性由合并后的 `post-merge-stamp` 保障。
+**豁免项（跳过）— 由 `ci.yml` 的 `AUDIT_SKIP_VERSION_CHECKS` 环境变量驱动（`run-audit.js` / `run-validators.js` 实现）：**
+- 版本过渡态校验：`validate-versions`、`validate-verext`（`tokens.json`/`package.json` 已 bump 而 `VERSION` 未同步——因 `release-please` 的 `generic` updater 无法更新无 `x-release-please-version` 标注的纯文本 `VERSION` 文件）
+- 版本化 manifest 校验：`validate-manifest`、`validate-icons`（`icons.json` / `edic-manifest.json` 由 extra-files 预先 bump，过渡态下与 `VERSION` 不一致属预期）
+- 审计的阶段检查：Version stamp / Version sync / Icon sprite / Changelog（`changelog.html` 滞后于新 `CHANGELOG.md` 同样属预期）
+- 最终一致性由合并后的 `post-merge-stamp` 保障（同步 `VERSION` → `stamp_version.py` → 重建 `changelog.html` → 刷新视觉基线）。
 
 **强制项（不可跳过）：**
 - `validate_release_notes.py`：此脚本校验 **`CHANGELOG.md` 中是否存在当前版本节**（变更日志唯一来源，由 `release-please` 维护）。即使在 Release PR 分支上，如果缺失该版本节，CI 必须失败并**物理阻断该 Release PR 的合并**（否则网站变更页与 GitHub Release notes 都会是空的）。
@@ -349,7 +352,7 @@ Release PR（分支名以 `release-please--` 开头）存活期间，CI 校验�
 
 ### 4. Version Sync
 
-All version references are synced via release-please extra-files (`tokens.json` / `package.json`) and `stamp_version.py`. The `VERSION` file itself is a plain-text semver (e.g. `1.9.1`) — release-please's GenericUpdater only rewrites lines annotated with `x-release-please-version` and **cannot update unannotated plain text**. Therefore `VERSION` is synced by `post-merge-stamp` from release-please's `version` output, then `stamp_version.py` propagates the version to HTML/MD `?v=` cache-busting parameters.
+All version references are synced via release-please extra-files (`tokens.json` / `package.json` / `icons.json` / `edic-manifest.json`) and `stamp_version.py`. The `VERSION` file itself is a plain-text semver (e.g. `1.9.1`) — release-please's GenericUpdater only rewrites lines annotated with `x-release-please-version` and **cannot update unannotated plain text**. Therefore `VERSION` is synced by `post-merge-stamp` from release-please's `version` output, then `stamp_version.py` propagates the version to HTML/MD `?v=` cache-busting parameters.
 
 | File | Tool |
 |------|------|
@@ -357,6 +360,8 @@ All version references are synced via release-please extra-files (`tokens.json` 
 | `AGENTS.md` | `stamp_version.py` |
 | `tokens.json` `"version"` | release-please `extra-files` |
 | `package.json` `"version"` | release-please `extra-files` |
+| `icons.json` `"version"` | release-please `extra-files` |
+| `edic-manifest.json` `"version"` | release-please `extra-files` |
 | `VERSION` | `post-merge-stamp`（GenericUpdater 无法更新无注解纯文本） |
 
 Run `make stamp-version` after `post-merge-stamp` to sync all HTML/MD files.
