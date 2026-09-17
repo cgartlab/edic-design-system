@@ -3,6 +3,13 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.2.1](https://github.com/cgartlab/edic-design-system/compare/v2.2.0...v2.2.1) (2026-09-17)
+
+
+### 修复
+
+* sync component count 39 to 41 across site and skill docs ([#285](https://github.com/cgartlab/edic-design-system/issues/285)) ([bedb87a](https://github.com/cgartlab/edic-design-system/commit/bedb87a0ddaf18c38ef802904769704d0318b9ea))
+
 ## [2.2.0](https://github.com/cgartlab/edic-design-system/compare/v2.1.4...v2.2.0) (2026-09-17)
 
 
