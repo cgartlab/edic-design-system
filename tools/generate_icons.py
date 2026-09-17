@@ -131,8 +131,10 @@ def icon_keywords(icon_id: str) -> list[str]:
 
 
 def build_icon_manifest(icons: list[dict]) -> str:
+    # 版本单一来源：VERSION 文件（此前硬编码 2.0.0，发布后会导致 icons.json 版本回退）
+    version = (ROOT / "VERSION").read_text(encoding="utf-8").strip() or "0.0.0"
     payload = {
-        "version": "2.0.0",
+        "version": version,
         "source": "scripts.js ICONS array",
         "sprite": "icons.svg",
         "naming": {
