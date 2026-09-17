@@ -73,6 +73,22 @@ const STAMPERS = [
   { script: "stamp_version.py", args: ["--check"] },
 ];
 
+// release-please 分支/合并提交存在「tokens/package 已 bump 而 VERSION 未同步」的
+// 预期过渡态（AGENTS.md §3.1），由 post-merge-stamp 收敛。此时跳过版本相关校验。
+const SKIP_VERSION_CHECKS = ["1", "true", "yes"].includes(
+  String(process.env.AUDIT_SKIP_VERSION_CHECKS || "").toLowerCase()
+);
+
+function effectiveValidators() {
+  return SKIP_VERSION_CHECKS
+    ? VALIDATORS.filter((s) => s !== "validate_versions.py" && s !== "validate_verext.py")
+    : VALIDATORS;
+}
+
+function effectiveStampers() {
+  return SKIP_VERSION_CHECKS ? [] : STAMPERS;
+}
+
 function runOne(script, args = []) {
   const toolPath = path.join(ROOT, "tools", script);
   const label = args.length ? `${script} ${args.join(" ")}` : script;
@@ -103,12 +119,15 @@ function main() {
 
   let hasFail = false;
   let hasWarn = false;
-  for (const { script, args } of STAMPERS) {
+  if (SKIP_VERSION_CHECKS) {
+    console.log("注：AUDIT_SKIP_VERSION_CHECKS 已启用 — 跳过版本校验器 validate-versions/validate-verext 与 stamp 检查（release-please 过渡态）。");
+  }
+  for (const { script, args } of effectiveStampers()) {
     const r = runOne(script, args);
     if (r === "fail") hasFail = true;
     if (r === "warn") hasWarn = true;
   }
-  for (const script of VALIDATORS) {
+  for (const script of effectiveValidators()) {
     const r = runOne(script);
     if (r === "fail") hasFail = true;
     if (r === "warn") hasWarn = true;
