@@ -163,6 +163,7 @@ h4 1.5 · h3 1.875 · h2 2.25 · h1 3 · display 3.75 · hero 4.5.
 - **工具提示**: `ds-tooltip-host` `ds-tooltip`
 
 - **菜单**: `ds-menu` (`--align-end`) `ds-menu-item` (`--danger`) `ds-menu-divider`
+- **确认对话框**: `ds-alert-dialog` `ds-alert-dialog-backdrop` `ds-alert-dialog-title` `ds-alert-dialog-desc` `ds-alert-dialog-actions`
 
 ### Typography
 - **标题**: `ds-display` `ds-hero` `ds-h1` `ds-h2` `ds-h3` `ds-h4` `ds-h5` `ds-subtitle`

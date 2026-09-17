@@ -839,6 +839,14 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .ds-modal-title{font-family:var(--ds-font-display);font-size:var(--ds-text-h4);margin:0;color:var(--ds-color-fg-strong)}
 .ds-modal-footer{display:flex;gap:var(--ds-space-3);justify-content:flex-end}
 .ds-modal--demo{position:static;box-shadow:var(--ds-shadow-lg);max-width:400px}
+
+/* ===== Alert Dialog ===== */
+.ds-alert-dialog-backdrop{position:fixed;inset:0;z-index:var(--ds-z-modal);display:flex;align-items:center;justify-content:center;padding:var(--ds-space-5);background:color-mix(in oklch,var(--ds-color-bg) 55%,transparent)}
+.ds-alert-dialog-backdrop[hidden]{display:none}
+.ds-alert-dialog{width:min(100%,28rem);background:var(--ds-color-surface-raised);border:1px solid var(--ds-color-border);border-radius:var(--ds-radius-xl);box-shadow:var(--ds-shadow-2xl);padding:var(--ds-space-6)}
+.ds-alert-dialog-title{margin:0 0 var(--ds-space-2);color:var(--ds-color-fg);font-family:var(--ds-font-display);font-size:var(--ds-text-h4)}
+.ds-alert-dialog-desc{margin:0 0 var(--ds-space-5);color:var(--ds-color-muted);font-size:var(--ds-text-body)}
+.ds-alert-dialog-actions{display:flex;justify-content:flex-end;gap:var(--ds-space-3)}
 .ds-btn--danger{background:var(--ds-color-error);color:var(--ds-color-white);border-color:var(--ds-color-error)}
 .ds-btn--danger:hover{background:color-mix(in oklch,var(--ds-color-error) 92%,var(--ds-color-black) 8%);border-color:color-mix(in oklch,var(--ds-color-error) 92%,var(--ds-color-black) 8%);box-shadow:var(--ds-shadow-btn-hover)}
 

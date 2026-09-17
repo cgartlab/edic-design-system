@@ -193,7 +193,7 @@ mkdir -p .kiro/steering
 | Reveal animation / 揭示动效 | `ds-reveal` + `--d` stagger |
 | Toast / 通知 | `ds-toast ds-toast-icon` |
 
-完整组件契约（42 个核心组件家族）见 `SKILL.md`。
+完整组件契约（43 个核心组件家族）见 `SKILL.md`。
 
 ---
 
@@ -291,6 +291,6 @@ import './path/to/styles.css';
 - 完善打印/PDF 输出样式，添加 `@page` 规则
 
 ### v1.5.1 (2026-06)
-- 维护 42 个核心组件类与新增组件的样式契约
+- 维护 43 个核心组件类与新增组件的样式契约
 - 统一组件契约结构
 - 添加双语 README 安装说明

@@ -2634,3 +2634,52 @@ const TOKENS = [
     else if (e.key === "End") { e.preventDefault(); items[items.length - 1].focus(); }
   });
 })();
+
+/* ===== Alert Dialog (confirmation, focus trap) ===== */
+(function() {
+  if (window.__dsAlertDialogLoaded) return; // 防重复注册
+  window.__dsAlertDialogLoaded = true;
+  var lastTrigger = null;
+
+  function findFocusable(root) {
+    return Array.prototype.filter.call(
+      root.querySelectorAll('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'),
+      function(el) { return !el.hidden; }
+    );
+  }
+  function openDialog(trigger) {
+    var target = document.querySelector(trigger.getAttribute("data-dialog-target"));
+    if (!target) return;
+    var backdrop = target.closest(".ds-alert-dialog-backdrop");
+    if (!backdrop) return;
+    lastTrigger = trigger;
+    backdrop.hidden = false;
+    var first = target.querySelector(".ds-btn,[data-dialog-focus]") || target;
+    if (first && first.focus) first.focus();
+  }
+  function closeDialog() {
+    var open = document.querySelector(".ds-alert-dialog-backdrop:not([hidden])");
+    if (!open) return;
+    open.hidden = true;
+    if (lastTrigger && lastTrigger.focus) lastTrigger.focus();
+    lastTrigger = null;
+  }
+  document.addEventListener("click", function(e) {
+    var trigger = e.target.closest ? e.target.closest("[data-dialog-trigger]") : null;
+    if (trigger) { e.preventDefault(); openDialog(trigger); return; }
+    var closeBtn = e.target.closest ? e.target.closest("[data-dialog-close]") : null;
+    if (closeBtn) { e.preventDefault(); closeDialog(); return; }
+    if (e.target.classList && e.target.classList.contains("ds-alert-dialog-backdrop")) closeDialog();
+  });
+  document.addEventListener("keydown", function(e) {
+    var open = document.querySelector(".ds-alert-dialog-backdrop:not([hidden])");
+    if (!open) return;
+    if (e.key === "Escape") { closeDialog(); return; }
+    if (e.key !== "Tab") return;
+    var focusables = findFocusable(open);
+    if (!focusables.length) return;
+    var first = focusables[0], last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+})();
