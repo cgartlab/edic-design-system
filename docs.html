@@ -5,7 +5,7 @@
 <title>使用文档 · EDIC Design System</title>
 <meta name="description" content="EDIC 设计系统使用文档：安装引入、设计令牌、色彩主题、暗色模式、排版、组件、动效、图标、可访问性、定制扩展与 FAQ。">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="styles.css?v=2.2.0">
+<link rel="stylesheet" href="styles.css?v=2.2.1">
 </head>
 <body>
 <a href="#ds-main" class="ds-skip">跳至主要内容</a>
@@ -118,11 +118,11 @@
     &lt;meta charset="UTF-8"&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
     &lt;link rel="icon" type="image/svg+xml" href="favicon.svg"&gt;
-    &lt;link rel="stylesheet" href="styles.css?v=2.2.0"&gt;
+    &lt;link rel="stylesheet" href="styles.css?v=2.2.1"&gt;
   &lt;/head&gt;
   &lt;body&gt;
     &lt;!-- 你的内容 --&gt;
-    &lt;script src="scripts.js?v=2.2.0"&gt;&lt;/script&gt;
+    &lt;script src="scripts.js?v=2.2.1"&gt;&lt;/script&gt;
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
           </figure>
@@ -449,7 +449,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">json</span><button class="ds-copy-btn" data-copy="#c-machine-token" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
             <pre id="c-machine-token" tabindex="0"><code class="language-json">{
-  "version": "2.2.0",
+  "version": "2.2.1",
   "schema": "2.0.0",
   "tokens": [
     {
@@ -496,8 +496,8 @@ skills/edic-design-system/SKILL.md</code></pre>
           <p>EDIC 的升级以增量方式进行。现有 1.x 项目只需要更新 <code>styles.css</code> 和 <code>scripts.js</code> 的版本戳即可继续工作；新代码再逐步采用结构化 token、manifest 与语义别名。</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-migration" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
-            <pre id="c-migration" tabindex="0"><code class="language-html">&lt;link rel="stylesheet" href="styles.css?v=2.2.0"&gt;
-&lt;script src="scripts.js?v=2.2.0"&gt;&lt;/script&gt;</code></pre>
+            <pre id="c-migration" tabindex="0"><code class="language-html">&lt;link rel="stylesheet" href="styles.css?v=2.2.1"&gt;
+&lt;script src="scripts.js?v=2.2.1"&gt;&lt;/script&gt;</code></pre>
           </figure>
           <h3>可选迁移步骤</h3>
           <ol>
@@ -2112,7 +2112,7 @@ skills/edic-design-system/SKILL.md</code></pre>
                 <p>玻璃卡片使用 <code>backdrop-filter: blur(24px)</code>，背景为系统色盘中相邻色的渐变。</p>
                 <div class="ds-glass-meta">
                   <span>EDIC Design System</span>
-                  <span>v2.2.0</span>
+                  <span>v2.2.1</span>
                 </div>
               </div>
             </div>
@@ -2175,7 +2175,7 @@ skills/edic-design-system/SKILL.md</code></pre>
                   <div class="ds-timeline-dot"></div>
                   <div class="ds-timeline-content">
                     <span class="ds-timeline-tag">发布</span>
-                    <div class="ds-timeline-date">2026.09 — v2.2.0</div>
+                    <div class="ds-timeline-date">2026.09 — v2.2.1</div>
                     <div class="ds-timeline-title">设计基础设施升级</div>
                     <p>结构化 tokens、manifest、AGENT-GUIDE、209 枚图标索引、41 个核心组件契约，以及 15 个验证器组成的质量门槛；HTML 校验覆盖主内容区、外部资源、`javascript:`、内联事件与标题数量。</p>
                   </div>
@@ -2310,14 +2310,14 @@ skills/edic-design-system/SKILL.md</code></pre>
     <div class="ds-footer-bottom">
       <span>© <span class="ds-year">2026</span> EDIC · CGArtLab</span>
       <div class="ds-cluster">
-        <span class="ds-mono" data-ds-version>v2.2.0</span>
+        <span class="ds-mono" data-ds-version>v2.2.1</span>
         <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" class="ds-link" title="本设计系统采用 CC BY 4.0 许可证">CC BY 4.0</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script src="scripts.js?v=2.2.0"></script>
+<script src="scripts.js?v=2.2.1"></script>
 <button id="theme-toggle-btn-fixed" class="ds-theme-toggle-btn ds-theme-toggle-btn--fixed" type="button" aria-label="跟随系统 · 点击切换">
   <span class="theme-icon"></span>
 </button>
