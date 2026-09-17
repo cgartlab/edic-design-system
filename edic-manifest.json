@@ -97,7 +97,8 @@
       "command-palette",
       "spinner",
       "form-field",
-      "menu"
+      "menu",
+      "alert-dialog"
     ],
     "rules": [
       "Each component must expose default, hover, focus-visible, active, and disabled states where applicable.",

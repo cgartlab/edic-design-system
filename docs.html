@@ -230,7 +230,7 @@
   &lt;p&gt;使用令牌的卡片，悬停浮起。&lt;/p&gt;
 &lt;/article&gt;</code></pre>
           </figure>
-          <p>42 个核心组件家族的 live 形态、变体与状态，请见<a href="#visual-components">视觉手册 · 组件库</a>；本页内同时保留常用用法、ARIA 契约与可复制代码。</p>
+          <p>43 个核心组件家族的 live 形态、变体与状态，请见<a href="#visual-components">视觉手册 · 组件库</a>；本页内同时保留常用用法、ARIA 契约与可复制代码。</p>
 
           <h3>响应式导航 · Mobile Drawer</h3>
           <p>导航栏 <code>.ds-navbar</code> 在桌面端为水平毛玻璃浮动导航，在移动端与平板（&lt;1024px）转为右侧滑出抽屉。移动端导航复用已有设计令牌。</p>
@@ -698,7 +698,7 @@ skills/edic-design-system/SKILL.md</code></pre>
 
         <section class="ds-doc-block" id="visual-components">
           <h2>视觉手册 · 组件库</h2>
-          <p>当前覆盖 42 个核心组件家族，包含常用变体、状态、ARIA 契约与可复制代码。每个组件都保持纯 CSS + HTML 示例，可直接复制到项目中使用。</p>
+          <p>当前覆盖 43 个核心组件家族，包含常用变体、状态、ARIA 契约与可复制代码。每个组件都保持纯 CSS + HTML 示例，可直接复制到项目中使用。</p>
           <div class="ds-component-group">
             <div class="ds-component-label">01 · Button</div>
             <div class="ds-component-preview">
@@ -989,6 +989,22 @@ skills/edic-design-system/SKILL.md</code></pre>
               </div>
             </div>
           </div>
+        <div class="ds-component-group">
+          <div class="ds-component-label">Alert Dialog</div>
+          <div class="ds-component-preview ds-flex-col ds-items-start ds-w-full">
+            <button class="ds-btn ds-btn--primary" type="button" data-dialog-trigger data-dialog-target="#alert-dialog-demo">删除项目</button>
+            <div class="ds-alert-dialog-backdrop" hidden>
+              <div class="ds-alert-dialog" id="alert-dialog-demo" role="alertdialog" aria-modal="true" aria-labelledby="alert-dialog-demo-title" aria-describedby="alert-dialog-demo-desc">
+                <h2 class="ds-alert-dialog-title" id="alert-dialog-demo-title">确认删除？</h2>
+                <p class="ds-alert-dialog-desc" id="alert-dialog-demo-desc">此操作不可撤销，将永久删除该项目。</p>
+                <div class="ds-alert-dialog-actions">
+                  <button class="ds-btn ds-btn--ghost" type="button" data-dialog-close>取消</button>
+                  <button class="ds-btn ds-btn--primary" type="button" data-dialog-close>删除</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
           <div class="ds-component-group">
             <div class="ds-component-label">12 · Tabs</div>
             <div class="ds-component-preview ds-flex-col ds-items-stretch">
@@ -1705,7 +1721,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           <div class="ds-component-label">35 · Stat</div>
           <div class="ds-component-preview">
             <div class="ds-stat-grid">
-              <div class="ds-stat"><span class="ds-stat-num">42</span><span class="ds-stat-label">核心组件</span></div>
+              <div class="ds-stat"><span class="ds-stat-num">43</span><span class="ds-stat-label">核心组件</span></div>
               <div class="ds-stat"><span class="ds-stat-num">291</span><span class="ds-stat-label">设计令牌</span></div>
               <div class="ds-stat"><span class="ds-stat-num">209</span><span class="ds-stat-label">图标</span></div>
             </div>
@@ -2191,7 +2207,7 @@ skills/edic-design-system/SKILL.md</code></pre>
                     <span class="ds-timeline-tag">发布</span>
                     <div class="ds-timeline-date">2026.09 — v2.3.0</div>
                     <div class="ds-timeline-title">设计基础设施升级</div>
-                    <p>结构化 tokens、manifest、AGENT-GUIDE、209 枚图标索引、42 个核心组件契约，以及 15 个验证器组成的质量门槛；HTML 校验覆盖主内容区、外部资源、`javascript:`、内联事件与标题数量。</p>
+                    <p>结构化 tokens、manifest、AGENT-GUIDE、209 枚图标索引、43 个核心组件契约，以及 15 个验证器组成的质量门槛；HTML 校验覆盖主内容区、外部资源、`javascript:`、内联事件与标题数量。</p>
                   </div>
                 </div>
                 <div class="ds-timeline-item">
