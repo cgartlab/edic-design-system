@@ -3,6 +3,13 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.1.3](https://github.com/cgartlab/edic-design-system/compare/v2.1.2...v2.1.3) (2026-09-17)
+
+
+### 修复
+
+* **ci:** upgrade release actions to latest majors (upload-artifact v7, release-please-action v5) and sync release-flow docs ([#279](https://github.com/cgartlab/edic-design-system/issues/279)) ([37370fb](https://github.com/cgartlab/edic-design-system/commit/37370fbbea7e60e9ca71c96740238fe699fceca3))
+
 ## [2.1.2](https://github.com/cgartlab/edic-design-system/compare/v2.1.1...v2.1.2) (2026-09-17)
 
 
