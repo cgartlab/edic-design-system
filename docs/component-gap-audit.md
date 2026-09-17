@@ -29,7 +29,7 @@ deeper contracts.
 | Buttons and controls | `ds-btn`, icon button, copy button, dropdown | Menu, context menu, segmented control, toggle button group, checkbox button | Add contracts and examples for composite controls |
 | Forms and input | inputs, selects, checkboxes, radios, toggles, sliders, date fields | File upload, search input, OTP/password, time picker, date range, rich text toolbar, form field wrapper | Expand forms with contract-driven examples |
 | Data display | table, timeline, stat, avatar, code, swatches | Description list, list/list item, tree, avatar group, image fallback, horizontal timeline | Add enterprise data display patterns |
-| Feedback and loading | alert, badge, chip, toast, progress, skeleton | Spinner, empty state docs/example, progress ring, notification center, error boundary | Add loading/empty/error patterns |
+| Feedback and loading | alert, badge, chip, toast, progress, skeleton | empty state docs/example, progress ring, notification center, error boundary | Add loading/empty/error patterns |
 | Navigation | navbar, breadcrumb, pagination, steps, sidebar nav, tabs | Current page state, focus behavior, mobile navigation drawer, context menu | Document ARIA and keyboard behavior |
 | Overlays and dialogs | modal, dropdown, tooltip, drawer, popover, command palette | Alert dialog, stronger focus trap/Esc contracts, trigger relationship for popover/drawer, loading state contracts | Formalize contract examples |
 
@@ -54,6 +54,7 @@ deeper contracts.
 - 2.0.0 已交付并文档化（不再视为缺口）：`ds-description-list`、`ds-combobox`、
   `ds-date-picker` / `ds-date-calendar`、`ds-empty-state`、`ds-divider`，
   以及 switch / radio-group / command-palette / drawer / tooltip 的契约补齐。
+  `ds-spinner` / `ds-form-field`（P1 backlog 已交付）。
 
 ## Execution Queue
 

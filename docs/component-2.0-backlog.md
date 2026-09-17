@@ -15,9 +15,9 @@ This backlog converts the component gap audit into sequential, auditable tasks.
 
 | Component | Priority | Contract owner | Notes |
 | --- | --- | --- | --- |
-| Spinner / Loader | P1 | P1 | CSS-only loader with reduced-motion fallback |
+| Spinner / Loader | P1 | P1 | CSS-only loader with reduced-motion fallback |✅ 2.2.0 已实现（`ds-spinner`）|
 | Menu | P1 | P1 | `aria-haspopup`, `aria-expanded`, menu item roles |
-| Form Field | P1 | P1 | label, hint, error, disabled, required field wrapper |
+| Form Field | P1 | P1 | label, hint, error, disabled, required field wrapper |✅ 2.2.0 已实现（`ds-form-field`）|
 | Empty State | P1 | P1 | existing `ds-empty-state` may need docs/example completion |已有 docs/示例；✅ 2.0.0 已实现 |
 | Alert Dialog | P1 | P1 | modal-like confirmation with focus trap and Esc behavior |
 | File Upload | P1 | P1 | drag area, filename list, progress/error state |
