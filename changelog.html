@@ -106,11 +106,18 @@
             <li><strong>docs:</strong> 修复 <code>examples/components/index.html</code> 标题层级与导航类名示例</li>
             <li><strong>scripts:</strong> 修复 <code>run-validators.js</code> 在显式 <code>PYTHON</code> 路径下的数组兼容性问题</li>
             <li><strong>tokens:</strong> 更新 <code>validate_tokens.py</code> 以读取 2.0 <code>tokens[]</code> 结构并兼容旧扁平结构</li>
+            <li><strong>storage:</strong> 集中化 localStorage 安全读写（<code>safeLocalStorage</code> 抽象），新增对应单元测试</li>
+            <li><strong>ci:</strong> 修复 Release PR 合并后 CI 版本验证竞态</li>
+            <li><strong>ci:</strong> 修复 Release PR 合并后 CI 版本验证竞态</li>
           </ul>
           <h3>文档</h3>
           <ul>
             <li><strong>release:</strong> 添加 2.0.0 变更日志条目</li>
             <li><strong>site:</strong> 同步版本戳并验证 24 个发布目标文件一致</li>
+          </ul>
+          <h3>⚠ BREAKING CHANGES</h3>
+          <ul>
+            <li>EDIC 2.0 质量审计与可访问性加固</li>
           </ul>
         </section>
         <section class="ds-doc-block" id="v1102">
