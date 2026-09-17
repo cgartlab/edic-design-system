@@ -3,6 +3,16 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.1.1](https://github.com/cgartlab/edic-design-system/compare/v2.1.0...v2.1.1) (2026-09-17)
+
+2.1.0 发布后的稳定性与一致性修复（详见 [#275](https://github.com/cgartlab/edic-design-system/pull/275)）。
+
+### 修复
+
+* **ci:** 恢复 AGENTS.md §3.1 的 release-please 版本过渡态豁免——v2 审计重构时丢失。`ci.yml` 传入 `AUDIT_SKIP_VERSION_CHECKS`（分支 `release-please--*` 或相关合并提交，表达式 null 安全且兼容 merge/squash 两种形态），`run-audit.js` / `run-validators.js` 相应跳过版本 stamp/sync 与 validate-versions/verext
+* **release:** `icons.json` 与 `edic-manifest.json` 加入 release-please extra-files（此前发布后版本滞后，导致 validate-manifest/validate-icons 失败）；`tools/generate_icons.py` 版本改从 `VERSION` 读取（此前硬编码 2.0.0，运行 `make icons` 会导致 icons.json 版本回退）
+* **test:** 刷新视觉基线（`post-merge-stamp` 修改版本串后 styles.css / scripts.js / examples 哈希漂移）
+
 ## [2.1.0](https://github.com/cgartlab/edic-design-system/compare/v2.0.0...v2.1.0) (2026-09-17)
 
 全站质量审计与一致性加固（7 个维度，详见 [#273](https://github.com/cgartlab/edic-design-system/pull/273)）。

@@ -80,9 +80,16 @@ const SKIP_VERSION_CHECKS = ["1", "true", "yes"].includes(
 );
 
 function effectiveValidators() {
-  return SKIP_VERSION_CHECKS
-    ? VALIDATORS.filter((s) => s !== "validate_versions.py" && s !== "validate_verext.py")
-    : VALIDATORS;
+  if (!SKIP_VERSION_CHECKS) return VALIDATORS;
+  const skipped = new Set([
+    "validate_versions.py",
+    "validate_verext.py",
+    // icons.json / edic-manifest.json 由 release-please extra-files 预先 bump，
+    // 在版本过渡态下与 VERSION 不一致；其余检查（组件/图标数量等）在该分支上稳定。
+    "validate_manifest.py",
+    "validate_icons.py",
+  ]);
+  return VALIDATORS.filter((s) => !skipped.has(s));
 }
 
 function effectiveStampers() {
@@ -120,7 +127,7 @@ function main() {
   let hasFail = false;
   let hasWarn = false;
   if (SKIP_VERSION_CHECKS) {
-    console.log("注：AUDIT_SKIP_VERSION_CHECKS 已启用 — 跳过版本校验器 validate-versions/validate-verext 与 stamp 检查（release-please 过渡态）。");
+    console.log("注：AUDIT_SKIP_VERSION_CHECKS 已启用 — 跳过版本相关校验（validate-versions/verext/manifest/icons）与 stamp 检查（release-please 过渡态）。");
   }
   for (const { script, args } of effectiveStampers()) {
     const r = runOne(script, args);
