@@ -2570,3 +2570,67 @@ const TOKENS = [
     renderChart(host, raw);
   }
 })();
+
+/* ===== Menu (WAI-ARIA dropdown) ===== */
+(function() {
+  if (window.__dsMenuLoaded) return; // 防重复注册（测试多次求值 / 页面重复引入）
+  window.__dsMenuLoaded = true;
+  function getTarget(trigger) {
+    return document.querySelector(trigger.getAttribute("data-menu-target"));
+  }
+  function setOpen(trigger, open) {
+    var target = getTarget(trigger);
+    if (!target) return;
+    target.hidden = !open;
+    trigger.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  function closeAll(except) {
+    var triggers = document.querySelectorAll("[data-menu-trigger]");
+    Array.prototype.forEach.call(triggers, function(tr) {
+      if (tr === except) return;
+      setOpen(tr, false);
+    });
+  }
+  function openMenu(trigger) {
+    closeAll(trigger);
+    setOpen(trigger, true);
+    var target = getTarget(trigger);
+    if (!target) return;
+    var first = target.querySelector(".ds-menu-item:not([aria-disabled='true'])");
+    if (first) first.focus();
+  }
+  document.addEventListener("click", function(e) {
+    var trigger = e.target.closest ? e.target.closest("[data-menu-trigger]") : null;
+    if (trigger) {
+      e.preventDefault();
+      var target = getTarget(trigger);
+      if (target && target.hidden) openMenu(trigger);
+      else closeAll();
+      return;
+    }
+    closeAll();
+  });
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") {
+      var open = document.querySelector("[data-menu-trigger][aria-expanded='true']");
+      if (open) { closeAll(); open.focus(); }
+      return;
+    }
+    var trigger = document.querySelector("[data-menu-trigger][aria-expanded='true']");
+    if (!trigger) return;
+    var target = getTarget(trigger);
+    if (!target || target.hidden) return;
+    var inside = target.contains(document.activeElement) || trigger === document.activeElement;
+    if (!inside) return;
+    var items = Array.prototype.filter.call(
+      target.querySelectorAll(".ds-menu-item"),
+      function(i) { return i.getAttribute("aria-disabled") !== "true"; }
+    );
+    if (!items.length) return;
+    var idx = items.indexOf(document.activeElement);
+    if (e.key === "ArrowDown") { e.preventDefault(); items[(idx + 1) % items.length].focus(); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); items[(idx - 1 + items.length) % items.length].focus(); }
+    else if (e.key === "Home") { e.preventDefault(); items[0].focus(); }
+    else if (e.key === "End") { e.preventDefault(); items[items.length - 1].focus(); }
+  });
+})();

@@ -16,7 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 | File | Role |
 |------|------|
-| `styles.css` | All design tokens (`:root` + `[data-theme="dark"]`), 41 component families, animations, site shell |
+| `styles.css` | All design tokens (`:root` + `[data-theme="dark"]`), 42 component families, animations, site shell |
 | `scripts.js` | Icon rendering, token table rendering, theme toggle, scroll reveal, copy actions, tab panels |
 | `tokens.json` | Structured JSON of all design tokens — source of truth for programmatic consumption |
 
