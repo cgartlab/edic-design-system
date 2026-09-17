@@ -3,6 +3,13 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.2.0](https://github.com/cgartlab/edic-design-system/compare/v2.1.4...v2.2.0) (2026-09-17)
+
+
+### 新增
+
+* add spinner and form-field components (P1 backlog) ([#283](https://github.com/cgartlab/edic-design-system/issues/283)) ([b960126](https://github.com/cgartlab/edic-design-system/commit/b960126d984c953ff0aedd68431a8b13099d2cfe))
+
 ## [2.1.4](https://github.com/cgartlab/edic-design-system/compare/v2.1.3...v2.1.4) (2026-09-17)
 
 
