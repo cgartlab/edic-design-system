@@ -32,6 +32,7 @@
       <a href="prompts.html" class="ds-navbar-link ds-navbar-link--active" aria-current="page">提示词</a>
       <a href="downloads.html" class="ds-navbar-link">下载</a>
       <a href="terms.html" class="ds-navbar-link">条款</a>
+      <a href="changelog.html" class="ds-navbar-link">更新</a>
       <a href="https://github.com/cgartlab/edic-design-system" class="ds-navbar-link" target="_blank" rel="noopener">仓库</a>
       <button id="theme-toggle-btn" class="ds-theme-toggle-btn" type="button" aria-label="跟随系统 · 点击切换">
         <span class="theme-icon"></span>
@@ -59,8 +60,8 @@
         <h2 class="ds-cta-h2 ds-mb-6">三步对齐</h2>
         <div class="ds-steps">
           <div class="ds-step"><span class="ds-step-num">1</span><div class="ds-step-body"><h3>选择版本并复制</h3><p>完整版系统提示词、精简提示词（开场白）或 Skill 技能包（持久化）。</p></div></div>
-          <div class="ds-step"><span class="ds-step-num">2</span><div class="ds-step-body"><h4>放到正确位置</h4><p>系统消息、Custom Instructions、规则文件或 skills 目录——各家 Agent 的配置位置见下方。</p></div></div>
-          <div class="ds-step"><span class="ds-step-num">3</span><div class="ds-step-body"><h4>下达需求</h4><p>「做一个定价页」「写一封发布邮件」——按提示遵循 EDIC 规则；邮件类输出使用兼容样式。</p></div></div>
+          <div class="ds-step"><span class="ds-step-num">2</span><div class="ds-step-body"><h3>放到正确位置</h3><p>系统消息、Custom Instructions、规则文件或 skills 目录——各家 Agent 的配置位置见下方。</p></div></div>
+          <div class="ds-step"><span class="ds-step-num">3</span><div class="ds-step-body"><h3>下达需求</h3><p>「做一个定价页」「写一封发布邮件」——按提示遵循 EDIC 规则；邮件类输出使用兼容样式。</p></div></div>
         </div>
       </div>
       <div class="ds-reveal ds-reveal--right">
@@ -131,7 +132,7 @@
   --ds-color-surface: oklch(99% 0.005 80)       /* 卡片表面 */
   --ds-color-surface-raised: oklch(100% 0 0)    /* 弹层/模态 */
   --ds-color-border: oklch(89% 0.012 80)
-  --ds-color-muted: oklch(48% 0.015 60)         /* 辅助文字 */
+  --ds-color-muted: oklch(42% 0.015 60)         /* 辅助文字 */
   --ds-color-fg: oklch(20% 0.02 60)             /* 正文 */
   --ds-color-fg-strong: oklch(14% 0.025 60)     /* 标题 */
 橄榄绿（10 级 --ds-color-olive-50…900），强调色：
@@ -167,7 +168,7 @@
 · 反馈：ds-badge--{accent|success|warning|error}、ds-alert--{info|success|warning|error}、ds-toast
 · 导航：ds-navbar ds-tabs/ds-tab ds-breadcrumb ds-pagination ds-nav-item ds-pagenav(--rail/--hidden) ds-mnav-trigger
 · 数据：ds-table ds-progress ds-avatar ds-chip
-· 覆盖层：ds-modal ds-tooltip-demo ds-dropdown
+· 覆盖层：ds-modal ds-tooltip ds-dropdown
 · 排版：ds-display ds-h1..h4 ds-caption ds-eyebrow ds-lead ds-serif ds-mono
 · 动效：ds-reveal(+--left/--right/--scale，错峰用内联 --d)、ds-anim-float/spin-slow/pulse/fade-in/rise/glow-breathe
 · 进阶：ds-timeline、ds-accordion、ds-date-group、ds-slider-group
@@ -247,7 +248,7 @@ description: 让产出遵循 EDIC 设计系统（Editorial × Olive Green、网�
   --ds-color-surface-raised: oklch(100% 0 0)
   --ds-color-fg: oklch(20% 0.02 60)         /* 正文 */
   --ds-color-fg-strong: oklch(14% 0.025 60) /* 标题 */
-  --ds-color-muted: oklch(48% 0.015 60)
+  --ds-color-muted: oklch(42% 0.015 60)
   --ds-color-olive-400: oklch(52% 0.08 115) === --ds-accent ===
 语义色（含 -bg）：success 145 / warning 85 / error 30 / info 240（色相）。
 暗色 [data-theme="dark"]：基底 oklch(15% 0.008 75)，正文 oklch(84% 0.008 72)。
@@ -286,7 +287,7 @@ description: 让产出遵循 EDIC 设计系统（Editorial × Olive Green、网�
   &lt;/article&gt;
 
 ## 参考
-· 视觉手册与 live 令牌：https://edic.cgartlab.com/docs.html
+· 视觉手册与 live 令牌：https://edic.cgartlab.com/docs.html#visual-colors
 · 使用文档：https://edic.cgartlab.com/docs.html
 · 结构化令牌：tokens.json</pre>
             <div class="ds-prompt-foot"><span>持久化 · 放入 Agent 的 skills 目录</span><a href="https://github.com/cgartlab/edic-design-system/releases/download/v2.0.0/edic-design-system-skill-v2.0.0.zip" class="ds-text-accent" download>下载完整包 →</a></div>
@@ -351,10 +352,11 @@ description: 让产出遵循 EDIC 设计系统（Editorial × Olive Green、网�
       <div class="ds-footer-col">
         <p class="ds-footer-col-heading">关于</p>
         <ul class="ds-footer-links">
-          <li><a href="https://cgartlab.com" target="_blank" rel="noopener">EDIC.com</a></li>
+          <li><a href="https://cgartlab.com" target="_blank" rel="noopener">CGArtLab.com</a></li>
           <li><a href="https://github.com/cgartlab/edic-design-system" target="_blank" rel="noopener">GitHub 仓库</a></li>
           <li><a href="terms.html">使用条款</a></li>
           <li><a href="downloads.html#examples">真实示例</a></li>
+          <li><a href="changelog.html">更新日志</a></li>
           <li><a href="https://blog.cgartlab.com" target="_blank" rel="noopener">博客</a></li>
           <li><a href="index.html#sitemap">网站地图</a></li>
         </ul>

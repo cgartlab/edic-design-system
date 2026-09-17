@@ -145,6 +145,18 @@ _HEADER_RE = re.compile(
     r".*?"                                                     # 中间杂项
     r"(?P<date>\d{4}-\d{2}-\d{2})?\s*$"                        # 可选日期
 )
+
+
+class DuplicateVersionError(ValueError):
+    """CHANGELOG.md 中存在重复的版本节（同一版本只能出现一次）。"""
+
+
+def _semver_key(version: str) -> tuple:
+    """返回可比较的 semver 键：主/次/补丁 + 预发布标记（预发布排在同版本正式版之后）。"""
+    core, _, pre = version.partition("-")
+    parts = core.split(".")
+    major, minor, patch = (int(parts[i]) for i in range(3))
+    return (major, minor, patch, 1 if pre else 0, pre or "")
 _SECTION_RE = re.compile(r"^###\s+(.+?)\s*$")
 _ITEM_RE = re.compile(r"^\s*[*\-]\s+(.+?)\s*$")
 
@@ -180,10 +192,10 @@ def parse_changelog() -> list[Version]:
             flush_version()
             ver = hm.group("ver")
             base = ver.split("-")[0]
-            # 跳过未发布占位与重复版本（保留首次出现 = 最新）
             if base in seen:
-                cur = None
-                continue
+                raise DuplicateVersionError(
+                    f"CHANGELOG.md 存在重复版本节: [{base}]（请合并重复节后重新运行）"
+                )
             seen.add(base)
             cur = Version(
                 version=ver,
@@ -314,10 +326,16 @@ def main() -> int:
     except FileNotFoundError as e:
         print(f"[ERROR] {e}", file=sys.stderr)
         return 1
+    except DuplicateVersionError as e:
+        print(f"[ERROR] {e}", file=sys.stderr)
+        return 1
 
     if not versions:
         print("[ERROR] CHANGELOG.md 中未解析到任何版本节。", file=sys.stderr)
         return 1
+
+    # 按 semver 降序输出（修复历史版本节在源文件中未按新→旧排序导致的目录乱序）
+    versions.sort(key=lambda v: _semver_key(v.version), reverse=True)
 
     print(f"从 CHANGELOG.md 解析到 {len(versions)} 个版本：",
           ", ".join(f"v{v.version}" for v in versions))

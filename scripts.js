@@ -1,4 +1,4 @@
-﻿/* ===== EDIC Design System v2.0.0 — Icon Grid & Token Table ===== */
+/* ===== EDIC Design System v2.0.0 — Icon Grid & Token Table ===== */
 
 const ICONS = [
   {id:"archive",svg:'<svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>'},
@@ -883,7 +883,31 @@ const TOKENS = [
   }
 
   function copyText(text) {
-    return navigator.clipboard.writeText(text);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text);
+    }
+    // 非安全上下文（http:// LAN 预览等）没有 Clipboard API — 用 execCommand 降级。
+    // 保证本函数永不同步抛错，使 .then()/.catch() 分支始终可用。
+    return new Promise(function(resolve, reject) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.top = "0";
+      ta.style.left = "0";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        var ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+        ok ? resolve() : reject(new Error("execCommand copy failed"));
+      } catch (err) {
+        document.body.removeChild(ta);
+        reject(err);
+      }
+    });
   }
 
   function getSourceText(btn) {

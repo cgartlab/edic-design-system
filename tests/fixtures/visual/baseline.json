@@ -12,7 +12,7 @@
         "aria-expanded",
         "[data-theme=\"dark\"]"
       ],
-      "sha256": "49efc129f18a04c4a710f420c8bc7c516b055b8ae98654c70a0c31a3f642b213"
+      "sha256": "73da0f6d25dc57a925b73d5e7b60d0d9b7aa3db8260e1620b53d00d27777c700"
     },
     {
       "path": "styles.css",
@@ -31,7 +31,7 @@
         "theme",
         "render icon grid"
       ],
-      "sha256": "5b089dc7b1a365eed853a5bb852683c28a097ba3155cdc7bda27ded1faa24fe0"
+      "sha256": "3b93556d6dc0c8ca94f76acd4db0dd21d776c36f8a55f637778a8989317ab26f"
     }
   ]
 }

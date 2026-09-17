@@ -70,14 +70,14 @@
               <li><a class="ds-pagenav-link" href="#v162"><span class="ds-pagenav-num">10</span><span class="ds-pagenav-text">v1.6.2</span></a></li>
               <li><a class="ds-pagenav-link" href="#v161"><span class="ds-pagenav-num">11</span><span class="ds-pagenav-text">v1.6.1</span></a></li>
               <li><a class="ds-pagenav-link" href="#v160"><span class="ds-pagenav-num">12</span><span class="ds-pagenav-text">v1.6.0</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v153"><span class="ds-pagenav-num">13</span><span class="ds-pagenav-text">v1.5.3</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v155"><span class="ds-pagenav-num">14</span><span class="ds-pagenav-text">v1.5.5</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v154"><span class="ds-pagenav-num">15</span><span class="ds-pagenav-text">v1.5.4</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v155"><span class="ds-pagenav-num">13</span><span class="ds-pagenav-text">v1.5.5</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v154"><span class="ds-pagenav-num">14</span><span class="ds-pagenav-text">v1.5.4</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v153"><span class="ds-pagenav-num">15</span><span class="ds-pagenav-text">v1.5.3</span></a></li>
               <li><a class="ds-pagenav-link" href="#v152"><span class="ds-pagenav-num">16</span><span class="ds-pagenav-text">v1.5.2</span></a></li>
               <li><a class="ds-pagenav-link" href="#v151"><span class="ds-pagenav-num">17</span><span class="ds-pagenav-text">v1.5.1</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v140"><span class="ds-pagenav-num">18</span><span class="ds-pagenav-text">v1.4.0</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v150"><span class="ds-pagenav-num">18</span><span class="ds-pagenav-text">v1.5.0</span></a></li>
               <li><a class="ds-pagenav-link" href="#v143"><span class="ds-pagenav-num">19</span><span class="ds-pagenav-text">v1.4.3</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v150"><span class="ds-pagenav-num">20</span><span class="ds-pagenav-text">v1.5.0</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v140"><span class="ds-pagenav-num">20</span><span class="ds-pagenav-text">v1.4.0</span></a></li>
               <li><a class="ds-pagenav-link" href="#v110"><span class="ds-pagenav-num">21</span><span class="ds-pagenav-text">v1.1.0</span></a></li>
               <li><a class="ds-pagenav-link" href="#v100"><span class="ds-pagenav-num">22</span><span class="ds-pagenav-text">v1.0.0</span></a></li>
             </ol>
@@ -663,6 +663,50 @@
             <li>完善中文排版规范与细节优化</li>
           </ul>
         </section>
+        <section class="ds-doc-block" id="v155">
+          <h2>v1.5.5 — 2026-06-19</h2>
+          <h3>新增</h3>
+          <ul>
+            <li><strong>页面目录组件</strong>：统一页面目录组件 <code>.ds-pagenav</code>，支持桌面浮动与移动端折叠</li>
+            <li><strong>代码样式规范</strong>：Prism.js 语法高亮主题，橄榄绿编辑风格，16 种 token 类型</li>
+            <li><strong>Layer 2 验证器</strong>：新增 cssref、darkmode、verext、hardcode 四个跨文件验证器</li>
+            <li><strong>图标 sprite 生成</strong>：<code>tools/generate_icons.py</code> 可生成独立 SVG sprite</li>
+          </ul>
+          <h3>修复</h3>
+          <ul>
+            <li><strong>TOC 命名空间冲突回归</strong></li>
+            <li><strong>Prism 代码块暗色模式可见性</strong></li>
+            <li><strong>反模式清理</strong>（hex/rgba 迁移到 OKLch，死代码删除）</li>
+            <li><strong>移除失效链接</strong>：删除 <code>handbook.html</code>（404），更新 <code>edic.cgartlab.com</code> Reference 链接</li>
+            <li><strong>修正重复链接</strong>：<code>docs.html</code> 重复链接合并，新增 Website 和 <code>tokens.json</code> 完整 URL</li>
+            <li><strong>版本源统一</strong>：VERSION、package.json、tokens.json、SKILL.md 全部更新至 1.5.5</li>
+            <li><strong>缓存失效修复</strong>：执行 <code>make stamp-version</code>，所有 HTML/CSS/JS/MD 文件 <code>?v=</code> 更新至 1.5.5</li>
+          </ul>
+          <h3>变更</h3>
+          <ul>
+            <li><strong>命名验证器白名单扩展</strong>（新增 7 个合法类别）</li>
+            <li><strong>CI 治理完善</strong>，<code>make validate</code> 退出码聚合</li>
+            <li><strong>暗色模式 Gravitas &amp; Glow 增强</strong></li>
+            <li><strong>ClawHub/SkillHub 元数据</strong>：SKILL.md 新增 <code>slug</code>、<code>displayName</code>、<code>version</code> 字段</li>
+            <li><strong>Skill 包 License 统一</strong>：包内 README.md License badge 更新为 MIT-0，与 SKILL.md 一致</li>
+            <li><strong>Skill ZIP 重建</strong>：<code>scripts/package_skill.py</code> 重建并通过 <code>--check</code> 校验</li>
+          </ul>
+        </section>
+        <section class="ds-doc-block" id="v154">
+          <h2>v1.5.4 — 2026-06-14</h2>
+          <h3>修复</h3>
+          <ul>
+            <li><strong>移动端滚动锁定无法释放</strong>：修复汉堡菜单关闭时 <code>removeProperty(&quot;touchAction&quot;)</code>（驼峰写法）无效操作导致的 <code>touch-action:none</code> 永久残留，改用 <code>overflow: hidden</code> 方案</li>
+            <li><strong>页脚「网站地图」死链</strong>：<code>index.html#sitemap</code> 锚点不存在，已补充 <code>id=&quot;sitemap&quot;</code> 到页脚分区</li>
+            <li><strong>`.ds-progress` 组件变体缺失</strong>：新增 <code>--success</code> 和 <code>--error</code> 颜色变体</li>
+          </ul>
+          <h3>维护</h3>
+          <ul>
+            <li><strong>Release 流程自动化</strong>：新增 <code>scripts/package_skill.py</code> 和 <code>scripts/package_release.py</code>，重写 <code>.github/workflows/release.yml</code> 为三产物流程</li>
+            <li><strong>`stamp_version.py`</strong>：将 <code>skills/edic-design-system/README.md</code> 纳入版本 stamp 目标</li>
+            <li><strong>`.gitattributes`</strong>：新增 <code>export-ignore</code> 和 <code>*.zip binary</code></li>
+          </ul>
+        </section>
         <section class="ds-doc-block" id="v153">
           <h2>v1.5.3 — 2026-06-08</h2>
           <h3>修复</h3>
@@ -681,43 +725,6 @@
           <h3>维护</h3>
           <ul>
             <li>同步更新 <code>docs/VERSIONING.md</code> line 155 的&quot;最新稳定版&quot;引用</li>
-          </ul>
-        </section>
-        <section class="ds-doc-block" id="v155">
-          <h2>v1.5.5 — 2026-06-05</h2>
-          <h3>新增</h3>
-          <ul>
-            <li><strong>页面目录组件</strong>：统一页面目录组件 <code>.ds-pagenav</code>，支持桌面浮动与移动端折叠</li>
-            <li><strong>代码样式规范</strong>：Prism.js 语法高亮主题，橄榄绿编辑风格，16 种 token 类型</li>
-            <li><strong>Layer 2 验证器</strong>：新增 cssref、darkmode、verext、hardcode 四个跨文件验证器</li>
-            <li><strong>图标 sprite 生成</strong>：<code>tools/generate_icons.py</code> 可生成独立 SVG sprite</li>
-          </ul>
-          <h3>修复</h3>
-          <ul>
-            <li><strong>TOC 命名空间冲突回归</strong></li>
-            <li><strong>Prism 代码块暗色模式可见性</strong></li>
-            <li><strong>反模式清理</strong>（hex/rgba 迁移到 OKLch，死代码删除）</li>
-          </ul>
-          <h3>变更</h3>
-          <ul>
-            <li><strong>命名验证器白名单扩展</strong>（新增 7 个合法类别）</li>
-            <li><strong>CI 治理完善</strong>，<code>make validate</code> 退出码聚合</li>
-            <li><strong>暗色模式 Gravitas &amp; Glow 增强</strong></li>
-          </ul>
-        </section>
-        <section class="ds-doc-block" id="v154">
-          <h2>v1.5.4 — 2026-06-14</h2>
-          <h3>修复</h3>
-          <ul>
-            <li><strong>移动端滚动锁定无法释放</strong>：修复汉堡菜单关闭时 <code>removeProperty(&quot;touchAction&quot;)</code>（驼峰写法）无效操作导致的 <code>touch-action:none</code> 永久残留，改用 <code>overflow: hidden</code> 方案</li>
-            <li><strong>页脚「网站地图」死链</strong>：<code>index.html#sitemap</code> 锚点不存在，已补充 <code>id=&quot;sitemap&quot;</code> 到页脚分区</li>
-            <li><strong>`.ds-progress` 组件变体缺失</strong>：新增 <code>--success</code> 和 <code>--error</code> 颜色变体</li>
-          </ul>
-          <h3>维护</h3>
-          <ul>
-            <li><strong>Release 流程自动化</strong>：新增 <code>scripts/package_skill.py</code> 和 <code>scripts/package_release.py</code>，重写 <code>.github/workflows/release.yml</code> 为三产物流程</li>
-            <li><strong>`stamp_version.py`</strong>：将 <code>skills/edic-design-system/README.md</code> 纳入版本 stamp 目标</li>
-            <li><strong>`.gitattributes`</strong>：新增 <code>export-ignore</code> 和 <code>*.zip binary</code></li>
           </ul>
         </section>
         <section class="ds-doc-block" id="v152">
@@ -744,52 +751,6 @@
             <li>移动端现象：目录展开时无法继续下滑、目录收起时正常 —— 因为收起的 <code>&lt;details&gt;</code> 内链接 <code>display:none</code>，<code>scrollIntoView</code> 对隐藏元素无效。</li>
             <li>影响页面：<code>handbook.html</code>、<code>docs.html</code>、<code>terms.html</code>、<code>prompts.html</code>（均使用 <code>.ds-pagenav</code>）。</li>
             <li>修复：新增 <code>revealInNavScroller()</code>，仅在目录<strong>自身</strong>存在内部滚动容器（桌面浮动 rail）时调整其 <code>scrollTop</code>，绝不触碰页面/窗口滚动位置。</li>
-          </ul>
-        </section>
-        <section class="ds-doc-block" id="v140">
-          <h2>v1.4.0 — 2026-06-04</h2>
-          <h3>Changed</h3>
-          <ul>
-            <li><strong>Brand rename</strong>: CGArtLab Design System → <strong>EDIC Design System</strong> (<strong>E</strong>ditorial <strong>D</strong>esign <strong>I</strong>nterface for <strong>C</strong>ontent)</li>
-            <li><strong>New positioning</strong>: 同时面向人类和 Agent 的编辑主义设计系统</li>
-            <li><strong>New philosophy</strong>: 为纷繁的数字内容建立温暖而克制的秩序</li>
-            <li><strong>Updated package name</strong>: <code>cgartlab-design-system</code> → <code>edic-design-system</code></li>
-            <li><strong>Renamed</strong>: <code>skills/cgartlab-design-system/</code> → <code>skills/edic-design-system/</code></li>
-            <li><strong>Renamed</strong>: <code>cgartlabcom_qrcode.svg</code> → <code>ediccom_qrcode.svg</code></li>
-            <li><strong>Updated</strong>: SVG logo text, favicon aria-label, all HTML titles and meta descriptions</li>
-            <li><strong>Updated</strong>: prompt files (<code>system-prompt.md</code>, <code>quick-prompt.md</code>) to reference EDIC</li>
-            <li><strong>Updated</strong>: README, AGENTS, CHANGELOG, CONTRIBUTING, docs — all brand strings and positioning copy</li>
-            <li><strong>Updated</strong>: <code>tools/generate_pdfs.py</code> PDF output filenames → <code>edic-ds-reference.pdf</code> / <code>edic-ds-color-card.pdf</code></li>
-            <li><strong>Updated</strong>: <code>report.html</code> localStorage key <code>cgartlab_smart_pagination</code> → <code>edic_smart_pagination</code></li>
-            <li><strong>Updated</strong>: DEVELOPMENT-GUIDE.md file tree references</li>
-          </ul>
-          <h3>Notes</h3>
-          <ul>
-            <li>GitHub org (<code>cgartlab</code>), repo name (<code>cgartlab-design-system</code>), and CNAME (<code>edic.cgartlab.com</code>) remain unchanged in this release — admin rename to be performed in a follow-up PR after DNS and repository redirects are configured</li>
-            <li>All in-repo URL references (<code>edic.cgartlab.com</code>, <code>github.com/cgartlab/cgartlab-design-system</code>, <code>cgartlab.github.io</code>) intentionally preserved</li>
-            <li>Color tokens (<code>--ds-color-olive-*</code>) unchanged</li>
-            <li>Personal contact identifiers (<code>cgartlab@outlook.com</code>, <code>@cgartlab</code> social handle, <code>keybase.io/cgartlab</code>) intentionally preserved as they belong to the maintainer, not the brand</li>
-          </ul>
-        </section>
-        <section class="ds-doc-block" id="v143">
-          <h2>v1.4.3 — 2026-06-05</h2>
-          <h3>修复</h3>
-          <ul>
-            <li><strong>文档内容一致性审计</strong>：修复 12 处跨文档矛盾</li>
-            <li>品牌名：CLAUDE.md 仍使用 &quot;CGArtLab&quot;，全系统已更名为 EDIC → 已修复</li>
-            <li>版本号：VERSION 1.4.2、package.json 1.4.0、README badge 自相矛盾（v1.4.2 vs 1.4.0）→ 统一为 1.4.3</li>
-            <li>组件数量：index.html 说 &quot;30+&quot; 和 &quot;25&quot;，handbook.html 说 &quot;25&quot; 和 &quot;23&quot;，README 说 &quot;25&quot; → 统一为 23（实际统计）</li>
-            <li>流程文档：VERSIONING.md 声称最新 v1.1.0，DEVELOPMENT-GUIDE.md 声称 v1.0 → 已标注需更新</li>
-            <li>README badge：alt 文本 v1.4.2 与 badge 文字 1.4.0 矛盾 → 已修复为 1.4.3</li>
-            <li>CLAUDE.md 发布示例：bump to v1.4.0 → bump to v1.4.3</li>
-          </ul>
-          <h3>文档</h3>
-          <ul>
-            <li><code>CHANGELOG.md</code>：<code>[未发布]</code> → <code>[1.4.3]</code>，更新版本链接</li>
-            <li><code>VERSION</code>：1.4.2 → 1.4.3</li>
-            <li><code>package.json</code>：1.4.0 → 1.4.3</li>
-            <li><code>README.md</code>：badge 版本统一为 1.4.3，组件数量 25 → 23</li>
-            <li><code>CLAUDE.md</code>：品牌名 CGArtLab → EDIC，版本 v1.3.1 → v1.4.3，示例命令 v1.4.0 → v1.4.3</li>
           </ul>
         </section>
         <section class="ds-doc-block" id="v150">
@@ -819,6 +780,52 @@
           <h3>变更</h3>
           <ul>
             <li><code>tools/validate_naming.py</code> 的 <code>VALID_CATEGORIES</code> 新增 7 个合法类别：<code>code</code> / <code>token</code> / <code>cjk</code> / <code>reveal</code> / <code>draw</code> / <code>stack</code> / <code>brand</code>（均为项目已使用但验证器历史遗漏的合法 CSS 变量类别）</li>
+          </ul>
+        </section>
+        <section class="ds-doc-block" id="v143">
+          <h2>v1.4.3 — 2026-06-05</h2>
+          <h3>修复</h3>
+          <ul>
+            <li><strong>文档内容一致性审计</strong>：修复 12 处跨文档矛盾</li>
+            <li>品牌名：CLAUDE.md 仍使用 &quot;CGArtLab&quot;，全系统已更名为 EDIC → 已修复</li>
+            <li>版本号：VERSION 1.4.2、package.json 1.4.0、README badge 自相矛盾（v1.4.2 vs 1.4.0）→ 统一为 1.4.3</li>
+            <li>组件数量：index.html 说 &quot;30+&quot; 和 &quot;25&quot;，handbook.html 说 &quot;25&quot; 和 &quot;23&quot;，README 说 &quot;25&quot; → 统一为 23（实际统计）</li>
+            <li>流程文档：VERSIONING.md 声称最新 v1.1.0，DEVELOPMENT-GUIDE.md 声称 v1.0 → 已标注需更新</li>
+            <li>README badge：alt 文本 v1.4.2 与 badge 文字 1.4.0 矛盾 → 已修复为 1.4.3</li>
+            <li>CLAUDE.md 发布示例：bump to v1.4.0 → bump to v1.4.3</li>
+          </ul>
+          <h3>文档</h3>
+          <ul>
+            <li><code>CHANGELOG.md</code>：<code>[未发布]</code> → <code>[1.4.3]</code>，更新版本链接</li>
+            <li><code>VERSION</code>：1.4.2 → 1.4.3</li>
+            <li><code>package.json</code>：1.4.0 → 1.4.3</li>
+            <li><code>README.md</code>：badge 版本统一为 1.4.3，组件数量 25 → 23</li>
+            <li><code>CLAUDE.md</code>：品牌名 CGArtLab → EDIC，版本 v1.3.1 → v1.4.3，示例命令 v1.4.0 → v1.4.3</li>
+          </ul>
+        </section>
+        <section class="ds-doc-block" id="v140">
+          <h2>v1.4.0 — 2026-06-04</h2>
+          <h3>Changed</h3>
+          <ul>
+            <li><strong>Brand rename</strong>: CGArtLab Design System → <strong>EDIC Design System</strong> (<strong>E</strong>ditorial <strong>D</strong>esign <strong>I</strong>nterface for <strong>C</strong>ontent)</li>
+            <li><strong>New positioning</strong>: 同时面向人类和 Agent 的编辑主义设计系统</li>
+            <li><strong>New philosophy</strong>: 为纷繁的数字内容建立温暖而克制的秩序</li>
+            <li><strong>Updated package name</strong>: <code>cgartlab-design-system</code> → <code>edic-design-system</code></li>
+            <li><strong>Renamed</strong>: <code>skills/cgartlab-design-system/</code> → <code>skills/edic-design-system/</code></li>
+            <li><strong>Renamed</strong>: <code>cgartlabcom_qrcode.svg</code> → <code>ediccom_qrcode.svg</code></li>
+            <li><strong>Updated</strong>: SVG logo text, favicon aria-label, all HTML titles and meta descriptions</li>
+            <li><strong>Updated</strong>: prompt files (<code>system-prompt.md</code>, <code>quick-prompt.md</code>) to reference EDIC</li>
+            <li><strong>Updated</strong>: README, AGENTS, CHANGELOG, CONTRIBUTING, docs — all brand strings and positioning copy</li>
+            <li><strong>Updated</strong>: <code>tools/generate_pdfs.py</code> PDF output filenames → <code>edic-ds-reference.pdf</code> / <code>edic-ds-color-card.pdf</code></li>
+            <li><strong>Updated</strong>: <code>report.html</code> localStorage key <code>cgartlab_smart_pagination</code> → <code>edic_smart_pagination</code></li>
+            <li><strong>Updated</strong>: DEVELOPMENT-GUIDE.md file tree references</li>
+          </ul>
+          <h3>Notes</h3>
+          <ul>
+            <li>GitHub org (<code>cgartlab</code>), repo name (<code>cgartlab-design-system</code>), and CNAME (<code>edic.cgartlab.com</code>) remain unchanged in this release — admin rename to be performed in a follow-up PR after DNS and repository redirects are configured</li>
+            <li>All in-repo URL references (<code>edic.cgartlab.com</code>, <code>github.com/cgartlab/cgartlab-design-system</code>, <code>cgartlab.github.io</code>) intentionally preserved</li>
+            <li>Color tokens (<code>--ds-color-olive-*</code>) unchanged</li>
+            <li>Personal contact identifiers (<code>cgartlab@outlook.com</code>, <code>@cgartlab</code> social handle, <code>keybase.io/cgartlab</code>) intentionally preserved as they belong to the maintainer, not the brand</li>
           </ul>
         </section>
         <section class="ds-doc-block" id="v110">

@@ -30,6 +30,7 @@
       <a href="prompts.html" class="ds-navbar-link">提示词</a>
       <a href="downloads.html" class="ds-navbar-link">下载</a>
       <a href="terms.html" class="ds-navbar-link">条款</a>
+      <a href="changelog.html" class="ds-navbar-link">更新</a>
       <a href="https://github.com/cgartlab/edic-design-system" class="ds-navbar-link" target="_blank" rel="noopener">仓库</a>
       <button id="theme-toggle-btn" class="ds-theme-toggle-btn" type="button" aria-label="跟随系统 · 点击切换">
         <span class="theme-icon"></span>
@@ -144,7 +145,7 @@
 }
 .promo-card:hover { box-shadow: var(--ds-shadow-lg); }</code></pre>
           </figure>
-          <p>令牌分为这些类别：<code>color</code>、<code>font</code>、<code>text</code>（字号）、<code>weight</code>、<code>leading</code>、<code>tracking</code>、<code>space</code>、<code>radius</code>、<code>shadow</code>、<code>duration</code>、<code>ease</code>、<code>z</code>、<code>blur</code>、<code>border</code>、<code>opacity</code>、<code>grid</code>、<code>breakpoint</code>。完整清单见<a href="#token-index">令牌索引</a>，结构化数据见 <code>tokens.json</code>。</p>
+          <p>令牌分为这些类别：<code>color</code>、<code>font</code>、<code>text</code>（字号）、<code>weight</code>、<code>leading</code>、<code>tracking</code>、<code>space</code>、<code>radius</code>、<code>shadow</code>、<code>duration</code>、<code>delay</code>、<code>ease</code>、<code>bp</code>、<code>breakpoint</code>、<code>blur</code>、<code>glass</code>、<code>border</code>、<code>opacity</code>、<code>grid</code>、<code>gutter</code>、<code>z</code>、<code>focus</code>、<code>motion</code>、<code>depth</code>。完整清单见<a href="#token-index">令牌索引</a>，结构化数据见 <code>tokens.json</code>。</p>
         </section>
 
         <section class="ds-doc-block" id="color">
@@ -480,9 +481,9 @@ skills/edic-design-system/SKILL.md</code></pre>
           <p>新代码优先使用语义别名，而不是直接选择原始色阶。语义别名仍然解析到 <code>--ds-*</code> 原始令牌，因此旧项目无需改动即可继续运行。</p>
           <ul>
             <li>表面：<code>--ds-color-surface-primary</code>、<code>--ds-color-surface-raised</code>、<code>--ds-color-surface-overlay</code>。</li>
-            <li>文本：<code>--ds-color-text-primary</code>、<code>--ds-color-text-muted</code>、<code>--ds-color-text-inverse</code>。</li>
-            <li>边框：<code>--ds-color-border-default</code>、<code>--ds-color-border-strong</code>、<code>--ds-color-border-focus</code>。</li>
-            <li>控件：<code>--ds-border-radius-control</code>、<code>--ds-motion-default</code>、<code>--ds-z-control</code>。</li>
+            <li>文本：<code>--ds-color-text-primary</code>、<code>--ds-color-text-secondary</code>、<code>--ds-color-text-strong</code>。</li>
+            <li>边框：<code>--ds-color-border-default</code>、<code>--ds-color-border-strong</code>、<code>--ds-color-border-subtle</code>。</li>
+            <li>控件：<code>--ds-border-radius-control</code>、<code>--ds-motion-default</code>、<code>--ds-z-dropdown</code>。</li>
           </ul>
           <div class="ds-alert ds-alert--info" role="note">
             <svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
@@ -579,15 +580,15 @@ skills/edic-design-system/SKILL.md</code></pre>
           </div>
           <h3>Type Scale — 比例尺</h3>
           <div class="ds-stack-6">
-            <div class="ds-stack-3"><div class="ds-type-label">Hero / 4.5 rem · 72 px <span class="ds-type-meta">700 ／ <code>--ds-leading-tight</code> 1.1 ／ <code>--ds-tracking-tight</code> -0.02 em</span></div><p class="ds-type-sample ds-type-sample--hero">AG 设计系统</p></div>
-            <div class="ds-stack-3"><div class="ds-type-label">Display / 3.75 rem · 60 px <span class="ds-type-meta">700 ／ <code>--ds-leading-tight</code> 1.1 ／ <code>--ds-tracking-tight</code> -0.02 em</span></div><p class="ds-type-sample ds-type-sample--display">阅读是设计</p></div>
-            <div class="ds-stack-3"><div class="ds-type-label">H1 / 3 rem · 48 px <span class="ds-type-meta">700 ／ <code>--ds-leading-tight</code> 1.1 ／ <code>--ds-tracking-tight</code> -0.02 em</span></div><p class="ds-type-sample ds-type-sample--h1">色彩定义情绪</p></div>
-            <div class="ds-stack-3"><div class="ds-type-label">H2 / 2.25 rem · 36 px <span class="ds-type-meta">700 ／ <code>--ds-leading-snug</code> 1.25 ／ <code>--ds-tracking-normal</code> 0</span></div><p class="ds-type-sample ds-type-sample--h2">文字承载信息</p></div>
-            <div class="ds-stack-3"><div class="ds-type-label">H3 / 1.875 rem · 30 px <span class="ds-type-meta">700 ／ <code>--ds-leading-snug</code> 1.25 ／ <code>--ds-tracking-normal</code> 0</span></div><p class="ds-type-sample ds-type-sample--h3">小组件标题</p></div>
-            <div class="ds-stack-3"><div class="ds-type-label">H4 / 1.5 rem · 24 px <span class="ds-type-meta">700 ／ <code>--ds-leading-snug</code> 1.25 ／ <code>--ds-tracking-normal</code> 0</span></div><p class="ds-type-sample ds-type-sample--h4">卡片标题</p></div>
-            <div class="ds-stack-3"><div class="ds-type-label">Body / 1rem · 16 px <span class="ds-type-meta">400 ／ <code>--ds-leading-normal</code> 1.5 ／ <code>--ds-tracking-normal</code> 0</span></div><p class="ds-type-sample ds-type-sample--body">正文文本，行长受 65ch 约束。中英混排优化字距与标点悬挂。</p></div>
-            <div class="ds-stack-3"><div class="ds-type-label">Body SM / 0.875 rem · 14 px <span class="ds-type-meta">400 ／ <code>--ds-leading-normal</code> 1.5 ／ <code>--ds-tracking-normal</code> 0</span></div><p class="ds-type-sample ds-type-sample--body-sm">辅助说明、图注、表单提示。</p></div>
-            <div class="ds-stack-3"><div class="ds-type-label">Caption / 0.75 rem · 12 px <span class="ds-type-meta">400 ／ <code>--ds-leading-normal</code> 1.5 ／ <code>--ds-tracking-wide</code> 0.08 em</span></div><p class="ds-type-sample ds-type-sample--caption">LABEL / 标签大写更清晰</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">Hero / 4.5 rem · 72 px <span class="ds-type-meta">700 ／ <code>--ds-leading-tight</code> 1.1 ／ <code>--ds-tracking-tight</code> -0.01 em</span></div><p class="ds-type-sample ds-type-sample--hero">AG 设计系统</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">Display / 3.75 rem · 60 px <span class="ds-type-meta">700 ／ <code>--ds-leading-tight</code> 1.1 ／ <code>--ds-tracking-tight</code> -0.01 em</span></div><p class="ds-type-sample ds-type-sample--display">阅读是设计</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">H1 / 3 rem · 48 px <span class="ds-type-meta">700 ／ <code>--ds-leading-tight</code> 1.1 ／ <code>--ds-tracking-tight</code> -0.01 em</span></div><p class="ds-type-sample ds-type-sample--h1">色彩定义情绪</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">H2 / 2.25 rem · 36 px <span class="ds-type-meta">700 ／ <code>--ds-leading-snug</code> 1.25 ／ <code>--ds-tracking-normal</code> 0.02 em</span></div><p class="ds-type-sample ds-type-sample--h2">文字承载信息</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">H3 / 1.875 rem · 30 px <span class="ds-type-meta">700 ／ <code>--ds-leading-snug</code> 1.25 ／ <code>--ds-tracking-normal</code> 0.02 em</span></div><p class="ds-type-sample ds-type-sample--h3">小组件标题</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">H4 / 1.5 rem · 24 px <span class="ds-type-meta">700 ／ <code>--ds-leading-snug</code> 1.25 ／ <code>--ds-tracking-normal</code> 0.02 em</span></div><p class="ds-type-sample ds-type-sample--h4">卡片标题</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">Body / 1rem · 16 px <span class="ds-type-meta">400 ／ <code>--ds-leading-normal</code> 1.55 ／ <code>--ds-tracking-normal</code> 0.02 em</span></div><p class="ds-type-sample ds-type-sample--body">正文文本，行长受 65ch 约束。中英混排优化字距与标点悬挂。</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">Body SM / 0.875 rem · 14 px <span class="ds-type-meta">400 ／ <code>--ds-leading-normal</code> 1.55 ／ <code>--ds-tracking-normal</code> 0.02 em</span></div><p class="ds-type-sample ds-type-sample--body-sm">辅助说明、图注、表单提示。</p></div>
+            <div class="ds-stack-3"><div class="ds-type-label">Caption / 0.75 rem · 12 px <span class="ds-type-meta">400 ／ <code>--ds-leading-normal</code> 1.55 ／ <code>--ds-tracking-wide</code> 0.04 em</span></div><p class="ds-type-sample ds-type-sample--caption">LABEL / 标签大写更清晰</p></div>
           </div>
 
           <h3>段落间距规范</h3>
@@ -2209,7 +2210,7 @@ skills/edic-design-system/SKILL.md</code></pre>
                 <div class="ds-form-group ds-form-submit">
                   <div class="ds-form-checkbox">
                     <input type="checkbox" id="consent">
-                    <label for="consent">我已阅读并同意 <a href="#">隐私政策</a></label>
+                    <label for="consent">我已阅读并同意 <a href="terms.html">隐私政策</a></label>
                   </div>
                   <button type="button" class="ds-btn ds-btn--primary ds-mt-5">发送留言</button>
                 </div>
@@ -2270,10 +2271,11 @@ skills/edic-design-system/SKILL.md</code></pre>
       <div class="ds-footer-col">
         <p class="ds-footer-col-heading">关于</p>
         <ul class="ds-footer-links">
-          <li><a href="https://cgartlab.com" target="_blank" rel="noopener">EDIC.com</a></li>
+          <li><a href="https://cgartlab.com" target="_blank" rel="noopener">CGArtLab.com</a></li>
           <li><a href="https://github.com/cgartlab/edic-design-system" target="_blank" rel="noopener">GitHub 仓库</a></li>
           <li><a href="terms.html">使用条款</a></li>
           <li><a href="downloads.html#examples">真实示例</a></li>
+          <li><a href="changelog.html">更新日志</a></li>
           <li><a href="https://blog.cgartlab.com" target="_blank" rel="noopener">博客</a></li>
           <li><a href="index.html#sitemap">网站地图</a></li>
         </ul>
