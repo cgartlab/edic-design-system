@@ -3,6 +3,13 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.1.1](https://github.com/cgartlab/edic-design-system/compare/v2.1.0...v2.1.1) (2026-09-17)
+
+
+### 修复
+
+* post-release version sync, visual baseline, and CI exemption (2.1.0) ([#275](https://github.com/cgartlab/edic-design-system/issues/275)) ([9a7b7b7](https://github.com/cgartlab/edic-design-system/commit/9a7b7b7067d2b260d6b23841332a63e3e4357e17))
+
 ## [2.1.0](https://github.com/cgartlab/edic-design-system/compare/v2.0.0...v2.1.0) (2026-09-17)
 
 全站质量审计与一致性加固（7 个维度，详见 [#273](https://github.com/cgartlab/edic-design-system/pull/273)）。
