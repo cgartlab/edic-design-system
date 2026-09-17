@@ -4,7 +4,7 @@
 
 SHELL := /bin/sh
 .DEFAULT_GOAL := help
-.PHONY: help lint build validate validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode validate-size stamp-version changelog changelog-check sync-versions sync-versions-check release-please serve clean serve-py serve-node generate-pdfs icons icons-check test skill-package release-package
+.PHONY: help lint build validate validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode validate-manifest validate-manifest-css validate-components validate-icons validate-visual-baseline validate-size stamp-version changelog changelog-check sync-versions sync-versions-check release-please serve clean serve-py serve-node generate-pdfs icons icons-check test test-unit skill-package release-package
 
 PYTHON ?= python3
 NODE ?= node
@@ -20,7 +20,7 @@ help:  ## 显示帮助
 	  awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 # ─── 统一入口 ──────────────────────────────────────────────
-lint:  ## 运行统一 lint（聚合 10 个验证器）
+lint:  ## 运行统一 lint（聚合 15 个验证器）
 	$(PYTHON) scripts/lint.py
 
 build:  ## 完整构建（lint → stamp → icons → PDFs → SKILL）
@@ -30,9 +30,9 @@ build:  ## 完整构建（lint → stamp → icons → PDFs → SKILL）
 # AGENTS.md 退出码契约：0 = pass / 1 = 阻塞错误 / 2 = 仅警告（非阻塞）
 # ci.yml 已将 exit 2 映射为 0；本地 `make validate` 也应如此——逐个运行所有验证器，
 # 仅在出现 exit 1 时失败，exit 0/2 视为通过。
-validate:  ## 全部验证（聚合 10 个验证器；exit 1 阻塞，exit 0/2 通过）
+validate:  ## 全部验证（聚合 15 个验证器；exit 1 阻塞，exit 0/2 通过）
 	@fail=0; \
-	for t in validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode; do \
+	for t in validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode validate-manifest validate-manifest-css validate-components validate-icons validate-visual-baseline; do \
 	  script="tools/validate_$$(echo $$t | sed 's/^validate-//').py"; \
 	  $(PYTHON) $$script > /tmp/ds-validate-$$t.raw 2>&1; \
 	  ec=$$?; \
@@ -66,7 +66,7 @@ validate-tokens:  ## 校验 tokens.json ↔ styles.css 一致性
 validate-naming:  ## 校验 BEM / token 命名规范
 	$(PYTHON) tools/validate_naming.py
 
-validate-html:  ## 校验 HTML 结构
+validate-html:  ## 校验 HTML 结构、主内容区、外部资源与事件契约
 	$(PYTHON) tools/validate_html.py
 
 validate-a11y:  ## 校验可访问性
@@ -89,6 +89,12 @@ validate-verext:  ## 校验 tokens.json / package.json 版本一致性
 
 validate-hardcode:  ## 校验硬编码颜色值（应使用 --ds-* token）
 	$(PYTHON) tools/validate_hardcode.py
+
+validate-manifest:  ## 校验 edic-manifest.json 结构与引用完整性
+	$(PYTHON) tools/validate_manifest.py
+
+validate-manifest-css:  ## 校验 manifest 核心组件在 styles.css 中有 CSS 类
+	$(PYTHON) tools/validate_manifest_css.py
 
 validate-size:  ## 校验 CSS/JS gzip 体积是否超过阈值
 	$(PYTHON) tools/validate_size.py
@@ -146,8 +152,11 @@ release-package: stamp-version icons generate-pdfs skill-package  ## 完整打�
 	$(PYTHON) scripts/package_release.py
 
 # ─── 测试 ──────────────────────────────────────────────────
-test: validate  ## 运行所有测试（当前等价于 validate）
+test: validate test-unit  ## 运行所有测试（validate + vitest 单元测试）
 	@echo "✓ 测试完成"
+
+test-unit:  ## 仅运行 Vitest 单元测试
+	npx vitest run
 
 # ─── 清理 ──────────────────────────────────────────────────
 clean:  ## 清理临时文件

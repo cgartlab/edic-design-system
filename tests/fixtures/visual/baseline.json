@@ -1,0 +1,37 @@
+{
+  "schema": "edic-visual-baseline-v1",
+  "description": "Lightweight deterministic visual regression baseline for EDIC static HTML/CSS assets.",
+  "assets": [
+    {
+      "path": "examples/components/index.html",
+      "signals": [
+        "ds-table",
+        "ds-breadcrumb",
+        "ds-command-palette",
+        "aria-current",
+        "aria-expanded",
+        "[data-theme=\"dark\"]"
+      ],
+      "sha256": "49efc129f18a04c4a710f420c8bc7c516b055b8ae98654c70a0c31a3f642b213"
+    },
+    {
+      "path": "styles.css",
+      "signals": [
+        "--ds-color-bg",
+        "--ds-color-surface-raised",
+        "[data-theme=\"dark\"]",
+        ".ds-popover"
+      ],
+      "sha256": "952ccab68fa37d2d7b2b883a964869ab3753004de8160cb6627ea23493418417"
+    },
+    {
+      "path": "scripts.js",
+      "signals": [
+        "const ICONS",
+        "theme",
+        "render icon grid"
+      ],
+      "sha256": "5b089dc7b1a365eed853a5bb852683c28a097ba3155cdc7bda27ded1faa24fe0"
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>纸间 — 设计与文化评论</title>
 <meta name="description" content="纸间 · 编辑主义设计与数字艺术独立刊物 — EDIC 设计系统博客示例">
-<link rel="stylesheet" href="styles.css?v=1.10.2">
+<link rel="stylesheet" href="styles.css?v=2.0.0">
 <style>
 /* ===== Blog Template — EDIC Design System ===== */
 
@@ -47,7 +47,7 @@
 .blog-article { padding: var(--ds-space-12) 0 var(--ds-space-16); }
 .blog-article-header { margin-bottom: var(--ds-space-10); }
 .blog-article-header .blog-category { font-family: var(--ds-font-mono); font-size: var(--ds-text-caption); text-transform: uppercase; letter-spacing: var(--ds-tracking-widest); color: var(--ds-accent); margin-bottom: var(--ds-space-3); }
-.blog-article-header h1 { font-family: var(--ds-font-display); font-size: var(--ds-text-display); line-height: var(--ds-leading-tight); letter-spacing: var(--ds-tracking-tight); color: var(--ds-color-fg-strong); margin-bottom: var(--ds-space-4); }
+.blog-article-header h2 { font-family: var(--ds-font-display); font-size: var(--ds-text-display); line-height: var(--ds-leading-tight); letter-spacing: var(--ds-tracking-tight); color: var(--ds-color-fg-strong); margin-bottom: var(--ds-space-4); }
 .blog-article-header .blog-meta-large { display: flex; gap: var(--ds-space-6); color: var(--ds-color-muted); font-size: var(--ds-text-body-sm); font-family: var(--ds-font-mono); }
 .blog-article-hero { width: 100%; aspect-ratio: 2/1; background: var(--ds-color-surface-overlay); border-radius: var(--ds-radius-xl); margin-bottom: var(--ds-space-10); display: flex; align-items: center; justify-content: center; color: var(--ds-color-border); font-family: var(--ds-font-mono); overflow: hidden; }
 .blog-article-hero img { width: 100%; height: 100%; object-fit: cover; }
@@ -68,7 +68,7 @@
 /* --- About Page --- */
 .blog-about { padding: var(--ds-space-12) 0 var(--ds-space-16); }
 .blog-about-header { margin-bottom: var(--ds-space-10); }
-.blog-about-header h1 { font-family: var(--ds-font-display); font-size: var(--ds-text-display); line-height: var(--ds-leading-tight); color: var(--ds-color-fg-strong); margin-bottom: var(--ds-space-4); }
+.blog-about-header h2 { font-family: var(--ds-font-display); font-size: var(--ds-text-display); line-height: var(--ds-leading-tight); color: var(--ds-color-fg-strong); margin-bottom: var(--ds-space-4); }
 .blog-about-content { display: grid; grid-template-columns: 1fr 1fr; gap: var(--ds-space-10); }
 .blog-about-text { font-size: var(--ds-text-body-lg); line-height: var(--ds-leading-body); color: var(--ds-color-fg); }
 .blog-about-text p { margin-bottom: var(--ds-space-4); }
@@ -80,7 +80,7 @@
 /* --- Archive --- */
 .blog-archive { padding: var(--ds-space-12) 0 var(--ds-space-16); }
 .blog-archive-header { margin-bottom: var(--ds-space-10); }
-.blog-archive-header h1 { font-family: var(--ds-font-display); font-size: var(--ds-text-display); line-height: var(--ds-leading-tight); color: var(--ds-color-fg-strong); margin-bottom: var(--ds-space-3); }
+.blog-archive-header h2 { font-family: var(--ds-font-display); font-size: var(--ds-text-display); line-height: var(--ds-leading-tight); color: var(--ds-color-fg-strong); margin-bottom: var(--ds-space-3); }
 .blog-archive-year { margin-bottom: var(--ds-space-8); }
 .blog-archive-year h2 { font-family: var(--ds-font-display); font-size: var(--ds-text-h2); color: var(--ds-color-fg-strong); margin-bottom: var(--ds-space-4); padding-bottom: var(--ds-space-2); border-bottom: 1px solid var(--ds-color-border); }
 .blog-archive-list { list-style: none; padding: 0; }
@@ -118,7 +118,7 @@
   .blog-featured h1 { font-size: var(--ds-text-h2); }
   .blog-about-content { grid-template-columns: 1fr; }
   .blog-grid { grid-template-columns: 1fr; }
-  .blog-article-header h1 { font-size: var(--ds-text-h2); }
+  .blog-article-header h2 { font-size: var(--ds-text-h2); }
 }
 </style>
 </head>
@@ -126,18 +126,19 @@
 
 <!-- Navigation -->
 <nav class="blog-nav blog-wrapper">
-  <a href="javascript:void(0)" class="blog-nav-brand" onclick="showSection('home')">纸间</a>
+  <a href="#section-home" class="blog-nav-brand" data-section="home">纸间</a>
   <button class="blog-nav-toggle" id="blog-nav-toggle" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="blog-nav-links">
     <span class="blog-nav-toggle-bar"></span>
     <span class="blog-nav-toggle-bar"></span>
     <span class="blog-nav-toggle-bar"></span>
   </button>
   <div class="blog-nav-links" id="blog-nav-links">
-    <a href="javascript:void(0)" class="active" onclick="showSection('home')" data-section="home">文章</a>
-    <a href="javascript:void(0)" onclick="showSection('archive')" data-section="archive">归档</a>
-    <a href="javascript:void(0)" onclick="showSection('about')" data-section="about">关于</a>
+    <a href="#section-home" class="active" data-section="home">文章</a>
+    <a href="#section-archive" data-section="archive">归档</a>
+    <a href="#section-about" data-section="about">关于</a>
   </div>
 </nav>
+<main id="ds-main" tabindex="-1">
 
 <!-- ===== HOME ===== -->
 <div id="section-home" class="blog-section active">
@@ -196,7 +197,7 @@
         <div class="blog-card-image"><span>▣</span></div>
         <span class="blog-card-tag">开源项目</span>
         <h3>EDIC 设计系统 v1.0 发布：从设计到代码的完整实践</h3>
-        <p>一套基于 OKLch 色彩、编辑主义排版的开放设计系统。内含 25 个组件、100 枚图标、200+ 设计令牌。</p>
+        <p>EDIC 以 OKLch 色彩与编辑主义排版起步；v2.0 已扩展至 39 个组件家族、209 枚图标、311 条结构化令牌。</p>
         <span class="blog-meta">2026.02.10 · 5 min</span>
       </a>
     </div>
@@ -208,7 +209,7 @@
   <article class="blog-article blog-wrapper blog-wrapper--narrow">
     <div class="blog-article-header">
       <div class="blog-category">设计思潮</div>
-      <h1>数字时代的排版自觉：屏幕如何重塑阅读</h1>
+      <h2>数字时代的排版自觉：屏幕如何重塑阅读</h2>
       <div class="blog-meta-large">
         <span>2026.04.28</span>
         <span>12 min read</span>
@@ -252,7 +253,7 @@
 <div id="section-archive" class="blog-section">
   <section class="blog-archive blog-wrapper blog-wrapper--narrow">
     <div class="blog-archive-header">
-      <h1>归档</h1>
+      <h2>归档</h2>
       <p class="ds-body-lg ds-text-muted">共 11 篇文章 · 始于 2025</p>
     </div>
     <div class="blog-archive-year">
@@ -283,13 +284,13 @@
 <div id="section-about" class="blog-section">
   <section class="blog-about blog-wrapper blog-wrapper--narrow">
     <div class="blog-about-header">
-      <h1>关于纸间</h1>
+      <h2>关于纸间</h2>
     </div>
     <div class="blog-about-content">
       <div class="blog-about-text">
         <p>「纸间」是一份关注设计、文化与技术的独立刊物。由 EDIC 团队创办，旨在以编辑主义的视觉语言，探讨数字时代的设计实践与思考。</p>
         <p>我们相信好的设计写作应当像好的设计本身一样——清晰、克制、有温度。每一篇文章都经过严格的编辑与排版，因为我们不只是写关于设计的内容，我们也在实践设计的理念。</p>
-        <p>本刊所有内容采用 <strong>CC BY-NC 4.0</strong> 协议发布。欢迎转载，但请注明出处并保持原文完整性。</p>
+        <p>本刊所有内容采用 <strong>CC BY 4.0</strong> 协议发布。欢迎转载，但请注明出处并保持原文完整性。</p>
         <p class="ds-mt-8"><a href="mailto:hello@cgartlab.com" class="ds-btn ds-btn--primary">联系编辑部</a></p>
       </div>
       <div class="blog-about-stats">
@@ -307,9 +308,10 @@
   <div class="blog-footer-copy">© 2026 纸间 · EDIC Design · <a href="terms.html">使用条款</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" title="本设计系统采用 CC BY 4.0 许可证">CC BY 4.0</a></div>
   <div class="blog-footer-links">
     <a href="https://github.com/cgartlab/edic-design-system" target="_blank" rel="noopener">GitHub</a>
-    <a href="terms.html">使用条款</a>
+    <a href="index.html">EDIC 设计系统</a>
   </div>
 </footer>
+</main>
 
 <script>
 // Event delegation for section navigation — replaces inline onclick handlers
@@ -323,8 +325,8 @@ document.addEventListener('click', function(e) {
   document.querySelectorAll('[data-section]').forEach(l => l.classList.remove('active'));
   const section = document.getElementById('section-' + id);
   if (section) section.classList.add('active');
-  const link = document.querySelector('[data-section="' + id + '"]');
-  if (link) link.classList.add('active');
+  const activeLink = document.querySelector('[data-section="' + id + '"]');
+  if (activeLink) activeLink.classList.add('active');
   // Close mobile nav on section select
   const toggle = document.getElementById('blog-nav-toggle');
   const links = document.getElementById('blog-nav-links');
@@ -333,7 +335,7 @@ document.addEventListener('click', function(e) {
     links.classList.remove('is-open');
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+});
 
 document.addEventListener('DOMContentLoaded', function() {
   const toggle = document.getElementById('blog-nav-toggle');
@@ -347,6 +349,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
-<script src="scripts.js?v=1.10.2"></script>
+<script src="scripts.js?v=2.0.0"></script>
 </body>
 </html>

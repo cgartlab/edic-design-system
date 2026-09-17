@@ -1,0 +1,2561 @@
+{
+  "version": "2.0.0",
+  "source": "scripts.js ICONS array",
+  "sprite": "icons.svg",
+  "naming": {
+    "legacy": "{name}-{variant}",
+    "v2": "{category}-{name}-{style}",
+    "style": "outline"
+  },
+  "icons": [
+    {
+      "name": "archive",
+      "category": "commerce",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "archive"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "arrow-down",
+      "category": "nav",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "arrow",
+        "down"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "arrow-left",
+      "category": "nav",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "arrow",
+        "left"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "arrow-right",
+      "category": "nav",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "arrow",
+        "right"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "arrow-up",
+      "category": "nav",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "arrow",
+        "up"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "at-sign",
+      "category": "communication",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "at",
+        "sign"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "bar-chart",
+      "category": "data",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "bar",
+        "chart"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "bell",
+      "category": "status",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "bell"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "bookmark",
+      "category": "status",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "bookmark"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "box",
+      "category": "commerce",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "box"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "briefcase",
+      "category": "commerce",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "briefcase"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "calendar",
+      "category": "communication",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "calendar"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "camera",
+      "category": "media",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "camera"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "check",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "check"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "check-circle",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "check",
+        "circle"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "chevron-down",
+      "category": "nav",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "chevron",
+        "down"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "chevron-left",
+      "category": "nav",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "chevron",
+        "left"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "chevron-right",
+      "category": "nav",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "chevron",
+        "right"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "chevron-up",
+      "category": "nav",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "chevron",
+        "up"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "circle",
+      "category": "status",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "circle"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "clipboard",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "clipboard"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "clock",
+      "category": "communication",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "clock"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "cloud",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "cloud"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "code",
+      "category": "data",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "code"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "copy",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "copy"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "credit-card",
+      "category": "commerce",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "credit",
+        "card"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "delete",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "delete"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "download",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "download"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "edit",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "edit"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "external-link",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "external",
+        "link"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "eye",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "eye"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "file",
+      "category": "system",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "file"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "file-text",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "file",
+        "text"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "filter",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "filter"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "flag",
+      "category": "status",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "flag"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "folder",
+      "category": "system",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "folder"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "gift",
+      "category": "commerce",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "gift"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "globe",
+      "category": "communication",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "globe"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "grid",
+      "category": "nav",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "grid"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "hash",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "hash"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "heart",
+      "category": "status",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "heart"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "help-circle",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "help",
+        "circle"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "home",
+      "category": "system",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "home"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "image",
+      "category": "media",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "image"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "info",
+      "category": "status",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "info"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "key",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "key"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "layers",
+      "category": "system",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "layers"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "layout",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "layout"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "link",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "link"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "list",
+      "category": "nav",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "list"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "lock",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "lock"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "mail",
+      "category": "communication",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "mail",
+        "email"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "map-pin",
+      "category": "system",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "map",
+        "pin",
+        "location"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "maximize",
+      "category": "media",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "maximize"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "menu",
+      "category": "nav",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "menu"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "mic",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "mic"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "minimize",
+      "category": "media",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "minimize"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "minus",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "minus"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "monitor",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "monitor"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "moon",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "moon"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "more-horizontal",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "more",
+        "horizontal"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "more-vertical",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "more",
+        "vertical"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "move",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "move"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "music",
+      "category": "media",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "music"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "package",
+      "category": "commerce",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "package"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "paperclip",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "paperclip"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "pause",
+      "category": "media",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "pause"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "phone",
+      "category": "communication",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "phone",
+        "call"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "play",
+      "category": "media",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "play"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "plus",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "plus"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "power",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "power"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "search",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "search"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "send",
+      "category": "communication",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "send"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "server",
+      "category": "data",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "server"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "settings",
+      "category": "system",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "settings"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "share",
+      "category": "communication",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "share"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "shield",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "shield"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "shopping-cart",
+      "category": "commerce",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "shopping",
+        "cart"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "sidebar",
+      "category": "nav",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "sidebar"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "sliders",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "sliders"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "smile",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "smile"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "speaker",
+      "category": "media",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "speaker"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "star",
+      "category": "status",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "star"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "sun",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "sun"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "table",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "table"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "tag",
+      "category": "commerce",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "tag"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "terminal",
+      "category": "data",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "terminal"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "trash",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "trash"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "trending-up",
+      "category": "data",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "trending",
+        "up"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "unlock",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "unlock"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "upload",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "upload"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "user",
+      "category": "communication",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "user",
+        "profile"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "users",
+      "category": "communication",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "users"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "video",
+      "category": "media",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "video"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "volume",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "volume"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "wifi",
+      "category": "data",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "wifi"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "x",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "x"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "zap",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "zap"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "zoom-in",
+      "category": "media",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "zoom",
+        "in"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "zoom-out",
+      "category": "media",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "zoom",
+        "out"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "action-add-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "action",
+        "add",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "action-archive-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "action",
+        "archive",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "action-check-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "action",
+        "check",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "action-copy-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "action",
+        "copy",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "action-delete-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "action",
+        "delete",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "action-download-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "action",
+        "download",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "action-edit-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "action",
+        "edit",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "action-filter-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "action",
+        "filter",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "action-lock-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "action",
+        "lock",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "action-refresh-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "action",
+        "refresh",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "action-save-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "action",
+        "save",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "action-search-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "action",
+        "search",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "action-share-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "action",
+        "share",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "action-upload-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "action",
+        "upload",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "ai-sparkles-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "ai",
+        "sparkles",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "ai-agent-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "ai",
+        "agent",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "ai-command-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "ai",
+        "command",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "ai-brain-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "ai",
+        "brain",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "ai-automation-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "ai",
+        "automation",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "commerce-cart-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "commerce",
+        "cart",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "commerce-card-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "commerce",
+        "card",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "commerce-gift-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "commerce",
+        "gift",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "commerce-receipt-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "commerce",
+        "receipt",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "commerce-balance-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "commerce",
+        "balance",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "commerce-coin-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "commerce",
+        "coin",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "commerce-store-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "commerce",
+        "store",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "communication-chat-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "communication",
+        "chat",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "communication-mail-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "communication",
+        "mail",
+        "outline",
+        "email"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "communication-send-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "communication",
+        "send",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "communication-phone-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "communication",
+        "phone",
+        "outline",
+        "call"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "communication-bell-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "communication",
+        "bell",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "communication-user-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "communication",
+        "user",
+        "outline",
+        "profile"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "communication-users-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "communication",
+        "users",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "communication-message-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "communication",
+        "message",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "communication-link-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "communication",
+        "link",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "data-chart-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "data",
+        "chart",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "data-database-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "data",
+        "database",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "data-server-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "data",
+        "server",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "data-network-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "data",
+        "network",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "data-filter-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "data",
+        "filter",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "data-sort-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "data",
+        "sort",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "data-bar-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "data",
+        "bar",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "data-pie-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "data",
+        "pie",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "data-line-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "data",
+        "line",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "data-table-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "data",
+        "table",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "editorial-book-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "editorial",
+        "book",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "editorial-pencil-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "editorial",
+        "pencil",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "editorial-quote-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "editorial",
+        "quote",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "editorial-newspaper-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "editorial",
+        "newspaper",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "editorial-magazine-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "editorial",
+        "magazine",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "editorial-note-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "editorial",
+        "note",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "editorial-compass-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "editorial",
+        "compass",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "editorial-library-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "editorial",
+        "library",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "editorial-archive-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "editorial",
+        "archive",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "media-image-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "media",
+        "image",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "media-video-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "media",
+        "video",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "media-music-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "media",
+        "music",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "media-camera-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "media",
+        "camera",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "media-play-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "media",
+        "play",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "media-pause-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "media",
+        "pause",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "media-volume-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "media",
+        "volume",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "media-photo-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "media",
+        "photo",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "media-globe-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "media",
+        "globe",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "media-mic-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "media",
+        "mic",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "nav-arrow-up-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "nav",
+        "arrow",
+        "up",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "nav-arrow-down-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "nav",
+        "arrow",
+        "down",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "nav-back-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "nav",
+        "back",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "nav-forward-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "nav",
+        "forward",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "nav-home-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "nav",
+        "home",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "nav-grid-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "nav",
+        "grid",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "nav-list-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "nav",
+        "list",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "nav-menu-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "nav",
+        "menu",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "nav-sidebar-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "nav",
+        "sidebar",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "nav-panel-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "nav",
+        "panel",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "nav-tabs-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "nav",
+        "tabs",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "nav-breadcrumb-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "nav",
+        "breadcrumb",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "nav-map-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "nav",
+        "map",
+        "outline",
+        "location"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "nav-compass-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "nav",
+        "compass",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "nav-command-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "nav",
+        "command",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "status-success-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "status",
+        "success",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "status-error-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "status",
+        "error",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "status-warning-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "status",
+        "warning",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "status-info-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "status",
+        "info",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "status-clock-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "status",
+        "clock",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "status-alert-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "status",
+        "alert",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "status-help-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "status",
+        "help",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "status-check-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "status",
+        "check",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "status-close-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "status",
+        "close",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "status-bell-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "status",
+        "bell",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "status-star-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "status",
+        "star",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "status-bookmark-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "status",
+        "bookmark",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "status-heart-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "status",
+        "heart",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "status-eye-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "status",
+        "eye",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "status-shield-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "status",
+        "shield",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "system-settings-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "system",
+        "settings",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "system-server-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "system",
+        "server",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "system-cloud-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "system",
+        "cloud",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "system-terminal-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "system",
+        "terminal",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "system-monitor-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "system",
+        "monitor",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "system-battery-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "system",
+        "battery",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "system-bluetooth-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "system",
+        "bluetooth",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "system-wifi-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "system",
+        "wifi",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "system-calendar-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "system",
+        "calendar",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "system-download-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "system",
+        "download",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "system-refresh-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "system",
+        "refresh",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "system-zoom-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "system",
+        "zoom",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "system-file-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "system",
+        "file",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "system-folder-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "system",
+        "folder",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    },
+    {
+      "name": "system-trash-outline",
+      "category": "action",
+      "style": "outline",
+      "viewBox": "0 0 24 24",
+      "keywords": [
+        "system",
+        "trash",
+        "outline"
+      ],
+      "aliases": [],
+      "deprecated": false
+    }
+  ]
+}

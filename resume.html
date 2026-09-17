@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>陈阳 · 简历与作品集</title>
 <meta name="description" content="EDIC 设计系统简历模板 — 可打印 A4 简历版式示例">
-<link rel="stylesheet" href="styles.css?v=1.10.2">
+<link rel="stylesheet" href="styles.css?v=2.0.0">
 <style>
 /*
  * Resume — EDIC Design System × Kami layout
@@ -326,6 +326,10 @@ body {
   gap: var(--sp-1);
 }
 
+.card-tags--bottom {
+  margin-bottom: var(--sp-2);
+}
+
 .card-tag {
   font-family: var(--mono);
   font-size: var(--fs-xs);
@@ -393,7 +397,7 @@ body {
 </head>
 <body>
 
-<div class="page">
+<main class="page" id="ds-main" tabindex="-1">
 
   <!-- ===== HEADER + SUMMARY (left-aligned, merged) ===== -->
   <header class="header">
@@ -602,7 +606,7 @@ body {
           <h3>EDIC 设计系统</h3>
           <div class="card-url">github.com/cgartlab/edic-design-system</div>
         </a>
-        <div class="card-desc">编辑主义 × 橄榄绿设计系统，基于 OKLch 色彩体系构建。含 25 个组件、100 枚 SVG 图标、200+ CSS 设计令牌，完整暗色模式，Penpot 设计文件同步。</div>
+        <div class="card-desc">编辑主义 × 橄榄绿设计系统，基于 OKLch 色彩体系构建。含 39 个核心组件家族、209 枚 SVG 图标、311 条结构化设计令牌，暗色令牌覆盖，并提供可导入 Penpot 的图标资源。</div>
         <div class="card-tags">
           <span class="card-tag">Design System</span>
           <span class="card-tag">OKLch</span>
@@ -636,7 +640,7 @@ body {
           <div class="card-url">cgartlab.com/posts/meditation-series</div>
         </a>
         <div class="card-desc">冥想是一种改变意识的形式，是解剖自己内心的过程，是让人无限接近实相的道路。2013 年起以数字绘画表达不同阶段的内心独白——繁重的压迫、对立的矛盾、复杂的冲突，每一幅都是真实的自己。使用数字绘面形式探索潜意识视觉化，10 幅作品跨越六年创作周期。</div>
-        <div class="card-tags" style="margin-bottom: var(--sp-2);">
+        <div class="card-tags card-tags--bottom">
           <span class="card-tag">数字绘画</span>
           <span class="card-tag">2013–2019</span>
           <span class="card-tag">10 幅</span>
@@ -651,6 +655,6 @@ body {
     工具是人类肢体的延伸，电脑是大脑的延伸，写作是思考本身。 · <a href="terms.html">使用条款</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" title="本设计系统采用 CC BY 4.0 许可证">CC BY 4.0</a>
   </footer>
 
-</div>
+</main>
 
 </body></html>

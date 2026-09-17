@@ -218,9 +218,17 @@ def main() -> int:
 
     root_vars = extract_vars_from_block(root_block)
     dark_vars = extract_vars_from_block(dark_block)
+    alias_target_re = re.compile(r"var\(\s*(--ds-[a-z0-9-]+)\s*\)")
+    alias_errors = [
+        f"semantic alias {name} points to missing target {target}"
+        for name, value in root_vars.items()
+        for target in alias_target_re.findall(value)
+        if target not in root_vars
+    ]
 
     errors: list[str] = []
     warnings: list[str] = []
+    errors.extend(alias_errors)
 
     # ─── 1. Pure black / pure white in dark mode values ───────────────
     dark_lines = dark_block.splitlines()

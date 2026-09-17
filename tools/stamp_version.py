@@ -64,6 +64,7 @@ HTML_TARGETS = [
     "company.html",
     "resume.html",
     "report.html",
+    "examples/components/index.html",
 ]
 
 CSS_TARGETS = ["styles.css"]

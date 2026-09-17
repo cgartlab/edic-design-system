@@ -5,7 +5,7 @@
 <title>更新日志 · EDIC Design System</title>
 <meta name="description" content="EDIC 设计系统更新日志，记录每个版本的变更内容、修复与新增功能。">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="styles.css?v=1.10.2">
+<link rel="stylesheet" href="styles.css?v=2.0.0">
 </head>
 <body>
 <a href="#content" class="ds-skip">跳至主要内容</a>
@@ -58,33 +58,61 @@
           <details class="ds-pagenav-disclosure" open>
             <summary class="ds-pagenav-summary"><span>版本</span><svg class="ds-pagenav-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 6 8 10 12 6"/></svg></summary>
             <ol class="ds-pagenav-list">
-              <li><a class="ds-pagenav-link" href="#v1102"><span class="ds-pagenav-num">01</span><span class="ds-pagenav-text">v1.10.2</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v1101"><span class="ds-pagenav-num">02</span><span class="ds-pagenav-text">v1.10.1</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v1100"><span class="ds-pagenav-num">03</span><span class="ds-pagenav-text">v1.10.0</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v191"><span class="ds-pagenav-num">04</span><span class="ds-pagenav-text">v1.9.1</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v190"><span class="ds-pagenav-num">05</span><span class="ds-pagenav-text">v1.9.0</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v181"><span class="ds-pagenav-num">06</span><span class="ds-pagenav-text">v1.8.1</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v180"><span class="ds-pagenav-num">07</span><span class="ds-pagenav-text">v1.8.0</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v170"><span class="ds-pagenav-num">08</span><span class="ds-pagenav-text">v1.7.0</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v162"><span class="ds-pagenav-num">09</span><span class="ds-pagenav-text">v1.6.2</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v161"><span class="ds-pagenav-num">10</span><span class="ds-pagenav-text">v1.6.1</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v160"><span class="ds-pagenav-num">11</span><span class="ds-pagenav-text">v1.6.0</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v153"><span class="ds-pagenav-num">12</span><span class="ds-pagenav-text">v1.5.3</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v155"><span class="ds-pagenav-num">13</span><span class="ds-pagenav-text">v1.5.5</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v154"><span class="ds-pagenav-num">14</span><span class="ds-pagenav-text">v1.5.4</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v152"><span class="ds-pagenav-num">15</span><span class="ds-pagenav-text">v1.5.2</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v151"><span class="ds-pagenav-num">16</span><span class="ds-pagenav-text">v1.5.1</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v140"><span class="ds-pagenav-num">17</span><span class="ds-pagenav-text">v1.4.0</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v143"><span class="ds-pagenav-num">18</span><span class="ds-pagenav-text">v1.4.3</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v150"><span class="ds-pagenav-num">19</span><span class="ds-pagenav-text">v1.5.0</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v110"><span class="ds-pagenav-num">20</span><span class="ds-pagenav-text">v1.1.0</span></a></li>
-              <li><a class="ds-pagenav-link" href="#v100"><span class="ds-pagenav-num">21</span><span class="ds-pagenav-text">v1.0.0</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v200"><span class="ds-pagenav-num">01</span><span class="ds-pagenav-text">v2.0.0</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v1102"><span class="ds-pagenav-num">02</span><span class="ds-pagenav-text">v1.10.2</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v1101"><span class="ds-pagenav-num">03</span><span class="ds-pagenav-text">v1.10.1</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v1100"><span class="ds-pagenav-num">04</span><span class="ds-pagenav-text">v1.10.0</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v191"><span class="ds-pagenav-num">05</span><span class="ds-pagenav-text">v1.9.1</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v190"><span class="ds-pagenav-num">06</span><span class="ds-pagenav-text">v1.9.0</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v181"><span class="ds-pagenav-num">07</span><span class="ds-pagenav-text">v1.8.1</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v180"><span class="ds-pagenav-num">08</span><span class="ds-pagenav-text">v1.8.0</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v170"><span class="ds-pagenav-num">09</span><span class="ds-pagenav-text">v1.7.0</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v162"><span class="ds-pagenav-num">10</span><span class="ds-pagenav-text">v1.6.2</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v161"><span class="ds-pagenav-num">11</span><span class="ds-pagenav-text">v1.6.1</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v160"><span class="ds-pagenav-num">12</span><span class="ds-pagenav-text">v1.6.0</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v153"><span class="ds-pagenav-num">13</span><span class="ds-pagenav-text">v1.5.3</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v155"><span class="ds-pagenav-num">14</span><span class="ds-pagenav-text">v1.5.5</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v154"><span class="ds-pagenav-num">15</span><span class="ds-pagenav-text">v1.5.4</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v152"><span class="ds-pagenav-num">16</span><span class="ds-pagenav-text">v1.5.2</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v151"><span class="ds-pagenav-num">17</span><span class="ds-pagenav-text">v1.5.1</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v140"><span class="ds-pagenav-num">18</span><span class="ds-pagenav-text">v1.4.0</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v143"><span class="ds-pagenav-num">19</span><span class="ds-pagenav-text">v1.4.3</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v150"><span class="ds-pagenav-num">20</span><span class="ds-pagenav-text">v1.5.0</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v110"><span class="ds-pagenav-num">21</span><span class="ds-pagenav-text">v1.1.0</span></a></li>
+              <li><a class="ds-pagenav-link" href="#v100"><span class="ds-pagenav-num">22</span><span class="ds-pagenav-text">v1.0.0</span></a></li>
             </ol>
           </details>
         </nav>
       </aside>
       <div class="ds-docs-main">
         <div class="ds-prose">
+        <section class="ds-doc-block" id="v200">
+          <h2>v2.0.0</h2>
+          <h3>新增</h3>
+          <ul>
+            <li><strong>tokens:</strong> 将 <code>tokens.json</code> 升级为 2.0 结构化数组，为每个令牌补充 <code>category</code>、<code>description</code>、<code>dark</code>、<code>aliases</code>、<code>status</code>，并保留 <code>_legacyTokens</code> 兼容旧读取方式</li>
+            <li><strong>tokens:</strong> 扩展语义别名层，覆盖 surface/text/border、depth、motion delay、opacity、grid/gutter/breakpoint 等 2.0 类别</li>
+            <li><strong>components:</strong> 核心组件清单扩展至 39 个，并为 switch、radio-group、combobox、date-picker、command-palette、drawer、description-list、tooltip 补齐 CSS 契约</li>
+            <li><strong>icons:</strong> 图标系统扩展至 209 枚，并生成 <code>icons.json</code> manifest 与 <code>&lt;symbol&gt;</code> sprite</li>
+            <li><strong>manifest:</strong> 新增 <code>edic-manifest.json</code>，集中描述令牌、组件、图标、模式、约束与 AI 使用规则</li>
+            <li><strong>agents:</strong> 新增 <code>AGENT-GUIDE.md</code>、迁移指南、组件 backlog 与 token 2.0 矩阵文档</li>
+            <li><strong>validation:</strong> 新增 manifest ↔ CSS 组件验证器，并接入 <code>make validate</code> 与 <code>npm run validate</code></li>
+            <li><strong>tooling:</strong> <code>make test</code> 现在运行完整验证与 Vitest 单元测试</li>
+          </ul>
+          <h3>修复</h3>
+          <ul>
+            <li><strong>manifest:</strong> 修正核心组件命名漂移，确保 <code>btn</code>、<code>nav</code>、<code>navbar</code>、<code>icon-btn</code> 与 CSS 实际类名一致</li>
+            <li><strong>docs:</strong> 更新 README 与 Skill README 的组件/图标数量和 Skill 版本标记</li>
+            <li><strong>docs:</strong> 修复 <code>examples/components/index.html</code> 标题层级与导航类名示例</li>
+            <li><strong>scripts:</strong> 修复 <code>run-validators.js</code> 在显式 <code>PYTHON</code> 路径下的数组兼容性问题</li>
+            <li><strong>tokens:</strong> 更新 <code>validate_tokens.py</code> 以读取 2.0 <code>tokens[]</code> 结构并兼容旧扁平结构</li>
+          </ul>
+          <h3>文档</h3>
+          <ul>
+            <li><strong>release:</strong> 添加 2.0.0 变更日志条目</li>
+            <li><strong>site:</strong> 同步版本戳并验证 24 个发布目标文件一致</li>
+          </ul>
+        </section>
         <section class="ds-doc-block" id="v1102">
           <h2>v1.10.2</h2>
           <h3>修复</h3>
@@ -918,14 +946,14 @@
     <div class="ds-footer-bottom">
       <span>© <span class="ds-year">2026</span> EDIC · CGArtLab</span>
       <div class="ds-cluster">
-        <span class="ds-mono" data-ds-version>v1.10.2</span>
+        <span class="ds-mono" data-ds-version>v2.0.0</span>
         <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" class="ds-text-accent ds-footer-cc" title="本设计系统采用 CC BY 4.0 许可证">CC BY 4.0</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script src="scripts.js?v=1.10.2"></script>
+<script src="scripts.js?v=2.0.0"></script>
 <button id="theme-toggle-btn-fixed" class="ds-theme-toggle-btn ds-theme-toggle-btn--fixed" type="button" aria-label="跟随系统 · 点击切换">
   <span class="theme-icon"></span>
 </button>

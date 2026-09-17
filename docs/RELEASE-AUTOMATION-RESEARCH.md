@@ -829,7 +829,7 @@ jobs:
           "
           
           # Run stamp_version.py to sync HTML/MD
-          python3 tools/stamp_version.py
+          npm run stamp
           
           git add VERSION tokens.json package.json docs/
           git commit -m "chore(release): sync versions to $VERSION [skip ci]"
@@ -935,7 +935,7 @@ jobs:
           "
           
           # Run stamp_version.py
-          python3 tools/stamp_version.py
+          npm run stamp
           
           git add VERSION tokens.json CHANGELOG.md docs/
           git commit -m "chore(release): v$NEW_VERSION"
