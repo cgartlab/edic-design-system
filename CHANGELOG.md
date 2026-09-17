@@ -3,6 +3,13 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.3.0](https://github.com/cgartlab/edic-design-system/compare/v2.2.1...v2.3.0) (2026-09-17)
+
+
+### 新增
+
+* add WAI-ARIA menu component with keyboard navigation (P1 backlog) ([#287](https://github.com/cgartlab/edic-design-system/issues/287)) ([3d55871](https://github.com/cgartlab/edic-design-system/commit/3d55871825402ae760959cdee3683de9d191bee3))
+
 ## [2.2.1](https://github.com/cgartlab/edic-design-system/compare/v2.2.0...v2.2.1) (2026-09-17)
 
 
