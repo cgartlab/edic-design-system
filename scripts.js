@@ -212,6 +212,18 @@ const ICONS = [
   {id:"system-trash-outline",svg:'<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M9 7V5h6v2M6 7l1 14h10l1-14"/></svg>'},
   ];
 
+/* ===== Storage abstraction ===== */
+const safeLocalStorage = {
+  getItem: function(key) {
+    try { return localStorage.getItem(key); }
+    catch (e) { console.warn("[EDIC] " + key + " preference could not be read (localStorage blocked)"); }
+  },
+  setItem: function(key, value) {
+    try { localStorage.setItem(key, value); }
+    catch (e) { console.warn("[EDIC] " + key + " preference could not be saved (localStorage blocked)"); }
+  }
+};
+
 const TOKENS = [
   ["--ds-color-bg","oklch(97% 0.012 80)"],
   ["--ds-color-surface","oklch(99% 0.005 80)"],
@@ -390,7 +402,7 @@ const TOKENS = [
       html.removeAttribute("data-theme-mode");
       html.setAttribute("data-theme-mode", mode);
     }
-    try { localStorage.setItem(THEME_KEY, mode); } catch(e) { console.warn("[EDIC] Theme preference could not be saved (localStorage blocked)"); }
+    safeLocalStorage.setItem(THEME_KEY, mode);
     updateButton(mode);
   }
 
@@ -432,7 +444,7 @@ const TOKENS = [
 
   function init() {
     let saved;
-    try { saved = localStorage.getItem(THEME_KEY); } catch(e) { console.warn("[EDIC] Theme preference could not be read (localStorage blocked)"); }
+    saved = safeLocalStorage.getItem(THEME_KEY);
     const initial = themes.indexOf(saved) !== -1 ? saved : "system";
     applyTheme(initial);
 
@@ -465,7 +477,7 @@ const TOKENS = [
 
   function applyLang(lang) {
     document.documentElement.lang = lang;
-    try { localStorage.setItem(LANG_KEY, lang); } catch(e) { console.warn("[EDIC] Language preference could not be saved (localStorage blocked)"); }
+    safeLocalStorage.setItem(LANG_KEY, lang);
     updateButtons(lang);
   }
 
@@ -494,7 +506,7 @@ const TOKENS = [
 
   function init() {
     var saved;
-    try { saved = localStorage.getItem(LANG_KEY); } catch(e) { console.warn("[EDIC] Language preference could not be read (localStorage blocked)"); }
+    saved = safeLocalStorage.getItem(LANG_KEY);
     var initial = LANGS.indexOf(saved) !== -1 ? saved : document.documentElement.lang || "zh-CN";
     applyLang(initial);
 
