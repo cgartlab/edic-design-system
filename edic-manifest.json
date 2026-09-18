@@ -98,7 +98,8 @@
       "spinner",
       "form-field",
       "menu",
-      "alert-dialog"
+      "alert-dialog",
+      "file-upload"
     ],
     "rules": [
       "Each component must expose default, hover, focus-visible, active, and disabled states where applicable.",

@@ -2683,3 +2683,89 @@ const TOKENS = [
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
 })();
+
+/* ===== File Upload (drag-drop + file list) ===== */
+(function() {
+  if (window.__dsFileUploadLoaded) return; // 防重复注册
+  window.__dsFileUploadLoaded = true;
+
+  function formatSize(bytes) {
+    if (!bytes && bytes !== 0) return "";
+    if (bytes < 1024) return bytes + " B";
+    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + " KB";
+    return (bytes / 1048576).toFixed(1) + " MB";
+  }
+  function announce(upload, msg) {
+    var live = upload.querySelector(".ds-file-upload-status");
+    if (live) live.textContent = msg;
+  }
+  function addFiles(upload, files) {
+    var list = upload.querySelector(".ds-file-upload-list");
+    if (!list || !files || !files.length) return;
+    var added = 0;
+    Array.prototype.forEach.call(files, function(file) {
+      if (!file || !file.name) return;
+      var li = document.createElement("li");
+      li.className = "ds-file-upload-item";
+      var name = document.createElement("span");
+      name.className = "ds-file-upload-name";
+      name.textContent = file.name;
+      var size = document.createElement("span");
+      size.className = "ds-file-upload-size";
+      size.textContent = formatSize(file.size);
+      var remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "ds-file-upload-remove";
+      remove.setAttribute("aria-label", "移除 " + file.name);
+      remove.textContent = "×";
+      remove.addEventListener("click", function() {
+        li.remove();
+        announce(upload, "已移除 " + file.name);
+      });
+      li.appendChild(name);
+      li.appendChild(size);
+      li.appendChild(remove);
+      list.appendChild(li);
+      added++;
+    });
+    announce(upload, "已添加 " + added + " 个文件");
+  }
+  function inputOf(drop) {
+    return drop.querySelector('input[type="file"]');
+  }
+  document.addEventListener("click", function(e) {
+    var drop = e.target.closest ? e.target.closest(".ds-file-upload-drop") : null;
+    if (drop && inputOf(drop)) inputOf(drop).click();
+  });
+  document.addEventListener("keydown", function(e) {
+    var drop = e.target.closest ? e.target.closest(".ds-file-upload-drop") : null;
+    if (!drop || (e.key !== "Enter" && e.key !== " ")) return;
+    e.preventDefault();
+    if (inputOf(drop)) inputOf(drop).click();
+  });
+  document.addEventListener("change", function(e) {
+    var input = e.target;
+    if (!input || input.type !== "file" || !input.classList.contains("ds-file-upload-input")) return;
+    var upload = input.closest(".ds-file-upload");
+    if (upload) addFiles(upload, input.files);
+    input.value = "";
+  });
+  document.addEventListener("dragover", function(e) {
+    var drop = e.target.closest ? e.target.closest(".ds-file-upload-drop") : null;
+    if (!drop) return;
+    e.preventDefault();
+    drop.classList.add("is-dragover");
+  });
+  document.addEventListener("dragleave", function(e) {
+    var drop = e.target.closest ? e.target.closest(".ds-file-upload-drop") : null;
+    if (drop) drop.classList.remove("is-dragover");
+  });
+  document.addEventListener("drop", function(e) {
+    var drop = e.target.closest ? e.target.closest(".ds-file-upload-drop") : null;
+    if (!drop) return;
+    e.preventDefault();
+    drop.classList.remove("is-dragover");
+    var dt = e.dataTransfer;
+    if (dt && dt.files) addFiles(drop.closest(".ds-file-upload"), dt.files);
+  });
+})();
