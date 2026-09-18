@@ -847,6 +847,19 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .ds-alert-dialog-title{margin:0 0 var(--ds-space-2);color:var(--ds-color-fg);font-family:var(--ds-font-display);font-size:var(--ds-text-h4)}
 .ds-alert-dialog-desc{margin:0 0 var(--ds-space-5);color:var(--ds-color-muted);font-size:var(--ds-text-body)}
 .ds-alert-dialog-actions{display:flex;justify-content:flex-end;gap:var(--ds-space-3)}
+
+/* ===== File Upload ===== */
+.ds-file-upload{display:flex;flex-direction:column;gap:var(--ds-space-3)}
+.ds-file-upload-input{display:none}
+.ds-file-upload-drop{border:1px dashed var(--ds-color-border-strong);border-radius:var(--ds-radius-lg);background:var(--ds-color-surface);padding:var(--ds-space-6);text-align:center;cursor:pointer;transition:border-color var(--ds-duration-200),background var(--ds-duration-200)}
+.ds-file-upload-drop:hover,.ds-file-upload-drop.is-dragover{border-color:var(--ds-accent);background:var(--ds-accent-soft)}
+.ds-file-upload-hint{font-size:var(--ds-text-caption);color:var(--ds-color-muted)}
+.ds-file-upload-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--ds-space-2)}
+.ds-file-upload-item{display:flex;align-items:center;gap:var(--ds-space-3);padding:var(--ds-space-2) var(--ds-space-3);border:1px solid var(--ds-color-border-subtle);border-radius:var(--ds-radius-md);background:var(--ds-color-surface-raised);font-size:var(--ds-text-body-sm)}
+.ds-file-upload-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ds-color-fg)}
+.ds-file-upload-size{color:var(--ds-color-muted);font-size:var(--ds-text-caption)}
+.ds-file-upload-remove{background:none;border:none;cursor:pointer;color:var(--ds-color-muted);padding:var(--ds-space-1);border-radius:var(--ds-radius-md)}
+.ds-file-upload-remove:hover{color:var(--ds-color-error);background:color-mix(in oklch,var(--ds-color-error) 8%,transparent)}
 .ds-btn--danger{background:var(--ds-color-error);color:var(--ds-color-white);border-color:var(--ds-color-error)}
 .ds-btn--danger:hover{background:color-mix(in oklch,var(--ds-color-error) 92%,var(--ds-color-black) 8%);border-color:color-mix(in oklch,var(--ds-color-error) 92%,var(--ds-color-black) 8%);box-shadow:var(--ds-shadow-btn-hover)}
 

@@ -130,6 +130,7 @@ h4 1.5 · h3 1.875 · h2 2.25 · h1 3 · display 3.75 · hero 4.5.
 - **基础表单**: `ds-input` (`--error`) `ds-label` `ds-hint` `ds-select` `ds-checkbox` `ds-radio` `ds-toggle` (`--track`/`--thumb`)
 - **扩展表单**: `ds-form-input` `ds-form-textarea` `ds-form-select` `ds-form-row` `ds-form-group` `ds-form-label` `ds-form-checkbox` `ds-form-hint` (`--error`) `ds-form-submit` `ds-form-required`
 - **表单字段**: `ds-form-field` (`--error`/`--disabled`) `ds-form-field-label` `ds-form-field-required` `ds-form-field-hint` `ds-form-field-error`
+- **文件上传**: `ds-file-upload` (`ds-file-upload-drop`/`list`/`item`/`status`)
 
 ### Feedback
 - **徽章**: `ds-badge` (`--default`/`--accent`/`--success`/`--warning`/`--error`)
