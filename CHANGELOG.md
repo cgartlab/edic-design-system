@@ -3,6 +3,13 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.5.0](https://github.com/cgartlab/edic-design-system/compare/v2.4.0...v2.5.0) (2026-09-18)
+
+
+### 新增
+
+* add file-upload component with drag-drop and file list (P1 backlog) ([#291](https://github.com/cgartlab/edic-design-system/issues/291)) ([af9beb9](https://github.com/cgartlab/edic-design-system/commit/af9beb9a1ca2d76e78536b3d4374db15b820126e))
+
 ## [2.4.0](https://github.com/cgartlab/edic-design-system/compare/v2.3.0...v2.4.0) (2026-09-17)
 
 
