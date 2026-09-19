@@ -62,7 +62,7 @@ def main() -> int:
                     f"[SIZE EXCEEDED] {name}: {actual / 1024:.1f}KB (limit: {limit / 1024:.0f}KB, {pct:.0f}% of limit)"
                 )
         print(
-            f"\nSize limit check FAILED. Update thresholds in .size-limit.json if intentional."
+            "\nSize limit check FAILED. Update thresholds in .size-limit.json if intentional."
         )
         return 1
 

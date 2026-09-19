@@ -343,7 +343,7 @@ def main() -> int:
     inline_issues = check_inline_styles(html_files)
     errors.extend(inline_issues)
 
-    print(f"─── 命名规范检查 ───")
+    print("─── 命名规范检查 ───")
     print(f"扫描 HTML  : {len(html_files)} 个")
     print(f"扫描 CSS   : {CSS_FILE.name}")
     print(f"扫描 JS    : {JS_FILE.name}")

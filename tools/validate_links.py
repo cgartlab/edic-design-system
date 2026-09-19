@@ -14,7 +14,6 @@ from __future__ import annotations
 
 import re
 import sys
-from collections import defaultdict
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
@@ -84,7 +83,7 @@ def main() -> int:
     errors = 0
     warnings = 0
 
-    print(f"─── 链接校验 ───")
+    print("─── 链接校验 ───")
     print(f"扫描 {len(html_files)} 个 HTML")
 
     for path in html_files:

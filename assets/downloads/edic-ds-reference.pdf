@@ -16,7 +16,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Courier >>
 endobj
 6 0 obj
-<< /Length 1660 >>
+<< /Length 1659 >>
 stream
 0.9781 0.9584 0.9267 rg
 0.00 0.00 595.28 841.89 re f
@@ -88,7 +88,7 @@ BT
 /F2 11.00 Tf
 0.2560 0.2782 0.0371 rg
 1 0 0 1 56.00 151.89 Tm
-(200+ design tokens   -   25 components   -   100 icons) Tj
+(292 design tokens   -   39 components   -   209 icons) Tj
 ET
 BT
 /F3 10.00 Tf
@@ -103,7 +103,7 @@ BT
 /F3 7.50 Tf
 0.3931 0.3600 0.3345 rg
 1 0 0 1 56.00 805.89 Tm
-(EDIC Design System  -  Editorial x Olive Green  -  v1.6.2) Tj
+(EDIC Design System  -  Editorial x Olive Green  -  v2.5.0) Tj
 ET
 BT
 /F3 7.50 Tf
@@ -424,7 +424,7 @@ BT
 /F3 7.50 Tf
 0.3931 0.3600 0.3345 rg
 1 0 0 1 56.00 805.89 Tm
-(EDIC Design System  -  Editorial x Olive Green  -  v1.6.2) Tj
+(EDIC Design System  -  Editorial x Olive Green  -  v2.5.0) Tj
 ET
 BT
 /F3 7.50 Tf
@@ -697,7 +697,7 @@ BT
 /F3 7.50 Tf
 0.3931 0.3600 0.3345 rg
 1 0 0 1 56.00 805.89 Tm
-(EDIC Design System  -  Editorial x Olive Green  -  v1.6.2) Tj
+(EDIC Design System  -  Editorial x Olive Green  -  v2.5.0) Tj
 ET
 BT
 /F3 7.50 Tf
@@ -986,7 +986,7 @@ BT
 /F3 7.50 Tf
 0.3931 0.3600 0.3345 rg
 1 0 0 1 56.00 805.89 Tm
-(EDIC Design System  -  Editorial x Olive Green  -  v1.6.2) Tj
+(EDIC Design System  -  Editorial x Olive Green  -  v2.5.0) Tj
 ET
 BT
 /F3 7.50 Tf
@@ -1008,15 +1008,15 @@ xref
 0000000211 00000 n 
 0000000286 00000 n 
 0000000354 00000 n 
-0000002066 00000 n 
-0000002218 00000 n 
-0000007821 00000 n 
-0000007973 00000 n 
-0000012007 00000 n 
-0000012161 00000 n 
-0000016783 00000 n 
+0000002065 00000 n 
+0000002217 00000 n 
+0000007820 00000 n 
+0000007972 00000 n 
+0000012006 00000 n 
+0000012160 00000 n 
+0000016782 00000 n 
 trailer
 << /Size 14 /Root 1 0 R >>
 startxref
-16937
+16936
 %%EOF

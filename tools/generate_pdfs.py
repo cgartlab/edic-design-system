@@ -105,14 +105,14 @@ def oklch_to_srgb(L: float, C: float, h: float):
     s_ = L - 0.0894841775 * a - 1.2914855480 * b
 
     # 3. Cube → Linear LMS
-    l = l_ * l_ * l_
-    m = m_ * m_ * m_
-    s = s_ * s_ * s_
+    L_lin = l_ * l_ * l_
+    M_lin = m_ * m_ * m_
+    S_lin = s_ * s_ * s_
 
     # 4. LMS → Linear sRGB (inverse of M1)
-    r_lin = 4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s
-    g_lin = -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s
-    b_lin = -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s
+    r_lin = 4.0767416621 * L_lin - 3.3077115913 * M_lin + 0.2309699292 * S_lin
+    g_lin = -1.2684380046 * L_lin + 2.6097574011 * M_lin - 0.3413193965 * S_lin
+    b_lin = -0.0041960863 * L_lin - 0.7034186147 * M_lin + 1.7076147010 * S_lin
 
     # 5. Gamma encoding (sRGB piecewise)
     def gamma_encode(v: float) -> float:
@@ -291,7 +291,8 @@ def build_reference():
     p.rect(0, 0, p.w, p.h, RGB["bg"])
     header(p, "01  Color Tokens", "All colors defined in OKLch for perceptual uniformity")
     y = 130
-    p.text(56, y, "NEUTRAL", "F2", 10, RGB["olive-500"]); y += 16
+    p.text(56, y, "NEUTRAL", "F2", 10, RGB["olive-500"])
+    y += 16
     neutrals = [
         ("--ds-color-bg", OKLCH["bg"], RGB["bg"]),
         ("--ds-color-surface-raised", OKLCH["surface-raised"], RGB["surface-raised"]),
@@ -304,7 +305,8 @@ def build_reference():
         p.swatch_row(56, y, name, val, col)
         y += 30
     y += 8
-    p.text(56, y, "OLIVE GREEN  (accent = olive-400)", "F2", 10, RGB["olive-500"]); y += 16
+    p.text(56, y, "OLIVE GREEN  (accent = olive-400)", "F2", 10, RGB["olive-500"])
+    y += 16
     olive = [
         ("--ds-color-olive-100", OKLCH["olive-100"], RGB["olive-100"], False),
         ("--ds-color-olive-300", OKLCH["olive-300"], RGB["olive-300"], False),
@@ -317,7 +319,8 @@ def build_reference():
         y += 30
     # second column: semantic
     y2 = 146
-    p.text(320, y2, "SEMANTIC", "F2", 10, RGB["olive-500"]); y2 += 16
+    p.text(320, y2, "SEMANTIC", "F2", 10, RGB["olive-500"])
+    y2 += 16
     sem = [
         ("--ds-color-success", OKLCH["success"], RGB["success"]),
         ("--ds-color-warning", OKLCH["warning"], RGB["warning"]),
@@ -335,7 +338,8 @@ def build_reference():
     p.rect(0, 0, p.w, p.h, RGB["bg"])
     header(p, "02  Typography", "Serif display + sans body + mono code")
     y = 134
-    p.text(56, y, "FONT FAMILIES", "F2", 10, RGB["olive-500"]); y += 22
+    p.text(56, y, "FONT FAMILIES", "F2", 10, RGB["olive-500"])
+    y += 22
     fams = [
         ("Display", "Iowan Old Style / Charter / Georgia / serif"),
         ("Body & UI", "Noto Sans SC / -apple-system / system-ui / sans-serif"),
@@ -346,7 +350,8 @@ def build_reference():
         p.text(150, y, stack, "F3", 9, RGB["muted"])
         y += 22
     y += 14
-    p.text(56, y, "TYPE SCALE (rem)", "F2", 10, RGB["olive-500"]); y += 24
+    p.text(56, y, "TYPE SCALE (rem)", "F2", 10, RGB["olive-500"])
+    y += 24
     scale = [
         ("hero", "4.5", 26), ("display", "3.75", 23), ("h1", "3", 20),
         ("h2", "2.25", 17), ("h3", "1.875", 15), ("h4", "1.5", 13),
@@ -366,7 +371,8 @@ def build_reference():
     p.rect(0, 0, p.w, p.h, RGB["bg"])
     header(p, "03 / 04  Spacing & Components", "4px base scale + class catalog")
     y = 134
-    p.text(56, y, "SPACING SCALE (4px base)", "F2", 10, RGB["olive-500"]); y += 20
+    p.text(56, y, "SPACING SCALE (4px base)", "F2", 10, RGB["olive-500"])
+    y += 20
     for tok, px in [("space-1", 4), ("space-2", 8), ("space-3", 12), ("space-4", 16),
                     ("space-6", 24), ("space-8", 32), ("space-12", 48), ("space-16", 64)]:
         p.rect(150, p.h - (y + 9), px, 10, RGB["olive-300"])
@@ -374,12 +380,17 @@ def build_reference():
         p.text(150 + px + 8, y + 8, f"{px}px", "F3", 8.5, RGB["fg"])
         y += 18
     y += 10
-    p.text(56, y, "RADIUS", "F2", 10, RGB["olive-500"]); y += 16
-    p.text(56, y, "sm 2  -  md 4  -  lg 8  -  xl 12  -  2xl 16  -  full", "F3", 9, RGB["fg"]); y += 20
-    p.text(56, y, "SHADOW", "F2", 10, RGB["olive-500"]); y += 16
-    p.text(56, y, "xs  -  sm  -  md  -  lg  -  xl  -  2xl", "F3", 9, RGB["fg"]); y += 28
+    p.text(56, y, "RADIUS", "F2", 10, RGB["olive-500"])
+    y += 16
+    p.text(56, y, "sm 2  -  md 4  -  lg 8  -  xl 12  -  2xl 16  -  full", "F3", 9, RGB["fg"])
+    y += 20
+    p.text(56, y, "SHADOW", "F2", 10, RGB["olive-500"])
+    y += 16
+    p.text(56, y, "xs  -  sm  -  md  -  lg  -  xl  -  2xl", "F3", 9, RGB["fg"])
+    y += 28
 
-    p.text(56, y, "COMPONENT CLASS CATALOG", "F2", 10, RGB["olive-500"]); y += 20
+    p.text(56, y, "COMPONENT CLASS CATALOG", "F2", 10, RGB["olive-500"])
+    y += 20
     cats = [
         ("Buttons", "ds-btn  --primary / --secondary / --ghost  --sm / --lg"),
         ("Cards", "ds-card  --hoverable / --flat   ds-glass-card"),
@@ -407,7 +418,8 @@ def build_color_card():
     header(p, "Color Card", "OKLch palette - EDIC Design System")
     # big olive ramp
     y = 130
-    p.text(56, y, "OLIVE RAMP  50 -> 900", "F2", 10, RGB["olive-500"]); y += 16
+    p.text(56, y, "OLIVE RAMP  50 -> 900", "F2", 10, RGB["olive-500"])
+    y += 16
     ramp = ["olive-50", "olive-100", "olive-200", "olive-300", "olive-400",
             "olive-500", "olive-600", "olive-700", "olive-800", "olive-900"]
     bw = (p.w - 112) / len(ramp)
@@ -418,11 +430,13 @@ def build_color_card():
     p.text(p.w - 70, y, "900", "F3", 8, RGB["muted"])
     y += 24
 
-    p.text(56, y, "ACCENT", "F2", 10, RGB["olive-500"]); y += 16
+    p.text(56, y, "ACCENT", "F2", 10, RGB["olive-500"])
+    y += 16
     p.swatch_row(56, y, "--ds-accent = --ds-color-olive-400", OKLCH["olive-400"], RGB["olive-400"], w=180, ring=True)
     y += 44
 
-    p.text(56, y, "NEUTRALS", "F2", 10, RGB["olive-500"]); y += 16
+    p.text(56, y, "NEUTRALS", "F2", 10, RGB["olive-500"])
+    y += 16
     for name, key in [
         ("--ds-color-bg", "bg"),
         ("--ds-color-fg", "fg"),
@@ -432,7 +446,8 @@ def build_color_card():
         p.swatch_row(56, y, name, OKLCH[key], RGB[key], w=150)
         y += 30
     y += 8
-    p.text(56, y, "SEMANTIC", "F2", 10, RGB["olive-500"]); y += 16
+    p.text(56, y, "SEMANTIC", "F2", 10, RGB["olive-500"])
+    y += 16
     for name, key in [
         ("--ds-color-success", "success"),
         ("--ds-color-warning", "warning"),

@@ -51,7 +51,7 @@ def read_version_from_file() -> str:
     if not VERSION_FILE.exists():
         raise FileNotFoundError(f"VERSION 文件不存在: {VERSION_FILE}")
     text = VERSION_FILE.read_text(encoding="utf-8")
-    lines = [l.strip() for l in text.strip().splitlines() if l.strip()]
+    lines = [line.strip() for line in text.strip().splitlines() if line.strip()]
     if not lines:
         raise ValueError(f"VERSION 文件为空: {VERSION_FILE}")
     version = lines[0]
@@ -66,7 +66,7 @@ def read_version_from_file() -> str:
 def sync_tokens_json(version: str, dry_run: bool = False) -> bool:
     """同步 tokens.json 的 version 字段。返回是否需要变更。"""
     if not TOKENS_FILE.exists():
-        print(f"  [WARN] tokens.json 不存在，跳过")
+        print("  [WARN] tokens.json 不存在，跳过")
         return False
 
     content = TOKENS_FILE.read_text(encoding="utf-8")
@@ -93,7 +93,7 @@ def sync_tokens_json(version: str, dry_run: bool = False) -> bool:
 def sync_package_json(version: str, dry_run: bool = False) -> bool:
     """同步 package.json 的 version 字段。返回是否需要变更。"""
     if not PACKAGE_FILE.exists():
-        print(f"  [WARN] package.json 不存在，跳过")
+        print("  [WARN] package.json 不存在，跳过")
         return False
 
     content = PACKAGE_FILE.read_text(encoding="utf-8")
@@ -119,7 +119,7 @@ def sync_package_json(version: str, dry_run: bool = False) -> bool:
 def run_stamp_version(dry_run: bool = False) -> int:
     """调用 stamp_version.py 同步 HTML/MD 文件。返回 0=成功, 1=失败。"""
     if not STAMP_SCRIPT.exists():
-        print(f"  [WARN] stamp_version.py 不存在，跳过 HTML/MD stamp")
+        print("  [WARN] stamp_version.py 不存在，跳过 HTML/MD stamp")
         return 0
 
     import subprocess
@@ -203,7 +203,7 @@ def main() -> int:
     dry_run = mode == "check"
 
     # ── 输出标题 ────────────────────────────────────────────
-    print(f"─── sync_versions.py ───")
+    print("─── sync_versions.py ───")
     print(f"模式: {mode}")
     print(f"VERSION: v{version}")
     print()
@@ -238,8 +238,8 @@ def main() -> int:
     if mode == "check":
         changed = tokens_changed or package_changed
         if changed:
-            print(f"\n✗ 版本不一致，需要运行: python3 tools/sync_versions.py")
-            print(f"  （或指定版本：python3 tools/sync_versions.py --set X.Y.Z）")
+            print("\n✗ 版本不一致，需要运行: python3 tools/sync_versions.py")
+            print("  （或指定版本：python3 tools/sync_versions.py --set X.Y.Z）")
             return 2
         else:
             print(f"\n✓ 所有版本文件一致（VERSION = v{version}）")

@@ -67,12 +67,12 @@ class A11YChecker(HTMLParser):
             if self.link_stack:
                 entry = self.link_stack.pop()
                 if not self._has_accessible_name(entry["attrs"], entry["text"]):
-                    self.interactive_no_name.append((f"<a>", entry["line"]))
+                    self.interactive_no_name.append(("<a>", entry["line"]))
         elif tag == "button":
             if self.button_stack:
                 entry = self.button_stack.pop()
                 if not self._has_accessible_name(entry["attrs"], entry["text"]):
-                    self.interactive_no_name.append((f"<button>", entry["line"]))
+                    self.interactive_no_name.append(("<button>", entry["line"]))
 
     def handle_data(self, data: str) -> None:
         if self._in_heading is not None:
@@ -192,7 +192,7 @@ def main() -> int:
             total_warnings += 1
 
     print()
-    print(f"─── 可访问性校验总结 ───")
+    print("─── 可访问性校验总结 ───")
     print(f"扫描文件: {len(html_files)}")
     print(f"错误    : {total_errors}")
     print(f"警告    : {total_warnings}")

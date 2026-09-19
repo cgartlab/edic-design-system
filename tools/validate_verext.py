@@ -146,7 +146,6 @@ def check_scripts_version_refs(
 
     # 检查引用的资源 ?v=
     css_qv_found = False
-    js_qv_found = False
 
     for match in SRC_REF_RE.finditer(text):
         resource = match.group(1)
@@ -168,7 +167,6 @@ def check_scripts_version_refs(
                 issues.append(("OK", ref, f"styles.css?v={ver}"))
 
         elif resource == "scripts.js":
-            js_qv_found = True
             if ver != expected:
                 issues.append(
                     (

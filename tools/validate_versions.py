@@ -141,11 +141,11 @@ def main() -> int:
         return 2
 
     expected = get_expected_version()
-    print(f"─── 版本号同步校验 ───")
+    print("─── 版本号同步校验 ───")
     if expected:
         print(f"期望版本（来自 VERSION）: {expected}")
     else:
-        print(f"[WARN] 未发现期望版本（VERSION 文件缺失）")
+        print("[WARN] 未发现期望版本（VERSION 文件缺失）")
         return 1
 
     by_resource: dict[str, dict[str, list[str]]] = defaultdict(
@@ -180,7 +180,7 @@ def main() -> int:
 
     hardcoded_violations = check_hardcoded_semver(expected)
     if hardcoded_violations:
-        print(f"\n[ERROR] 发现硬编码过期版本号：")
+        print("\n[ERROR] 发现硬编码过期版本号：")
         for name, lineno, content in hardcoded_violations:
             print(f"  {name}:{lineno}: {content[:100]}")
         errors += len(hardcoded_violations)
@@ -193,7 +193,7 @@ def main() -> int:
         ):
             no_version.append((path.name, match.group(1)))
     if no_version:
-        print(f"\n[WARN] 以下资源未使用 ?v= 版本号：")
+        print("\n[WARN] 以下资源未使用 ?v= 版本号：")
         for file, resource in no_version:
             print(f"  {file}: {resource}")
         warnings += 1
@@ -213,7 +213,7 @@ def main() -> int:
         if n_total > 0:
             placeholder_files.append((name, n_total))
     if placeholder_files:
-        print(f"\n[ERROR] 以下文件残留 {{{{DS_VERSION}}}} 占位符，需 stamp：")
+        print("\n[ERROR] 以下文件残留 {{DS_VERSION}} 占位符，需 stamp：")
         for name, n in placeholder_files:
             print(f"  {name}: {n} 处")
         errors += len(placeholder_files)
