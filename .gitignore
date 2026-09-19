@@ -64,3 +64,6 @@ out/
 assets/downloads/*.pdf
 assets/downloads/*.zip
 !assets/downloads/.gitkeep
+
+# ─── Web quality audit screenshots (regenerable via Playwright) ─
+tmp-*.png
