@@ -979,7 +979,7 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .ds-icon-btn:hover{border-color:var(--ds-color-fg-subtle);color:var(--ds-color-fg)}
 
 /* ===== Skeleton ===== */
-.ds-skeleton{background:linear-gradient(90deg,var(--ds-color-border-subtle) 25%,var(--ds-color-surface) 50%,var(--ds-color-border-subtle) 75%);background-size:200% 100%;animation:ds-shimmer 1var(--ds-duration-500) infinite;border-radius:var(--ds-radius-md)}
+.ds-skeleton{background:linear-gradient(90deg,var(--ds-color-border-subtle) 25%,var(--ds-color-surface) 50%,var(--ds-color-border-subtle) 75%);background-size:200% 100%;animation:ds-shimmer var(--ds-duration-500) infinite;border-radius:var(--ds-radius-md)}
 @keyframes ds-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
 /* ===== Dropdown ===== */
@@ -1696,7 +1696,7 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .ds-logo-hero:hover{transform:translateY(-2px) scale(1.02);box-shadow:var(--ds-shadow-2xl)}
 .ds-logo-hero svg{width:60px;height:60px;position:relative;z-index:var(--ds-z-above)}
 /* Hero nib: draw the outline + breather hole, then fade the fill in (single compound path) */
-.ds-logo-draw path{--ds-draw-len:150;fill-opacity:0;stroke-dasharray:var(--ds-draw-len);stroke-dashoffset:var(--ds-draw-len);animation:ds-draw 1var(--ds-duration-300) var(--ds-ease-out) forwards,ds-logo-fill .55s var(--ds-ease-out) 1s forwards}
+.ds-logo-draw path{--ds-draw-len:150;fill-opacity:0;stroke-dasharray:var(--ds-draw-len);stroke-dashoffset:var(--ds-draw-len);animation:ds-draw var(--ds-duration-300) var(--ds-ease-out) forwards,ds-logo-fill .55s var(--ds-ease-out) 1s forwards}
 @keyframes ds-logo-fill{to{fill-opacity:1;stroke:transparent}}
 @keyframes ds-logo-halo{0%,100%{transform:rotate(0deg);opacity:.5}50%{transform:rotate(180deg);opacity:.75}}
 @media(prefers-reduced-motion:reduce){

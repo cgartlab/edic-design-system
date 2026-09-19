@@ -22,7 +22,7 @@
         "[data-theme=\"dark\"]",
         ".ds-popover"
       ],
-      "sha256": "0531da7b57236201757c7e24485386c1f4f2813b7f3fe1851b7e95772141ad2a"
+      "sha256": "7b024bfde003cd707dd1b842f1733d5a51dc78e880c30a3efdb1d078e6434e52"
     },
     {
       "path": "scripts.js",
@@ -31,7 +31,7 @@
         "theme",
         "render icon grid"
       ],
-      "sha256": "bfb16497f3920b9afc286321e0b25479421b2913d9b976969d9288c75266befa"
+      "sha256": "1302b3840fc119881acdd100edc7580b6a2e73f6ffb43b12dff395722dfef588"
     }
   ]
 }
