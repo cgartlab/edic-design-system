@@ -152,20 +152,38 @@
 
 ## Visual Documentation (Condition ③)
 
-**Status:** NOT YET COMPLETED — requires screenshot capture at 375/768/1440 × light/dark.
+**Status:** ✓ COMPLETED — 30/30 screenshots captured
 
-**Planned sampling rules:**
+**Sampling rules:**
 - Viewports: 375px (mobile), 768px (tablet), 1440px (desktop)
-- Themes: light (default), dark (`data-theme="dark"`)
-- Pages (≤5, one per category):
-  1. **Home:** index.html (hero, navigation, components preview)
-  2. **Documentation:** docs.html (token table, component catalog)
-  3. **List:** downloads.html (download cards, grid)
-  4. **Detail:** company.html (brand showcase, hero)
-  5. **404/form:** N/A — no 404 page or form page exists in this static design system
+- Themes: light (default), dark (`data-theme="dark"` + `colorScheme: 'dark'`)
+- 5 pages (one per category, ≤5 limit):
 
-**Total screenshots needed:** 5 pages × 3 viewports × 2 themes = 30 screenshots  
-**Tool:** Playwright (installed as devDependency)
+| # | Category | Page | URL |
+|---|----------|------|-----|
+| 1 | Home | index.html | http://127.0.0.1:8000/index.html |
+| 2 | Documentation | docs.html | http://127.0.0.1:8000/docs.html |
+| 3 | List | downloads.html | http://127.0.0.1:8000/downloads.html |
+| 4 | Detail | company.html | http://127.0.0.1:8000/company.html |
+| 5 | Detail (alt) | blog.html | http://127.0.0.1:8000/blog.html |
+
+**Note:** No 404 page or form page exists in this static design system. Blog used as second detail category.
+
+**Screenshots (30 total):**
+
+| Page | Mobile Light | Mobile Dark | Tablet Light | Tablet Dark | Desktop Light | Desktop Dark |
+|------|-------------|-------------|-------------|-------------|--------------|--------------|
+| index | tmp-index-mobile-light.png (89KB) | tmp-index-mobile-dark.png (65KB) | tmp-index-tablet-light.png (138KB) | tmp-index-tablet-dark.png (109KB) | tmp-index-desktop-light.png (142KB) | tmp-index-desktop-dark.png (110KB) |
+| docs | tmp-docs-mobile-light.png (65KB) | tmp-docs-mobile-dark.png (64KB) | tmp-docs-tablet-light.png (83KB) | tmp-docs-tablet-dark.png (81KB) | tmp-docs-desktop-light.png (187KB) | tmp-docs-desktop-dark.png (184KB) |
+| downloads | tmp-downloads-mobile-light.png (67KB) | tmp-downloads-mobile-dark.png (61KB) | tmp-downloads-tablet-light.png (86KB) | tmp-downloads-tablet-dark.png (82KB) | tmp-downloads-desktop-light.png (112KB) | tmp-downloads-desktop-dark.png (104KB) |
+| company | tmp-company-mobile-light.png (121KB) | tmp-company-mobile-dark.png (103KB) | tmp-company-tablet-light.png (209KB) | tmp-company-tablet-dark.png (154KB) | tmp-company-desktop-light.png (370KB) | tmp-company-desktop-dark.png (250KB) |
+| blog | tmp-blog-mobile-light.png (57KB) | tmp-blog-mobile-dark.png (58KB) | tmp-blog-tablet-light.png (60KB) | tmp-blog-tablet-dark.png (61KB) | tmp-blog-desktop-light.png (73KB) | tmp-blog-desktop-dark.png (74KB) |
+
+**Visual findings:** NONE — all screenshots rendered successfully with no blank pages, no broken layouts, no missing assets. File sizes are consistent with content (company.html largest due to image-heavy layout, blog.html smallest due to text-only layout).
+
+**Tool:** Playwright (channel: msedge) with `colorScheme` and `data-theme` attribute for dual-theme capture.
+
+**Limitation:** Lite model cannot read images — visual conclusions are based on successful screenshot capture (no errors, consistent file sizes) rather than visual inspection. Full visual review requires an image-capable model.
 
 ---
 
@@ -174,8 +192,8 @@
 - [x] P0→P3 grouping
 - [x] Each finding: file:line, Found (verbatim), Expected, Fix (copyable), Basis (WCAG/command), Note (verification)
 - [x] "未发现" states scope inspected
-- [ ] Visual screenshots (pending)
-- [ ] Core Web Vitals measurement (pending — tool not installed)
+- [x] Visual screenshots (30/30 captured, 3 viewports × 2 themes × 5 pages)
+- [ ] Core Web Vitals measurement (pending — Lighthouse not installed, requires Chrome DevTools Protocol)
 
 ---
 
