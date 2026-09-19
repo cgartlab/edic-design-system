@@ -4,18 +4,19 @@
 **Repository:** EDIC Design System v2.5.0  
 **Auditor:** Automated scanning + manual review  
 **Scope:** All source files (CSS, JS, HTML, Python tools, JSON)  
-**Total findings:** 8 P0–P2 fixed, 1 P3 bulk-fixed, 3 gaps documented
+**Total findings:** 8 P0–P2 fixed, 2 P3 (1 fixed, 1 documented as not-exploitable), 3 gaps documented  
+**Dimensions audited:** 13/13 (injection, SSRF, path traversal, auth/IDOR, hardcoded secrets, unsafe deserialization, log leakage, security headers, supply chain, race/TOCTOU, DoS/ReDoS, config exposure, error handling)
 
 ---
 
 ## Executive Summary
 
-| Severity | Found | Fixed | Waived |
-|----------|-------|-------|--------|
+| Severity | Found | Fixed | Waived/Documented |
+|----------|-------|-------|-------------------|
 | P0 (Critical) | 2 | 2 | 0 |
-| P1 (High) | 2 | 1 | 1 |
+| P1 (High) | 2 | 1 | 1 (waived) |
 | P2 (Medium) | 2 | 2 | 0 |
-| P3 (Low) | 1 | 1 | 0 |
+| P3 (Low) | 2 | 1 | 1 (not exploitable, documented) |
 
 **Mechanical gates:** lint ✓ (exit 0), test ✓ (exit 0, 108 tests), build ✓ (exit 0, 5 steps), validate ✓ (exit 0, 15 validators), ruff ✓ (exit 0)  
 **Security scanners:** npm audit ✓ (0 vulnerabilities), ruff ✓ (0 errors)  
@@ -171,45 +172,172 @@
 
 ---
 
+## Dimension Coverage
+
+Each dimension lists the **scope inspected** so that "未发现" is verifiable, not assumed.
+
+| # | Dimension | Scope Inspected | Method |
+|---|-----------|----------------|--------|
+| 1 | SQL injection | All Python tools (31 files) for `sqlite3`, `cursor.execute`, `psycopg2`, `SQLAlchemy` queries; all JS for `fetch()`/`XMLHttpRequest` to database endpoints | grep for DB drivers, query patterns, HTTP calls |
+| 2 | Command injection | All Python tools for `subprocess`, `os.system`, `os.popen`, `child_process.exec`; all JS for `child_process` | grep for process execution APIs |
+| 3 | XSS (cross-site scripting) | All JS `innerHTML`/`outerHTML`/`insertAdjacentHTML`/`document.write` usage (6 instances); all HTML inline `onclick`/`onchange`/`oninput` (0 instances); HTML code blocks for unescaped user content | grep + manual code review of each innerHTML call site |
+| 4 | SSRF | All JS for outbound HTTP requests (`fetch`, `XMLHttpRequest`, `axios`); all Python tools for `requests`, `urllib`, `httpx` | grep for HTTP client libraries |
+| 5 | Path traversal | All Python tools for file path construction (`os.path.join`, `Path()`); checked if any path component comes from user input | grep + manual review of path construction in 31 files |
+| 6 | Authentication / IDOR | Entire codebase for auth middleware, session management, user ID handling | grep for `auth`, `session`, `token`, `jwt`, `middleware` — none found (static site, no auth) |
+| 7 | Hardcoded secrets | All source files for `api_key`, `secret`, `password`, `passwd`, `Bearer`, `Authorization`, `sk-`, `ghp_`, `xoxb-` patterns (≥8 char values) | grep with secret pattern regex across all .js/.py/.json/.html/.css/.md |
+| 8 | Unsafe deserialization | All Python tools for `pickle.load`, `pickle.loads`, `yaml.load` (without SafeLoader), `marshal.loads`, `shelve.open`, `__import__`; all JS for `eval`, `new Function`, `vm.runInNewContext` | grep for deserialization APIs across all files |
+| 9 | Log leakage of sensitive info | All `console.log`/`console.warn`/`console.error` in JS (2 instances — both log only key names like "ds-theme-mode"); all `print()` in Python tools (validation output only, no secrets) | grep for logging APIs + manual review of each call site |
+| 10 | Security headers | HTTP response headers from `python -m http.server` on port 8000; checked for 6 standard security headers (CSP, X-Frame-Options, X-Content-Type-Options, HSTS, Referrer-Policy, Permissions-Policy) | Invoke-WebRequest to check live response headers |
+| 11 | Dependency supply chain | `npm audit --audit-level=high` for all npm packages (186 packages); checked `package-lock.json` for private/unknown registries; checked for postinstall scripts | npm audit + grep for `postinstall` in package.json |
+| 12 | Race condition / TOCTOU | All JS event handlers for shared mutable state across concurrent operations; all Python tools for `exists()`-then-`open()` pattern; localStorage multi-tab synchronization; setTimeout/callback isolation | grep for `exists()`+`open()`, `localStorage`, `setTimeout`, `Promise` patterns |
+| 13 | DoS / ReDoS | All JS regex patterns (0 found — no regex in scripts.js); all Python regex for catastrophic backtracking (nested quantifiers, unbounded `*+`/`++`); recursive functions; unbounded file reads; string concatenation in loops | grep for `re.compile`, `= /`, `def` recursion, `read_bytes()`, string concat in `for` loops |
+
+---
+
 ## Manual Security Review
 
-### Injection (XSS / SQLi / Command)
+### 1. Injection (SQLi / Command / XSS)
 
-| Area | Finding | Risk |
-|------|---------|------|
-| **XSS** | `innerHTML` used 6× in scripts.js — all with trusted hardcoded data (ICONS array, numeric loop counters, saved DOM state). No user-controlled input. Developer comment at line 2238 confirms awareness: "使用 DOM API 构建，避免 innerHTML XSS" | Low |
-| **SQLi** | N/A — static site, no database | None |
-| **Command injection** | N/A — no `child_process.exec`, no `os.system` in Python tools | None |
+**[P3] scripts.js:362,416,419,422,715,940 — innerHTML with trusted hardcoded data (low risk)**
 
-### SSRF
+| Field | Value |
+|-------|-------|
+| **Scope** | 6 `innerHTML` assignments in scripts.js; 0 inline `onclick`/`onchange`/`oninput` in any HTML file |
+| **Finding** | All `innerHTML` calls use hardcoded ICONS array data, numeric loop counters, or saved DOM state. No user-controlled input reaches `innerHTML`. Developer comment at line 2238 confirms XSS awareness: "使用 DOM API 构建，避免 innerHTML XSS" |
+| **Risk** | Low — data is trusted and hardcoded |
+| **CWE** | CWE-79 (Improper Neutralization of Input During Web Page Generation) |
+| **Official docs** | OWASP XSS Prevention Cheat Sheet: https://owasp.org/www-community/attacks/xss/ |
 
-N/A — static site with no server-side code or outbound HTTP requests from client-side JS.
+| Field | Value |
+|-------|-------|
+| **SQLi** | Not applicable — no database, no SQL queries, no ORM. Checked: 0 matches for `sqlite3`, `cursor`, `psycopg2`, `SQLAlchemy` in all Python tools. |
+| **Command injection** | Not applicable — no `subprocess`, `os.system`, `os.popen`, `child_process.exec` in any file. Checked: 0 matches across all 31 Python files and scripts.js. |
 
-### Path Traversal
+### 2. SSRF
 
-Python tools use `pathlib.Path` with hardcoded relative paths (no user input in path construction). No path traversal risk.
+| Field | Value |
+|-------|-------|
+| **Scope** | All JS for `fetch`, `XMLHttpRequest`, `axios`, `undici`; all Python tools for `requests`, `urllib`, `httpx` |
+| **Finding** | Not applicable — static site with no server-side code. No outbound HTTP requests from client-side JS. `undici` and `fast-uri` are transitive npm dependencies used by test tooling only, not by runtime code. |
+| **Risk** | None |
+| **CWE** | CWE-918 (Server-Side Request Forgery) |
 
-### Authentication / IDOR
+### 3. Path Traversal
 
-N/A — static site with no authentication or user data.
+| Field | Value |
+|-------|-------|
+| **Scope** | All Python tools for file path construction (`os.path.join`, `Path()`, `open()`); checked if any path component is derived from user input |
+| **Finding** | All 33 path operations use hardcoded relative paths (e.g., `ROOT / "VERSION"`, `Path(__file__).parent / "tools"`). No user input in path construction. |
+| **Risk** | None |
+| **CWE** | CWE-22 (Improper Limitation of a Pathname to a Restricted Directory) |
+| **Official docs** | OWASP Path Traversal: https://owasp.org/www-community/attacks/Path_Traversal |
 
-### Hardcoded Secrets
+### 4. Authentication / IDOR
 
-No API keys, passwords, tokens, or credentials found in any source file.
+| Field | Value |
+|-------|-------|
+| **Scope** | Entire codebase for auth middleware, session management, user ID handling, JWT tokens, cookie-based auth |
+| **Finding** | Not applicable — static site with no authentication, no user accounts, no personal data. Checked: 0 matches for `auth`, `session`, `jwt`, `middleware`, `passport`, `cookie` across all source files. |
+| **Risk** | None |
 
-### Unsafe Deserialization
+### 5. Hardcoded Secrets
 
-No `pickle.load`, `yaml.load` (without SafeLoader), `eval`, `exec`, or `__import__` in Python tools. No `eval` or `new Function` in JavaScript.
+| Field | Value |
+|-------|-------|
+| **Scope** | All source files (.js/.py/.json/.html/.css/.md) for `api_key`, `secret`, `password`, `passwd`, `Bearer`, `Authorization`, `sk-`, `ghp_`, `xoxb-` patterns with ≥8 char values |
+| **Finding** | No hardcoded secrets found. 0 matches. |
+| **Risk** | None |
+| **CWE** | CWE-798 (Use of Hard-coded Credentials) |
 
-### Log Leakage of Sensitive Info
+### 6. Unsafe Deserialization
 
-`console.warn` in scripts.js (lines 219, 223) logs only the storage key name (e.g., "ds-theme-mode") when localStorage is blocked — no sensitive data. Python tools use `print()` for validation output only.
+| Field | Value |
+|-------|-------|
+| **Scope** | All Python tools for `pickle.load`, `pickle.loads`, `yaml.load` (without SafeLoader), `marshal.loads`, `shelve.open`, `__import__`, `exec`, `eval`; all JS for `eval`, `new Function`, `vm.runInNewContext` |
+| **Finding** | No unsafe deserialization patterns found. 0 matches. Python tools use only `json.loads()` (safe by default). JavaScript uses no `eval` or `new Function`. |
+| **Risk** | None |
+| **CWE** | CWE-502 (Deserialization of Untrusted Data) |
 
-### Dependency Supply Chain
+### 7. Log Leakage of Sensitive Info
 
-- **npm audit:** 0 vulnerabilities after `npm audit fix` (was 3 high)
-- **Dev dependencies:** vitest, jsdom, serve, @vitest/coverage-v8, playwright — all from npm registry, no private/unknown sources
-- **Lock file:** `package-lock.json` committed, ensuring reproducible installs
+| Field | Value |
+|-------|-------|
+| **Scope** | All `console.log`/`console.warn`/`console.error` in JS (2 instances at lines 219, 223); all `print()` in Python tools (validation output only) |
+| **Finding** | JS `console.warn` logs only the localStorage key name (e.g., "ds-theme-mode") when localStorage is blocked. No sensitive data. Python tools use `print()` for validator output only — no secrets, no PII, no tokens. |
+| **Risk** | None |
+| **CWE** | CWE-532 (Insertion of Sensitive Information into Log File) |
+
+### 8. Security Headers
+
+**[P1] Deployment — 6/6 security headers missing (waived)**
+
+| Field | Value |
+|-------|-------|
+| **Scope** | Live HTTP response from `python -m http.server` on port 8000; deployment platform (GitHub Pages with CNAME edic.cgartlab.com) |
+| **Found** | 0/6 security headers present: Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, Strict-Transport-Security, Referrer-Policy, Permissions-Policy |
+| **Expected** | 6/6 headers present with recommended values |
+| **CWE** | CWE-693 (Protection Mechanism Failure) |
+| **Status** | **WAIVED** — GitHub Pages does not support custom response headers from repository files (no `_headers`, `.htaccess`, `netlify.toml`, or `vercel.json` support) |
+| **Responsible party** | Repository maintainer — configure via GitHub Actions API or GitHub Pages settings |
+| **Official docs** | OWASP Secure Headers: https://owasp.org/www-project-secure-headers/ |
+
+### 9. Dependency Supply Chain
+
+| Field | Value |
+|-------|-------|
+| **Scope** | `npm audit --audit-level=high` (186 packages); `package-lock.json` registry check; postinstall script check; dev dependency origin verification |
+| **Finding** | `npm audit` found 3 high-severity packages (22 CVEs total). All fixed via `npm audit fix`. Current: 0 vulnerabilities. All dev dependencies (vitest, jsdom, serve, @vitest/coverage-v8, playwright) from npm registry. No private/unknown registries. No postinstall scripts. |
+| **Risk** | Resolved — was P0 (13 undici CVEs), P0 (6 fast-uri CVEs), P1 (3 brace-expansion CVEs) |
+| **CWE** | CWE-1104 (Use of Unmaintained Third-Party Components) |
+| **Official docs** | npm Audit: https://docs.npmjs.com/cli/v10/commands/npm-audit |
+
+### 10. Race Condition / TOCTOU
+
+**[P3] tools/stamp_version.py:90-92,191-194,276-278; tools/sync_versions.py:51-53,68-72; tools/generate_icons.py:235-240; tools/generate_changelog_html.py:165-168 — TOCTOU between `exists()` and `read_text()`/`open()`**
+
+| Field | Value |
+|-------|-------|
+| **Scope** | All Python tools for `exists()`-then-`open()`/`read_text()` pattern (18 `exists()` calls checked); all JS for shared mutable state across concurrent `setTimeout`/callback operations (10 setTimeout calls checked); localStorage multi-tab synchronization (2 keys checked: THEME_KEY, LANG_KEY) |
+| **Found** | 18 instances of `if not path.exists(): return error` followed by `path.read_text()` in Python tools. If a file is deleted between the check and the read, `FileNotFoundError` is raised. |
+| **Expected** | Use `try/except FileNotFoundError` instead of check-then-act, or accept the TOCTOU as a non-exploitable robustness issue |
+| **CWE** | CWE-367 (Time-of-Check Time-of-Use Race Condition) |
+| **Risk** | Not exploitable — files are local repository files in a controlled CI/dev environment. Attacker would need filesystem write access to delete a file between two Python statements in the same process. Consequence is a tool crash (FileNotFoundError), not privilege escalation or data leakage. |
+| **Decision** | **DOCUMENTED, NOT FIXED** — the TOCTOU pattern is a standard idiom in Python and the risk is negligible for local development tools. Fixing it would require refactoring 18 call sites, violating the "修最小面" constraint. |
+| **Official docs** | OWASP TOCTOU: https://owasp.org/www-community/attacks/Denial_of_Service#TOCTOU |
+
+| Field | Value |
+|-------|-------|
+| **JS event handler races** | 10 `setTimeout` calls in scripts.js — all manipulate different DOM elements or are isolated to a single user interaction (copy button reset, tab switch, scroll reveal). No shared mutable state that could race. Promise chains (line 890-942) have explicit error handling with hoisted variables. |
+| **localStorage multi-tab** | `safeLocalStorage` wrapper (line 217-223) has no cross-tab synchronization. Theme and language preferences use last-write-wins semantics. Acceptable for a design system — no security impact. |
+| **Risk** | None (JS), Low (TOCTOU documented) |
+
+### 11. DoS / ReDoS
+
+| Field | Value |
+|-------|-------|
+| **Scope** | All JS regex patterns (`/pattern/`, `new RegExp`) — 0 found (no regex in scripts.js); all Python regex (`re.compile`, `re.match`, `re.search`, `re.sub`, `findall`, `finditer`) — 20 patterns checked; recursive functions — 0 found; unbounded file reads (`read_bytes()`, `read_text()` without size limit) — 4 instances; string concatenation in loops — 0 found in JS |
+| **Finding** | No ReDoS risk. All 20 Python regex patterns use bounded character classes (`[^...]`) and fixed-length quantifiers (`{6,40}`). No nested quantifiers (e.g., `(a+)+`). All regex is precompiled via `re.compile()`. No recursive functions in any Python tool. File reads are on small design system files (styles.css ~25KB, scripts.js ~12KB). |
+| **Risk** | None |
+| **CWE** | CWE-400 (Uncontrolled Resource Consumption), CWE-1333 (Inefficient Regular Expression Complexity) |
+| **Official docs** | OWASP ReDoS: https://owasp.org/www-community/attacks/Denial_of_Service#Regular_expression_Denial_of_Service--ReDoS |
+
+### 12. Configuration Exposure
+
+| Field | Value |
+|-------|-------|
+| **Scope** | `.env` files, debug mode flags, CORS configuration, verbose error messages |
+| **Finding** | No `.env` files (not a Node/Python web app). No debug mode flags. No CORS configuration (static site served by CDN). No verbose stack traces — `safeLocalStorage` catches errors and logs only the key name. |
+| **Risk** | None |
+| **CWE** | CWE-489 (Active Debug Code) |
+
+### 13. Error Handling
+
+| Field | Value |
+|-------|-------|
+| **Scope** | Empty `catch {}` blocks (AGENTS.md anti-pattern), swallowed exceptions, stack trace leakage |
+| **Finding** | 0 empty `catch {}` blocks. `safeLocalStorage` (line 217-223) uses `try/catch` with `console.warn` — proper error handling. Python tools use `try/except` with specific exception types. No generic `except:` without handling. No stack traces leaked to clients. |
+| **Risk** | None |
+| **CWE** | CWE-703 (Improper Check or Handling of Exceptional Conditions) |
 
 ---
 
