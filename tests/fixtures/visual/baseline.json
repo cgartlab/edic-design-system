@@ -22,7 +22,7 @@
         "[data-theme=\"dark\"]",
         ".ds-popover"
       ],
-      "sha256": "a4461621d72f131354d4fda4b680b7f0e9f34a0d90e25d5128837529ce6520e1"
+      "sha256": "f7e3d24de8b0cd4dd91f81f508ce09cf9ff275e4bb8abf0c513118d8fb95a6b9"
     },
     {
       "path": "scripts.js",
