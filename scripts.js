@@ -227,7 +227,7 @@ const safeLocalStorage = {
 const TOKENS = [
   ["--ds-color-bg","oklch(97% 0.012 80)"],
   ["--ds-color-surface","oklch(99% 0.005 80)"],
-  ["--ds-color-surface-raised","oklch(100% 0 0)"],
+  ["--ds-color-surface-raised","oklch(99.5% 0.006 92)"],
   ["--ds-color-surface-overlay","oklch(97% 0.008 80)"],
   ["--ds-color-border-subtle","oklch(92% 0.012 80)"],
   ["--ds-color-border","oklch(89% 0.012 80)"],
@@ -236,6 +236,9 @@ const TOKENS = [
   ["--ds-color-fg-subtle","oklch(35% 0.018 60)"],
   ["--ds-color-fg","oklch(20% 0.02 60)"],
   ["--ds-color-fg-strong","oklch(14% 0.025 60)"],
+  ["--ds-color-heading","oklch(31% 0.058 128) ★"],
+  ["--ds-color-gold-500","oklch(57% 0.1 82)"],
+  ["--ds-color-gold-700","oklch(45% 0.09 80)"],
   ["--ds-color-fg-inverse","oklch(97% 0.005 80)"],
   ["--ds-color-white","oklch(100% 0 0)"],
   ["--ds-color-black","oklch(0% 0 0)"],
@@ -253,6 +256,7 @@ const TOKENS = [
   ["--ds-accent-hover","var(--ds-color-olive-500)"],
   ["--ds-accent-soft","var(--ds-color-olive-100)"],
   ["--ds-accent-muted","var(--ds-color-olive-50)"],
+  ["--ds-accent-gold","var(--ds-color-gold-700)"],
   ["--ds-color-success","oklch(55% 0.1 145)"],
   ["--ds-color-success-bg","oklch(93% 0.025 145)"],
   ["--ds-color-warning","oklch(65% 0.1 85)"],
@@ -261,7 +265,7 @@ const TOKENS = [
   ["--ds-color-error-bg","oklch(93% 0.025 30)"],
   ["--ds-color-info","oklch(55% 0.08 240)"],
   ["--ds-color-info-bg","oklch(93% 0.02 240)"],
-  ["--ds-font-display","\"Iowan Old Style\", \"Charter\", Georgia, \"Noto Serif SC\", \"Source Han Serif SC\", serif"],
+  ["--ds-font-display","\"Playfair Display\", \"Iowan Old Style\", \"Charter\", Georgia, \"Noto Serif SC\", \"Source Han Serif SC\", serif"],
   ["--ds-font-body","\"Noto Sans SC\", \"Source Han Sans SC\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", system-ui, sans-serif"],
   ["--ds-font-mono","\"JetBrains Mono\", \"IBM Plex Mono\", \"Noto Sans Mono SC\", ui-monospace, monospace"],
   ["--ds-font-ui","\"Noto Sans SC\", \"Source Han Sans SC\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", system-ui, sans-serif"],
@@ -866,6 +870,118 @@ const TOKENS = [
   Array.prototype.forEach.call(els, function(el) { obs.observe(el); });
   // Cleanup on page unload to prevent memory leaks
   window.addEventListener("unload", function() { obs.disconnect(); });
+})();
+
+/* ===== Syntax highlighting (built-in, zero-dependency) =====
+   Scans pre > code[class*="language-*"], tokenizes the plain text and
+   rewrites it as escaped HTML wrapped in .ds-tok--* spans. Colors come
+   from the --ds-token-* theme variables in styles.css. textContent is
+   preserved byte-for-byte, so copy buttons keep working unchanged. */
+(function() {
+  const blocks = document.querySelectorAll('pre code[class*="language-"]');
+  if (!blocks.length) return;
+
+  function esc(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function wrap(type, text) {
+    return '<span class="ds-tok--' + type + '">' + esc(text) + "</span>";
+  }
+
+  const JS_KW = "const|let|var|function|return|if|else|for|while|new|class|extends|super|import|export|default|from|async|await|try|catch|finally|throw|typeof|instanceof|delete|void|switch|case|break|continue|do|in|of|null|undefined|true|false|this";
+  const JS_BUILTIN = "console|document|window|Math|JSON|Array|Object|Promise|Number|String|Boolean|Date|fetch";
+
+  const RULES = {
+    html: [
+      { re: /<!--[\s\S]*?-->/y, t: "comment" },
+      { re: /<!doctype[^>]*>/iy, t: "keyword" },
+      { re: /<\/?[a-zA-Z][\w:.=-]*/y, t: "tag" },
+      { re: /\/?>/y, t: "punctuation" },
+      { re: /[a-zA-Z_:][\w:.-]*(?=\s*=)/y, t: "attr" },
+      { re: /"[^"]*"|'[^']*'/y, t: "string" },
+      { re: /=/y, t: "operator" }
+    ],
+    css: [
+      { re: /\/\*[\s\S]*?\*\//y, t: "comment" },
+      { re: /"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'/y, t: "string" },
+      { re: /@[\w-]+/y, t: "keyword" },
+      { re: /!important\b/y, t: "keyword" },
+      { re: /#[0-9a-fA-F]{3,8}\b/y, t: "number" },
+      { re: /--[\w-]+/y, t: "variable" },
+      { re: /-?[a-zA-Z][\w-]*(?=\s*:(?!:))/y, t: "attr" },
+      { re: /[.#][\w-]+/y, t: "selector" },
+      { re: /-?(?:\d+\.\d+|\d+)(?:[a-z]+|%)?/y, t: "number" },
+      { re: /[=~|^$*]/y, t: "operator" },
+      { re: /[{}[\]();:,]/y, t: "punctuation" }
+    ],
+    js: [
+      { re: /\/\/[^\n]*|\/\*[\s\S]*?\*\//y, t: "comment" },
+      { re: /`(?:\\[\s\S]|[^`\\])*`|"(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*'/y, t: "string" },
+      { re: new RegExp("\\b(?:" + JS_KW + ")\\b", "y"), t: "keyword" },
+      { re: new RegExp("\\b(?:" + JS_BUILTIN + ")\\b", "y"), t: "builtin" },
+      { re: /\b(?:0[xX][\da-fA-F]+|\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)\b/y, t: "number" },
+      { re: /[A-Za-z_$][\w$]*(?=\s*\()/y, t: "function" },
+      { re: /===|!==|==|!=|<=|>=|=>|\+\+|--|\+=|-=|\*\*|[+\-*/%=<>!&|?:^~]/y, t: "operator" },
+      { re: /[{}[\]();,.]/y, t: "punctuation" }
+    ],
+    json: [
+      { re: /\/\*[\s\S]*?\*\//y, t: "comment" },
+      { re: /"(?:\\.|[^"\\])*"(?=\s*:)/y, t: "attr" },
+      { re: /"(?:\\.|[^"\\])*"/y, t: "string" },
+      { re: /\b(?:true|false|null)\b/y, t: "keyword" },
+      { re: /-?(?:\d+\.\d+|\d+)(?:[eE][+-]?\d+)?/y, t: "number" },
+      { re: /[{}[\],:]/y, t: "punctuation" }
+    ],
+    bash: [
+      { re: /"(?:\\.|[^"\\])*"|'[^']*'/y, t: "string" },
+      { re: /#[^\n]*/y, t: "comment" },
+      { re: /\$\{[^}]*\}|\$[\w?@!#]+/y, t: "variable" },
+      { re: /\b(?:npm|npx|pnpm|node|yarn|make|git|python3?|pip3?|curl|wget|cd|echo|export|source|cat|ls|rm|cp|mv|exit)\b/y, t: "builtin" },
+      { re: /\b\d+\b/y, t: "number" },
+      { re: /&&|\||>>|>|<|[;=|]/y, t: "operator" },
+      { re: /[()[\]{}.,/\\:-]/y, t: "punctuation" }
+    ]
+  };
+  RULES.javascript = RULES.js;
+  RULES.shell = RULES.bash;
+
+  function tokenize(src, rules) {
+    let out = "";
+    let i = 0;
+    const n = src.length;
+    while (i < n) {
+      let hit = null;
+      for (let r = 0; r < rules.length; r++) {
+        const rule = rules[r];
+        rule.re.lastIndex = i;
+        const m = rule.re.exec(src);
+        if (m && m.index === i && m[0]) {
+          hit = { t: rule.t, text: m[0] };
+          break;
+        }
+      }
+      if (hit) {
+        out += wrap(hit.t, hit.text);
+        i += hit.text.length;
+      } else {
+        out += esc(src.charAt(i));
+        i++;
+      }
+    }
+    return out;
+  }
+
+  for (let b = 0; b < blocks.length; b++) {
+    const el = blocks[b];
+    const m = /(?:^|\s)language-([\w-]+)/.exec(el.className);
+    const rules = m ? RULES[m[1]] : null;
+    if (!rules) continue;
+    try {
+      el.innerHTML = tokenize(el.textContent, rules);
+    } catch (err) {
+      console.warn("[EDIC] syntax highlight skipped: " + err);
+    }
+  }
 })();
 
 /* ===== Copy to clipboard ===== */

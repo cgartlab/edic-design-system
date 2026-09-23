@@ -233,11 +233,11 @@
           <p>44 个核心组件家族的 live 形态、变体与状态，请见<a href="#visual-components">视觉手册 · 组件库</a>；本页内同时保留常用用法、ARIA 契约与可复制代码。</p>
 
           <h3>响应式导航 · Mobile Drawer</h3>
-          <p>导航栏 <code>.ds-navbar</code> 在桌面端为水平毛玻璃浮动导航，在移动端与平板（&lt;1024px）转为右侧滑出抽屉。移动端导航复用已有设计令牌。</p>
+          <p>导航栏 <code>.ds-navbar</code> 在桌面端为水平实底浮动导航（纸色 + 发丝下边框），在移动端与平板（&lt;1024px）转为右侧滑出抽屉。移动端导航复用已有设计令牌。</p>
 
           <h4>设计决策与使用令牌</h4>
           <ul>
-            <li><strong>顶部导航栏（移动端）</strong>：切换为实底 <code>--ds-color-surface-raised</code>，禁用毛玻璃。移动设备上 <code>backdrop-filter</code> 性能开销大且文字可读性不可控，因此移动端一律实底。</li>
+            <li><strong>顶部导航栏</strong>：全程实底 <code>--ds-color-surface</code>，不使用 <code>backdrop-filter</code>——纸面编辑风格保持安静，也避免毛玻璃的性能与可读性问题。</li>
             <li><strong>汉堡按钮</strong>：44×44px 触控目标、圆角 <code>--ds-radius-md</code>、3 条线到 X 的状态动画；悬停/按下时使用 <code>--ds-accent-soft</code> 背景与 <code>--ds-accent</code> 图标色。</li>
             <li><strong>遮罩层</strong>：使用 <code>--ds-color-overlay-light</code>（12% 黑色）——提供微妙的层级暗示但不会让整页变暗。<em>不使用</em> <code>--ds-color-overlay</code>（40%）——那是模态框专用的重级遮罩。动画使用 <code>--ds-duration-300</code> + <code>--ds-ease-out</code>。</li>
             <li><strong>抽屉面板</strong>：实底 <code>--ds-color-surface-raised</code>、左侧边框 <code>--ds-color-border</code>、阴影 <code>--ds-shadow-2xl</code>（最深级别，表达最高抬起层级）。滑入动画使用 <code>--ds-duration-300</code> + <code>--ds-ease-out</code>。</li>
@@ -272,7 +272,7 @@
             <table class="ds-table">
               <thead><tr><th scope="col">元素</th><th scope="col">令牌</th><th scope="col">桌面端</th><th scope="col">移动端</th></tr></thead>
               <tbody>
-                <tr><td>导航栏背景</td><td><code>--ds-glass-bg</code> / <code>--ds-color-surface-raised</code></td><td>毛玻璃（55% + blur）</td><td>实底表面，禁用 blur</td></tr>
+                <tr><td>导航栏背景</td><td><code>--ds-color-surface</code></td><td>实底纸色 · 发丝下边框</td><td>实底表面，无 blur</td></tr>
                 <tr><td>触发按钮</td><td><code>ds-mnav-trigger</code></td><td>隐藏</td><td>44px · 3-bar → X 动画</td></tr>
                 <tr><td>遮罩</td><td><code>--ds-color-overlay-light</code></td><td>无</td><td>12% 黑色 · 点击关闭</td></tr>
                 <tr><td>抽屉阴影</td><td><code>--ds-shadow-2xl</code></td><td>无</td><td>最深投影</td></tr>
@@ -286,7 +286,7 @@
             <svg class="ds-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             <div><div class="ds-alert-title">移动端规范</div>
               <ul class="ds-alert-list">
-                <li>移动端与平板窄屏导航<strong>禁止使用毛玻璃</strong>（<code>--ds-glass-bg</code>）——低端设备性能差且文字可读性不足。</li>
+                <li>导航栏<strong>不使用毛玻璃</strong>（<code>--ds-glass-bg</code> 仅保留给玻璃组件演示）——实底纸色更安静，也避免低端设备上的性能与可读性问题。</li>
                 <li>遮罩层使用 <code>--ds-color-overlay-light</code>（12%），<strong>不</strong>使用 <code>--ds-color-overlay</code>（40%）——后者是模态框级别。</li>
                 <li>触控目标不小于 44×44px（符合 WCAG 2.5.5）。</li>
               </ul>
@@ -309,10 +309,10 @@
 
         <section class="ds-doc-block" id="code-style">
           <h2>代码样式</h2>
-          <p>本站所有代码块保持零运行时依赖，不引入语法高亮库。代码块统一使用 <code>&lt;figure class="ds-code"&gt;</code> 结构，由语言标签栏 + 可复制代码区组成；代码内容按 HTML 实体转义后直接展示。</p>
+          <p>本站所有代码块保持零运行时依赖——语法高亮由 <code>scripts.js</code> 内置的轻量高亮器在页面加载时生成，不引入任何第三方高亮库。代码块统一使用 <code>&lt;figure class="ds-code"&gt;</code> 结构，由语言标签栏 + 可复制代码区组成；代码内容按 HTML 实体转义后直接展示，复制所得与源码逐字一致。</p>
 
           <h3>基本用法</h3>
-          <p>在 <code>&lt;pre&gt;</code> 或 <code>&lt;code&gt;</code> 上添加 <code>class="language-xxxx"</code>（如 <code>language-html</code>、<code>language-css</code>），用于标识代码语言，并便于复制与文档生成时解析：</p>
+          <p>在 <code>&lt;pre&gt;</code> 或 <code>&lt;code&gt;</code> 上添加 <code>class="language-xxxx"</code>（如 <code>language-html</code>、<code>language-css</code>），用于标识代码语言，并触发内置语法高亮、便于复制与文档生成时解析：</p>
           <figure class="ds-code">
             <div class="ds-code-bar"><span class="ds-code-lang">html</span><button class="ds-copy-btn" data-copy="#c-code-example" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="ds-copy-label">复制</span></button></div>
             <pre id="c-code-example" tabindex="0"><code class="language-html">&lt;figure class="ds-code"&gt;
@@ -323,13 +323,13 @@
           </figure>
 
           <h3>支持的语言</h3>
-          <p>常用示例覆盖 HTML（含 SVG/XML）、CSS、JavaScript、JSON、Bash 与纯文本。代码块背景始终为暗色，文字与标记颜色通过 CSS 变量 <code>--ds-token-*</code> 统一控制，与设计系统的 OKLch 色彩体系一致。</p>
+          <p>常用示例覆盖 HTML（含 SVG/XML）、CSS、JavaScript、JSON、Bash 与纯文本；标记为 <code>language-text</code> 的代码不做着色。文字与标记颜色通过 CSS 变量 <code>--ds-token-*</code> 统一控制，与设计系统的 OKLch 色彩体系一致。</p>
 
           <h3>主题令牌</h3>
           <p>语法高亮颜色由以下 CSS 变量定义，可通过覆盖变量整体换肤：</p>
           <div class="ds-table-wrap">
             <table class="ds-table">
-               <thead><tr><th scope="col">令牌</th><th scope="col">用途</th><th scope="col">浅色模式引用（暗底）</th><th scope="col">暗色模式引用（暗底）</th></tr></thead>
+               <thead><tr><th scope="col">令牌</th><th scope="col">用途</th><th scope="col">浅色模式值</th><th scope="col">暗色模式值</th></tr></thead>
               <tbody>
                 <tr><td><code>--ds-code-bg</code></td><td>代码块背景</td><td><code>var(--ds-code-bg)</code></td><td><code>var(--ds-code-bg)</code></td></tr>
                 <tr><td><code>--ds-code-text</code></td><td>基础文字色</td><td><code>var(--ds-code-text)</code></td><td><code>var(--ds-code-text)</code></td></tr>
@@ -345,7 +345,7 @@
               </tbody>
             </table>
           </div>
-          <p>代码块背景始终为暗色（不随页面主题反转），因此语法令牌的暗色模式值与浅色模式相同——在两种主题下均保持一致的编辑体验。</p>
+          <p>代码块背景随主题切换（浅色为暖纸色、暗色为暖夜色），语法令牌在两种主题下各有对应取值。高亮输出的 class 固定为 <code>ds-tok--*</code>，换肤只需覆盖 <code>--ds-token-*</code> 变量。</p>
 
           <h3>代码块组件</h3>
           <p>使用 <code>ds-code</code> 系列 class 构建代码块。推荐的结构：</p>
@@ -356,7 +356,7 @@
             <li><code>.ds-copy-btn[data-copy="#id"]</code> — 复制按钮（关联 <code>&lt;pre id="..."&gt;</code>）</li>
             <li><code>&lt;pre&gt;&lt;code class="language-*"&gt;</code> — 语言标记代码区</li>
           </ul>
-          <p>EDIC 不使用外部代码高亮脚本。若消费方需要语法高亮，应在自己的应用层按相同 class 结构接入，并保持本设计系统文件本身零依赖。</p>
+          <p>EDIC 不引入外部高亮脚本：高亮由内置的零依赖高亮器完成——它识别 <code>language-*</code> 类，把代码文本输出为 <code>&lt;span class=&quot;ds-tok--*&quot;&gt;</code> 标记，颜色取自 <code>--ds-token-*</code> 令牌。消费方也可按相同 class 结构在应用层接入自己的高亮方案。</p>
         </section>
 
         <section class="ds-doc-block" id="icons">
@@ -573,7 +573,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           <h2>视觉手册 · 字体系统</h2>
           <p>衬线 Display + 无衬线 Body 经典编辑主义搭配。</p>
           <div class="ds-grid-4 ds-mb-12">
-            <div class="ds-card"><div class="ds-component-label">Display</div><p class="ds-font-display ds-text-body-sm ds-color-muted ds-mt-2">Iowan Old Style / Charter / Georgia</p><p class="ds-font-display ds-text-h3 ds-mt-2">标题用衬线，克制且自信</p></div>
+            <div class="ds-card"><div class="ds-component-label">Display</div><p class="ds-font-display ds-text-body-sm ds-color-muted ds-mt-2">Playfair Display / Iowan / Charter / Georgia</p><p class="ds-font-display ds-text-h3 ds-mt-2">标题用衬线，克制且自信</p></div>
             <div class="ds-card"><div class="ds-component-label">Body</div><p class="ds-font-body ds-text-body-sm ds-color-muted ds-mt-2">SF Pro / system-ui / Noto Sans SC</p><p class="ds-font-body ds-text-body ds-mt-2">正文无衬线，确保可读性</p></div>
             <div class="ds-card"><div class="ds-component-label">Mono</div><p class="ds-font-mono ds-text-body-sm ds-color-muted ds-mt-2">JetBrains Mono / IBM Plex Mono</p><p class="ds-font-mono ds-text-body ds-mt-2">const token = "ds-system"</p></div>
             <div class="ds-card"><div class="ds-component-label">UI</div><p class="ds-font-ui ds-text-body-sm ds-color-muted ds-mt-2">system-ui / Noto Sans SC</p><p class="ds-font-ui ds-text-body ds-mt-2">Button / Input / Nav</p></div>
@@ -1735,7 +1735,7 @@ skills/edic-design-system/SKILL.md</code></pre>
           <div class="ds-component-preview">
             <div class="ds-stat-grid">
               <div class="ds-stat"><span class="ds-stat-num">44</span><span class="ds-stat-label">核心组件</span></div>
-              <div class="ds-stat"><span class="ds-stat-num">291</span><span class="ds-stat-label">设计令牌</span></div>
+              <div class="ds-stat"><span class="ds-stat-num">295</span><span class="ds-stat-label">设计令牌</span></div>
               <div class="ds-stat"><span class="ds-stat-num">209</span><span class="ds-stat-label">图标</span></div>
             </div>
           </div>
@@ -2290,7 +2290,7 @@ skills/edic-design-system/SKILL.md</code></pre>
 
         <section class="ds-doc-block" id="token-index">
           <h2>令牌索引</h2>
-          <p>全部 291 个 CSS 自定义属性汇总。可直接复制使用。</p>
+          <p>全部 295 个 CSS 自定义属性汇总。可直接复制使用。</p>
           <div class="ds-table-wrap ds-max-h-600 ds-overflow-y-auto">
             <table class="token-table">
               <thead><tr><th scope="col">Token</th><th scope="col">Value</th></tr></thead>

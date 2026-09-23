@@ -66,7 +66,7 @@ declarations, and in `@keyframes`.
 ```css
 /* ✅ Correct — warm dark base */
 [data-theme="dark"] .surface { background: var(--ds-color-bg); }
-/* which resolves to: oklch(15% 0.008 75) — warm grey, not cold black */
+/* which resolves to: oklch(17% 0.014 80) — warm grey, not cold black */
 ```
 
 ---
@@ -165,7 +165,7 @@ font-family: 'Courier New', monospace;
 
 ```css
 /* ✅ Correct */
-font-family: var(--ds-font-display);  /* headings: Iowan Old Style, Charter, Georgia, Noto Serif SC */
+font-family: var(--ds-font-display);  /* headings: Playfair Display, Iowan Old Style, Charter, Georgia, Noto Serif SC */
 font-family: var(--ds-font-body);     /* body: Noto Sans SC, -apple-system, system-ui */
 font-family: var(--ds-font-mono);     /* code: JetBrains Mono, IBM Plex Mono */
 ```

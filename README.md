@@ -30,7 +30,7 @@ It ships as three static files: `styles.css`, `scripts.js`, and `tokens.json`. N
 
 | | |
 |---|---|
-| **Design tokens** | 311 structured entries — color, typography, spacing, radius, shadow, motion |
+| **Design tokens** | 318 structured entries — color, typography, spacing, radius, shadow, motion |
 | **Components** | 44 core component families, token-based dark mode |
 | **Icons** | 209 SVG symbols, 1.5px stroke, `aria-hidden` |
 | **Color system** | OKLch-only — perceptually uniform, no hex/rgb guesswork |
@@ -168,7 +168,7 @@ EDIC（**E**ditorial **D**esign **I**nterface for **C**ontent，内容编辑设�
 
 | | |
 |---|---|
-| **设计令牌** | 311 条结构化条目 — 颜色、字体、间距、圆角、阴影、动效 |
+| **设计令牌** | 318 条结构化条目 — 颜色、字体、间距、圆角、阴影、动效 |
 | **组件** | 44 个核心组件家族，暗色令牌覆盖 |
 | **图标** | 209 个 SVG 符号，1.5px 描边，`aria-hidden` |
 | **色彩系统** | 纯 OKLch — 感知均匀，告别 hex/rgb 猜测 |

@@ -12,7 +12,7 @@ EDIC 是同时面向人类和 Agent 的编辑主义设计系统 — 为纷繁的
 · 风格：编辑主义 × 橄榄绿，暖白纸色基底，克制留白。
 · 颜色：一律用 OKLch。强调色 --ds-accent = oklch(52% 0.08 115)；
   背景 oklch(97% 0.012 80)；正文 oklch(20% 0.02 60)。
-· 字体：标题用衬线(Iowan/Charter/Georgia)，正文/UI 用无衬线，
+· 字体：标题用衬线(Playfair/Iowan/Charter/Georgia)，正文/UI 用无衬线，
   代码用等宽(JetBrains Mono)。中英混排开启字距优化。
 · 间距：4px 基准比例（4/8/12/16/24/32…）。圆角核心 8–16px。
 · 令牌优先：用 var(--ds-*) 变量，禁止硬编码魔法数字。

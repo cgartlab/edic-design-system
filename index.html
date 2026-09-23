@@ -3,7 +3,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EDIC Design System — 同时面向人类和Agent的编辑主义设计系统</title>
-<meta name="description" content="EDIC（Editorial Design Interface for Content）— 面向人类与 Agent 的编辑主义设计系统，帮助团队产出更一致的界面。基于 OKLch 与 311 条结构化令牌，框架无关、暗色就绪、中英混排优化。">
+<meta name="description" content="EDIC（Editorial Design Interface for Content）— 面向人类与 Agent 的编辑主义设计系统，帮助团队产出更一致的界面。基于 OKLch 与 318 条结构化令牌，框架无关、暗色就绪、中英混排优化。">
 <meta property="og:title" content="EDIC Design System">
 <meta property="og:description" content="面向人类与 Agent 的编辑主义设计系统 — 帮助团队产出更一致的界面">
 <meta property="og:type" content="website">
@@ -16,11 +16,6 @@
 </head>
 <body>
 <a href="#ds-main" class="ds-skip">跳至主要内容</a>
-
-<!-- Decorative background -->
-<div class="ds-bg-blob ds-bg-blob--1" aria-hidden="true"></div>
-<div class="ds-bg-blob ds-bg-blob--2" aria-hidden="true"></div>
-<div class="ds-bg-blob ds-bg-blob--3" aria-hidden="true"></div>
 
 <!-- Site Navbar -->
 <nav class="ds-navbar" role="navigation" aria-label="主导航">
@@ -72,7 +67,7 @@
             <span class="ds-hero-cycle-word">编辑主义</span>
           </span>
         </span>设计系统</h1>
-      <div class="ds-hero-badge ds-reveal" style="--d:80ms"><span class="ds-dot"></span>v2.5.1 · 开源设计系统 · 311 条结构化令牌</div>
+      <div class="ds-hero-badge ds-reveal" style="--d:80ms">v2.5.1 · 开源设计系统 · 318 条结构化令牌</div>
       <div class="ds-hero-actions ds-reveal" style="--d:280ms">
         <div class="ds-hero-actions__row">
           <a href="docs.html#visual-colors" class="ds-btn ds-btn--primary ds-btn--lg">浏览视觉手册</a>
@@ -143,7 +138,7 @@
           </svg>
         </span>
         <p class="ds-card-heading">令牌驱动</p>
-        <p>291 个 CSS 自定义属性覆盖色彩、字体、间距、圆角、阴影、动效与层级。改一个变量，全局即时更新。</p>
+        <p>295 个 CSS 自定义属性覆盖色彩、字体、间距、圆角、阴影、动效与层级。改一个变量，全局即时更新。</p>
       </article>
 
       <!-- Feature Card 3: 编辑主义排版 -->
@@ -225,7 +220,7 @@
     </div>
     <div class="ds-stats-grid ds-reveal">
       <div class="ds-stat-card">
-        <span class="ds-stat-num">311</span>
+        <span class="ds-stat-num">318</span>
         <span class="ds-stat-label">结构化令牌</span>
       </div>
       <div class="ds-stat-card">
@@ -259,7 +254,7 @@
 · 风格：编辑主义 × 橄榄绿，暖白纸色基底，克制留白。
 · 颜色：一律用 OKLch。强调色 --ds-accent = oklch(52% 0.08 115)；
   背景 oklch(97% 0.012 80)；正文 oklch(20% 0.02 60)。
-· 字体：标题用衬线(Iowan/Charter/Georgia)，正文/UI 用无衬线，
+· 字体：标题用衬线(Playfair/Iowan/Charter/Georgia)，正文/UI 用无衬线，
   代码用等宽(JetBrains Mono)。中英混排开启字距优化。
 · 间距：4 px 基准比例（4/8/12/16/24/32…）。圆角核心 8–16 px。
 · 令牌优先：用 var(--ds-*) 变量，禁止硬编码魔法数字。

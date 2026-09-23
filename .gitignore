@@ -65,5 +65,8 @@ assets/downloads/*.pdf
 assets/downloads/*.zip
 !assets/downloads/.gitkeep
 
+# ─── Local preview screenshots (verification only) ───────
+preview/
+
 # ─── Web quality audit screenshots (regenerable via Playwright) ─
 tmp-*.png

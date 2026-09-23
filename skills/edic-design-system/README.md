@@ -147,7 +147,7 @@ mkdir -p .kiro/steering
 
 1. **OKLch Colors / OKLch 颜色** — 所有颜色使用 OKLch 色彩空间，绝不用 hex/rgb
 2. **Token-Driven / 令牌驱动** — 使用 `--ds-*` CSS 变量，禁止硬编码魔法数字
-3. **Dark Mode / 暗色模式** — 基底用暖灰 `oklch(15% 0.008 75)`，非纯黑
+3. **Dark Mode / 暗色模式** — 基底用暖灰 `oklch(17% 0.014 80)`，非纯黑
 4. **Component System / 组件系统** — 基类 + 修饰符：`ds-btn` / `ds-btn--primary`
 5. **Accessibility / 无障碍** — 图标按钮需 `aria-label`，装饰元素需 `aria-hidden`
 

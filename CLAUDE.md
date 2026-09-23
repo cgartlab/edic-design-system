@@ -42,7 +42,7 @@ Categories: color | font | text | weight | leading | tracking |
 
 ### Dark Mode
 
-Always define both `:root` and `[data-theme="dark"]` for every color token. Dark mode never uses pure black `oklch(0% 0 0)` — use warm grey `oklch(15% 0.008 75)`.
+Always define both `:root` and `[data-theme="dark"]` for every color token. Dark mode never uses pure black `oklch(0% 0 0)` — use warm grey `oklch(17% 0.014 80)`.
 
 ### Icon System
 
