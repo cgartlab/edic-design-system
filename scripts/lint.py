@@ -96,7 +96,7 @@ def main() -> int:
         results.append((name, rc, output))
 
     print()
-    print(f"─── Summary ───")
+    print("─── Summary ───")
     print(f"  {GREEN}passed{RESET}: {pass_count}")
     if warn_count:
         print(f"  {YELLOW}warnings{RESET}: {warn_count}")

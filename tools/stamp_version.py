@@ -370,7 +370,7 @@ def apply_stamp(paths: Iterable[Path], version: str, mode: str) -> int:
     if mode == "check":
         if inconsistencies:
             print(f"✗ {files_checked} 个文件检查，{inconsistencies} 个需要 stamp")
-            print(f"  运行: python3 tools/stamp_version.py")
+            print("  运行: python3 tools/stamp_version.py")
             return 2
         print(f"✓ {files_checked} 个文件全部一致（VERSION = {version}）")
         return 0
@@ -441,7 +441,7 @@ def main() -> int:
     elif args.restore:
         mode = "restore"
 
-    print(f"─── stamp_version.py ───")
+    print("─── stamp_version.py ───")
     print(f"VERSION: v{version}")
     print(f"模式: {mode}")
     print()

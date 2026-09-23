@@ -231,7 +231,7 @@ def main() -> int:
 
     # ─── 总结 ────────────────────────────────────────────
     print()
-    print(f"─── 总结 ───")
+    print("─── 总结 ───")
     print(f"tokens.json  : {len(json_tokens)} 个 token")
     print(f"styles.css   : {len(root_vars)} 个 :root 变量, {len(dark_vars)} 个暗色变量")
     print(f"错误         : {'有' if has_error else '无'}")

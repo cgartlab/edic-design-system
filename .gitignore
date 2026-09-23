@@ -67,3 +67,6 @@ assets/downloads/*.zip
 
 # ─── Local preview screenshots (verification only) ───────
 preview/
+
+# ─── Web quality audit screenshots (regenerable via Playwright) ─
+tmp-*.png

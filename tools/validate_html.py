@@ -208,7 +208,7 @@ def main() -> int:
             print(f"[OK] {path.name}")
 
     print()
-    print(f"─── HTML 校验总结 ───")
+    print("─── HTML 校验总结 ───")
     print(f"扫描文件: {len(html_files)}")
     print(f"错误    : {total_errors}")
     print(f"警告    : {total_warnings}")

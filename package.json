@@ -1,6 +1,6 @@
 {
   "name": "edic-design-system",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "private": true,
   "description": "EDIC Design System — 零运行时依赖的纯静态设计系统（仅用于开发工具与 CI 自动化）",
   "license": "CC-BY-4.0",
@@ -44,6 +44,7 @@
   "devDependencies": {
     "@vitest/coverage-v8": "^4.1.11",
     "jsdom": "^29.1.1",
+    "playwright": "^1.63.0",
     "serve": "^14.2.4",
     "vitest": "^4.1.8"
   },

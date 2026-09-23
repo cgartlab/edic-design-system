@@ -207,7 +207,6 @@ def check_css(path: Path, verbose: bool) -> tuple[list[str], list[str]]:
             # 直接跳过该行（已是 @keyframes token 声明行，不触发重复检测）
             continue
 
-        old_depth = brace_depth
         brace_depth += delta
         brace_depth = max(brace_depth, 0)
 

@@ -179,13 +179,12 @@ def check_oklch_in_value(value: str) -> list[str]:
     issues = []
     for m in OKLCH_COLOR.finditer(value):
         luminance = float(m.group(1))
-        chroma = float(m.group(2))
         # Pure black: luminance = 0
         if luminance == 0:
-            issues.append(f"pure black oklch(0 ...)")
+            issues.append("pure black oklch(0 ...)")
         # Pure white: luminance = 100
         if luminance == 100:
-            issues.append(f"pure white oklch(100 ...)")
+            issues.append("pure white oklch(100 ...)")
     return issues
 
 
@@ -322,7 +321,7 @@ def main() -> int:
             )
 
     # ─── Summary ───────────────────────────────────────────────────────
-    print(f"─── 暗色模式检查 ───")
+    print("─── 暗色模式检查 ───")
     print(f":root tokens       : {len(root_vars)}")
     print(f"[data-theme=dark]: {len(dark_vars)}")
     print(f"missing overrides : {len(missing_overrides)}")

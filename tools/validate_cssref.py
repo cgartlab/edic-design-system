@@ -62,7 +62,6 @@ def extract_html_classes(html_text: str, verbose: bool = False) -> dict[tuple[st
         value = match.group(1)
         # 支持多行 class 属性，按空白分割
         line_no = cleaned[:match.start()].count("\n") + 1
-        file_line = (cleaned, line_no)
         classes = set()
         for cls in value.split():
             cls = cls.strip()
@@ -186,7 +185,7 @@ def main() -> int:
 
     errors, warnings = check_cssref(html_files, CSS_FILE, JS_FILE, verbose=args.verbose)
 
-    print(f"─── CSS 引用检查 ───")
+    print("─── CSS 引用检查 ───")
     print(f"扫描 HTML: {len(html_files)} 个")
     print(f"扫描 CSS : {CSS_FILE.name}")
     print()
