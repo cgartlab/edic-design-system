@@ -3,6 +3,21 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.5.1](https://github.com/cgartlab/edic-design-system/compare/v2.5.0...v2.5.1) (2026-09-19)
+
+
+### 修复
+
+* **quality:** resolve token value drift and invalid CSS animation syntax ([14b54b9](https://github.com/cgartlab/edic-design-system/commit/14b54b93c282bb25eaab385d748bceb9e5565f2e))
+* **security:** patch 22 CVEs in transitive dependencies via npm audit fix ([e5143ea](https://github.com/cgartlab/edic-design-system/commit/e5143ea925a7819d07c1c608b658bbaff23201df))
+
+
+### 文档
+
+* **report:** add race/TOCTOU and DoS/ReDoS dimensions with explicit check scope ([477ddd1](https://github.com/cgartlab/edic-design-system/commit/477ddd163ac5b697ba9724a47dc157ca27e32874))
+* **report:** add visual documentation (30 screenshots) to web quality report ([a1fe17b](https://github.com/cgartlab/edic-design-system/commit/a1fe17b8a2c453de87cbc4359fe8e30c3e073516))
+* **report:** add web quality audit report with 12-dimension coverage ([976dab5](https://github.com/cgartlab/edic-design-system/commit/976dab53d66957b1afbed8c276b1a54d0ce76950))
+
 ## [2.5.0](https://github.com/cgartlab/edic-design-system/compare/v2.4.0...v2.5.0) (2026-09-18)
 
 
