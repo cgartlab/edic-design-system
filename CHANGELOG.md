@@ -3,6 +3,18 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.6.0](https://github.com/cgartlab/edic-design-system/compare/v2.5.1...v2.6.0) (2026-09-23)
+
+
+### 新增
+
+* **site:** 纸感样式重构 + 暗色暖夜配色 + 内置语法高亮 ([63bc6fa](https://github.com/cgartlab/edic-design-system/commit/63bc6fa3bf641df8a5b89a2e8e463bc0a9c27e2e))
+
+
+### 修复
+
+* **site:** Argus 评审 P1/P2 —— 魔数尺寸改用设计令牌 ([e02c84a](https://github.com/cgartlab/edic-design-system/commit/e02c84a3bdeb99bb8dc8ff90fada1d1b618a5a6c))
+
 ## [2.5.1](https://github.com/cgartlab/edic-design-system/compare/v2.5.0...v2.5.1) (2026-09-19)
 
 
