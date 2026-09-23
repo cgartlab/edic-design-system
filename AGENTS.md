@@ -33,7 +33,7 @@ These will cause PRs to fail:
 - **BEM dangling modifier** — `.ds-card a--active` is invalid. Use `.ds-card-link--active` instead.
 - **No empty `catch {}` blocks**
 - **No duplicate HTML `id` attributes**
-- **Dark mode:** never use pure `#000` — use `oklch(15% ...)` warm gray; never use light-mode accent values directly — brighten 5-10%
+- **Dark mode:** never use pure `#000` — use `oklch(17% ...)` warm gray; never use light-mode accent values directly — brighten 5-10%
 
 ---
 
@@ -194,7 +194,7 @@ release/{version}      # release prep
 
 ## Code Style
 
-- **Code blocks:** Use `.ds-code` container with `<pre><code class="language-*">`. Prism.js handles highlighting — do NOT manually add `<span class="token-*">`.
+- **Code blocks:** Use `.ds-code` container with `<pre><code class="language-*">`. The built-in zero-dependency highlighter in `scripts.js` wraps tokens at runtime as `<span class="ds-tok--*">` (colors from `--ds-token-*`) — do NOT hand-author token spans in HTML.
 - **Code colors:** Use `--ds-token-*` variables (defined in `styles.css`), not hardcoded colors.
 - **HTML in code blocks:** Must escape as `&lt;` and `&amp;`.
 

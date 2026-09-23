@@ -11,7 +11,7 @@
 ## 2. 强制规则（Anti-patterns）
 - 网页/UI 颜色一律使用 **OKLch**；混色用 `color-mix(in oklch, …)`。
 - 网页/UI 视觉值用 `var(--ds-*)` 令牌，禁止硬编码（如 `#fff`、`16px` 魔法数）。
-- 暗色模式禁止纯黑 `#000`；用暖灰 `oklch(15% 0.008 75)`。
+- 暗色模式禁止纯黑 `#000`；用暖灰 `oklch(17% 0.014 80)`。
 - 暗色下强调色需较浅色模式亮化 5–10%。
 - 组件用「基类 + 修饰符」：`ds-btn` / `ds-btn--primary`。
 - 禁止内联 `style=`（除非是动态计算值，如错峰延迟 `--d`）；其余一律用 class + 令牌。
@@ -22,7 +22,7 @@
 ```
 --ds-color-bg: oklch(97% 0.012 80)            /* 整体背景，暖白纸色 */
 --ds-color-surface: oklch(99% 0.005 80)       /* 卡片表面 */
---ds-color-surface-raised: oklch(100% 0 0)    /* 弹层/模态 */
+--ds-color-surface-raised: oklch(99.5% 0.006 92)    /* 弹层/模态 */
 --ds-color-border: oklch(89% 0.012 80)
 --ds-color-muted: oklch(42% 0.015 60)         /* 辅助文字 */
 --ds-color-fg: oklch(20% 0.02 60)             /* 正文 */
@@ -40,11 +40,11 @@
 success oklch(55% 0.1 145) · warning oklch(65% 0.1 85)
 error   oklch(50% 0.14 30) · info    oklch(55% 0.08 240)
 ```
-暗色（`[data-theme="dark"]`）：基底 `oklch(15% 0.008 75)`，正文 `oklch(84% 0.008 72)`，强调 `--ds-color-olive-400 = oklch(57% 0.065 115)`。
+暗色（`[data-theme="dark"]`）：基底 `oklch(17% 0.014 80)`，正文 `oklch(88% 0.008 80)`，强调 `--ds-color-olive-400 = oklch(57% 0.065 115)`。
 
 ## 4. 字体
 ```
---ds-font-display: "Iowan Old Style","Charter",Georgia,"Noto Serif SC",serif   /* 标题 */
+--ds-font-display: "Playfair Display","Iowan Old Style","Charter",Georgia,"Noto Serif SC",serif   /* 标题 */
 --ds-font-body / --ds-font-ui: "Noto Sans SC",-apple-system,system-ui,sans-serif /* 正文/控件 */
 --ds-font-mono: "JetBrains Mono","IBM Plex Mono",monospace                       /* 代码 */
 ```

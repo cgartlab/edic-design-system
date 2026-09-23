@@ -303,7 +303,7 @@ bg(97%) → surface(99%) → raised(100%)       muted(48%) → fg-subtle(35%) �
 
 | 角色 | CSS变量 | 字体栈 | 使用场景 |
 |------|---------|--------|----------|
-| **Display** | `--ds-font-display` | Iowan Old Style → Charter → Georgia → Noto Serif SC → Source Han Serif SC → serif | 大标题（Hero/H1-H4） |
+| **Display** | `--ds-font-display` | Playfair Display → Iowan Old Style → Charter → Georgia → Noto Serif SC → Source Han Serif SC → serif | 大标题（Hero/H1-H4） |
 | **Body** | `--ds-font-body` | Noto Sans SC → Source Han Sans SC → -apple-system → BlinkMacSystemFont → Segoe UI → system-ui → sans-serif | 正文内容 |
 | **Mono** | `--ds-font-mono` | JetBrains Mono → IBM Plex Mono → Noto Sans Mono SC → ui-monospace → monospace | 代码、令牌值 |
 | **UI** | `--ds-font-ui` | Noto Sans SC → Source Han Sans SC → -apple-system → BlinkMacSystemFont → Segoe UI → system-ui → sans-serif | 按钮、输入框、导航 |
@@ -790,17 +790,17 @@ h1, h2, h3, h4, h5, h6, ...  { letter-spacing: var(--ds-tracking-cjk-heading) }
 
 ```css
 [data-theme="dark"] {
-  --ds-color-bg: oklch(15% 0.008 75);           /* 97% → 15% 反转 */
-  --ds-color-surface: oklch(19% 0.008 75);      /* 99% → 19% */
-  --ds-color-surface-raised: oklch(23% 0.01 75); /* 100% → 23% */
-  --ds-color-fg: oklch(84% 0.008 72);           /* 20% → 84% 反转 */
+  --ds-color-bg: oklch(17% 0.014 80);           /* 97% → 17% 反转 */
+  --ds-color-surface: oklch(22% 0.016 80);      /* 99% → 22% */
+  --ds-color-surface-raised: oklch(26% 0.018 80); /* 100% → 26% */
+  --ds-color-fg: oklch(88% 0.008 80);           /* 20% → 88% 反转 */
   /* ... 所有颜色令牌重新定义 */
 }
 ```
 
 **关键设计决策：**
-- 背景不用纯黑 `oklch(0%)` → 用暖灰 `oklch(15% 0.008 75)` 保持温暖感
-- 文字不用纯白 `oklch(100%)` → 用 `oklch(84%)` 降低对比度刺眼感
+- 背景不用纯黑 `oklch(0%)` → 用暖灰 `oklch(17% 0.014 80)` 保持温暖感
+- 文字不用纯白 `oklch(100%)` → 用 `oklch(88%)` 降低对比度刺眼感
 - 橄榄绿从 olive-400 `oklch(52%)` 亮化到 `oklch(57%)` 确保暗底上可见
 - 阴影 opacity 从 4-12% 提高到 25-50%（暗底上低 opacity 阴影不可见）
 
@@ -1452,8 +1452,8 @@ timeline, contact-form, toast, glass-card, glass-btn
     "color-error": "oklch(50% 0.14 30)",
     "color-warning": "oklch(65% 0.1 85)",
     "color-info": "oklch(55% 0.08 240)",
-    "color-bg-dark": "oklch(15% 0.008 75)",
-    "color-fg-dark": "oklch(84% 0.008 72)",
+    "color-bg-dark": "oklch(17% 0.014 80)",
+    "color-fg-dark": "oklch(88% 0.008 80)",
     "text-caption": "0.75rem",
     "text-body": "1rem",
     "text-hero": "4.5rem",

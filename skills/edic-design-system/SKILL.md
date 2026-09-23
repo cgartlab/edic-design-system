@@ -56,7 +56,7 @@ Component generation rules:
 ## Hard rules (anti-patterns)
 - Define web/UI colors in **OKLch**; mix with `color-mix(in oklch, …)`.
 - Use `var(--ds-*)` tokens for every web/UI visual value. No hard-coded `#fff` / `16px`.
-- Dark mode never uses pure black `#000` — use warm grey `oklch(15% 0.008 75)`.
+- Dark mode never uses pure black `#000` — use warm grey `oklch(17% 0.014 80)`.
 - In dark mode, lighten the accent ~5–10% vs. light mode.
 - Components use base + modifier: `ds-btn` / `ds-btn--primary`.
 - No inline `style=` except genuinely dynamic values (e.g. stagger `--d`).
@@ -71,7 +71,7 @@ Light (`:root`):
 ```
 --ds-color-bg: oklch(97% 0.012 80)          /* warm paper background */
 --ds-color-surface: oklch(99% 0.005 80)
---ds-color-surface-raised: oklch(100% 0 0)  /* popovers / modals */
+--ds-color-surface-raised: oklch(99.5% 0.006 92)  /* popovers / modals */
 --ds-color-border: oklch(89% 0.012 80)
 --ds-color-muted: oklch(42% 0.015 60)       /* secondary text */
 --ds-color-fg: oklch(20% 0.02 60)           /* body text */
@@ -85,12 +85,12 @@ Olive ramp `--ds-color-olive-50…900`; accent:
 ```
 Semantic (each has a `-bg` tint): success `oklch(55% 0.1 145)`,
 warning `oklch(65% 0.1 85)`, error `oklch(50% 0.14 30)`, info `oklch(55% 0.08 240)`.
-Dark (`[data-theme="dark"]`): base `oklch(15% 0.008 75)`, body `oklch(84% 0.008 72)`,
+Dark (`[data-theme="dark"]`): base `oklch(17% 0.014 80)`, body `oklch(88% 0.008 80)`,
 accent `oklch(57% 0.065 115)`.
 
 ## Typography
 ```
---ds-font-display: "Iowan Old Style","Charter",Georgia,"Noto Serif SC",serif
+--ds-font-display: "Playfair Display","Iowan Old Style","Charter",Georgia,"Noto Serif SC",serif
 --ds-font-body / --ds-font-ui: "Noto Sans SC",-apple-system,system-ui,sans-serif
 --ds-font-mono: "JetBrains Mono","IBM Plex Mono",monospace
 ```
@@ -264,7 +264,7 @@ Run through this checklist mentally before returning any HTML:
 - [ ] Every spacing value uses `var(--ds-space-*)` — no bare `px`/`rem`.
 - [ ] Every font-size uses `var(--ds-text-*)` — no bare `px`/`rem`.
 - [ ] Every font-family uses `var(--ds-font-*)`.
-- [ ] Dark mode: no `#000` background; warm grey `oklch(15% 0.008 75)` via `var(--ds-color-bg)`.
+- [ ] Dark mode: no `#000` background; warm grey `oklch(17% 0.014 80)` via `var(--ds-color-bg)`.
 - [ ] BEM: every modifier class is paired with its base class (`ds-btn ds-btn--primary`).
 - [ ] Inline `style=` only for genuinely runtime-dynamic values (`--d`, widths, heights).
 - [ ] Icon-only buttons have `aria-label`; decorative SVGs have `aria-hidden="true"`.

@@ -64,3 +64,6 @@ out/
 assets/downloads/*.pdf
 assets/downloads/*.zip
 !assets/downloads/.gitkeep
+
+# ─── Local preview screenshots (verification only) ───────
+preview/
