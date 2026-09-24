@@ -3,6 +3,13 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.7.0](https://github.com/cgartlab/edic-design-system/compare/v2.6.0...v2.7.0) (2026-09-24)
+
+
+### 新增
+
+* publish skill to SkillHub in release pipeline ([#297](https://github.com/cgartlab/edic-design-system/issues/297)) ([8365fae](https://github.com/cgartlab/edic-design-system/commit/8365fae0fee88a6fcb8c5468c3c45fb32ad48b7b))
+
 ## [2.6.0](https://github.com/cgartlab/edic-design-system/compare/v2.5.1...v2.6.0) (2026-09-23)
 
 
