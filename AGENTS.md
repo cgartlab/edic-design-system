@@ -225,7 +225,14 @@ release-please（合并后 push main 再触发）→ release_created=true：
    ③ post-merge-stamp：同步 VERSION（从 release-please 的 `version` output）
      ↓ release: published 事件
 release.yml（Release Pipeline）触发 → 构建 PDF/ZIP/CHECKSUMS → 上传到已创建的 Release
+  └─ skillhub job（needs: build）→ tools/publish_skillhub.py 校验 → skillhub publish 覆盖更新 SkillHub 上的 edic-design-system 条目
 ```
+
+> **SkillHub 自动发布**：`release.yml` 的 `skillhub` job 在每次发布后构建 Skill ZIP，
+> 经 `tools/publish_skillhub.py` 校验 frontmatter（slug/displayName/version/description）与
+> CHANGELOG 摘要后，用 `skillhub publish`（host `https://api.skillhub.cn`）覆盖更新 SkillHub
+> 已有的 **edic-design-system** 条目。依赖仓库 secret **`SKILLHUB_API_KEY`**（缺失时 job 快速失败）。
+> 本地预演：`make skillhub-prepare`（解压 + 校验 + 生成 dist/skillhub-changelog.txt，不接触网络）。
 
 ### 网站变更页（changelog.html）
 

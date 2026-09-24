@@ -151,6 +151,12 @@ skill-package: icons generate-pdfs stamp-version  ## 重新打包 SKILL.zip（st
 release-package: stamp-version icons generate-pdfs skill-package  ## 完整打包发行 ZIP（stamp → icons → PDFs → SKILL → release ZIP）
 	$(PYTHON) scripts/package_release.py
 
+skillhub-prepare: skill-package  ## 准备 SkillHub 发布目录（解压 SKILL.zip + 校验 frontmatter + 提取 changelog）
+	$(PYTHON) tools/publish_skillhub.py prepare \
+		assets/downloads/edic-design-system-skill-v$$(cat VERSION).zip \
+		--out dist/skillhub-edic \
+		--changelog-out dist/skillhub-changelog.txt
+
 # ─── 测试 ──────────────────────────────────────────────────
 test: validate test-unit  ## 运行所有测试（validate + vitest 单元测试）
 	@echo "✓ 测试完成"
