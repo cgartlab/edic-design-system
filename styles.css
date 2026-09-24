@@ -1,4 +1,4 @@
-/* ===== EDIC Design System v2.7.0 — Tokens & Styles ===== */
+/* ===== EDIC Design System v2.8.0 — Tokens & Styles ===== */
 
 /* ===== Self-hosted display serif (zero external runtime requests) =====
    Playfair Display — latin subset, SIL Open Font License 1.1 (see assets/fonts/OFL.txt).
@@ -2045,7 +2045,7 @@ a.ds-feature-card:focus-visible{outline:var(--ds-focus-outline-width) solid var(
 .ds-pt-0{padding-top:0}
 
 /* =========================================================================
-   CGArtLab Design System v2.7.0 — Gravitas & Glow
+   CGArtLab Design System v2.8.0 — Gravitas & Glow
    Dark-mode editorial presence: warm olive undertone on shadow depths,
    luminous borders, soft auras, and inner-surface glow. Light mode
    stays restrained (0% opacity tokens, classes visually inert).
