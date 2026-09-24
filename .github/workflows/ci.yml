@@ -38,8 +38,8 @@ jobs:
           # 按 AGENTS.md §3.1 跳过版本检查。`|| ''` 防止 push 事件下 null 求值失败。
           AUDIT_SKIP_VERSION_CHECKS: ${{ contains(github.event.head_commit.message || '', 'release-please--') || startsWith(github.head_ref || '', 'release-please--') }}
         run: npm run audit
-      - name: Validate SkillHub publish script
-        run: python3 -m py_compile tools/publish_skillhub.py
+      - name: Validate publish scripts
+        run: python3 -m py_compile tools/publish_skillhub.py tools/publish_clawhub.py
       - name: Validate release notes exist
         if: github.head_ref != '' && contains(github.head_ref, 'release-please')
         run: python3 tools/validate_release_notes.py

@@ -4,7 +4,7 @@
 
 SHELL := /bin/sh
 .DEFAULT_GOAL := help
-.PHONY: help lint build validate validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode validate-manifest validate-manifest-css validate-components validate-icons validate-visual-baseline validate-size stamp-version changelog changelog-check sync-versions sync-versions-check release-please serve clean serve-py serve-node generate-pdfs icons icons-check test test-unit skill-package release-package
+.PHONY: help lint build validate validate-tokens validate-naming validate-html validate-a11y validate-versions validate-links validate-cssref validate-darkmode validate-verext validate-hardcode validate-manifest validate-manifest-css validate-components validate-icons validate-visual-baseline validate-size stamp-version changelog changelog-check sync-versions sync-versions-check release-please serve clean serve-py serve-node generate-pdfs icons icons-check test test-unit skill-package release-package skillhub-prepare clawhub-prepare
 
 PYTHON ?= python3
 NODE ?= node
@@ -156,6 +156,12 @@ skillhub-prepare: skill-package  ## 准备 SkillHub 发布目录（解压 SKILL.
 		assets/downloads/edic-design-system-skill-v$$(cat VERSION).zip \
 		--out dist/skillhub-edic \
 		--changelog-out dist/skillhub-changelog.txt
+
+clawhub-prepare: skill-package  ## 准备 ClawHub 发布目录（解压 + 校验唯一 ID + 生成阅读友好更新摘要）
+	$(PYTHON) tools/publish_clawhub.py prepare \
+		assets/downloads/edic-design-system-skill-v$$(cat VERSION).zip \
+		--out dist/clawhub-edic \
+		--changelog-out dist/clawhub-changelog.txt
 
 # ─── 测试 ──────────────────────────────────────────────────
 test: validate test-unit  ## 运行所有测试（validate + vitest 单元测试）
