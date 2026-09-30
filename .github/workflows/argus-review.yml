@@ -4,6 +4,10 @@ on:
     types: [opened, synchronize, ready_for_review]
 jobs:
   review:
+    # Dependabot PRs do not receive repository secrets, so the app-token step
+    # always fails on them. Mirror the guard used by cgartlab/argus and
+    # cgartlab/men review workflows.
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: read
