@@ -50,7 +50,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       # 健康检查：验证关键资产存在
       # 这能立刻暴露问题资产（例如缺 index.html），比依赖 GitHub Pages 内部错误信息更直接
