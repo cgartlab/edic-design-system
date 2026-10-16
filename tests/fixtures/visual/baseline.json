@@ -12,7 +12,7 @@
         "aria-expanded",
         "[data-theme=\"dark\"]"
       ],
-      "sha256": "cc768840270b851cc3bc05648fcec705dcb3f8a25f15967e9782ba94cc685640"
+      "sha256": "2aed14e8d380ab94411d0b9616c2c4a1eac7df0b9268dc49028e0303ba22db62"
     },
     {
       "path": "styles.css",
@@ -22,7 +22,7 @@
         "[data-theme=\"dark\"]",
         ".ds-popover"
       ],
-      "sha256": "74a5c8d9daf7d95b0cf13a023aae224d7e4f0a3e468bb36556ea21b42f7a5b32"
+      "sha256": "e467c12c02bf23a66d365f8d5a985780c831d15abf84f57dd5f7fc5601a2ca43"
     },
     {
       "path": "scripts.js",
@@ -31,7 +31,7 @@
         "theme",
         "render icon grid"
       ],
-      "sha256": "20cbdd86ec2d82ca9543590e905ad6e5c2e1a52ffe58d7bba1f1ce8bfdf34d46"
+      "sha256": "5680004edc56bddee7a1021df4951425e08fdc2c192b90a0ef9ed0ff0caf368b"
     }
   ]
 }
