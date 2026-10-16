@@ -3,6 +3,14 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.8.2](https://github.com/cgartlab/edic-design-system/compare/v2.8.1...v2.8.2) (2026-10-16)
+
+
+### 修复
+
+* **ci:** release-please 过渡态版本豁免覆盖 squash 合并形态 ([#306](https://github.com/cgartlab/edic-design-system/issues/306)) ([c910998](https://github.com/cgartlab/edic-design-system/commit/c91099830cc724d564e208791528d8be39f75b1f))
+* **ci:** 给 AUDIT_SKIP_VERSION_CHECKS 表达式加引号，修复 YAML 解析失败 ([#308](https://github.com/cgartlab/edic-design-system/issues/308)) ([a72704a](https://github.com/cgartlab/edic-design-system/commit/a72704a3da0e7532b1e13e7c611f0ef97e69109c))
+
 ## [2.8.1](https://github.com/cgartlab/edic-design-system/compare/v2.8.0...v2.8.1) (2026-10-15)
 
 
