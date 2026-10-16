@@ -48,5 +48,6 @@ jobs:
       - name: Verify changelog.html is up to date
         # release-please 分支跳过：CHANGELOG.md 由 release-please 先行更新，changelog.html
         # 由合并后的 post-merge-stamp 重建（validate_release_notes.py 仍强制校验版本节存在）。
-        if: ${{ !(startsWith(github.head_ref, 'release-please--') || contains(github.event.head_commit.message || '', 'release-please--')) }}
+        # squash 合并（`chore(main): release X.Y.Z`）同样处于过渡态，一并跳过。
+        if: "${{ !(startsWith(github.head_ref, 'release-please--') || contains(github.event.head_commit.message || '', 'release-please--') || contains(github.event.head_commit.message || '', 'chore(main): release ')) }}"
         run: python3 tools/generate_changelog_html.py --check
