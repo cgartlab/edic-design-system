@@ -3,6 +3,13 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.8.1](https://github.com/cgartlab/edic-design-system/compare/v2.8.0...v2.8.1) (2026-10-15)
+
+
+### 修复
+
+* **ci:** skip Argus review on dependabot PRs ([#303](https://github.com/cgartlab/edic-design-system/issues/303)) ([68daf69](https://github.com/cgartlab/edic-design-system/commit/68daf69eda092ee975469bce35657c1a20bfedb3))
+
 ## [2.8.0](https://github.com/cgartlab/edic-design-system/compare/v2.7.0...v2.8.0) (2026-09-24)
 
 
