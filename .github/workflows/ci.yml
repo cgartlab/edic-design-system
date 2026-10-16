@@ -38,7 +38,7 @@ jobs:
           # 按 AGENTS.md §3.1 跳过版本检查。`|| ''` 防止 push 事件下 null 求值失败。
           # squash 合并的提交信息是 `chore(main): release X.Y.Z (#NNN)`（不含分支名），
           # 需显式匹配，否则过渡态会红 main 的 CI。
-          AUDIT_SKIP_VERSION_CHECKS: ${{ contains(github.event.head_commit.message || '', 'release-please--') || startsWith(github.head_ref || '', 'release-please--') || contains(github.event.head_commit.message || '', 'chore(main): release ') }}
+          AUDIT_SKIP_VERSION_CHECKS: "${{ contains(github.event.head_commit.message || '', 'release-please--') || startsWith(github.head_ref || '', 'release-please--') || contains(github.event.head_commit.message || '', 'chore(main): release ') }}"
         run: npm run audit
       - name: Validate publish scripts
         run: python3 -m py_compile tools/publish_skillhub.py tools/publish_clawhub.py
