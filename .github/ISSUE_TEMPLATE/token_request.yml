@@ -1,0 +1,100 @@
+name: 🎨 Token Request
+description: 提议新增或修改设计令牌（颜色 / 字体 / 间距 / 圆角 / 阴影 / 动效）
+title: "[Token] "
+labels: ["✨ type:enhancement"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Token Request｜令牌请求
+
+        > 令牌是设计系统的基石。新增前请评估是否能复用现有令牌。
+
+  - type: input
+    id: token-name
+    attributes:
+      label: Token Name｜Token 名称
+      description: --ds-{category}-{name}[-{modifier}]（如 --ds-color-blue-400）
+      placeholder: "--ds-{category}-{name}"
+    validations:
+      required: true
+
+  - type: textarea
+    id: token-value
+    attributes:
+      label: Token Value｜Token 值
+      description: 浅色 + 暗色（暗色必填）
+      render: css
+      placeholder: |
+        /* 浅色 */
+        :root {
+          --ds-xxx-xxx: oklch(...);
+        }
+
+        /* 暗色（必填） */
+        [data-theme="dark"] {
+          --ds-xxx-xxx: oklch(...);
+        }
+    validations:
+      required: true
+
+  - type: textarea
+    id: usage
+    attributes:
+      label: Usage｜用途
+      description: 哪些组件 / 场景会使用？解决什么问题？
+    validations:
+      required: true
+
+  - type: textarea
+    id: relations
+    attributes:
+      label: Relation to Existing Tokens｜与现有令牌的关系
+      placeholder: |
+        - 复用现有：___
+        - 替代现有：___
+        - 互补现有：___
+    validations:
+      required: false
+
+  - type: textarea
+    id: a11y-contrast
+    attributes:
+      label: Accessibility Contrast｜可访问性验证
+      description: WCAG AA = 4.5:1 普通 / 3:1 大字
+      placeholder: |
+        | 浅色背景 | 浅色 fg | 暗色背景 | 暗色 fg | 通过 |
+        |----------|---------|----------|---------|------|
+        |          |         |          |         | ☐    |
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: affected-files
+    attributes:
+      label: Affected Files｜受影响文件
+      options:
+        - label: styles.css（必须）
+          required: true
+        - label: tokens.json（必须）
+          required: true
+        - label: scripts.js 的 TOKENS 数组
+        - label: docs.html（自动展示）
+        - label: AGENTS.md（如果新增类别）
+        - label: CHANGELOG.md
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority｜优先级
+      description: 该令牌的优先级
+      options:
+        - P0（必须）
+        - P1（应该）
+        - P2（可以）
+    validations:
+      required: true

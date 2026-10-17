@@ -1,9 +1,9 @@
 ---
-name: 通用问题 / 讨论
+name: 💬 通用问题 / 讨论
 description: 不属于以上任何类型的问题或讨论
 about: 用 Issue 进行公开讨论（设计方向、风格争议等）
-title: ""
-labels: ["discussion"]
+title: "[Discussion] "
+labels: ["question"]
 assignees: []
 ---
 

@@ -1,0 +1,60 @@
+name: 🖼️ Icon Request
+description: 提议新增 SVG 图标
+title: "[Icon] "
+labels: ["✨ type:enhancement"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Icon Request｜图标请求
+
+        Propose a new SVG icon / 提议新增 SVG 图标。
+
+  - type: input
+    id: icon-name
+    attributes:
+      label: Icon Name｜图标名
+      description: kebab-case.svg（如 arrow-right.svg）
+      placeholder: "kebab-case.svg"
+    validations:
+      required: true
+
+  - type: textarea
+    id: usage
+    attributes:
+      label: Usage｜用途
+      description: 在哪些场景会用到？语义是什么？
+    validations:
+      required: true
+
+  - type: textarea
+    id: visual-reference
+    attributes:
+      label: Visual Reference｜视觉参考
+      description: 如有，附 Lucide / Feather / Heroicons 等类似系统的截图或链接
+    validations:
+      required: false
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation Notes｜实现说明
+      description: viewBox 0 0 24 24，1.5px stroke，Lucide 风格线性图标
+      placeholder: |
+        { id: "icon-name", svg: '<svg viewBox="0 0 24 24">...</svg>' }
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority｜优先级
+      description: 该图标的优先级
+      options:
+        - P0（核心场景）
+        - P1（高频场景）
+        - P2（边缘场景）
+    validations:
+      required: true
