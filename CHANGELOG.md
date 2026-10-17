@@ -3,6 +3,13 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.8.3](https://github.com/cgartlab/edic-design-system/compare/v2.8.2...v2.8.3) (2026-10-17)
+
+
+### 修复
+
+* **security:** override compression 1.8.2 + source-map-js 1.2.2 ([#312](https://github.com/cgartlab/edic-design-system/issues/312)) ([76121b3](https://github.com/cgartlab/edic-design-system/commit/76121b3c76a00316939d851443a2344ee0acdd88))
+
 ## [2.8.2](https://github.com/cgartlab/edic-design-system/compare/v2.8.1...v2.8.2) (2026-10-16)
 
 
