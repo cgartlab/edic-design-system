@@ -1,8 +1,8 @@
 ---
 name: 📚 Docs / Content
 description: 文档改进、内容修正、示例补充
-title: "[docs] "
-labels: ["documentation"]
+title: "[Docs] "
+labels: ["📝 type:docs"]
 assignees: []
 ---
 

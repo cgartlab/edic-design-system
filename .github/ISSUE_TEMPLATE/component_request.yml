@@ -1,0 +1,133 @@
+name: 🧩 Component Request
+description: 提议新增一个设计系统组件（先评审再实现）
+title: "[Component] "
+labels: ["✨ type:enhancement"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Component Request｜组件请求
+
+        > ⚠️ **重要**：新增组件会影响设计语言与维护成本。请先在此表单中**完整填写提案**，
+        > 维护者评审通过后再开 PR 实现。直接开 PR 可能被拒。
+
+  - type: input
+    id: component-name
+    attributes:
+      label: Component Name｜组件名
+      description: ds-{name}（如 ds-tooltip）
+      placeholder: "ds-{name}"
+    validations:
+      required: true
+
+  - type: textarea
+    id: usage
+    attributes:
+      label: Use Cases｜使用场景
+      description: 在哪些页面 / 哪些交互会用到？解决什么设计问题？
+    validations:
+      required: true
+
+  - type: textarea
+    id: api-draft
+    attributes:
+      label: API Draft｜API 草案
+      description: HTML 结构示例
+      render: html
+      placeholder: |
+        <div class="ds-component">
+          <span class="ds-component-element">...</span>
+        </div>
+    validations:
+      required: true
+
+  - type: textarea
+    id: variants
+    attributes:
+      label: Variants｜变体清单
+      description: 如 --primary / --ghost
+      placeholder: |
+        - [ ] variant 1（如 --primary）
+        - [ ] variant 2（如 --ghost）
+    validations:
+      required: true
+
+  - type: textarea
+    id: states
+    attributes:
+      label: States｜状态清单
+      description: default / hover / active / focus / disabled / loading / error
+      placeholder: |
+        - [ ] default
+        - [ ] hover
+        - [ ] active
+        - [ ] focus
+        - [ ] disabled
+    validations:
+      required: true
+
+  - type: textarea
+    id: visual-reference
+    attributes:
+      label: Visual Reference｜视觉参考
+      description: 截图 / 草图 / 类似系统链接
+    validations:
+      required: false
+
+  - type: textarea
+    id: dark-mode
+    attributes:
+      label: Dark Mode｜暗色模式
+      description: 需要特殊处理吗？预估色彩调整方式。
+    validations:
+      required: false
+
+  - type: textarea
+    id: responsive
+    attributes:
+      label: Responsive｜响应式
+      description: 在 375 / 768 / 1440px 下的预期表现。
+    validations:
+      required: false
+
+  - type: textarea
+    id: a11y
+    attributes:
+      label: Accessibility｜可访问性
+      description: 键盘交互、屏幕阅读器 ARIA 属性、触摸目标（≥ 44×44px）
+      placeholder: |
+        - 键盘交互：Tab / Enter / Esc / 方向键
+        - 屏幕阅读器：所需 ARIA 属性
+        - 触摸目标：≥ 44×44px
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives｜替代方案评估
+      description: 是否可由现有组件扩展？为什么不？
+    validations:
+      required: false
+
+  - type: textarea
+    id: maintenance-cost
+    attributes:
+      label: Maintenance Cost｜维护成本估计
+      placeholder: |
+        - 新增 CSS 行数：约 ___ 行
+        - 新增 JS 行数：约 ___ 行
+        - 新增令牌：约 ___ 个
+        - 影响现有组件：无 / 轻 / 中 / 重
+    validations:
+      required: false
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References｜参考
+      description: 其他设计系统类似组件的链接（Radix / shadcn / Material / Ant Design 等）
+    validations:
+      required: false

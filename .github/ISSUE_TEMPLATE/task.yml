@@ -1,4 +1,4 @@
-name: Task｜任务
+name: Task
 description: Track a to-do item or engineering task / 跟踪待办事项或工程任务
 title: "[Task] "
 labels: ["📋 type:task"]
