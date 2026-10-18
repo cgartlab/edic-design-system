@@ -40,9 +40,13 @@ on:
   workflow_dispatch:
 
 # 取消进行中的部署：避免 race condition（旧版本覆盖新版本）
+# 注意：workflow_run 与 push 可能同时触发（普通 PR 合并时，Release Please
+# 完成后会再触发一次本 workflow）。若 cancel-in-progress: true，后一次会
+# 取消前一次；一旦后一次失败，就没有部署留下。改为 false 让它们排队执行，
+# 最终生效的是最新内容，且不会出现"两次都取消、无部署"的情况。
 concurrency:
   group: pages-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 # 部署到 GitHub Pages 必须的权限：
 #   contents: read   — checkout 代码
@@ -68,11 +72,13 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
+      # workflow_run 触发时，默认 SHA 来自上游事件（发生在 stamp 提交之前），
+      # 因此必须显式检出 main。post-merge-stamp 是 Release Please 的最后一个
+      # job，其 push 在该 workflow 完成前就已发生，而 workflow_run 只在其
+      # 完成后触发 —— 因此此处检出的 main 必然已包含 stamp 提交。
       - name: Checkout
         uses: actions/checkout@v7
         with:
-          # workflow_run 的上游事件发生在 stamp 提交之前，默认 SHA 会指向
-          # 旧提交；显式检出 main 以拿到 stamp 之后的最新版本戳。
           ref: ${{ github.event_name == 'workflow_run' && 'main' || github.sha }}
 
       # 健康检查：验证关键资产存在
