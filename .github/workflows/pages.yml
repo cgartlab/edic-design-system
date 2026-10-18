@@ -8,7 +8,15 @@
 #
 # 触发方式：
 #   push to main              → 自动部署
+#   workflow_run (Release Please) → 发布后部署（见下方说明）
 #   workflow_dispatch         → 手动重新部署（不改变内容，仅触发）
+#
+# 为什么需要 workflow_run：
+#   post-merge-stamp 用含 `[skip ci]` 的信息提交 VERSION 与 ?v= 缓存戳。
+#   GitHub Actions 会跳过含 [skip ci] 的 push 触发的所有 workflow，
+#   包括本 workflow —— 导致发布后线上站点停留在 stamp 之前的版本号。
+#   workflow_run 由上游 workflow 的完成事件驱动，不受 [skip ci] 影响，
+#   因此 v2.9.0 发布后站点 badge 仍显示 v2.8.3（issue #319）。
 #
 # 前置条件：
 #   - 仓库 Settings → Pages → Source: "GitHub Actions"（已通过 API 切换）
@@ -23,19 +31,31 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # 发布后部署：post-merge-stamp 的 [skip ci] 提交不会触发 push 事件，
+  # 但 Release Please 完成后会触发本 workflow。仅在该上游成功时部署，
+  # 以拿到 stamp 之后的最新 main（含同步后的 VERSION 与 ?v= 缓存戳）。
+  workflow_run:
+    workflows: ["Release Please"]
+    types: [completed]
   workflow_dispatch:
 
 # 取消进行中的部署：避免 race condition（旧版本覆盖新版本）
+# 注意：workflow_run 与 push 可能同时触发（普通 PR 合并时，Release Please
+# 完成后会再触发一次本 workflow）。若 cancel-in-progress: true，后一次会
+# 取消前一次；一旦后一次失败，就没有部署留下。改为 false 让它们排队执行，
+# 最终生效的是最新内容，且不会出现"两次都取消、无部署"的情况。
 concurrency:
   group: pages-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 # 部署到 GitHub Pages 必须的权限：
 #   contents: read   — checkout 代码
+#   actions: read    — 读取 workflow_run 上游信息
 #   pages: write     — 写入 Pages 部署
 #   id-token: write  — OIDC token（GitHub Pages 验证部署身份）
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 
@@ -44,13 +64,22 @@ jobs:
     name: Deploy static site
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    # workflow_run 触发时，仅在上游 Release Please 成功后才部署；
+    # push / workflow_dispatch 触发时无此限制。
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
+      # workflow_run 触发时，默认 SHA 来自上游事件（发生在 stamp 提交之前），
+      # 因此必须显式检出 main。post-merge-stamp 是 Release Please 的最后一个
+      # job，其 push 在该 workflow 完成前就已发生，而 workflow_run 只在其
+      # 完成后触发 —— 因此此处检出的 main 必然已包含 stamp 提交。
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || github.sha }}
 
       # 健康检查：验证关键资产存在
       # 这能立刻暴露问题资产（例如缺 index.html），比依赖 GitHub Pages 内部错误信息更直接
