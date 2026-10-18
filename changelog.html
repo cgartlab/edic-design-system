@@ -106,17 +106,14 @@
           <h2>v2.9.0</h2>
           <h3>新增</h3>
           <ul>
-            <li><strong>docs:</strong> show dark-mode values in token table (closes )</li>
-            <li><strong>docs:</strong> show dark-mode values in token table (closes )</li>
+            <li><strong>docs:</strong> show dark-mode values in token table</li>
           </ul>
           <h3>修复</h3>
           <ul>
             <li><strong>docs:</strong> address Argus review on token table</li>
             <li><strong>docs:</strong> stop token table cells from wrapping</li>
             <li><strong>issue-templates:</strong> resolve .md/.yml duplication and label conflicts</li>
-            <li><strong>issue-templates:</strong> resolve .md/.yml duplication and label conflicts</li>
-            <li><strong>typography:</strong> CJK spacing and title balance (closes )</li>
-            <li><strong>typography:</strong> CJK spacing and title balance (closes )</li>
+            <li><strong>typography:</strong> CJK spacing and title balance</li>
           </ul>
           <h3>文档</h3>
           <ul>
@@ -269,7 +266,7 @@
           <ul>
             <li>copy 新增 <code>execCommand</code> 降级单元测试 ×2（单元测试总计 90 个）</li>
           </ul>
-          <h3>清理</h3>
+          <h3>其他</h3>
           <ul>
             <li>移除仓库根目录孤儿资产 <code>preview.png</code>（约 219KB，无任何引用）</li>
           </ul>
@@ -296,14 +293,13 @@
             <li><strong>tokens:</strong> 更新 <code>validate_tokens.py</code> 以读取 2.0 <code>tokens[]</code> 结构并兼容旧扁平结构</li>
             <li><strong>storage:</strong> 集中化 localStorage 安全读写（<code>safeLocalStorage</code> 抽象），新增对应单元测试</li>
             <li><strong>ci:</strong> 修复 Release PR 合并后 CI 版本验证竞态</li>
-            <li><strong>ci:</strong> 修复 Release PR 合并后 CI 版本验证竞态</li>
           </ul>
           <h3>文档</h3>
           <ul>
             <li><strong>release:</strong> 添加 2.0.0 变更日志条目</li>
             <li><strong>site:</strong> 同步版本戳并验证 24 个发布目标文件一致</li>
           </ul>
-          <h3>⚠ BREAKING CHANGES</h3>
+          <h3>回滚</h3>
           <ul>
             <li>EDIC 2.0 质量审计与可访问性加固</li>
           </ul>
@@ -320,7 +316,6 @@
           <h3>修复</h3>
           <ul>
             <li><strong>release:</strong> 发布流程改为 release-please 官方自动 tag 模型</li>
-            <li><strong>release:</strong> 发布流程改为 release-please 官方自动 tag 模型</li>
             <li><strong>release:</strong> 响应评审修复 P1/P2/P3（5 条）</li>
           </ul>
           <h3>文档</h3>
@@ -333,35 +328,27 @@
           <h3>新增</h3>
           <ul>
             <li><strong>charts:</strong> 添加统一 SVG 图表引擎，支持 10 种图表类型</li>
-            <li><strong>charts:</strong> 添加统一 SVG 图表引擎，支持 10 种图表类型</li>
             <li><strong>skill:</strong> add references/ directory for R dimension improvement</li>
             <li><strong>skill:</strong> improve TRACE dimensions A/C/E for SkillHub evaluation</li>
-            <li><strong>skill:</strong> R2 reliability — patterns, recipes, self-check, bug fixes</li>
-            <li><strong>skill:</strong> R2 reliability — patterns, recipes, self-check, bug fixes</li>
-            <li><strong>skill:</strong> R2 reliability — patterns, recipes, self-check, bug fixes</li>
-            <li><strong>skill:</strong> R2 reliability — patterns, recipes, self-check, bug fixes</li>
-            <li><strong>skill:</strong> R2 reliability — patterns, recipes, self-check, bug fixes</li>
-            <li><strong>skill:</strong> R2 reliability — PATTERNS, RECIPES, self-check, bug fixes</li>
+            <li><strong>skill:</strong> R2 reliability — patterns, recipes, self-check, bug</li>
+            <li><strong>skill:</strong> R2 reliability — PATTERNS, RECIPES, self-check, bug</li>
           </ul>
           <h3>修复</h3>
           <ul>
             <li><strong>blog:</strong> remove inline styles and hardcoded values</li>
             <li><strong>blog:</strong> remove inline styles and hardcoded values to comply with design system</li>
             <li><strong>charts:</strong> aria-label 无标签时用 String(v) 兜底三元表达式</li>
+            <li><strong>css:</strong> add missing ds-body-lg utility class, fix blog.html class</li>
             <li><strong>css:</strong> add missing ds-body-lg utility class, fix blog.html class ref</li>
-            <li><strong>css:</strong> add missing ds-body-lg utility class, fix blog.html class ref, closes</li>
             <li><strong>pages:</strong> restore section bottom padding</li>
             <li><strong>release:</strong> post-merge-stamp detect gate 改为 manifest（修复 P1 阻断）</li>
             <li><strong>release:</strong> 修复 post-merge-stamp gate + 同步 AGENTS.md</li>
             <li><strong>release:</strong> 回退 skip-github-release 为 true，恢复手工 tag 发布</li>
-            <li><strong>release:</strong> 回退 skip-github-release 为 true，恢复手工 tag 发布</li>
             <li><strong>release:</strong> 回退幽灵发布 + 简化 post-merge-stamp detect 逻辑</li>
             <li><strong>release:</strong> 清理死 outputs + 同步文档为手工 tag 流程</li>
             <li><strong>skill:</strong> correct TOKENS.md version ref; replace 64px with --ds-space-16 in RECIPES.md</li>
-            <li><strong>skill:</strong> correct TOKENS.md version ref; replace 64px with --ds-space-16 in RECIPES.md</li>
-            <li><strong>tooltip:</strong> add JS interaction + ARIA + role=tooltip, replace inline style with class, remove dead CSS, token padding/z-index/gap (closes )</li>
-            <li><strong>tooltip:</strong> add JS interaction + ARIA support (closes )</li>
-            <li><strong>tooltip:</strong> add JS interaction + ARIA support (closes )</li>
+            <li><strong>tooltip:</strong> add JS interaction + ARIA + role=tooltip, replace inline style with class, remove dead CSS, token padding/z-index/gap</li>
+            <li><strong>tooltip:</strong> add JS interaction + ARIA support</li>
           </ul>
           <h3>文档</h3>
           <ul>
@@ -425,7 +412,6 @@
             <li>CC BY 4.0 使用条款全面修订 - 法律合规性审查</li>
             <li>CGArtLab Design System v1.0</li>
             <li><strong>changelog:</strong> add update log page and fix footer links</li>
-            <li><strong>changelog:</strong> add update log page and fix footer links</li>
             <li><strong>code:</strong> add Prism.js syntax highlighting + editorial olive-green theme</li>
             <li><strong>code:</strong> add Prism.js syntax highlighting with editorial olive-green theme</li>
             <li><strong>css:</strong> dark-mode gravitas &amp; glow (v1.5.0) — warm olive undertone layer</li>
@@ -440,12 +426,11 @@
             <li><strong>nav:</strong> frosted-acrylic glass on navbar + mobile drawer (dark-mode aware)</li>
             <li><strong>opencode:</strong> add Argus auto PR review workflow</li>
             <li><strong>opencode:</strong> add Argus GitHub App workflow</li>
-            <li><strong>opencode:</strong> add Argus GitHub App workflow</li>
             <li><strong>opencode:</strong> add auto PR review trigger + app token fix</li>
             <li>overhaul mobile navigation menu</li>
             <li>overhaul mobile navigation menu</li>
             <li><strong>toc:</strong> unify handbook/docs/terms TOC into .ds-pagenav component</li>
-            <li><strong>tokens:</strong> expand tokens.json from ~30% to ~80% coverage — dark mode colors, breakpoints, z-index, duration, easing, shadow, tracking, leading, weight scales (closes , )</li>
+            <li><strong>tokens:</strong> expand tokens.json from ~30% to ~80% coverage — dark mode colors, breakpoints, z-index, duration, easing, shadow, tracking, leading, weight scales</li>
             <li><strong>tools:</strong> add icons.svg generator from scripts.js ICONS array</li>
             <li><strong>tools:</strong> add stamp_version.py and dynamic VERSION reading in PDF</li>
             <li>unify version stamping across all project files</li>
@@ -465,15 +450,15 @@
             <li>add changelog.html to stamp targets, scripts.js version placeholder, footer-end div</li>
             <li>Fix validate_hardcode.py bugs and replace bare oklch in styles.css</li>
             <li>remove hero background glow, enable LAN serve, add preview workflow docs</li>
-            <li><strong>a11y:</strong> add :focus-visible to .ds-toc-item for keyboard navigation (closes )</li>
-            <li><strong>a11y:</strong> add forced-colors rule for .ds-gradient-text to fix WHCM visibility (closes )</li>
-            <li><strong>a11y:</strong> add main landmark + fix skip-link target across 5 pages (closes )</li>
-            <li><strong>a11y:</strong> add prefers-color-scheme: dark CSS fallback for dark-system users before JS loads (closes )</li>
-            <li><strong>a11y:</strong> restructure resume.html cards to fix nested anchor/block-level invalid HTML (closes )</li>
+            <li><strong>a11y:</strong> add :focus-visible to .ds-toc-item for keyboard navigation</li>
+            <li><strong>a11y:</strong> add forced-colors rule for .ds-gradient-text to fix WHCM visibility</li>
+            <li><strong>a11y:</strong> add main landmark + fix skip-link target across 5 pages</li>
+            <li><strong>a11y:</strong> add prefers-color-scheme: dark CSS fallback for dark-system users before JS loads</li>
+            <li><strong>a11y:</strong> restructure resume.html cards to fix nested anchor/block-level invalid HTML</li>
             <li>add meta descriptions to 4 HTML files</li>
             <li>bump asset cache-busting version 1.1.5 -&amp;gt; 1.2.0</li>
             <li>bump asset version v1.1.5 -&amp;gt; v1.2.0 (cache-bust the mobile nav)</li>
-            <li><strong>ci:</strong> align release.yml checkout action to @v5 matching ci.yml (closes )</li>
+            <li><strong>ci:</strong> align release.yml checkout action to @v5 matching ci.yml</li>
             <li><strong>CI:</strong> exclude continue-on-error validators from blocking check + improve pre-commit hook</li>
             <li><strong>ci:</strong> lock playwright version in CI workflow for reproducible builds</li>
             <li><strong>ci:</strong> root cause - replace bash ternary with if/elif exit code handling</li>
@@ -481,32 +466,30 @@
             <li>correct CC BY 4.0 adapter-license freedom per Codex review</li>
             <li><strong>critical-c4:</strong> add auto-dismiss functionality to Toast component</li>
             <li><strong>css:</strong> .ds-table-wrap 健壮性 — a11y 焦点环 + overflow-y 显式声明</li>
-            <li><strong>css:</strong> add min-width:0/max-width:100% to .ds-compat-item for narrow-viewport overflow fix (closes )</li>
-            <li><strong>css:</strong> make .ds-footer-brand span full width at tablet breakpoint (closes )</li>
-            <li><strong>css:</strong> remove ::before/::after pseudo-elements from .ds-hero-meta for IE compatibility (closes )</li>
-            <li><strong>css:</strong> remove body duplicate transition, page-btn white token, report.html meta (closes , , )</li>
-            <li><strong>css:</strong> remove duplicate overflow-wrap from .ds-text-cjk to fix self-override (closes )</li>
-            <li><strong>css:</strong> touch-safe hover for .ds-feature-card + responsive .ds-stat-num clamp (closes , )</li>
+            <li><strong>css:</strong> add min-width:0/max-width:100% to .ds-compat-item for narrow-viewport overflow fix</li>
+            <li><strong>css:</strong> make .ds-footer-brand span full width at tablet breakpoint</li>
+            <li><strong>css:</strong> remove ::before/::after pseudo-elements from .ds-hero-meta for IE compatibility</li>
+            <li><strong>css:</strong> remove body duplicate transition, page-btn white token, report.html meta</li>
+            <li><strong>css:</strong> remove duplicate overflow-wrap from .ds-text-cjk to fix self-override</li>
+            <li><strong>css:</strong> touch-safe hover for .ds-feature-card + responsive .ds-stat-num clamp</li>
             <li><strong>css:</strong> unify handbook pagenav spacing, fix responsive overflow and stale versions</li>
             <li><strong>css:</strong> 桌面端浮动 TOC 重设计 + 移动端 TOC 不再遮挡主题切换按钮</li>
-            <li><strong>design-system:</strong> replace bare oklch in report.html and resume.html with --ds-* tokens, closes</li>
+            <li><strong>design-system:</strong> replace bare oklch in report.html and resume.html with --ds-* tokens</li>
             <li><strong>design-system:</strong> resolve all verified style inconsistencies and hardcoded values</li>
             <li>div balance in handbook + add skip-to-content, robots.txt, sitemap, og:image</li>
             <li><strong>docs:</strong> resolve 16 cross-document contradictions for v1.4.3</li>
             <li><strong>docs:</strong> 冒烟测试 fix 触发 release-please</li>
             <li><strong>footer:</strong> replace h3 with semantic p.ds-footer-col-heading</li>
             <li><strong>footer:</strong> update copyright to CGArtLab, add blog link, move sitemap under 关于</li>
-            <li><strong>footer:</strong> update copyright to CGArtLab, add blog link, move sitemap under 关于</li>
             <li><strong>footer:</strong> 替换 h3 为语义化 p.ds-footer-col-heading</li>
             <li><strong>handbook:</strong> close 640-1023px TOC dead zone, fix mobile active state, unify base</li>
-            <li><strong>handbook:</strong> extract timeline/contact into standalone sections for TOC navigation</li>
             <li><strong>handbook:</strong> extract timeline/contact into standalone sections for TOC navigation</li>
             <li><strong>handbook:</strong> mobile overflow protection for #typography inline-style tables</li>
             <li><strong>handbook:</strong> mobile spacing — cover eyebrow gap 24→16px, pagenav top margin 16px</li>
             <li><strong>handbook:</strong> remove C,G subtitle and add TOC top margin on mobile</li>
             <li><strong>handbook:</strong> remove hidden pagenav from mobile layout — eliminates blank gap</li>
-            <li><strong>html:</strong> add scripts.js to blog.html to enable theme/dark mode and all progressive enhancements (closes )</li>
-            <li><strong>html:</strong> rename duplicate theme-toggle-btn id to theme-toggle-btn-fixed on floating buttons (closes )</li>
+            <li><strong>html:</strong> add scripts.js to blog.html to enable theme/dark mode and all progressive enhancements</li>
+            <li><strong>html:</strong> rename duplicate theme-toggle-btn id to theme-toggle-btn-fixed on floating buttons</li>
             <li><strong>icons:</strong> add presentation attributes to SVG sprite symbols</li>
             <li>increase mobile drawer glass opacity to 92-94% + cache-bust CSS/JS</li>
             <li><strong>index:</strong> differentiate CTA button hierarchy - primary/secondary/ghost</li>
@@ -514,11 +497,10 @@
             <li><strong>index:</strong> widen CTA container and remove measure constraint to prevent single-character orphan</li>
             <li><strong>interactions:</strong> 5 UI/a11y bugs + 87-test unit suite (v1.5.2)</li>
             <li><strong>interactions:</strong> a11y, copy feedback, memory leaks, and AGENTS.md rewrite</li>
-            <li><strong>interactions:</strong> a11y, copy feedback, memory leaks, and AGENTS.md rewrite</li>
-            <li><strong>js:</strong> cycleTheme reads data-theme-mode instead of parsing Chinese aria-label (closes )</li>
-            <li><strong>js:</strong> TOC IntersectionObserver picks topmost section, adds 16ms debounce to prevent rapid flicker (closes )</li>
+            <li><strong>js:</strong> cycleTheme reads data-theme-mode instead of parsing Chinese aria-label</li>
+            <li><strong>js:</strong> TOC IntersectionObserver picks topmost section, adds 16ms debounce to prevent rapid flicker</li>
             <li><strong>makefile:</strong> use cross-platform clean with -delete for .pyc files</li>
-            <li><strong>misc:</strong> bump stale v1.0 version comments to v1.3.1 in styles.css and scripts.js (closes )</li>
+            <li><strong>misc:</strong> bump stale v1.0 version comments to v1.3.1 in styles.css and scripts.js</li>
             <li><strong>mnav:</strong> let mobile menu links navigate without aborting page load</li>
             <li>mobile drawer — revert to solid background, remove backdrop-filter</li>
             <li>mobile nav drawer solid background + document mobile nav spec</li>
@@ -545,7 +527,6 @@
             <li><strong>mobile-scroll:</strong> change ds-pagenav-disclosure overflow to visible on mobile</li>
             <li><strong>mobile-scroll:</strong> use overscroll-behavior contain on disclosure and list</li>
             <li><strong>mobile:</strong> release scroll lock reliably; fix sitemap dead link</li>
-            <li><strong>mobile:</strong> release scroll lock reliably; fix sitemap dead link</li>
             <li><strong>opencode:</strong> add git identity config</li>
             <li><strong>opencode:</strong> add git identity config for Argus bot</li>
             <li><strong>opencode:</strong> add git identity config, fix CRLF corruption</li>
@@ -558,26 +539,25 @@
             <li><strong>opencode:</strong> use credential helper store instead of remote URL token</li>
             <li><strong>opencode:</strong> use token input instead of use_github_token for PR auto-review</li>
             <li><strong>pagenav:</strong> stop scroll-spy from yanking the whole page (issue )</li>
-            <li><strong>pagenav:</strong> stop scroll-spy from yanking the whole page (issue )</li>
             <li><strong>pages:</strong> migrate to workflow-based Pages + restore v1.6.0 stamp</li>
             <li>prepend the trigger to the focusable elements array so Tab</li>
             <li>prevent Argus self-triggering, add concurrency, upgrade actions</li>
             <li><strong>release:</strong> add include-component-in-tag: false to prevent duplicate tag prefix</li>
             <li>remove dark overlay when mobile menu opens</li>
-            <li>replace href=# with javascript:void(0) in blog.html nav links (closes )</li>
+            <li>replace href=# with javascript:void(0) in blog.html nav links</li>
             <li>resolve 19 heading hierarchy jumps across 7 HTML files</li>
-            <li>resolve 3 P0 mobile issues, closes</li>
+            <li>resolve 3 P0 mobile issues</li>
             <li>restore CNAME for GitHub Pages custom domain (designsystem.cgartlab.com)</li>
             <li>rewrite mobile nav from working version f52c293</li>
             <li><strong>styles:</strong> add --d animation-delay CSS variable default (0ms) in :root</li>
             <li><strong>styles:</strong> replace ch-unit max-width on hero-lead with min(660px, 100%) for CJK correctness</li>
-            <li><strong>tokens:</strong> sync scripts.js letter-spacing and font-stack values with styles.css (closes , )</li>
-            <li><strong>tokens:</strong> sync version to 1.3.1 (closes )</li>
+            <li><strong>tokens:</strong> sync scripts.js letter-spacing and font-stack values with styles.css</li>
+            <li><strong>tokens:</strong> sync version to 1.3.1</li>
             <li><strong>tools:</strong> exclude string literal braces from function depth count in validate_naming.py</li>
             <li><strong>tools:</strong> implement accurate OKLch-&amp;gt;sRGB conversion in generate_pdfs.py</li>
-            <li><strong>tools:</strong> validate_a11y.py — fix has_h1 dead code and _has_accessible_name text check (closes , )</li>
-            <li><strong>tools:</strong> validate_html checks description/title; validate_links checks script src (closes , )</li>
-            <li><strong>tools:</strong> validate_tokens.py uses brace-depth scanner for :root blocks to handle nested @media (closes )</li>
+            <li><strong>tools:</strong> validate_a11y.py — fix has_h1 dead code and _has_accessible_name text check</li>
+            <li><strong>tools:</strong> validate_html checks description/title; validate_links checks script src</li>
+            <li><strong>tools:</strong> validate_tokens.py uses brace-depth scanner for :root blocks to handle nested @media</li>
             <li>unify handbook TOC with docs/terms sidebar style and fix mobile nav rollback</li>
             <li>unify section spacing to 64px across all pages</li>
             <li>update Reference links to valid edic.cgartlab.com URLs (v1.5.5)</li>
@@ -589,8 +569,7 @@
           <h3>重构</h3>
           <ul>
             <li><strong>footer:</strong> unify footer layout, update copyright, and add site map</li>
-            <li><strong>footer:</strong> unify footer layout, update copyright, and add site map</li>
-            <li><strong>js:</strong> replace all var with const/let in scripts.js per project coding rules (closes )</li>
+            <li><strong>js:</strong> replace all var with const/let in scripts.js per project coding rules</li>
             <li>mobile nav aligned with design system tokens &amp; patterns</li>
             <li>replace 22 inline onclick handlers with event delegation</li>
             <li><strong>resume:</strong> 重写简历模板与个人信息</li>
@@ -601,7 +580,6 @@
             <li>add CLAUDE.md for Claude Code guidance</li>
             <li>add CLAUDE.md for Claude Code guidance</li>
             <li><strong>AGENTS.md:</strong> update doc generation time and add notes</li>
-            <li><strong>changelog:</strong> add code style specification entry under [Unreleased]</li>
             <li><strong>changelog:</strong> add code style specification entry under [Unreleased]</li>
             <li>comprehensive v1.5.0 sync — domain, tokens, prompts, SKILL, README rewrite</li>
             <li>comprehensive v1.5.0 sync — domain, tokens, prompts, SKILL, README rewrite</li>
@@ -626,7 +604,7 @@
         </section>
         <section class="ds-doc-block" id="v162">
           <h2>v1.6.2 — 2026-06-22</h2>
-          <h3>修复（首页设计系统规范合规性）</h3>
+          <h3>修复</h3>
           <ul>
             <li><strong>[P0] `ds-stat-num`/`ds-stat-label` 双重 CSS 定义</strong>：<code>styles.css</code> 中存在两套同名规则，第二套（旧 <code>.ds-stat-grid</code> 体系）覆盖第一套（<code>.ds-stats-grid</code> 体系），导致首页统计数字 <code>display:block</code> 丢失、字号异常、标签样式错误。移除第二套中的重复选择器，旧体系仅保留布局类。</li>
             <li><strong>[P0] `ds-eyebrow` `letter-spacing` 被 `!important` 强制覆盖</strong>：全局 CJK 基线层将 <code>.ds-eyebrow</code> 的字间距 <code>!important</code> 压至 <code>tracking-wider</code>（0.08em），而组件定义规定 <code>tracking-widest</code>（0.12em）。从 <code>!important</code> 规则中移除 <code>.ds-eyebrow</code>，令组件定义正常生效。</li>
@@ -655,7 +633,6 @@
             <li>CC BY 4.0 使用条款全面修订 - 法律合规性审查</li>
             <li>CGArtLab Design System v1.0</li>
             <li><strong>changelog:</strong> add update log page and fix footer links</li>
-            <li><strong>changelog:</strong> add update log page and fix footer links</li>
             <li><strong>code:</strong> add Prism.js syntax highlighting + editorial olive-green theme</li>
             <li><strong>code:</strong> add Prism.js syntax highlighting with editorial olive-green theme</li>
             <li><strong>css:</strong> dark-mode gravitas &amp; glow (v1.5.0) — warm olive undertone layer</li>
@@ -670,12 +647,11 @@
             <li><strong>nav:</strong> frosted-acrylic glass on navbar + mobile drawer (dark-mode aware)</li>
             <li><strong>opencode:</strong> add Argus auto PR review workflow</li>
             <li><strong>opencode:</strong> add Argus GitHub App workflow</li>
-            <li><strong>opencode:</strong> add Argus GitHub App workflow</li>
             <li><strong>opencode:</strong> add auto PR review trigger + app token fix</li>
             <li>overhaul mobile navigation menu</li>
             <li>overhaul mobile navigation menu</li>
             <li><strong>toc:</strong> unify handbook/docs/terms TOC into .ds-pagenav component</li>
-            <li><strong>tokens:</strong> expand tokens.json from ~30% to ~80% coverage — dark mode colors, breakpoints, z-index, duration, easing, shadow, tracking, leading, weight scales (closes , )</li>
+            <li><strong>tokens:</strong> expand tokens.json from ~30% to ~80% coverage — dark mode colors, breakpoints, z-index, duration, easing, shadow, tracking, leading, weight scales</li>
             <li><strong>tools:</strong> add icons.svg generator from scripts.js ICONS array</li>
             <li><strong>tools:</strong> add stamp_version.py and dynamic VERSION reading in PDF</li>
             <li>unify version stamping across all project files</li>
@@ -695,15 +671,15 @@
             <li>add changelog.html to stamp targets, scripts.js version placeholder, footer-end div</li>
             <li>Fix validate_hardcode.py bugs and replace bare oklch in styles.css</li>
             <li>remove hero background glow, enable LAN serve, add preview workflow docs</li>
-            <li><strong>a11y:</strong> add :focus-visible to .ds-toc-item for keyboard navigation (closes )</li>
-            <li><strong>a11y:</strong> add forced-colors rule for .ds-gradient-text to fix WHCM visibility (closes )</li>
-            <li><strong>a11y:</strong> add main landmark + fix skip-link target across 5 pages (closes )</li>
-            <li><strong>a11y:</strong> add prefers-color-scheme: dark CSS fallback for dark-system users before JS loads (closes )</li>
-            <li><strong>a11y:</strong> restructure resume.html cards to fix nested anchor/block-level invalid HTML (closes )</li>
+            <li><strong>a11y:</strong> add :focus-visible to .ds-toc-item for keyboard navigation</li>
+            <li><strong>a11y:</strong> add forced-colors rule for .ds-gradient-text to fix WHCM visibility</li>
+            <li><strong>a11y:</strong> add main landmark + fix skip-link target across 5 pages</li>
+            <li><strong>a11y:</strong> add prefers-color-scheme: dark CSS fallback for dark-system users before JS loads</li>
+            <li><strong>a11y:</strong> restructure resume.html cards to fix nested anchor/block-level invalid HTML</li>
             <li>add meta descriptions to 4 HTML files</li>
             <li>bump asset cache-busting version 1.1.5 -&amp;gt; 1.2.0</li>
             <li>bump asset version v1.1.5 -&amp;gt; v1.2.0 (cache-bust the mobile nav)</li>
-            <li><strong>ci:</strong> align release.yml checkout action to @v5 matching ci.yml (closes )</li>
+            <li><strong>ci:</strong> align release.yml checkout action to @v5 matching ci.yml</li>
             <li><strong>CI:</strong> exclude continue-on-error validators from blocking check + improve pre-commit hook</li>
             <li><strong>ci:</strong> lock playwright version in CI workflow for reproducible builds</li>
             <li><strong>ci:</strong> root cause - replace bash ternary with if/elif exit code handling</li>
@@ -711,43 +687,40 @@
             <li>correct CC BY 4.0 adapter-license freedom per Codex review</li>
             <li><strong>critical-c4:</strong> add auto-dismiss functionality to Toast component</li>
             <li><strong>css:</strong> .ds-table-wrap 健壮性 — a11y 焦点环 + overflow-y 显式声明</li>
-            <li><strong>css:</strong> add min-width:0/max-width:100% to .ds-compat-item for narrow-viewport overflow fix (closes )</li>
-            <li><strong>css:</strong> make .ds-footer-brand span full width at tablet breakpoint (closes )</li>
-            <li><strong>css:</strong> remove ::before/::after pseudo-elements from .ds-hero-meta for IE compatibility (closes )</li>
-            <li><strong>css:</strong> remove body duplicate transition, page-btn white token, report.html meta (closes , , )</li>
-            <li><strong>css:</strong> remove duplicate overflow-wrap from .ds-text-cjk to fix self-override (closes )</li>
-            <li><strong>css:</strong> touch-safe hover for .ds-feature-card + responsive .ds-stat-num clamp (closes , )</li>
+            <li><strong>css:</strong> add min-width:0/max-width:100% to .ds-compat-item for narrow-viewport overflow fix</li>
+            <li><strong>css:</strong> make .ds-footer-brand span full width at tablet breakpoint</li>
+            <li><strong>css:</strong> remove ::before/::after pseudo-elements from .ds-hero-meta for IE compatibility</li>
+            <li><strong>css:</strong> remove body duplicate transition, page-btn white token, report.html meta</li>
+            <li><strong>css:</strong> remove duplicate overflow-wrap from .ds-text-cjk to fix self-override</li>
+            <li><strong>css:</strong> touch-safe hover for .ds-feature-card + responsive .ds-stat-num clamp</li>
             <li><strong>css:</strong> unify handbook pagenav spacing, fix responsive overflow and stale versions</li>
             <li><strong>css:</strong> 桌面端浮动 TOC 重设计 + 移动端 TOC 不再遮挡主题切换按钮</li>
-            <li><strong>design-system:</strong> replace bare oklch in report.html and resume.html with --ds-* tokens, closes</li>
+            <li><strong>design-system:</strong> replace bare oklch in report.html and resume.html with --ds-* tokens</li>
             <li><strong>design-system:</strong> resolve all verified style inconsistencies and hardcoded values</li>
             <li>div balance in handbook + add skip-to-content, robots.txt, sitemap, og:image</li>
             <li><strong>docs:</strong> resolve 16 cross-document contradictions for v1.4.3</li>
             <li><strong>docs:</strong> 冒烟测试 fix 触发 release-please</li>
             <li><strong>footer:</strong> replace h3 with semantic p.ds-footer-col-heading</li>
             <li><strong>footer:</strong> update copyright to CGArtLab, add blog link, move sitemap under 关于</li>
-            <li><strong>footer:</strong> update copyright to CGArtLab, add blog link, move sitemap under 关于</li>
             <li><strong>footer:</strong> 替换 h3 为语义化 p.ds-footer-col-heading</li>
             <li><strong>handbook:</strong> close 640-1023px TOC dead zone, fix mobile active state, unify base</li>
-            <li><strong>handbook:</strong> extract timeline/contact into standalone sections for TOC navigation</li>
             <li><strong>handbook:</strong> extract timeline/contact into standalone sections for TOC navigation</li>
             <li><strong>handbook:</strong> mobile overflow protection for #typography inline-style tables</li>
             <li><strong>handbook:</strong> mobile spacing — cover eyebrow gap 24→16px, pagenav top margin 16px</li>
             <li><strong>handbook:</strong> remove C,G subtitle and add TOC top margin on mobile</li>
             <li><strong>handbook:</strong> remove hidden pagenav from mobile layout — eliminates blank gap</li>
-            <li><strong>html:</strong> add scripts.js to blog.html to enable theme/dark mode and all progressive enhancements (closes )</li>
-            <li><strong>html:</strong> rename duplicate theme-toggle-btn id to theme-toggle-btn-fixed on floating buttons (closes )</li>
+            <li><strong>html:</strong> add scripts.js to blog.html to enable theme/dark mode and all progressive enhancements</li>
+            <li><strong>html:</strong> rename duplicate theme-toggle-btn id to theme-toggle-btn-fixed on floating buttons</li>
             <li><strong>icons:</strong> add presentation attributes to SVG sprite symbols</li>
             <li>increase mobile drawer glass opacity to 92-94% + cache-bust CSS/JS</li>
             <li><strong>index:</strong> differentiate CTA button hierarchy - primary/secondary/ghost</li>
             <li><strong>index:</strong> widen CTA container and remove measure constraint to prevent single-character orphan</li>
             <li><strong>interactions:</strong> 5 UI/a11y bugs + 87-test unit suite (v1.5.2)</li>
             <li><strong>interactions:</strong> a11y, copy feedback, memory leaks, and AGENTS.md rewrite</li>
-            <li><strong>interactions:</strong> a11y, copy feedback, memory leaks, and AGENTS.md rewrite</li>
-            <li><strong>js:</strong> cycleTheme reads data-theme-mode instead of parsing Chinese aria-label (closes )</li>
-            <li><strong>js:</strong> TOC IntersectionObserver picks topmost section, adds 16ms debounce to prevent rapid flicker (closes )</li>
+            <li><strong>js:</strong> cycleTheme reads data-theme-mode instead of parsing Chinese aria-label</li>
+            <li><strong>js:</strong> TOC IntersectionObserver picks topmost section, adds 16ms debounce to prevent rapid flicker</li>
             <li><strong>makefile:</strong> use cross-platform clean with -delete for .pyc files</li>
-            <li><strong>misc:</strong> bump stale v1.0 version comments to v1.3.1 in styles.css and scripts.js (closes )</li>
+            <li><strong>misc:</strong> bump stale v1.0 version comments to v1.3.1 in styles.css and scripts.js</li>
             <li><strong>mnav:</strong> let mobile menu links navigate without aborting page load</li>
             <li>mobile drawer — revert to solid background, remove backdrop-filter</li>
             <li>mobile nav drawer solid background + document mobile nav spec</li>
@@ -774,7 +747,6 @@
             <li><strong>mobile-scroll:</strong> change ds-pagenav-disclosure overflow to visible on mobile</li>
             <li><strong>mobile-scroll:</strong> use overscroll-behavior contain on disclosure and list</li>
             <li><strong>mobile:</strong> release scroll lock reliably; fix sitemap dead link</li>
-            <li><strong>mobile:</strong> release scroll lock reliably; fix sitemap dead link</li>
             <li><strong>opencode:</strong> add git identity config</li>
             <li><strong>opencode:</strong> add git identity config for Argus bot</li>
             <li><strong>opencode:</strong> add git identity config, fix CRLF corruption</li>
@@ -787,24 +759,23 @@
             <li><strong>opencode:</strong> use credential helper store instead of remote URL token</li>
             <li><strong>opencode:</strong> use token input instead of use_github_token for PR auto-review</li>
             <li><strong>pagenav:</strong> stop scroll-spy from yanking the whole page (issue )</li>
-            <li><strong>pagenav:</strong> stop scroll-spy from yanking the whole page (issue )</li>
             <li>prepend the trigger to the focusable elements array so Tab</li>
             <li>prevent Argus self-triggering, add concurrency, upgrade actions</li>
             <li>remove dark overlay when mobile menu opens</li>
-            <li>replace href=# with javascript:void(0) in blog.html nav links (closes )</li>
+            <li>replace href=# with javascript:void(0) in blog.html nav links</li>
             <li>resolve 19 heading hierarchy jumps across 7 HTML files</li>
-            <li>resolve 3 P0 mobile issues, closes</li>
+            <li>resolve 3 P0 mobile issues</li>
             <li>restore CNAME for GitHub Pages custom domain (designsystem.cgartlab.com)</li>
             <li>rewrite mobile nav from working version f52c293</li>
             <li><strong>styles:</strong> add --d animation-delay CSS variable default (0ms) in :root</li>
             <li><strong>styles:</strong> replace ch-unit max-width on hero-lead with min(660px, 100%) for CJK correctness</li>
-            <li><strong>tokens:</strong> sync scripts.js letter-spacing and font-stack values with styles.css (closes , )</li>
-            <li><strong>tokens:</strong> sync version to 1.3.1 (closes )</li>
+            <li><strong>tokens:</strong> sync scripts.js letter-spacing and font-stack values with styles.css</li>
+            <li><strong>tokens:</strong> sync version to 1.3.1</li>
             <li><strong>tools:</strong> exclude string literal braces from function depth count in validate_naming.py</li>
             <li><strong>tools:</strong> implement accurate OKLch-&amp;gt;sRGB conversion in generate_pdfs.py</li>
-            <li><strong>tools:</strong> validate_a11y.py — fix has_h1 dead code and _has_accessible_name text check (closes , )</li>
-            <li><strong>tools:</strong> validate_html checks description/title; validate_links checks script src (closes , )</li>
-            <li><strong>tools:</strong> validate_tokens.py uses brace-depth scanner for :root blocks to handle nested @media (closes )</li>
+            <li><strong>tools:</strong> validate_a11y.py — fix has_h1 dead code and _has_accessible_name text check</li>
+            <li><strong>tools:</strong> validate_html checks description/title; validate_links checks script src</li>
+            <li><strong>tools:</strong> validate_tokens.py uses brace-depth scanner for :root blocks to handle nested @media</li>
             <li>unify handbook TOC with docs/terms sidebar style and fix mobile nav rollback</li>
             <li>unify section spacing to 64px across all pages</li>
             <li>update Reference links to valid edic.cgartlab.com URLs (v1.5.5)</li>
@@ -816,8 +787,7 @@
           <h3>重构</h3>
           <ul>
             <li><strong>footer:</strong> unify footer layout, update copyright, and add site map</li>
-            <li><strong>footer:</strong> unify footer layout, update copyright, and add site map</li>
-            <li><strong>js:</strong> replace all var with const/let in scripts.js per project coding rules (closes )</li>
+            <li><strong>js:</strong> replace all var with const/let in scripts.js per project coding rules</li>
             <li>mobile nav aligned with design system tokens &amp; patterns</li>
             <li>replace 22 inline onclick handlers with event delegation</li>
             <li><strong>resume:</strong> 重写简历模板与个人信息</li>
@@ -828,7 +798,6 @@
             <li>add CLAUDE.md for Claude Code guidance</li>
             <li>add CLAUDE.md for Claude Code guidance</li>
             <li><strong>AGENTS.md:</strong> update doc generation time and add notes</li>
-            <li><strong>changelog:</strong> add code style specification entry under [Unreleased]</li>
             <li><strong>changelog:</strong> add code style specification entry under [Unreleased]</li>
             <li>comprehensive v1.5.0 sync — domain, tokens, prompts, SKILL, README rewrite</li>
             <li>comprehensive v1.5.0 sync — domain, tokens, prompts, SKILL, README rewrite</li>
@@ -870,7 +839,7 @@
             <li><strong>版本源统一</strong>：VERSION、package.json、tokens.json、SKILL.md 全部更新至 1.5.5</li>
             <li><strong>缓存失效修复</strong>：执行 <code>make stamp-version</code>，所有 HTML/CSS/JS/MD 文件 <code>?v=</code> 更新至 1.5.5</li>
           </ul>
-          <h3>变更</h3>
+          <h3>修复</h3>
           <ul>
             <li><strong>命名验证器白名单扩展</strong>（新增 7 个合法类别）</li>
             <li><strong>CI 治理完善</strong>，<code>make validate</code> 退出码聚合</li>
@@ -888,7 +857,7 @@
             <li><strong>页脚「网站地图」死链</strong>：<code>index.html#sitemap</code> 锚点不存在，已补充 <code>id=&quot;sitemap&quot;</code> 到页脚分区</li>
             <li><strong>`.ds-progress` 组件变体缺失</strong>：新增 <code>--success</code> 和 <code>--error</code> 颜色变体</li>
           </ul>
-          <h3>维护</h3>
+          <h3>其他</h3>
           <ul>
             <li><strong>Release 流程自动化</strong>：新增 <code>scripts/package_skill.py</code> 和 <code>scripts/package_release.py</code>，重写 <code>.github/workflows/release.yml</code> 为三产物流程</li>
             <li><strong>`stamp_version.py`</strong>：将 <code>skills/edic-design-system/README.md</code> 纳入版本 stamp 目标</li>
@@ -904,13 +873,13 @@
             <li><code>index.html</code> stats 块:核心组件 stat 拆分为&quot;20 核心&quot;和&quot;5 附加&quot;两个独立统计块,更精确反映组件库的层次</li>
             <li><code>index.html</code> / <code>handbook.html</code> / <code>docs.html</code> 描述文案:所有提及&quot;23 核心组件&quot;之处改为&quot;20 核心 + 5 附加组件&quot;</li>
             <li>同步更新 <code>handbook.html</code> 头部 meta 行与 footer 介绍段落</li>
-            <li><strong>版本号统一</strong>(1.5.2 → 1.5.3):</li>
+            <li><strong>版本号统一</strong>(1.5.2 → 1.5.3)</li>
             <li><code>VERSION</code> 1.5.2 → 1.5.3</li>
             <li><code>tokens.json</code> / <code>package.json</code> / <code>package-lock.json</code> <code>version</code> 字段 1.5.0 → 1.5.3(修正了此前 1.5.0/1.5.2/1.5.3 三方漂移的旧 bug)</li>
             <li><code>changelog.html</code> footer <code>data-ds-version</code> 元素 v1.5.0 → v1.5.3(该元素不在 <code>stamp_version.py</code> 的 <code>HTML_TARGETS</code> 列表中,需手工维护)</li>
             <li>其余 HTML / MD 文件 <code>?v=</code> 与可见版本号已由 <code>make stamp-version</code> 自动同步</li>
           </ul>
-          <h3>维护</h3>
+          <h3>其他</h3>
           <ul>
             <li>同步更新 <code>docs/VERSIONING.md</code> line 155 的&quot;最新稳定版&quot;引用</li>
           </ul>
@@ -923,8 +892,8 @@
           </ul>
           <h3>修复</h3>
           <ul>
-            <li><strong>[B3] Copy 按钮错误状态后标签永久卡住</strong>：<code>.catch()</code> 回调引用了只在 <code>.then()</code> 闭包中声明的 <code>label</code> 和 <code>original</code>，导致 <code>ReferenceError</code>，恢复超时从未执行，按钮文字永远停在 &quot;复制失败&quot;。将两个变量提升到 <code>.then()</code>/<code>.catch()</code> 分叉前，两个分支均可访问。</li>
-            <li><strong>[B5] PageNav TOC 页面加载时无初始高亮</strong>：<code>IntersectionObserver</code> scroll-spy 仅在滚动时触发，页面首次加载时目录无任何项高亮。现在 pagenav 控制器初始化完成后立即调用 <code>setActive()</code> 激活第一项。</li>
+            <li><strong>[B3] Copy 按钮错误状态后标签永久卡住</strong>：<code>.catch</code> 回调引用了只在 <code>.then</code> 闭包中声明的 <code>label</code> 和 <code>original</code>，导致 <code>ReferenceError</code>，恢复超时从未执行，按钮文字永远停在 &quot;复制失败&quot;。将两个变量提升到 <code>.then</code>/<code>.catch</code> 分叉前，两个分支均可访问。</li>
+            <li><strong>[B5] PageNav TOC 页面加载时无初始高亮</strong>：<code>IntersectionObserver</code> scroll-spy 仅在滚动时触发，页面首次加载时目录无任何项高亮。现在 pagenav 控制器初始化完成后立即调用 <code>setActive</code> 激活第一项。</li>
             <li><strong>[B7] Tabs 缺少 WAI-ARIA roles 及 Arrow 键导航</strong>：<code>data-tabs</code> 控制器只设置了 <code>aria-selected</code>，未设置 <code>role=tablist</code>（容器）、<code>role=tab</code>（按钮）、<code>role=tabpanel</code>（面板），也不支持 WAI-ARIA Tabs pattern 要求的 ArrowLeft/ArrowRight 键盘切换与 roving tabindex。</li>
             <li><strong>[B2] Accordion 头部无法键盘访问</strong>：<code>.ds-accordion-header</code> 是 <code>&lt;div&gt;</code> 元素，缺少 <code>role=&quot;button&quot;</code> 和 <code>tabindex=&quot;0&quot;</code>，Tab 键直接跳过，屏幕阅读器不识别为可交互元素。JS 控制器现在在初始化时统一注入两个属性。</li>
             <li><strong>[B1] Handbook Tabs 使用全局 `querySelectorAll` inline onclick</strong>：手册页 &quot;14 · Tabs&quot; 演示的 inline onclick 调用 <code>document.querySelectorAll(&#x27;.ds-tab&#x27;)</code> 全局选择所有 tab，若页面有多组 tabs 则互相干扰，且缺失 ARIA 和键盘导航。已重构为 <code>data-tabs</code>/<code>data-tab</code>/<code>data-panel</code> 声明式模式。</li>
@@ -938,7 +907,7 @@
             <li><strong>手册/文档页面异常回滚（issue #135）</strong>：统一目录组件 <code>.ds-pagenav</code> 的 scroll-spy 在高亮当前章节时，对激活的目录链接调用了原生 <code>Element.scrollIntoView({block:&quot;nearest&quot;})</code>。该 API 会滚动<strong>所有</strong>可滚动祖先（含整个页面窗口），当目录处于正常文档流时（移动端折叠面板 / docs 侧栏），向下滚动会被反复拽回顶部，表现为&quot;卡住无法下滑&quot;和异常回滚。</li>
             <li>移动端现象：目录展开时无法继续下滑、目录收起时正常 —— 因为收起的 <code>&lt;details&gt;</code> 内链接 <code>display:none</code>，<code>scrollIntoView</code> 对隐藏元素无效。</li>
             <li>影响页面：<code>handbook.html</code>、<code>docs.html</code>、<code>terms.html</code>、<code>prompts.html</code>（均使用 <code>.ds-pagenav</code>）。</li>
-            <li>修复：新增 <code>revealInNavScroller()</code>，仅在目录<strong>自身</strong>存在内部滚动容器（桌面浮动 rail）时调整其 <code>scrollTop</code>，绝不触碰页面/窗口滚动位置。</li>
+            <li>修复：新增 <code>revealInNavScroller</code>，仅在目录<strong>自身</strong>存在内部滚动容器（桌面浮动 rail）时调整其 <code>scrollTop</code>，绝不触碰页面/窗口滚动位置。</li>
           </ul>
         </section>
         <section class="ds-doc-block" id="v150">
@@ -965,7 +934,7 @@
             <li><code>styles.css</code> 5 行死代码 <code>--ds-letter-spacing-*</code> / <code>--ds-word-spacing-cjk</code> 删除（遗留自 <code>--ds-tracking-*</code> 重命名前）</li>
             <li><code>scripts.js</code> 3 处空 catch 块改为 <code>void e;</code> / <code>void 0;</code>（localStorage 读/写 + clipboard.writeText）</li>
           </ul>
-          <h3>变更</h3>
+          <h3>修复</h3>
           <ul>
             <li><code>tools/validate_naming.py</code> 的 <code>VALID_CATEGORIES</code> 新增 7 个合法类别：<code>code</code> / <code>token</code> / <code>cjk</code> / <code>reveal</code> / <code>draw</code> / <code>stack</code> / <code>brand</code>（均为项目已使用但验证器历史遗漏的合法 CSS 变量类别）</li>
           </ul>
@@ -993,7 +962,7 @@
         </section>
         <section class="ds-doc-block" id="v140">
           <h2>v1.4.0 — 2026-06-04</h2>
-          <h3>Changed</h3>
+          <h3>修复</h3>
           <ul>
             <li><strong>Brand rename</strong>: CGArtLab Design System → <strong>EDIC Design System</strong> (<strong>E</strong>ditorial <strong>D</strong>esign <strong>I</strong>nterface for <strong>C</strong>ontent)</li>
             <li><strong>New positioning</strong>: 同时面向人类和 Agent 的编辑主义设计系统</li>
@@ -1008,7 +977,7 @@
             <li><strong>Updated</strong>: <code>report.html</code> localStorage key <code>cgartlab_smart_pagination</code> → <code>edic_smart_pagination</code></li>
             <li><strong>Updated</strong>: DEVELOPMENT-GUIDE.md file tree references</li>
           </ul>
-          <h3>Notes</h3>
+          <h3>其他</h3>
           <ul>
             <li>GitHub org (<code>cgartlab</code>), repo name (<code>cgartlab-design-system</code>), and CNAME (<code>edic.cgartlab.com</code>) remain unchanged in this release — admin rename to be performed in a follow-up PR after DNS and repository redirects are configured</li>
             <li>All in-repo URL references (<code>edic.cgartlab.com</code>, <code>github.com/cgartlab/cgartlab-design-system</code>, <code>cgartlab.github.io</code>) intentionally preserved</li>
@@ -1050,7 +1019,7 @@
             <li>0.4s 平滑过渡</li>
             <li><strong>资源版本号刷新</strong>：<code>?v=1.1.0</code> 缓存策略</li>
           </ul>
-          <h3>变更</h3>
+          <h3>修复</h3>
           <ul>
             <li><code>styles.css</code> 与 <code>scripts.js</code> 整合所有令牌、组件、动效、站点壳</li>
             <li>站点壳（navbar / 装饰 / TOC / 主题切换）一并内联</li>
@@ -1087,7 +1056,7 @@
             <li><code>DEVELOPMENT-GUIDE.md</code>（1449 行开发指南）</li>
             <li><code>tokens.json</code>（结构化令牌）</li>
           </ul>
-          <h3>许可证</h3>
+          <h3>其他</h3>
           <ul>
             <li>CC BY 4.0</li>
             <li><strong>新增 (Added)</strong> — 新功能</li>

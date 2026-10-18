@@ -94,6 +94,18 @@ def clean_item(text: str) -> str:
         return label  # 保留可读文字，去掉 URL
     s = _LINK_RE.sub(_link_repl, s)
 
+    # 2b) 链接被丢弃后可能留下空括号，如 "(closes [#295](u))" → "(closes )"。
+    #     括号内只剩 closes/fixes 等引导词或纯标点时，整组删除。
+    s = re.sub(r"\(\s*(?:closes|fixes|see|ref|refs)\b[^)]*\)", "", s, flags=re.I)
+    s = re.sub(r"\(\s*\)", "", s)
+    s = re.sub(r"\(\s*[,;:·\s]*\s*\)", "", s)
+    # 清理因此产生的尾部悬挂标点与多余空白
+    s = re.sub(r"[,;:]\s*$", "", s)
+    # 引用组被删后可能留下悬挂的 "closes" 引导词（原文形如
+    # "... ref ([sha](u)), closes [#N](u)"，两组被分别吃掉）
+    s = re.sub(r"[,\s]+(?:closes|fixes|see|ref|refs)\s*$", "", s, flags=re.I)
+    s = re.sub(r"\s{2,}", " ", s).rstrip()
+
     # 3) 先按 ** 和 ` 切分出"受保护"片段，分别处理，避免转义破坏标签
     #    做法：用占位符提取 bold/code 内容，转义其余，再回填为标签。
     tokens: list[tuple[str, str]] = []  # (kind, content)
