@@ -3,6 +3,22 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.8.4](https://github.com/cgartlab/edic-design-system/compare/v2.8.3...v2.8.4) (2026-10-18)
+
+
+### 修复
+
+* **issue-templates:** resolve .md/.yml duplication and label conflicts ([c6bac9f](https://github.com/cgartlab/edic-design-system/commit/c6bac9f0ec89a7c7d75e5c7fba5fe99df60a56b6))
+* **issue-templates:** resolve .md/.yml duplication and label conflicts ([f53ce00](https://github.com/cgartlab/edic-design-system/commit/f53ce00041bff740c4a9eda6c7b8c8d071034cb7))
+* **typography:** CJK spacing and title balance (closes [#310](https://github.com/cgartlab/edic-design-system/issues/310)) ([59b55b7](https://github.com/cgartlab/edic-design-system/commit/59b55b7abb39f8a21fc9658a6a1b3888e44c56d3))
+* **typography:** CJK spacing and title balance (closes [#310](https://github.com/cgartlab/edic-design-system/issues/310)) ([e1e527b](https://github.com/cgartlab/edic-design-system/commit/e1e527ba0c035b0a97b34d0f2f9ec1403996556d))
+
+
+### 文档
+
+* **pr:** add CJK typography verification screenshots ([aabe6a5](https://github.com/cgartlab/edic-design-system/commit/aabe6a5b436a812e3352a4eda08937aec5a3557a))
+* **pr:** replace screenshots with complete 2x renders ([d6691a3](https://github.com/cgartlab/edic-design-system/commit/d6691a3e7bc4ed6f6124aa29d881c1cc544742dc))
+
 ## [2.8.3](https://github.com/cgartlab/edic-design-system/compare/v2.8.2...v2.8.3) (2026-10-17)
 
 
