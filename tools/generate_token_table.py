@@ -126,15 +126,25 @@ def build_table() -> list[list[str]]:
     """
     css = STYLES_CSS.read_text(encoding="utf-8")
 
-    # :root 可能出现在多处（主定义 + 后置补充），合并并按出现顺序保留
+    # :root 可能出现在多处（主定义 + 后置补充）。后出现的覆盖前者，与 CSS 级联
+    # 语义一致；但重复定义通常是合并残留，因此显式告警而不是静默覆盖。
     root_vars: dict[str, str] = {}
+    seen_in: dict[str, int] = {}
     for m in re.finditer(r":root\s*\{", css):
         # 排除 :root 作为后代选择器一部分的情况
         line_start = css.rfind("\n", 0, m.start()) + 1
         if css[line_start:m.start()].strip():
             continue
+        line_no = css.count("\n", 0, m.start()) + 1
         block = extract_block(css[m.start():], ":root")
         for k, v in extract_vars(block).items():
+            if k in seen_in:
+                print(
+                    f"[WARN] {k} 重复定义：:root 第 {seen_in[k]} 行与第 {line_no} 行，"
+                    f"采用后者（CSS 级联语义）",
+                    file=sys.stderr,
+                )
+            seen_in[k] = line_no
             root_vars[k] = v
 
     dark_vars: dict[str, str] = {}
