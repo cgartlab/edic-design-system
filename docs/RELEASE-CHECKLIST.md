@@ -62,6 +62,23 @@ post-merge-stamp（检测 release_created output）自动：
 
 - [ ] 检查 `CHANGELOG.md` 是否包含完整的版本条目（由 release-please 自动填入，是变更日志唯一来源）
   - 如需润色措辞，直接编辑 `CHANGELOG.md` 对应版本节即可（changelog.html 会从中重建）
+- [ ] **在版本标题与条目之间补「一句话概括」**（收益最高、成本最低，见 [#321](https://github.com/cgartlab/edic-design-system/issues/321)）
+
+  release-please 只生成条目列表，读者要读完 20+ 条才知道「这版跟我有没有关系」。合并 Release PR 前，在版本标题下插入一段：
+
+  ```markdown
+  ## [2.9.0](https://github.com/cgartlab/edic-design-system/compare/v2.8.3...v2.9.0) (2026-10-18)
+
+  > **一句话概括**：这版主要完善**令牌文档的暗色模式展示**——令牌表现在会同时显示亮色和
+  > 暗色两列取值。**如果你只是引用 EDIC 的 CSS，不需要做任何事**；如果你在维护自己的
+  > 令牌文档，可以参考新的展示方式。
+
+  ### 新增
+  ...
+  ```
+
+  要点：说清「改了什么」+「你需要做什么 / 不需要做任何事」。对**破坏性变更**必须明确写出迁移动作。
+
 - [ ] 运行 `make changelog` 预览 changelog.html 将如何更新
 - [ ] 检查 `README.md` 截图与示例是否需要更新
 - [ ] 检查 `AGENTS.md` 组件清单是否需要更新

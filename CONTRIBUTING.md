@@ -68,6 +68,26 @@ test(validate): 增加 token 名称正则校验
 chore(release): bump v2.9.0
 ```
 
+#### Commit subject 语言约定
+
+`type(scope): 中文描述`。**冒号后的描述必须是中文，并写清「对使用者的影响」而非实现细节。**
+
+`CHANGELOG.md` 由 release-please 从 commit subject 自动生成，commit 写英文，变更日志就是英文——这是历史上 82% 条目为英文的根因。
+
+```diff
+- docs: show dark-mode values in token table
++ docs: 令牌表同时显示暗色模式取值
+```
+
+| | 示例 |
+|---|---|
+| ✅ | `fix: 暗色模式下按钮边框消失` |
+| ✅ | `feat: 令牌表新增暗色模式取值列` |
+| ❌ | `fix: update border-color token in dark mode`（英文） |
+| ❌ | `fix: 把 raw hex 改成 var(--ds-border)`（实现细节，非使用者影响） |
+
+> 例外：`type` 与 `scope` 保持英文（release-please 依赖它们分类）；专有名词（OKLch、WCAG、ARIA）保留原文。
+
 ### 3. 本地验证
 
 在提 PR 前必须运行：

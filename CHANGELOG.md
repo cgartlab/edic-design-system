@@ -9,7 +9,6 @@
 ### 新增
 
 * **docs:** show dark-mode values in token table (closes [#295](https://github.com/cgartlab/edic-design-system/issues/295)) ([0105637](https://github.com/cgartlab/edic-design-system/commit/01056370d40e75945db1878d203614dfbddfd363))
-* **docs:** show dark-mode values in token table (closes [#295](https://github.com/cgartlab/edic-design-system/issues/295)) ([a64f6b0](https://github.com/cgartlab/edic-design-system/commit/a64f6b0b960d225bef36ab94bfb8b66f1c37a172))
 
 
 ### 修复
@@ -17,9 +16,7 @@
 * **docs:** address Argus review on token table ([f8d4086](https://github.com/cgartlab/edic-design-system/commit/f8d408651f7189a6a71a6bdab92e6f279ba352a1))
 * **docs:** stop token table cells from wrapping ([80cc3a5](https://github.com/cgartlab/edic-design-system/commit/80cc3a5841dc7bfc2305732697d2661482114f9b))
 * **issue-templates:** resolve .md/.yml duplication and label conflicts ([c6bac9f](https://github.com/cgartlab/edic-design-system/commit/c6bac9f0ec89a7c7d75e5c7fba5fe99df60a56b6))
-* **issue-templates:** resolve .md/.yml duplication and label conflicts ([f53ce00](https://github.com/cgartlab/edic-design-system/commit/f53ce00041bff740c4a9eda6c7b8c8d071034cb7))
 * **typography:** CJK spacing and title balance (closes [#310](https://github.com/cgartlab/edic-design-system/issues/310)) ([59b55b7](https://github.com/cgartlab/edic-design-system/commit/59b55b7abb39f8a21fc9658a6a1b3888e44c56d3))
-* **typography:** CJK spacing and title balance (closes [#310](https://github.com/cgartlab/edic-design-system/issues/310)) ([e1e527b](https://github.com/cgartlab/edic-design-system/commit/e1e527ba0c035b0a97b34d0f2f9ec1403996556d))
 
 
 ### 文档
@@ -173,7 +170,7 @@
 * **site:** 统一导航与页脚（5 页导航栏新增「更新」入口、prompts/downloads/terms/docs 页脚补「更新日志」、`cgartlab.com` 链接标签统一、index 页脚补「博客」「网站地图」）；修复 docs.html 联系表单隐私政策死链；并列标题层级统一（prompts/company/terms）
 * **docs:** 文案修正——resume「数字绘面」→「数字绘画」、terms「endorsement」→「背书」、blog v1.0 发布文日期与导语
 
-### 清理
+### 其他
 
 * 移除仓库根目录孤儿资产 `preview.png`（约 219KB，无任何引用）
 
@@ -183,7 +180,7 @@
 
 ## [2.0.0](https://github.com/cgartlab/edic-design-system/compare/v1.10.2...v2.0.0) (2026-09-17)
 
-### ⚠ BREAKING CHANGES
+### 回滚
 
 * EDIC 2.0 质量审计与可访问性加固 ([#264](https://github.com/cgartlab/edic-design-system/issues/264))
 
@@ -207,7 +204,6 @@
 * **tokens:** 更新 `validate_tokens.py` 以读取 2.0 `tokens[]` 结构并兼容旧扁平结构
 * **storage:** 集中化 localStorage 安全读写（`safeLocalStorage` 抽象），新增对应单元测试
 * **ci:** 修复 Release PR 合并后 CI 版本验证竞态 ([b50a66f](https://github.com/cgartlab/edic-design-system/commit/b50a66f4cea89faecba92ab6e84de75c356820e2))
-* **ci:** 修复 Release PR 合并后 CI 版本验证竞态 ([be15bc6](https://github.com/cgartlab/edic-design-system/commit/be15bc6586ff3daae6a6d9da29f4305c8d328767))
 
 ### 文档
 
@@ -227,7 +223,6 @@
 ### 修复
 
 * **release:** 发布流程改为 release-please 官方自动 tag 模型 ([88b4276](https://github.com/cgartlab/edic-design-system/commit/88b4276e6bcd2db0a30a13379940537fa2ad2f33))
-* **release:** 发布流程改为 release-please 官方自动 tag 模型 ([67db170](https://github.com/cgartlab/edic-design-system/commit/67db17028635ae7b336a8a52ad6e0469bfa5cc47))
 * **release:** 响应评审修复 P1/P2/P3（5 条） ([b45701c](https://github.com/cgartlab/edic-design-system/commit/b45701ccf767a4152445112d12e5f8409950a193))
 
 
@@ -241,14 +236,9 @@
 ### 新增
 
 * **charts:** 添加统一 SVG 图表引擎，支持 10 种图表类型 ([9138b88](https://github.com/cgartlab/edic-design-system/commit/9138b88994fe410814f4434be949316887da84ea))
-* **charts:** 添加统一 SVG 图表引擎，支持 10 种图表类型 ([2b3800e](https://github.com/cgartlab/edic-design-system/commit/2b3800e9c11c408074b7a97f904b09a7be8e2369))
 * **skill:** add references/ directory for R dimension improvement ([#208](https://github.com/cgartlab/edic-design-system/issues/208)) ([afb1a88](https://github.com/cgartlab/edic-design-system/commit/afb1a8813dec328406f077845ead8fdefbe8d19d))
 * **skill:** improve TRACE dimensions A/C/E for SkillHub evaluation ([#207](https://github.com/cgartlab/edic-design-system/issues/207)) ([2cd9753](https://github.com/cgartlab/edic-design-system/commit/2cd975343e9779fe8430d8da5290aaf4c8190165))
 * **skill:** R2 reliability — patterns, recipes, self-check, bug fixes ([424794f](https://github.com/cgartlab/edic-design-system/commit/424794f148d737394631c2a0eea5e63dd67da552))
-* **skill:** R2 reliability — patterns, recipes, self-check, bug fixes ([3fbe59a](https://github.com/cgartlab/edic-design-system/commit/3fbe59a00de2b13f3eb070a0e215e2fa7a359fdc))
-* **skill:** R2 reliability — patterns, recipes, self-check, bug fixes ([d55f96f](https://github.com/cgartlab/edic-design-system/commit/d55f96fbeb2aae36bf503ef7bafa8551cba6cff3))
-* **skill:** R2 reliability — patterns, recipes, self-check, bug fixes ([d3ce640](https://github.com/cgartlab/edic-design-system/commit/d3ce64019d6f5c59f1e11144a54e2a6024b15c26))
-* **skill:** R2 reliability — patterns, recipes, self-check, bug fixes ([5c31735](https://github.com/cgartlab/edic-design-system/commit/5c31735d7175e0d19a138370d6dcbc833701104d))
 * **skill:** R2 reliability — PATTERNS, RECIPES, self-check, bug fixes ([5443055](https://github.com/cgartlab/edic-design-system/commit/544305500b1277257999430e91b1e9f47e8a7179))
 
 
@@ -263,14 +253,11 @@
 * **release:** post-merge-stamp detect gate 改为 manifest（修复 P1 阻断） ([f55da87](https://github.com/cgartlab/edic-design-system/commit/f55da8772366e1e5eb63624dd506af4d0f425627))
 * **release:** 修复 post-merge-stamp gate + 同步 AGENTS.md ([3a0c0b3](https://github.com/cgartlab/edic-design-system/commit/3a0c0b3bbce20ee8ae21ae5c088145ada24afc58))
 * **release:** 回退 skip-github-release 为 true，恢复手工 tag 发布 ([b3c5954](https://github.com/cgartlab/edic-design-system/commit/b3c595493365d5404e61c812a8f429220d516a61))
-* **release:** 回退 skip-github-release 为 true，恢复手工 tag 发布 ([c862400](https://github.com/cgartlab/edic-design-system/commit/c86240013ab5dd54152f7b8d897550953354caf1))
 * **release:** 回退幽灵发布 + 简化 post-merge-stamp detect 逻辑 ([ea4df69](https://github.com/cgartlab/edic-design-system/commit/ea4df699516374650420379a21c7658025bd0d77))
 * **release:** 清理死 outputs + 同步文档为手工 tag 流程 ([e153cd9](https://github.com/cgartlab/edic-design-system/commit/e153cd9665a1079da0731aea4449c5b17c13bc5e))
 * **skill:** correct TOKENS.md version ref; replace 64px with --ds-space-16 in RECIPES.md ([f41065d](https://github.com/cgartlab/edic-design-system/commit/f41065d9885821d932b807ed0d0fe4eda4c3969d))
-* **skill:** correct TOKENS.md version ref; replace 64px with --ds-space-16 in RECIPES.md ([83dac31](https://github.com/cgartlab/edic-design-system/commit/83dac3153bddd407a4ff0aa583a8655027a758a5))
 * **tooltip:** add JS interaction + ARIA + role=tooltip, replace inline style with class, remove dead CSS, token padding/z-index/gap (closes [#213](https://github.com/cgartlab/edic-design-system/issues/213)) ([93a727b](https://github.com/cgartlab/edic-design-system/commit/93a727b4ba54160c111d0e46f586e702f54f96b6))
 * **tooltip:** add JS interaction + ARIA support (closes [#213](https://github.com/cgartlab/edic-design-system/issues/213)) ([4c50a97](https://github.com/cgartlab/edic-design-system/commit/4c50a973cf0862495ad2146109002f1224f12ef8))
-* **tooltip:** add JS interaction + ARIA support (closes [#213](https://github.com/cgartlab/edic-design-system/issues/213)) ([5823fa2](https://github.com/cgartlab/edic-design-system/commit/5823fa2798fe13e94337f792106862b4cac06138))
 
 
 ### 文档
@@ -338,7 +325,6 @@
 * CC BY 4.0 使用条款全面修订 - 法律合规性审查 ([c9b2447](https://github.com/cgartlab/edic-design-system/commit/c9b2447e249849acdc0ae12d223df666366a32bd))
 * CGArtLab Design System v1.0 ([5483b25](https://github.com/cgartlab/edic-design-system/commit/5483b2513bb63184d6c16bc61e6751e163f0ffb2))
 * **changelog:** add update log page and fix footer links ([8f23b22](https://github.com/cgartlab/edic-design-system/commit/8f23b224084fe57e61c1ac8d149784623cccb63d))
-* **changelog:** add update log page and fix footer links ([#144](https://github.com/cgartlab/edic-design-system/issues/144)) ([c268f70](https://github.com/cgartlab/edic-design-system/commit/c268f709b0298be5ef4dbaba5f7897b206a32acf))
 * **code:** add Prism.js syntax highlighting + editorial olive-green theme ([add21ed](https://github.com/cgartlab/edic-design-system/commit/add21ed7b46203a72bb67d79885cc466caa6d7ba))
 * **code:** add Prism.js syntax highlighting with editorial olive-green theme ([#92](https://github.com/cgartlab/edic-design-system/issues/92)) ([93b00db](https://github.com/cgartlab/edic-design-system/commit/93b00db511558edf6aeaa22efcedc39ede64182f))
 * **css:** dark-mode gravitas & glow (v1.5.0) — warm olive undertone layer ([#132](https://github.com/cgartlab/edic-design-system/issues/132)) ([0e96ec8](https://github.com/cgartlab/edic-design-system/commit/0e96ec8d15e1f70b97b6197e138cd2753dad23b1))
@@ -353,7 +339,6 @@
 * **nav:** frosted-acrylic glass on navbar + mobile drawer (dark-mode aware) ([9101866](https://github.com/cgartlab/edic-design-system/commit/9101866f41c88ea1b2c91553dfde20efb356fa8c))
 * **opencode:** add Argus auto PR review workflow ([72be2f4](https://github.com/cgartlab/edic-design-system/commit/72be2f4d5754cd191992e09ba687b72089a50315))
 * **opencode:** add Argus GitHub App workflow ([989d14a](https://github.com/cgartlab/edic-design-system/commit/989d14ad0cf358af00c03b8d2d2317bd35c49763))
-* **opencode:** add Argus GitHub App workflow ([8f4bae6](https://github.com/cgartlab/edic-design-system/commit/8f4bae602ceab0d3bf1436ac3774fc658674c5e5))
 * **opencode:** add auto PR review trigger + app token fix ([4beaeae](https://github.com/cgartlab/edic-design-system/commit/4beaeaef2983db093ac799a1e04784c8ac2f66e1))
 * overhaul mobile navigation menu ([48a34bb](https://github.com/cgartlab/edic-design-system/commit/48a34bbbbe68c6feeef104896bbb2f5d9335b13d))
 * overhaul mobile navigation menu ([b6941ef](https://github.com/cgartlab/edic-design-system/commit/b6941efb7b287236529f6f3f9d6051c225f12344))
@@ -410,11 +395,9 @@
 * **docs:** 冒烟测试 fix 触发 release-please ([8432100](https://github.com/cgartlab/edic-design-system/commit/84321001648d78b342332574457205269a74f1c4))
 * **footer:** replace h3 with semantic p.ds-footer-col-heading ([6ed7378](https://github.com/cgartlab/edic-design-system/commit/6ed7378bf1e72905b231191e05277382c16e9887))
 * **footer:** update copyright to CGArtLab, add blog link, move sitemap under 关于 ([fc80606](https://github.com/cgartlab/edic-design-system/commit/fc806064000579a94764469941c68677ce56b7d8))
-* **footer:** update copyright to CGArtLab, add blog link, move sitemap under 关于 ([665ac08](https://github.com/cgartlab/edic-design-system/commit/665ac08761e9dd973e738363b167f5f21f9814bd))
 * **footer:** 替换 h3 为语义化 p.ds-footer-col-heading ([#145](https://github.com/cgartlab/edic-design-system/issues/145)) ([477e441](https://github.com/cgartlab/edic-design-system/commit/477e44115e2b41d1c6172e4fcea21d43b1456d71))
 * **handbook:** close 640-1023px TOC dead zone, fix mobile active state, unify base ([#125](https://github.com/cgartlab/edic-design-system/issues/125)) ([891d715](https://github.com/cgartlab/edic-design-system/commit/891d7158edde6a1cc65022048ee4ad48e0ad7822))
 * **handbook:** extract timeline/contact into standalone sections for TOC navigation ([e7c969a](https://github.com/cgartlab/edic-design-system/commit/e7c969a17b42f486800572922af909e2ab8ef8d3))
-* **handbook:** extract timeline/contact into standalone sections for TOC navigation ([#129](https://github.com/cgartlab/edic-design-system/issues/129)) ([58be16f](https://github.com/cgartlab/edic-design-system/commit/58be16ff9ac45151e705ecdc10cc6e84672edf3d))
 * **handbook:** mobile overflow protection for #typography inline-style tables ([#117](https://github.com/cgartlab/edic-design-system/issues/117)) ([6bc734c](https://github.com/cgartlab/edic-design-system/commit/6bc734c0078b229769bab474be7cbeab2778a19c))
 * **handbook:** mobile spacing — cover eyebrow gap 24→16px, pagenav top margin 16px ([#137](https://github.com/cgartlab/edic-design-system/issues/137)) ([0950f1d](https://github.com/cgartlab/edic-design-system/commit/0950f1d913b615d3dcd90fbf4e6f3c8ca23e7a9a))
 * **handbook:** remove C,G subtitle and add TOC top margin on mobile ([8294b71](https://github.com/cgartlab/edic-design-system/commit/8294b719741e587fb943072364b67bf4e55cd13d))
@@ -428,7 +411,6 @@
 * **index:** widen CTA container and remove measure constraint to prevent single-character orphan ([#91](https://github.com/cgartlab/edic-design-system/issues/91)) ([5bf1145](https://github.com/cgartlab/edic-design-system/commit/5bf11458938300adc24735d7ec47e3fda5069af0))
 * **interactions:** 5 UI/a11y bugs + 87-test unit suite (v1.5.2) ([#159](https://github.com/cgartlab/edic-design-system/issues/159)) ([7fdbc1b](https://github.com/cgartlab/edic-design-system/commit/7fdbc1b4936cc5d33cf384173f0da817dce03fe2))
 * **interactions:** a11y, copy feedback, memory leaks, and AGENTS.md rewrite ([8365173](https://github.com/cgartlab/edic-design-system/commit/8365173b93f462672d33595b375e2ec5b776f311))
-* **interactions:** a11y, copy feedback, memory leaks, and AGENTS.md rewrite ([#141](https://github.com/cgartlab/edic-design-system/issues/141)) ([05d2e17](https://github.com/cgartlab/edic-design-system/commit/05d2e17281f1ac581cb8c0e4dbd8b63714e8bf86))
 * **js:** cycleTheme reads data-theme-mode instead of parsing Chinese aria-label (closes [#34](https://github.com/cgartlab/edic-design-system/issues/34)) ([5d0e95f](https://github.com/cgartlab/edic-design-system/commit/5d0e95fdeec49b2b142d7db7d43004a433aca56c))
 * **js:** TOC IntersectionObserver picks topmost section, adds 16ms debounce to prevent rapid flicker (closes [#58](https://github.com/cgartlab/edic-design-system/issues/58)) ([3ffb7ce](https://github.com/cgartlab/edic-design-system/commit/3ffb7cef378b05c062d3f4725c91ba9de3fee7ff))
 * **makefile:** use cross-platform clean with -delete for .pyc files ([#80](https://github.com/cgartlab/edic-design-system/issues/80)) ([f4fe514](https://github.com/cgartlab/edic-design-system/commit/f4fe514e0bd4a779fae8e03798b4e35e2af7c0ee))
@@ -459,7 +441,6 @@
 * **mobile-scroll:** change ds-pagenav-disclosure overflow to visible on mobile ([ecb3e0f](https://github.com/cgartlab/edic-design-system/commit/ecb3e0f66a0717714883936de08bfbe7f28ff19c))
 * **mobile-scroll:** use overscroll-behavior contain on disclosure and list ([31bb921](https://github.com/cgartlab/edic-design-system/commit/31bb92130af72a13a9f2392c33efdf3f829d115c))
 * **mobile:** release scroll lock reliably; fix sitemap dead link ([236da9c](https://github.com/cgartlab/edic-design-system/commit/236da9cd304b9d29eb2e2a92104d911c11dc16e8))
-* **mobile:** release scroll lock reliably; fix sitemap dead link ([#142](https://github.com/cgartlab/edic-design-system/issues/142)) ([3a3a552](https://github.com/cgartlab/edic-design-system/commit/3a3a5520965fbd2798d31eb3bad25982859e33ca))
 * **opencode:** add git identity config ([f91e6d1](https://github.com/cgartlab/edic-design-system/commit/f91e6d172c0ad9cd6333458eca7cefd4dc48caf4))
 * **opencode:** add git identity config for Argus bot ([2fd42d9](https://github.com/cgartlab/edic-design-system/commit/2fd42d9db1bf793b25fb229fe24e8e5f2c5bfb4a))
 * **opencode:** add git identity config, fix CRLF corruption ([95dd4c9](https://github.com/cgartlab/edic-design-system/commit/95dd4c9c23d0a4dcf94e08353c49c12881189ef7))
@@ -472,7 +453,6 @@
 * **opencode:** use credential helper store instead of remote URL token ([88710ef](https://github.com/cgartlab/edic-design-system/commit/88710ef9eb06b804f4f043854d3e3767d8e580a7))
 * **opencode:** use token input instead of use_github_token for PR auto-review ([cfbd9a7](https://github.com/cgartlab/edic-design-system/commit/cfbd9a771979e3bfceb2944a81f84f4cdfabdd61))
 * **pagenav:** stop scroll-spy from yanking the whole page (issue [#135](https://github.com/cgartlab/edic-design-system/issues/135)) ([be09bed](https://github.com/cgartlab/edic-design-system/commit/be09bed64e4247e23583c2ed73706de330078062))
-* **pagenav:** stop scroll-spy from yanking the whole page (issue [#135](https://github.com/cgartlab/edic-design-system/issues/135)) ([#143](https://github.com/cgartlab/edic-design-system/issues/143)) ([5a7602e](https://github.com/cgartlab/edic-design-system/commit/5a7602eb2f295148a8f0d16d4f3d4fe7cf8d73bf))
 * **pages:** migrate to workflow-based Pages + restore v1.6.0 stamp ([dbd26c2](https://github.com/cgartlab/edic-design-system/commit/dbd26c28a80fdcb2dbfbc574e5542a8f5b3df693))
 * prepend the trigger to the focusable elements array so Tab ([a0180a8](https://github.com/cgartlab/edic-design-system/commit/a0180a8ded8eaeb7edc88bb4e18320ef73c346ba))
 * prevent Argus self-triggering, add concurrency, upgrade actions ([6b42cc3](https://github.com/cgartlab/edic-design-system/commit/6b42cc3759e56deb1beaa136b80416fdd890bf7e))
@@ -504,7 +484,6 @@
 ### 重构
 
 * **footer:** unify footer layout, update copyright, and add site map ([066a805](https://github.com/cgartlab/edic-design-system/commit/066a8058209a9ea072e390800dc5fe7a36d77dad))
-* **footer:** unify footer layout, update copyright, and add site map ([85331ac](https://github.com/cgartlab/edic-design-system/commit/85331ac00ed9792bafec266b211bcd69e26431e1))
 * **js:** replace all var with const/let in scripts.js per project coding rules (closes [#56](https://github.com/cgartlab/edic-design-system/issues/56)) ([0e01c92](https://github.com/cgartlab/edic-design-system/commit/0e01c9290ef9e0598979f61a8ca55e2cb8856631))
 * mobile nav aligned with design system tokens & patterns ([6cb45d1](https://github.com/cgartlab/edic-design-system/commit/6cb45d1c36dc5a092c6c8daaf5e955b457c84d6a))
 * replace 22 inline onclick handlers with event delegation ([#112](https://github.com/cgartlab/edic-design-system/issues/112)) ([fa2c431](https://github.com/cgartlab/edic-design-system/commit/fa2c431d78f7e1fbb30a9c9710f4c6953864dabf))
@@ -518,7 +497,6 @@
 * add CLAUDE.md for Claude Code guidance ([#130](https://github.com/cgartlab/edic-design-system/issues/130)) ([f33efc9](https://github.com/cgartlab/edic-design-system/commit/f33efc917b1f2a9c1142d33ed24ce93248628537))
 * **AGENTS.md:** update doc generation time and add notes ([b180821](https://github.com/cgartlab/edic-design-system/commit/b1808218ed939f0edccdea87dfdefc572776074e))
 * **changelog:** add code style specification entry under [Unreleased] ([96122eb](https://github.com/cgartlab/edic-design-system/commit/96122eb28be6b06a81a16fa74f47760d2432a1be))
-* **changelog:** add code style specification entry under [Unreleased] ([e0cd97f](https://github.com/cgartlab/edic-design-system/commit/e0cd97f2cdd51e51df9617dacd66a1e919dbb5e8))
 * comprehensive v1.5.0 sync — domain, tokens, prompts, SKILL, README rewrite ([a2afe90](https://github.com/cgartlab/edic-design-system/commit/a2afe90dd4f872ec5a312190fb01fce3b34836cf))
 * comprehensive v1.5.0 sync — domain, tokens, prompts, SKILL, README rewrite ([#140](https://github.com/cgartlab/edic-design-system/issues/140)) ([e9f0bd2](https://github.com/cgartlab/edic-design-system/commit/e9f0bd240d716e5ddb16e3be58160af43fd449ff))
 * document icons.svg generator in AGENTS and CHANGELOG ([5187a1c](https://github.com/cgartlab/edic-design-system/commit/5187a1c64e912371e9024c8d67589abf875bb01f))
@@ -542,7 +520,7 @@
 
 ## [1.6.2] — 2026-06-22
 
-### 修复（首页设计系统规范合规性）
+### 修复
 
 - **[P0] `ds-stat-num`/`ds-stat-label` 双重 CSS 定义**：`styles.css` 中存在两套同名规则，第二套（旧 `.ds-stat-grid` 体系）覆盖第一套（`.ds-stats-grid` 体系），导致首页统计数字 `display:block` 丢失、字号异常、标签样式错误。移除第二套中的重复选择器，旧体系仅保留布局类。
 - **[P0] `ds-eyebrow` `letter-spacing` 被 `!important` 强制覆盖**：全局 CJK 基线层将 `.ds-eyebrow` 的字间距 `!important` 压至 `tracking-wider`（0.08em），而组件定义规定 `tracking-widest`（0.12em）。从 `!important` 规则中移除 `.ds-eyebrow`，令组件定义正常生效。
@@ -573,7 +551,6 @@
 * CC BY 4.0 使用条款全面修订 - 法律合规性审查 ([c9b2447](https://github.com/cgartlab/edic-design-system/commit/c9b2447e249849acdc0ae12d223df666366a32bd))
 * CGArtLab Design System v1.0 ([5483b25](https://github.com/cgartlab/edic-design-system/commit/5483b2513bb63184d6c16bc61e6751e163f0ffb2))
 * **changelog:** add update log page and fix footer links ([8f23b22](https://github.com/cgartlab/edic-design-system/commit/8f23b224084fe57e61c1ac8d149784623cccb63d))
-* **changelog:** add update log page and fix footer links ([#144](https://github.com/cgartlab/edic-design-system/issues/144)) ([c268f70](https://github.com/cgartlab/edic-design-system/commit/c268f709b0298be5ef4dbaba5f7897b206a32acf))
 * **code:** add Prism.js syntax highlighting + editorial olive-green theme ([add21ed](https://github.com/cgartlab/edic-design-system/commit/add21ed7b46203a72bb67d79885cc466caa6d7ba))
 * **code:** add Prism.js syntax highlighting with editorial olive-green theme ([#92](https://github.com/cgartlab/edic-design-system/issues/92)) ([93b00db](https://github.com/cgartlab/edic-design-system/commit/93b00db511558edf6aeaa22efcedc39ede64182f))
 * **css:** dark-mode gravitas & glow (v1.5.0) — warm olive undertone layer ([#132](https://github.com/cgartlab/edic-design-system/issues/132)) ([0e96ec8](https://github.com/cgartlab/edic-design-system/commit/0e96ec8d15e1f70b97b6197e138cd2753dad23b1))
@@ -588,7 +565,6 @@
 * **nav:** frosted-acrylic glass on navbar + mobile drawer (dark-mode aware) ([9101866](https://github.com/cgartlab/edic-design-system/commit/9101866f41c88ea1b2c91553dfde20efb356fa8c))
 * **opencode:** add Argus auto PR review workflow ([72be2f4](https://github.com/cgartlab/edic-design-system/commit/72be2f4d5754cd191992e09ba687b72089a50315))
 * **opencode:** add Argus GitHub App workflow ([989d14a](https://github.com/cgartlab/edic-design-system/commit/989d14ad0cf358af00c03b8d2d2317bd35c49763))
-* **opencode:** add Argus GitHub App workflow ([8f4bae6](https://github.com/cgartlab/edic-design-system/commit/8f4bae602ceab0d3bf1436ac3774fc658674c5e5))
 * **opencode:** add auto PR review trigger + app token fix ([4beaeae](https://github.com/cgartlab/edic-design-system/commit/4beaeaef2983db093ac799a1e04784c8ac2f66e1))
 * overhaul mobile navigation menu ([48a34bb](https://github.com/cgartlab/edic-design-system/commit/48a34bbbbe68c6feeef104896bbb2f5d9335b13d))
 * overhaul mobile navigation menu ([b6941ef](https://github.com/cgartlab/edic-design-system/commit/b6941efb7b287236529f6f3f9d6051c225f12344))
@@ -645,11 +621,9 @@
 * **docs:** 冒烟测试 fix 触发 release-please ([8432100](https://github.com/cgartlab/edic-design-system/commit/84321001648d78b342332574457205269a74f1c4))
 * **footer:** replace h3 with semantic p.ds-footer-col-heading ([6ed7378](https://github.com/cgartlab/edic-design-system/commit/6ed7378bf1e72905b231191e05277382c16e9887))
 * **footer:** update copyright to CGArtLab, add blog link, move sitemap under 关于 ([fc80606](https://github.com/cgartlab/edic-design-system/commit/fc806064000579a94764469941c68677ce56b7d8))
-* **footer:** update copyright to CGArtLab, add blog link, move sitemap under 关于 ([665ac08](https://github.com/cgartlab/edic-design-system/commit/665ac08761e9dd973e738363b167f5f21f9814bd))
 * **footer:** 替换 h3 为语义化 p.ds-footer-col-heading ([#145](https://github.com/cgartlab/edic-design-system/issues/145)) ([477e441](https://github.com/cgartlab/edic-design-system/commit/477e44115e2b41d1c6172e4fcea21d43b1456d71))
 * **handbook:** close 640-1023px TOC dead zone, fix mobile active state, unify base ([#125](https://github.com/cgartlab/edic-design-system/issues/125)) ([891d715](https://github.com/cgartlab/edic-design-system/commit/891d7158edde6a1cc65022048ee4ad48e0ad7822))
 * **handbook:** extract timeline/contact into standalone sections for TOC navigation ([e7c969a](https://github.com/cgartlab/edic-design-system/commit/e7c969a17b42f486800572922af909e2ab8ef8d3))
-* **handbook:** extract timeline/contact into standalone sections for TOC navigation ([#129](https://github.com/cgartlab/edic-design-system/issues/129)) ([58be16f](https://github.com/cgartlab/edic-design-system/commit/58be16ff9ac45151e705ecdc10cc6e84672edf3d))
 * **handbook:** mobile overflow protection for #typography inline-style tables ([#117](https://github.com/cgartlab/edic-design-system/issues/117)) ([6bc734c](https://github.com/cgartlab/edic-design-system/commit/6bc734c0078b229769bab474be7cbeab2778a19c))
 * **handbook:** mobile spacing — cover eyebrow gap 24→16px, pagenav top margin 16px ([#137](https://github.com/cgartlab/edic-design-system/issues/137)) ([0950f1d](https://github.com/cgartlab/edic-design-system/commit/0950f1d913b615d3dcd90fbf4e6f3c8ca23e7a9a))
 * **handbook:** remove C,G subtitle and add TOC top margin on mobile ([8294b71](https://github.com/cgartlab/edic-design-system/commit/8294b719741e587fb943072364b67bf4e55cd13d))
@@ -662,7 +636,6 @@
 * **index:** widen CTA container and remove measure constraint to prevent single-character orphan ([#91](https://github.com/cgartlab/edic-design-system/issues/91)) ([5bf1145](https://github.com/cgartlab/edic-design-system/commit/5bf11458938300adc24735d7ec47e3fda5069af0))
 * **interactions:** 5 UI/a11y bugs + 87-test unit suite (v1.5.2) ([#159](https://github.com/cgartlab/edic-design-system/issues/159)) ([7fdbc1b](https://github.com/cgartlab/edic-design-system/commit/7fdbc1b4936cc5d33cf384173f0da817dce03fe2))
 * **interactions:** a11y, copy feedback, memory leaks, and AGENTS.md rewrite ([8365173](https://github.com/cgartlab/edic-design-system/commit/8365173b93f462672d33595b375e2ec5b776f311))
-* **interactions:** a11y, copy feedback, memory leaks, and AGENTS.md rewrite ([#141](https://github.com/cgartlab/edic-design-system/issues/141)) ([05d2e17](https://github.com/cgartlab/edic-design-system/commit/05d2e17281f1ac581cb8c0e4dbd8b63714e8bf86))
 * **js:** cycleTheme reads data-theme-mode instead of parsing Chinese aria-label (closes [#34](https://github.com/cgartlab/edic-design-system/issues/34)) ([5d0e95f](https://github.com/cgartlab/edic-design-system/commit/5d0e95fdeec49b2b142d7db7d43004a433aca56c))
 * **js:** TOC IntersectionObserver picks topmost section, adds 16ms debounce to prevent rapid flicker (closes [#58](https://github.com/cgartlab/edic-design-system/issues/58)) ([3ffb7ce](https://github.com/cgartlab/edic-design-system/commit/3ffb7cef378b05c062d3f4725c91ba9de3fee7ff))
 * **makefile:** use cross-platform clean with -delete for .pyc files ([#80](https://github.com/cgartlab/edic-design-system/issues/80)) ([f4fe514](https://github.com/cgartlab/edic-design-system/commit/f4fe514e0bd4a779fae8e03798b4e35e2af7c0ee))
@@ -693,7 +666,6 @@
 * **mobile-scroll:** change ds-pagenav-disclosure overflow to visible on mobile ([ecb3e0f](https://github.com/cgartlab/edic-design-system/commit/ecb3e0f66a0717714883936de08bfbe7f28ff19c))
 * **mobile-scroll:** use overscroll-behavior contain on disclosure and list ([31bb921](https://github.com/cgartlab/edic-design-system/commit/31bb92130af72a13a9f2392c33efdf3f829d115c))
 * **mobile:** release scroll lock reliably; fix sitemap dead link ([236da9c](https://github.com/cgartlab/edic-design-system/commit/236da9cd304b9d29eb2e2a92104d911c11dc16e8))
-* **mobile:** release scroll lock reliably; fix sitemap dead link ([#142](https://github.com/cgartlab/edic-design-system/issues/142)) ([3a3a552](https://github.com/cgartlab/edic-design-system/commit/3a3a5520965fbd2798d31eb3bad25982859e33ca))
 * **opencode:** add git identity config ([f91e6d1](https://github.com/cgartlab/edic-design-system/commit/f91e6d172c0ad9cd6333458eca7cefd4dc48caf4))
 * **opencode:** add git identity config for Argus bot ([2fd42d9](https://github.com/cgartlab/edic-design-system/commit/2fd42d9db1bf793b25fb229fe24e8e5f2c5bfb4a))
 * **opencode:** add git identity config, fix CRLF corruption ([95dd4c9](https://github.com/cgartlab/edic-design-system/commit/95dd4c9c23d0a4dcf94e08353c49c12881189ef7))
@@ -706,7 +678,6 @@
 * **opencode:** use credential helper store instead of remote URL token ([88710ef](https://github.com/cgartlab/edic-design-system/commit/88710ef9eb06b804f4f043854d3e3767d8e580a7))
 * **opencode:** use token input instead of use_github_token for PR auto-review ([cfbd9a7](https://github.com/cgartlab/edic-design-system/commit/cfbd9a771979e3bfceb2944a81f84f4cdfabdd61))
 * **pagenav:** stop scroll-spy from yanking the whole page (issue [#135](https://github.com/cgartlab/edic-design-system/issues/135)) ([be09bed](https://github.com/cgartlab/edic-design-system/commit/be09bed64e4247e23583c2ed73706de330078062))
-* **pagenav:** stop scroll-spy from yanking the whole page (issue [#135](https://github.com/cgartlab/edic-design-system/issues/135)) ([#143](https://github.com/cgartlab/edic-design-system/issues/143)) ([5a7602e](https://github.com/cgartlab/edic-design-system/commit/5a7602eb2f295148a8f0d16d4f3d4fe7cf8d73bf))
 * prepend the trigger to the focusable elements array so Tab ([a0180a8](https://github.com/cgartlab/edic-design-system/commit/a0180a8ded8eaeb7edc88bb4e18320ef73c346ba))
 * prevent Argus self-triggering, add concurrency, upgrade actions ([6b42cc3](https://github.com/cgartlab/edic-design-system/commit/6b42cc3759e56deb1beaa136b80416fdd890bf7e))
 * remove dark overlay when mobile menu opens ([ffa2597](https://github.com/cgartlab/edic-design-system/commit/ffa2597e39b28fb8a196117a85b28fb83206f60b))
@@ -736,7 +707,6 @@
 ### 重构
 
 * **footer:** unify footer layout, update copyright, and add site map ([066a805](https://github.com/cgartlab/edic-design-system/commit/066a8058209a9ea072e390800dc5fe7a36d77dad))
-* **footer:** unify footer layout, update copyright, and add site map ([85331ac](https://github.com/cgartlab/edic-design-system/commit/85331ac00ed9792bafec266b211bcd69e26431e1))
 * **js:** replace all var with const/let in scripts.js per project coding rules (closes [#56](https://github.com/cgartlab/edic-design-system/issues/56)) ([0e01c92](https://github.com/cgartlab/edic-design-system/commit/0e01c9290ef9e0598979f61a8ca55e2cb8856631))
 * mobile nav aligned with design system tokens & patterns ([6cb45d1](https://github.com/cgartlab/edic-design-system/commit/6cb45d1c36dc5a092c6c8daaf5e955b457c84d6a))
 * replace 22 inline onclick handlers with event delegation ([#112](https://github.com/cgartlab/edic-design-system/issues/112)) ([fa2c431](https://github.com/cgartlab/edic-design-system/commit/fa2c431d78f7e1fbb30a9c9710f4c6953864dabf))
@@ -750,7 +720,6 @@
 * add CLAUDE.md for Claude Code guidance ([#130](https://github.com/cgartlab/edic-design-system/issues/130)) ([f33efc9](https://github.com/cgartlab/edic-design-system/commit/f33efc917b1f2a9c1142d33ed24ce93248628537))
 * **AGENTS.md:** update doc generation time and add notes ([b180821](https://github.com/cgartlab/edic-design-system/commit/b1808218ed939f0edccdea87dfdefc572776074e))
 * **changelog:** add code style specification entry under [Unreleased] ([96122eb](https://github.com/cgartlab/edic-design-system/commit/96122eb28be6b06a81a16fa74f47760d2432a1be))
-* **changelog:** add code style specification entry under [Unreleased] ([e0cd97f](https://github.com/cgartlab/edic-design-system/commit/e0cd97f2cdd51e51df9617dacd66a1e919dbb5e8))
 * comprehensive v1.5.0 sync — domain, tokens, prompts, SKILL, README rewrite ([a2afe90](https://github.com/cgartlab/edic-design-system/commit/a2afe90dd4f872ec5a312190fb01fce3b34836cf))
 * comprehensive v1.5.0 sync — domain, tokens, prompts, SKILL, README rewrite ([#140](https://github.com/cgartlab/edic-design-system/issues/140)) ([e9f0bd2](https://github.com/cgartlab/edic-design-system/commit/e9f0bd240d716e5ddb16e3be58160af43fd449ff))
 * document icons.svg generator in AGENTS and CHANGELOG ([5187a1c](https://github.com/cgartlab/edic-design-system/commit/5187a1c64e912371e9024c8d67589abf875bb01f))
@@ -787,7 +756,7 @@
   - `changelog.html` footer `data-ds-version` 元素 v1.5.0 → v1.5.3(该元素不在 `stamp_version.py` 的 `HTML_TARGETS` 列表中,需手工维护)
   - 其余 HTML / MD 文件 `?v=` 与可见版本号已由 `make stamp-version` 自动同步
 
-### 维护
+### 其他
 
 - 同步更新 `docs/VERSIONING.md` line 155 的"最新稳定版"引用
 
@@ -812,7 +781,7 @@
 - **版本源统一**：VERSION、package.json、tokens.json、SKILL.md 全部更新至 1.5.5
 - **缓存失效修复**：执行 `make stamp-version`，所有 HTML/CSS/JS/MD 文件 `?v=` 更新至 1.5.5
 
-### 变更
+### 修复
 
 - **命名验证器白名单扩展**（新增 7 个合法类别）
 - **CI 治理完善**，`make validate` 退出码聚合
@@ -831,7 +800,7 @@
 - **页脚「网站地图」死链**：`index.html#sitemap` 锚点不存在，已补充 `id="sitemap"` 到页脚分区
 - **`.ds-progress` 组件变体缺失**：新增 `--success` 和 `--error` 颜色变体
 
-### 维护
+### 其他
 
 - **Release 流程自动化**：新增 `scripts/package_skill.py` 和 `scripts/package_release.py`，重写 `.github/workflows/release.yml` 为三产物流程
 - **`stamp_version.py`**：将 `skills/edic-design-system/README.md` 纳入版本 stamp 目标
@@ -869,7 +838,7 @@
 
 ## [1.4.0] — 2026-06-04
 
-### Changed
+### 修复
 
 - **Brand rename**: CGArtLab Design System → **EDIC Design System** (**E**ditorial **D**esign **I**nterface for **C**ontent)
 - **New positioning**: 同时面向人类和 Agent 的编辑主义设计系统
@@ -884,7 +853,7 @@
 - **Updated**: `report.html` localStorage key `cgartlab_smart_pagination` → `edic_smart_pagination`
 - **Updated**: DEVELOPMENT-GUIDE.md file tree references
 
-### Notes
+### 其他
 
 - GitHub org (`cgartlab`), repo name (`cgartlab-design-system`), and CNAME (`edic.cgartlab.com`) remain unchanged in this release — admin rename to be performed in a follow-up PR after DNS and repository redirects are configured
 - All in-repo URL references (`edic.cgartlab.com`, `github.com/cgartlab/cgartlab-design-system`, `cgartlab.github.io`) intentionally preserved
@@ -944,7 +913,7 @@
 - `styles.css` 5 行死代码 `--ds-letter-spacing-*` / `--ds-word-spacing-cjk` 删除（遗留自 `--ds-tracking-*` 重命名前）
 - `scripts.js` 3 处空 catch 块改为 `void e;` / `void 0;`（localStorage 读/写 + clipboard.writeText）
 
-### 变更
+### 修复
 
 #### 命名验证器白名单扩展
 - `tools/validate_naming.py` 的 `VALID_CATEGORIES` 新增 7 个合法类别：`code` / `token` / `cjk` / `reveal` / `draw` / `stack` / `brand`（均为项目已使用但验证器历史遗漏的合法 CSS 变量类别）
@@ -987,7 +956,7 @@
   - 0.4s 平滑过渡
 - **资源版本号刷新**：`?v=1.1.0` 缓存策略
 
-### 变更
+### 修复
 
 - `styles.css` 与 `scripts.js` 整合所有令牌、组件、动效、站点壳
 - 站点壳（navbar / 装饰 / TOC / 主题切换）一并内联
@@ -1025,7 +994,7 @@
 - `DEVELOPMENT-GUIDE.md`（1449 行开发指南）
 - `tokens.json`（结构化令牌）
 
-### 许可证
+### 其他
 
 - CC BY 4.0
 

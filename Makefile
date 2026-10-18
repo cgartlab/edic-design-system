@@ -108,6 +108,12 @@ changelog:  ## 从 CHANGELOG.md 单源重建 changelog.html
 changelog-check:  ## 检查 changelog.html 是否与 CHANGELOG.md 同步（CI 用）
 	$(PYTHON) tools/generate_changelog_html.py --check
 
+changelog-dedupe:  ## CHANGELOG.md 条目去重 + 分类归并（历史条目一次性整理）
+	$(PYTHON) tools/dedupe_changelog.py
+
+changelog-dedupe-check:  ## 检查 CHANGELOG.md 是否有重复条目或非标准分类（CI 用）
+	$(PYTHON) tools/dedupe_changelog.py --check
+
 sync-versions:  ## 将 VERSION 同步到 tokens.json、package.json 及 HTML/MD
 	$(PYTHON) tools/sync_versions.py
 
