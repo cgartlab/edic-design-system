@@ -224,137 +224,9 @@ const safeLocalStorage = {
   }
 };
 
-const TOKENS = [
-  ["--ds-color-bg","oklch(97% 0.012 80)"],
-  ["--ds-color-surface","oklch(99% 0.005 80)"],
-  ["--ds-color-surface-raised","oklch(99.5% 0.006 92)"],
-  ["--ds-color-surface-overlay","oklch(97% 0.008 80)"],
-  ["--ds-color-border-subtle","oklch(92% 0.012 80)"],
-  ["--ds-color-border","oklch(89% 0.012 80)"],
-  ["--ds-color-border-strong","oklch(82% 0.015 75)"],
-  ["--ds-color-muted","oklch(42% 0.015 60)"],
-  ["--ds-color-fg-subtle","oklch(35% 0.018 60)"],
-  ["--ds-color-fg","oklch(20% 0.02 60)"],
-  ["--ds-color-fg-strong","oklch(14% 0.025 60)"],
-  ["--ds-color-heading","oklch(31% 0.058 128) ★"],
-  ["--ds-color-gold-500","oklch(57% 0.1 82)"],
-  ["--ds-color-gold-700","oklch(45% 0.09 80)"],
-  ["--ds-color-fg-inverse","oklch(97% 0.005 80)"],
-  ["--ds-color-white","oklch(100% 0 0)"],
-  ["--ds-color-black","oklch(0% 0 0)"],
-  ["--ds-color-olive-50","oklch(90% 0.025 115)"],
-  ["--ds-color-olive-100","oklch(82% 0.035 115)"],
-  ["--ds-color-olive-200","oklch(72% 0.05 115)"],
-  ["--ds-color-olive-300","oklch(62% 0.065 115)"],
-  ["--ds-color-olive-400","oklch(52% 0.08 115) ★"],
-  ["--ds-color-olive-500","oklch(45% 0.085 115)"],
-  ["--ds-color-olive-600","oklch(38% 0.08 115)"],
-  ["--ds-color-olive-700","oklch(30% 0.07 115)"],
-  ["--ds-color-olive-800","oklch(22% 0.055 115)"],
-  ["--ds-color-olive-900","oklch(15% 0.04 115)"],
-  ["--ds-accent","var(--ds-color-olive-400)"],
-  ["--ds-accent-hover","var(--ds-color-olive-500)"],
-  ["--ds-accent-soft","var(--ds-color-olive-100)"],
-  ["--ds-accent-muted","var(--ds-color-olive-50)"],
-  ["--ds-accent-gold","var(--ds-color-gold-700)"],
-  ["--ds-color-success","oklch(55% 0.1 145)"],
-  ["--ds-color-success-bg","oklch(93% 0.025 145)"],
-  ["--ds-color-warning","oklch(65% 0.1 85)"],
-  ["--ds-color-warning-bg","oklch(95% 0.025 85)"],
-  ["--ds-color-error","oklch(50% 0.14 30)"],
-  ["--ds-color-error-bg","oklch(93% 0.025 30)"],
-  ["--ds-color-info","oklch(55% 0.08 240)"],
-  ["--ds-color-info-bg","oklch(93% 0.02 240)"],
-  ["--ds-font-display","\"Playfair Display\", \"Iowan Old Style\", \"Charter\", Georgia, \"Noto Serif SC\", \"Source Han Serif SC\", serif"],
-  ["--ds-font-body","\"Noto Sans SC\", \"Source Han Sans SC\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", system-ui, sans-serif"],
-  ["--ds-font-mono","\"JetBrains Mono\", \"IBM Plex Mono\", \"Noto Sans Mono SC\", ui-monospace, monospace"],
-  ["--ds-font-ui","\"Noto Sans SC\", \"Source Han Sans SC\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", system-ui, sans-serif"],
-  ["--ds-text-caption","0.75rem (12px)"],
-  ["--ds-text-body-sm","0.875rem (14px)"],
-  ["--ds-text-body","1rem (16px)"],
-  ["--ds-text-body-lg","1.125rem (18px)"],
-  ["--ds-text-lead","1.25rem (20px)"],
-  ["--ds-text-h5","1.25rem (20px)"],
-  ["--ds-text-h4","1.5rem (24px)"],
-  ["--ds-text-h3","1.875rem (30px)"],
-  ["--ds-text-h2","2.25rem (36px)"],
-  ["--ds-text-h1","3rem (48px)"],
-  ["--ds-text-display","3.75rem (60px)"],
-  ["--ds-text-hero","4.5rem (72px)"],
-  ["--ds-weight-light","300"],
-  ["--ds-weight-regular","400"],
-  ["--ds-weight-medium","500"],
-  ["--ds-weight-semibold","600"],
-  ["--ds-weight-bold","700"],
-  ["--ds-leading-tight","1.1"],
-  ["--ds-leading-snug","1.25"],
-  ["--ds-leading-body","1.55"],
-  ["--ds-leading-relaxed","1.7"],
-  ["--ds-leading-loose","2"],
-  ["--ds-tracking-tight","-0.01em"],
-  ["--ds-tracking-normal","0.02em"],
-  ["--ds-tracking-wide","0.04em"],
-  ["--ds-tracking-wider","0.08em"],
-  ["--ds-tracking-widest","0.12em"],
-  ["--ds-space-0","0"],
-  ["--ds-space-1","0.25rem (4px)"],
-  ["--ds-space-2","0.5rem (8px)"],
-  ["--ds-space-3","0.75rem (12px)"],
-  ["--ds-space-4","1rem (16px)"],
-  ["--ds-space-5","1.25rem (20px)"],
-  ["--ds-space-6","1.5rem (24px)"],
-  ["--ds-space-7","1.75rem (28px)"],
-  ["--ds-space-8","2rem (32px)"],
-  ["--ds-space-9","2.25rem (36px)"],
-  ["--ds-space-10","2.5rem (40px)"],
-  ["--ds-space-11","2.75rem (44px)"],
-  ["--ds-space-12","3rem (48px)"],
-  ["--ds-space-14","3.5rem (56px)"],
-  ["--ds-space-16","4rem (64px)"],
-  ["--ds-space-18","4.5rem (72px)"],
-  ["--ds-space-20","5rem (80px)"],
-  ["--ds-space-24","6rem (96px)"],
-  ["--ds-space-28","7rem (112px)"],
-  ["--ds-space-32","8rem (128px)"],
-  ["--ds-radius-none","0"],
-  ["--ds-radius-sm","2px"],
-  ["--ds-radius-md","4px"],
-  ["--ds-radius-lg","8px"],
-  ["--ds-radius-xl","12px"],
-  ["--ds-radius-2xl","16px"],
-  ["--ds-radius-full","9999px"],
-  ["--ds-shadow-xs","0 1px 2px oklch(0% 0 0 / 4%)"],
-  ["--ds-shadow-sm","0 1px 3px oklch(0% 0 0 / 6%), 0 1px 2px oklch(0% 0 0 / 4%)"],
-  ["--ds-shadow-md","0 4px 6px oklch(0% 0 0 / 6%), 0 2px 4px oklch(0% 0 0 / 4%)"],
-  ["--ds-shadow-lg","0 10px 15px oklch(0% 0 0 / 8%), 0 4px 6px oklch(0% 0 0 / 4%)"],
-  ["--ds-shadow-xl","0 20px 25px oklch(0% 0 0 / 10%), 0 8px 10px oklch(0% 0 0 / 6%)"],
-  ["--ds-shadow-2xl","0 25px 50px oklch(0% 0 0 / 12%)"],
-  ["--ds-shadow-inner","inset 0 2px 4px oklch(0% 0 0 / 4%)"],
-  ["--ds-duration-150","150ms"],
-  ["--ds-duration-200","200ms"],
-  ["--ds-duration-300","300ms"],
-  ["--ds-duration-500","500ms"],
-  ["--ds-ease-out","cubic-bezier(0.16, 1, 0.3, 1)"],
-  ["--ds-ease-spring","cubic-bezier(0.34, 1.56, 0.64, 1)"],
-  ["--ds-bp-sm","640px"],
-  ["--ds-bp-md","768px"],
-  ["--ds-bp-lg","1024px"],
-  ["--ds-bp-xl","1280px"],
-  ["--ds-z-dropdown","100"],
-  ["--ds-z-sticky","200"],
-  ["--ds-z-overlay","300"],
-  ["--ds-z-modal","400"],
-  ["--ds-z-toast","500"],
-  ["--ds-color-overlay","oklch(0% 0 0 / 0.4)"],
-  ["--ds-color-overlay-light","oklch(0% 0 0 / 0.12)"],
-  ["--ds-glass-bg","oklch(97% 0.012 80 / 0.55)"],
-  ["--ds-glass-border","oklch(89% 0.012 80 / 0.25)"],
-  ["--ds-glass-shadow","0 4px 24px oklch(0% 0 0 / 0.06)"],
-  ["--ds-blur-sm","4px"],
-  ["--ds-blur-md","12px"],
-  ["--ds-blur-lg","24px"],
-  ["--ds-blur-xl","48px"],
-];
+/* @generated:token-table:begin — 由 tools/generate_token_table.py 生成，勿手改 */
+const TOKEN_TABLE_DATA = [["--ds-color-bg","oklch(97% 0.012 80)","oklch(17% 0.014 80)"],["--ds-color-surface","oklch(99% 0.005 80)","oklch(22% 0.016 80)"],["--ds-color-surface-raised","oklch(99.5% 0.006 92)","oklch(26% 0.018 80)"],["--ds-color-surface-overlay","oklch(97% 0.008 80)","oklch(24% 0.016 80)"],["--ds-color-border-subtle","oklch(92% 0.012 80)","oklch(31% 0.014 80)"],["--ds-color-border","oklch(89% 0.012 80)","oklch(35% 0.016 80)"],["--ds-color-border-strong","oklch(82% 0.015 75)","oklch(44% 0.018 76)"],["--ds-color-muted","oklch(42% 0.015 60)","oklch(66% 0.012 75)"],["--ds-color-fg-subtle","oklch(35% 0.018 60)","oklch(76% 0.012 75)"],["--ds-color-fg","oklch(20% 0.02 60)","oklch(88% 0.008 80)"],["--ds-color-fg-muted","var(--ds-color-muted)",""],["--ds-color-fg-strong","oklch(14% 0.025 60)","oklch(95% 0.005 85)"],["--ds-color-heading","oklch(31% 0.058 128)","oklch(93% 0.014 92)"],["--ds-color-gold-500","oklch(57% 0.1 82)","oklch(76% 0.11 82)"],["--ds-color-gold-700","oklch(45% 0.09 80)","oklch(80% 0.095 80)"],["--ds-color-fg-inverse","oklch(97% 0.005 80)","oklch(17% 0.014 80)"],["--ds-color-white","oklch(100% 0 0)","oklch(100% 0 0)"],["--ds-color-black","oklch(0% 0 0)","oklch(0% 0 0)"],["--ds-color-olive-50","oklch(90% 0.025 115)","oklch(22% 0.02 115)"],["--ds-color-olive-100","oklch(82% 0.035 115)","oklch(27% 0.025 115)"],["--ds-color-olive-200","oklch(72% 0.05 115)","oklch(35% 0.035 115)"],["--ds-color-olive-300","oklch(62% 0.065 115)","oklch(45% 0.05 115)"],["--ds-color-olive-400","oklch(52% 0.08 115)","oklch(57% 0.065 115)"],["--ds-color-olive-500","oklch(45% 0.085 115)","oklch(64% 0.065 115)"],["--ds-color-olive-600","oklch(38% 0.08 115)","oklch(71% 0.06 115)"],["--ds-color-olive-700","oklch(30% 0.07 115)","oklch(79% 0.05 115)"],["--ds-color-olive-800","oklch(22% 0.055 115)","oklch(87% 0.035 115)"],["--ds-color-olive-900","oklch(15% 0.04 115)","oklch(94% 0.02 115)"],["--ds-accent","var(--ds-color-olive-400)","var(--ds-color-olive-400)"],["--ds-accent-hover","var(--ds-color-olive-500)","var(--ds-color-olive-500)"],["--ds-accent-soft","var(--ds-color-olive-100)","var(--ds-color-olive-200)"],["--ds-accent-muted","var(--ds-color-olive-50)","var(--ds-color-olive-100)"],["--ds-accent-gold","var(--ds-color-gold-700)","var(--ds-color-gold-700)"],["--ds-gradient-t2","linear-gradient(135deg, oklch(85% 0.02 80), oklch(92% 0.015 70))","linear-gradient(135deg, oklch(70% 0.02 80), oklch(77% 0.015 70))"],["--ds-gradient-t3","linear-gradient(135deg, oklch(88% 0.015 230), oklch(94% 0.01 210))","linear-gradient(135deg, oklch(73% 0.015 230), oklch(79% 0.01 210))"],["--ds-gradient-t4","linear-gradient(135deg, oklch(82% 0.025 100), oklch(90% 0.02 85))","linear-gradient(135deg, oklch(67% 0.025 100), oklch(75% 0.02 85))"],["--ds-color-success","oklch(55% 0.1 145)","oklch(60% 0.09 145)"],["--ds-color-success-bg","oklch(93% 0.025 145)","oklch(22% 0.03 145)"],["--ds-color-warning","oklch(65% 0.1 85)","oklch(72% 0.09 85)"],["--ds-color-warning-bg","oklch(95% 0.025 85)","oklch(24% 0.03 85)"],["--ds-color-error","oklch(50% 0.14 30)","oklch(55% 0.12 30)"],["--ds-color-error-bg","oklch(93% 0.025 30)","oklch(22% 0.03 30)"],["--ds-color-info","oklch(55% 0.08 240)","oklch(60% 0.07 240)"],["--ds-color-info-bg","oklch(93% 0.02 240)","oklch(22% 0.025 240)"],["--ds-color-copy-success","oklch(80% 0.12 145)","oklch(85% 0.10 145)"],["--ds-color-copy-success-border","oklch(60% 0.12 145)","oklch(65% 0.10 145)"],["--ds-brand-paper","var(--ds-color-surface)",""],["--ds-brand-ink","var(--ds-color-fg-strong)",""],["--ds-brand-demo-paper","oklch(99% 0.005 80)","oklch(99% 0.005 80)"],["--ds-brand-demo-ink","oklch(15% 0.008 75)","oklch(15% 0.008 75)"],["--ds-font-display","\"Playfair Display\", \"Iowan Old Style\", \"Charter\", Georgia, \"Noto Serif SC\", \"Source Han Serif SC\", serif",""],["--ds-font-heading","var(--ds-font-display)",""],["--ds-font-body","\"Noto Sans SC\", \"Source Han Sans SC\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", system-ui, sans-serif",""],["--ds-font-mono","\"JetBrains Mono\", \"IBM Plex Mono\", \"Noto Sans Mono SC\", ui-monospace, monospace",""],["--ds-font-ui","\"Noto Sans SC\", \"Source Han Sans SC\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", system-ui, sans-serif",""],["--ds-cjk-line-height","1.7",""],["--ds-text-caption","0.75rem",""],["--ds-text-body-sm","0.875rem",""],["--ds-text-body","1rem",""],["--ds-text-body-lg","1.125rem",""],["--ds-text-lead","1.25rem",""],["--ds-text-h5","1.25rem",""],["--ds-text-h4","1.5rem",""],["--ds-text-h3","1.875rem",""],["--ds-text-h2","2.25rem",""],["--ds-text-h2-tablet","2rem",""],["--ds-text-h1","3rem",""],["--ds-text-display","3.75rem",""],["--ds-text-hero","4.5rem",""],["--ds-weight-light","300",""],["--ds-weight-regular","400",""],["--ds-weight-medium","500",""],["--ds-weight-semibold","600",""],["--ds-weight-bold","700",""],["--ds-leading-tight","1.1",""],["--ds-leading-snug","1.25",""],["--ds-leading-body","1.55",""],["--ds-leading-normal","var(--ds-leading-body)",""],["--ds-leading-relaxed","1.7",""],["--ds-leading-loose","2",""],["--ds-tracking-tight","-0.01em",""],["--ds-tracking-normal","0.02em",""],["--ds-tracking-wide","0.04em",""],["--ds-tracking-wider","0.08em",""],["--ds-tracking-widest","0.12em",""],["--ds-tracking-mono","0",""],["--ds-tracking-cjk-body","0.03em",""],["--ds-tracking-cjk-heading","0.06em",""],["--ds-space-0","0",""],["--ds-space-0-25","0.0625rem",""],["--ds-space-0-5","0.125rem",""],["--ds-space-0-75","0.1875rem",""],["--ds-space-1","0.25rem",""],["--ds-space-2","0.5rem",""],["--ds-space-3","0.75rem",""],["--ds-space-4","1rem",""],["--ds-space-5","1.25rem",""],["--ds-space-6","1.5rem",""],["--ds-space-7","1.75rem",""],["--ds-space-8","2rem",""],["--ds-space-9","2.25rem",""],["--ds-space-10","2.5rem",""],["--ds-space-11","2.75rem",""],["--ds-space-12","3rem",""],["--ds-space-14","3.5rem",""],["--ds-space-16","4rem",""],["--ds-space-18","4.5rem",""],["--ds-space-20","5rem",""],["--ds-space-24","6rem",""],["--ds-space-28","7rem",""],["--ds-space-32","8rem",""],["--ds-space-40","10rem",""],["--ds-radius-none","0",""],["--ds-radius-sm","2px",""],["--ds-radius-md","4px",""],["--ds-radius-lg","8px",""],["--ds-radius-xl","12px",""],["--ds-radius-2xl","16px",""],["--ds-radius-full","9999px",""],["--ds-shadow-xs","0 1px 2px oklch(0% 0 0 / 4%)","0 1px 2px oklch(0% 0 0 / 30%)"],["--ds-shadow-sm","0 1px 3px oklch(0% 0 0 / 6%), 0 1px 2px oklch(0% 0 0 / 4%)","0 1px 3px oklch(0% 0 0 / 35%), 0 1px 2px oklch(0% 0 0 / 25%)"],["--ds-shadow-md","0 4px 6px oklch(0% 0 0 / 6%), 0 2px 4px oklch(0% 0 0 / 4%)","0 4px 6px oklch(0% 0 0 / 35%), 0 2px 4px oklch(0% 0 0 / 25%)"],["--ds-shadow-lg","0 10px 15px oklch(0% 0 0 / 8%), 0 4px 6px oklch(0% 0 0 / 4%)","0 10px 15px oklch(0% 0 0 / 40%), 0 4px 6px oklch(0% 0 0 / 25%)"],["--ds-shadow-xl","0 20px 25px oklch(0% 0 0 / 10%), 0 8px 10px oklch(0% 0 0 / 6%)","0 20px 25px oklch(0% 0 0 / 40%), 0 8px 10px oklch(0% 0 0 / 25%)"],["--ds-shadow-2xl","0 25px 50px oklch(0% 0 0 / 12%)","0 25px 50px oklch(0% 0 0 / 50%)"],["--ds-shadow-inner","inset 0 2px 4px oklch(0% 0 0 / 4%)","inset 0 2px 4px oklch(0% 0 0 / 25%)"],["--ds-shadow-btn","0 1px 2px oklch(0% 0 0 / 6%)","0 1px 2px oklch(0% 0 0 / 35%)"],["--ds-shadow-btn-hover","0 4px 12px oklch(0% 0 0 / 10%), 0 2px 4px oklch(0% 0 0 / 6%)","0 4px 12px oklch(0% 0 0 / 40%), 0 2px 4px oklch(0% 0 0 / 25%)"],["--ds-shadow-slider-thumb","0 1px 4px oklch(0% 0 0 / 12%)","0 1px 4px oklch(0% 0 0 / 30%)"],["--ds-shadow-slider-thumb-hover","0 1px 8px oklch(0% 0 0 / 18%), 0 0 0 6px color-mix(in oklch, var(--ds-accent) 15%, transparent)","0 1px 8px oklch(0% 0 0 / 35%), 0 0 0 6px color-mix(in oklch, var(--ds-accent) 20%, transparent)"],["--ds-duration-50","50ms",""],["--ds-duration-100","100ms",""],["--ds-duration-150","150ms",""],["--ds-duration-200","200ms",""],["--ds-duration-300","300ms",""],["--ds-duration-500","500ms",""],["--ds-duration-700","700ms",""],["--ds-duration-1000","1000ms",""],["--ds-ease-out","cubic-bezier(0.16, 1, 0.3, 1)",""],["--ds-ease-in","cubic-bezier(0.4, 0, 1, 1)",""],["--ds-ease-in-out","cubic-bezier(0.4, 0, 0.2, 1)",""],["--ds-ease-spring","cubic-bezier(0.34, 1.56, 0.64, 1)",""],["--ds-bp-sm","640px",""],["--ds-bp-md","768px",""],["--ds-bp-lg","1024px",""],["--ds-bp-xl","1280px",""],["--ds-bp-2xl","1536px",""],["--ds-z-base","0",""],["--ds-z-above","1",""],["--ds-z-dropdown","100",""],["--ds-z-sticky","200",""],["--ds-z-overlay","300",""],["--ds-z-modal","400",""],["--ds-z-toast","500",""],["--ds-z-skip","1000",""],["--ds-color-overlay","oklch(0% 0 0 / 0.4)","oklch(17% 0.014 80 / 0.5)"],["--ds-color-overlay-light","oklch(0% 0 0 / 0.12)","oklch(17% 0.014 80 / 0.2)"],["--ds-glass-bg","oklch(97% 0.012 80 / 0.55)","oklch(17% 0.014 80 / 0.6)"],["--ds-glass-border","oklch(89% 0.012 80 / 0.25)","oklch(89% 0.012 80 / 0.08)"],["--ds-glass-shadow","0 4px 24px oklch(0% 0 0 / 0.06)","0 4px 24px oklch(0% 0 0 / 0.25)"],["--ds-blur-sm","4px","4px"],["--ds-blur-md","12px","12px"],["--ds-blur-lg","24px","24px"],["--ds-blur-xl","48px","48px"],["--ds-chart-1","oklch(62% 0.09 50)","oklch(72% 0.08 50)"],["--ds-chart-2","oklch(64% 0.09 145)","oklch(74% 0.08 145)"],["--ds-chart-3","oklch(58% 0.10 250)","oklch(74% 0.09 250)"],["--ds-chart-4","oklch(67% 0.11 65)","oklch(77% 0.10 65)"],["--ds-chart-5","oklch(62% 0.08 185)","oklch(72% 0.07 185)"],["--ds-chart-6","oklch(62% 0.09 310)","oklch(72% 0.08 310)"],["--ds-chart-7","oklch(70% 0.09 90)","oklch(80% 0.08 90)"],["--ds-chart-8","oklch(50% 0.08 30)","oklch(70% 0.07 30)"],["--ds-chart-bar-radius","var(--ds-radius-sm)",""],["--ds-chart-grid-color","var(--ds-color-border-subtle)","var(--ds-color-border-subtle)"],["--ds-chart-axis-color","var(--ds-color-border-strong)","var(--ds-color-border-strong)"],["--ds-chart-label-color","var(--ds-color-fg-subtle)","var(--ds-color-fg-subtle)"],["--ds-chart-axis-label-size","var(--ds-text-h5)",""],["--ds-chart-label-size","var(--ds-text-body)",""],["--ds-chart-stroke-width","2.5",""],["--ds-chart-area-opacity","0.15",""],["--ds-chart-hover-brightness","1.1",""],["--ds-chart-tooltip-bg","var(--ds-glass-bg)","var(--ds-glass-bg)"],["--ds-chart-tooltip-border","var(--ds-glass-border)","var(--ds-glass-border)"],["--ds-chart-tooltip-shadow","var(--ds-shadow-lg)","var(--ds-shadow-lg)"],["--ds-chart-dot-size","3",""],["--ds-chart-slice-gap","var(--ds-space-0-25)",""],["--ds-chart-dot-stroke-width","1.5",""],["--ds-chart-dot-hover-scale","1.67",""],["--ds-chart-slice-hover-scale","1.03",""],["--ds-chart-bar-lift","calc(var(--ds-space-0-25) * -1)",""],["--ds-chart-sparkline-stroke-width","2",""],["--ds-glow-xs","0 0 12px oklch(52% 0.08 115 / 0%)","0 0 12px oklch(52% 0.08 115 / 0%)"],["--ds-glow-sm","0 0 16px oklch(52% 0.08 115 / 0%)","0 0 16px oklch(52% 0.08 115 / 0%)"],["--ds-glow-md","0 0 24px oklch(52% 0.08 115 / 0%)","0 0 24px oklch(52% 0.08 115 / 0%)"],["--ds-glow-lg","0 0 48px oklch(52% 0.08 115 / 0%)","0 0 48px oklch(52% 0.08 115 / 0%)"],["--ds-glow-border","oklch(52% 0.08 115 / 0%)","oklch(52% 0.08 115 / 0%)"],["--ds-glow-text","0 0 24px oklch(52% 0.08 115 / 0%)","0 0 24px oklch(52% 0.08 115 / 0%)"],["--ds-glow-text-hover","0 0 32px oklch(57% 0.065 115 / 0%)","0 0 32px oklch(57% 0.065 115 / 0%)"],["--ds-glow-surface","inset 0 1px 0 oklch(52% 0.08 115 / 0%)","inset 0 1px 0 oklch(52% 0.08 115 / 0%)"],["--ds-glow-aura","radial-gradient(ellipse at center,oklch(57% 0.065 115 / 0%) 0%,transparent 70%)","radial-gradient(ellipse at center,oklch(57% 0.065 115 / 0%) 0%,transparent 70%)"],["--ds-code-bg","oklch(97% 0.005 85)","oklch(20% 0.014 80)"],["--ds-code-bg-bar","oklch(94% 0.008 85)","oklch(22% 0.015 80)"],["--ds-code-text","oklch(22% 0.03 60)","oklch(90% 0.008 85)"],["--ds-code-print-border","oklch(85% 0.02 60)","oklch(79% 0 0)"],["--ds-token-comment","oklch(42% 0.04 130)","oklch(55% 0.035 130)"],["--ds-token-keyword","oklch(42% 0.20 25)","oklch(78% 0.10 25)"],["--ds-token-string","oklch(45% 0.15 145)","oklch(82% 0.10 130)"],["--ds-token-function","oklch(45% 0.14 95)","oklch(85% 0.08 85)"],["--ds-token-number","oklch(42% 0.17 55)","oklch(80% 0.09 60)"],["--ds-token-tag","oklch(42% 0.16 40)","oklch(78% 0.09 60)"],["--ds-token-attr-name","oklch(42% 0.10 200)","oklch(75% 0.06 180)"],["--ds-token-class","oklch(42% 0.14 260)","oklch(78% 0.07 200)"],["--ds-token-builtin","oklch(42% 0.16 55)","oklch(80% 0.09 60)"],["--ds-token-operator","oklch(38% 0.04 80)","oklch(70% 0.02 80)"],["--ds-token-punctuation","oklch(34% 0.03 80)","oklch(65% 0.02 80)"],["--ds-token-variable","oklch(40% 0.08 70)","oklch(85% 0.05 70)"],["--ds-token-selector","oklch(45% 0.14 95)","oklch(85% 0.08 85)"],["--ds-token-inserted","oklch(40% 0.14 145)","oklch(70% 0.10 145)"],["--ds-token-deleted","oklch(42% 0.18 25)","oklch(65% 0.14 30)"],["--ds-token-url","oklch(42% 0.12 250)","oklch(72% 0.08 200)"],["--ds-border-radius-card","var(--ds-radius-lg)",""],["--ds-border-radius-control","var(--ds-radius-md)",""],["--ds-border-style-default","solid","solid"],["--ds-border-width-default","1px","1px"],["--ds-border-width-hairline","1px","1px"],["--ds-border-width-thick","2px","2px"],["--ds-breakpoint-2xl","var(--ds-bp-2xl)",""],["--ds-breakpoint-lg","var(--ds-bp-lg)",""],["--ds-breakpoint-md","var(--ds-bp-md)",""],["--ds-breakpoint-sm","var(--ds-bp-sm)",""],["--ds-breakpoint-xl","var(--ds-bp-xl)",""],["--ds-color-border-default","var(--ds-color-border)",""],["--ds-color-surface-primary","var(--ds-color-surface)",""],["--ds-color-surface-raised-primary","var(--ds-color-surface-raised)",""],["--ds-color-text-primary","var(--ds-color-fg)",""],["--ds-color-text-secondary","var(--ds-color-fg-subtle)",""],["--ds-color-text-strong","var(--ds-color-fg-strong)",""],["--ds-delay-0","0ms",""],["--ds-delay-1","50ms",""],["--ds-delay-2","100ms",""],["--ds-delay-3","150ms",""],["--ds-delay-4","200ms",""],["--ds-depth-floating","var(--ds-shadow-lg)",""],["--ds-depth-popover","var(--ds-shadow-md)",""],["--ds-disabled-bg","var(--ds-color-border-subtle)",""],["--ds-disabled-text","var(--ds-color-muted)",""],["--ds-duration-base","var(--ds-duration-300)",""],["--ds-duration-fast","var(--ds-duration-150)",""],["--ds-duration-slow","var(--ds-duration-500)",""],["--ds-focus-outline-offset","2px",""],["--ds-focus-outline-width","2px",""],["--ds-grid-columns","12",""],["--ds-grid-gutter","var(--ds-space-4)",""],["--ds-grid-min-column","0",""],["--ds-gutter-default","var(--ds-space-4)",""],["--ds-gutter-narrow","var(--ds-space-2)",""],["--ds-gutter-wide","var(--ds-space-8)",""],["--ds-motion-default","var(--ds-duration-base) var(--ds-ease-out)",""],["--ds-motion-reduced","0ms linear",""],["--ds-opacity-disabled",".48",""],["--ds-opacity-muted",".72",""],["--ds-opacity-overlay",".40",""],["--ds-overlay-bg","var(--ds-color-overlay)",""],["--ds-overlay-blur","var(--ds-blur-sm)",""],["--ds-skeleton-base","var(--ds-color-border-subtle)",""],["--ds-skeleton-highlight","var(--ds-color-surface-overlay)",""],["--ds-size-control-sm","var(--ds-space-8)",""],["--ds-size-control","var(--ds-space-10)",""],["--ds-size-control-lg","var(--ds-space-12)",""],["--ds-size-touch-sm","2.75rem",""],["--ds-size-touch","var(--ds-space-11)",""],["--ds-size-touch-lg","3.5rem",""],["--ds-size-avatar-sm","var(--ds-space-7)",""],["--ds-size-avatar","var(--ds-space-10)",""],["--ds-size-avatar-lg","3.5rem",""],["--ds-size-icon-xs","var(--ds-space-3)",""],["--ds-size-icon-sm","var(--ds-space-4)",""],["--ds-size-icon","var(--ds-space-5)",""],["--ds-size-icon-lg","var(--ds-space-6)",""],["--ds-size-slider-thumb","var(--ds-space-6)",""],["--ds-size-scrollbar","8px",""],["--ds-size-scrollbar-border","2px",""],["--ds-size-toc-indicator","3px",""],["--ds-size-toc-indicator-active","6px",""],["--ds-size-nav-max","240px",""],["--ds-size-progress-max","320px",""],["--ds-size-input-max","320px",""],["--ds-size-slider-max","320px",""],["--ds-size-slider-track","28px",""],["--ds-size-slider-thumb-track","6px",""],["--ds-size-date-max","320px",""],["--ds-size-combobox-max","320px",""],["--ds-size-date-picker-max","320px",""],["--ds-size-toc-article-max","320px",""],["--ds-size-contact-form-max","640px",""],["--ds-reveal-distance","18px",""],["--ds-reveal-duration","var(--ds-duration-700)",""],["--ds-reveal-ease","var(--ds-ease-out)",""]];
+/* @generated:token-table:end */
 
 /* ===== Init: render icon grid ===== */
 (function() {
@@ -373,16 +245,43 @@ const TOKENS = [
 (function() {
   const tb = document.getElementById("token-tbody");
   if (!tb) return;
-  TOKENS.forEach(function(t) {
+
+  // TOKEN_TABLE_DATA 由 tools/generate_token_table.py 从 styles.css 生成：
+  // [name, lightValue, darkValue]；darkValue 为空串表示暗色下沿用浅色值。
+  if (typeof TOKEN_TABLE_DATA === "undefined") return;
+
+  // 同步正文里的 token 总数，避免数字硬编码漂移
+  const countEl = document.getElementById("token-count");
+  if (countEl) countEl.textContent = String(TOKEN_TABLE_DATA.length);
+
+  const frag = document.createDocumentFragment();
+  TOKEN_TABLE_DATA.forEach(function(t) {
     const tr = document.createElement("tr");
-    const td1 = document.createElement("td");
-    td1.textContent = t[0];
-    const td2 = document.createElement("td");
-    td2.textContent = t[1];
-    tr.appendChild(td1);
-    tr.appendChild(td2);
-    tb.appendChild(tr);
+    const name = t[0], light = t[1], dark = t[2];
+
+    const tdName = document.createElement("td");
+    tdName.textContent = name;
+
+    const tdLight = document.createElement("td");
+    tdLight.textContent = light;
+
+    const tdDark = document.createElement("td");
+    if (dark) {
+      tdDark.textContent = dark;
+    } else {
+      // 无独立暗色覆盖：沿用浅色值，用省略号与 aria-label 说明，避免误读为"缺失"
+      tdDark.textContent = "—";
+      tdDark.className = "token-dark-inherit";
+      tdDark.title = "暗色模式下沿用浅色值";
+      tdDark.setAttribute("aria-label", "暗色模式下沿用浅色值");
+    }
+
+    tr.appendChild(tdName);
+    tr.appendChild(tdLight);
+    tr.appendChild(tdDark);
+    frag.appendChild(tr);
   });
+  tb.appendChild(frag);
 })();
 
 /* ===== Theme Switcher ===== */

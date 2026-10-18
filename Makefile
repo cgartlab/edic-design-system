@@ -145,6 +145,12 @@ icons:  ## 从 scripts.js 的 ICONS 数组生成 icons.svg sprite
 icons-check:  ## 校验 icons.svg 是否与 scripts.js 的 ICONS 数组同步（CI 用）
 	$(PYTHON) tools/generate_icons.py --check
 
+token-table:  ## 从 styles.css 生成 docs 令牌表数据（浅色 + 暗色）
+	$(PYTHON) tools/generate_token_table.py
+
+token-table-check:  ## 校验令牌表是否与 styles.css 同步（CI 用）
+	$(PYTHON) tools/generate_token_table.py --check
+
 skill-package: icons generate-pdfs stamp-version  ## 重新打包 SKILL.zip（stamp → icons → PDFs → SKILL）
 	$(PYTHON) scripts/package_skill.py
 

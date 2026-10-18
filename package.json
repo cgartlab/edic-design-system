@@ -37,6 +37,8 @@
     "pdfs": "node scripts/run-validator.js generate_pdfs.py",
     "icons": "node scripts/run-validator.js generate_icons.py",
     "icons:check": "node scripts/run-validator.js generate_icons.py --check",
+    "token-table": "node scripts/run-validator.js generate_token_table.py",
+    "token-table:check": "node scripts/run-validator.js generate_token_table.py --check",
     "clean": "node scripts/clean.js",
     "sync": "node scripts/run-validator.js sync_versions.py",
     "sync:check": "node scripts/run-validator.js sync_versions.py --check"

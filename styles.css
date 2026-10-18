@@ -1218,6 +1218,10 @@ h1, h2, h3, h4, h5, h6, .ds-h1, .ds-h2, .ds-h3, .ds-h4, .ds-h5, .ds-display, .ds
 .token-table th{text-align:left;padding:var(--ds-space-2) var(--ds-space-3);font-weight:600;color:var(--ds-color-muted);text-transform:uppercase;font-size:var(--ds-text-caption);letter-spacing:var(--ds-tracking-wider);border-bottom:1px solid var(--ds-color-border)}
 .token-table td{padding:var(--ds-space-2) var(--ds-space-3);border-bottom:1px solid var(--ds-color-border-subtle);font-family:var(--ds-font-mono);font-size:var(--ds-text-caption);vertical-align:middle}
 .token-table td:first-child{font-weight:600;font-family:var(--ds-font-ui);font-size:var(--ds-text-body-sm)}
+/* Dark-mode value column: narrow, keep values from dominating */
+.token-table{min-width:640px}
+.token-table th:nth-child(3),.token-table td:nth-child(3){width:34%;color:var(--ds-color-fg-subtle)}
+.token-table td.token-dark-inherit{color:var(--ds-color-border-strong);text-align:center;cursor:help}
 
 /* ===== Slider ===== */
 .ds-slider-group{max-width:var(--ds-size-slider-max);width:100%}
