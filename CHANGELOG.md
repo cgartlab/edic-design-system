@@ -3,6 +3,22 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.9.1](https://github.com/cgartlab/edic-design-system/compare/v2.9.0...v2.9.1) (2026-10-18)
+
+
+### 修复
+
+* **ci:** deploy Pages after post-merge-stamp (closes [#319](https://github.com/cgartlab/edic-design-system/issues/319)) ([cb593b8](https://github.com/cgartlab/edic-design-system/commit/cb593b8444280eaaf62196e41db189b43f47ba63))
+* **ci:** deploy Pages after post-merge-stamp (closes [#319](https://github.com/cgartlab/edic-design-system/issues/319)) ([d418d27](https://github.com/cgartlab/edic-design-system/commit/d418d27d84d51d350a40110ffbb00aff29a6b6e2))
+* **ci:** harden pages workflow against concurrent double-deploy ([5ee51c4](https://github.com/cgartlab/edic-design-system/commit/5ee51c4c843d0e49b30b00a0c207bc937e8d80c6))
+
+
+### 文档
+
+* **changelog:** dedupe entries, normalize sections, fix empty-paren residue (closes [#321](https://github.com/cgartlab/edic-design-system/issues/321)) ([95483b4](https://github.com/cgartlab/edic-design-system/commit/95483b41f707e65408c6995cd5a1dc8f5247452b))
+* **changelog:** dedupe entries, normalize sections, fix empty-paren residue (closes [#321](https://github.com/cgartlab/edic-design-system/issues/321)) ([e601d48](https://github.com/cgartlab/edic-design-system/commit/e601d487e52cc779e4a2b9813c6d26a747626203))
+* **pr:** add changelog page screenshots ([82c4834](https://github.com/cgartlab/edic-design-system/commit/82c4834efcfc4df2f443c8beb6c9f4be969d8d7f))
+
 ## [2.9.0](https://github.com/cgartlab/edic-design-system/compare/v2.8.3...v2.9.0) (2026-10-18)
 
 
