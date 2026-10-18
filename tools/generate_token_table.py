@@ -28,8 +28,52 @@ ROOT = Path(__file__).resolve().parent.parent
 STYLES_CSS = ROOT / "styles.css"
 SCRIPTS_JS = ROOT / "scripts.js"
 
-# --ds-xxx: value;  (值内允许括号、逗号、引号，以分号结尾)
-CSS_VAR_DECL = re.compile(r"(--ds-[\w-]+)\s*:\s*([^;]+);")
+# --ds-xxx: value;
+# Value may contain nested functions (rgba/oklch inside gradient), quoted strings,
+# and commas. Semicolons inside parens/quotes are tolerated; only a top-level ';'
+# terminates. Scanned in code because CSS nesting depth is unbounded.
+CSS_VAR_START = re.compile(r"(--ds-[\w-]+)\s*:\s*")
+
+
+def iter_var_decls(block: str):
+    """Yield (name, value) for each top-level --ds-* declaration in a CSS block.
+
+    Walks the text tracking paren depth and quote state, so values containing
+    nested functions (e.g. radial-gradient(..., oklch(...) ...)) or semicolons
+    inside strings are captured intact.
+    """
+    pos = 0
+    n = len(block)
+    while pos < n:
+        m = CSS_VAR_START.search(block, pos)
+        if not m:
+            return
+        name = m.group(1)
+        i = m.end()
+        depth = 0
+        quote = ""
+        buf_start = i
+        while i < n:
+            ch = block[i]
+            if quote:
+                if ch == quote and block[i - 1] != "\\":
+                    quote = ""
+            elif ch in "\"'":
+                quote = ch
+            elif ch == "(":
+                depth += 1
+            elif ch == ")":
+                if depth > 0:
+                    depth -= 1
+            elif ch == ";" and depth == 0:
+                break
+            elif ch == "}" and depth == 0:
+                break
+            i += 1
+        value = " ".join(block[buf_start:i].split())
+        if value:
+            yield name, value
+        pos = i + 1 if i < n and block[i] == ";" else i + 1
 
 BEGIN_MARKER = "/* @generated:token-table:begin — 由 tools/generate_token_table.py 生成，勿手改 */"
 END_MARKER = "/* @generated:token-table:end */"
@@ -70,8 +114,8 @@ def extract_block(css: str, selector: str) -> str:
 
 def extract_vars(block: str) -> dict[str, str]:
     out: dict[str, str] = {}
-    for m in CSS_VAR_DECL.finditer(block):
-        out[m.group(1)] = " ".join(m.group(2).split())
+    for name, value in iter_var_decls(block):
+        out[name] = value
     return out
 
 
