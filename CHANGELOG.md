@@ -3,6 +3,13 @@
 本项目所有显著变更记录于此。格式基于 [Keep a Changelog](https://keepachangelog.com/en/2.0.0/)，
 版本号遵循 [语义化版本 2.0.0](https://semver.org/lang/zh-CN/)（设计系统适配版，见 [docs/VERSIONING.md](./docs/VERSIONING.md)）。
 
+## [2.9.2](https://github.com/cgartlab/edic-design-system/compare/v2.9.1...v2.9.2) (2026-10-19)
+
+
+### 文档
+
+* **lessons:** expand LESSONS.md from session history and git evidence ([#324](https://github.com/cgartlab/edic-design-system/issues/324)) ([f4377ab](https://github.com/cgartlab/edic-design-system/commit/f4377abcf6bb1d0851fa0efbcea412f8798bd53e))
+
 ## [2.9.1](https://github.com/cgartlab/edic-design-system/compare/v2.9.0...v2.9.1) (2026-10-18)
 
 
