@@ -2,7 +2,7 @@
 
 > **会话约定**：开始任何工作前，先读根目录 `LESSONS.md`（本仓库从真实失误沉淀的「教训→规则」清单）并遵循其中所有规则；遇到新失误按其 §维护 追加。
 
-**Version:** 2.9.1 | **Site:** https://edic.cgartlab.com | **License:** CC BY 4.0
+**Version:** 2.9.2 | **Site:** https://edic.cgartlab.com | **License:** CC BY 4.0
 
 ---
 
@@ -396,7 +396,7 @@ If limits are exceeded, CI blocks the release.
 
 All releases are archived on GitHub Releases with:
 
-- Version tag (e.g., `v2.9.1`)
+- Version tag (e.g., `v2.9.2`)
 - Release notes (from `CHANGELOG.md`)
 - Checksums (SHA-256)
 - Pre-built assets (`.gz` files)
